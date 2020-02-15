@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/biblioteca
+    username: postgres
+    password: 48299871
+    initialization-mode: always
+    data: classpath:org/springframework/session/jdbc/schema-postgresql.sql
+    continue-on-error: true
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+  session:
+    jdbc:
+      initialize-schema: always
+    store-type: jdbc
