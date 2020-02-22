@@ -24,9 +24,17 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/jquery/dist/core.js",
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/jquery/dist/core.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -93,9 +101,9 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/jquery/dist/jquery.js",
-              "node_modules/vendor.js/lib/vendor.js",
               "node_modules/jquery/dist/core.js"
             ]
           }
@@ -126,6 +134,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "realm-of-card"
+    }
+  },
+  "defaultProject": "realm-of-card",
+  "cli": {
+    "analytics": "ebad1e1a-b5e5-43d6-b80b-f4f99051b70a"
+  }
 }
