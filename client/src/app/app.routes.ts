@@ -6,11 +6,14 @@ import {ProductDetailComponent} from './home/product-detail/product-detail.compo
 import {LoginComponent} from './login/login.component';
 
 export const ROUTES: Routes = [
-  {path: '', component: HomeComponent,
-    children: [
-      {path: 'product-detail', component: ProductDetailComponent}
-    ]
-  },
+  // {
+  //   path: '', component: HomeComponent,
+  //   children: [
+  //     {path: 'product-detail', component: ProductDetailComponent}
+  //   ]
+  // },
+  {path: '', component: HomeComponent},
   {path: 'user-details', component: UserDetailsComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'product-detail', component: ProductDetailComponent}
 ];
