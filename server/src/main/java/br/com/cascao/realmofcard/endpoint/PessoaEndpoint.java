@@ -16,6 +16,7 @@ import java.util.List;
 
 public class PessoaEndpoint {
 
+    @Autowired
     private Pessoa pessoa;
 
     @GetMapping()
@@ -25,7 +26,6 @@ public class PessoaEndpoint {
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public Pessoa get(@PathVariable int id){
-        this.pessoa = new Pessoa();
         this.pessoa.setId(id);
         new Fachada().consultar(this.pessoa);
         return this.pessoa;

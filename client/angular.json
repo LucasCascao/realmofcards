@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "realm-of-card": {
+    "realmofcards": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/realm-of-card",
+            "outputPath": "dist/realmofcards",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,16 +24,13 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
-              "node_modules/popper.js/dist/umd/popper.js",
-              "node_modules/jquery/dist/core.js",
               "node_modules/jquery/dist/jquery.js",
-              "node_modules/jquery/dist/core.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"
             ]
           },
           "configurations": {
@@ -70,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "realm-of-card:build"
+            "browserTarget": "realmofcards:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "realm-of-card:build:production"
+              "browserTarget": "realmofcards:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "realm-of-card:build"
+            "browserTarget": "realmofcards:build"
           }
         },
         "test": {
@@ -96,16 +93,9 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
-              "node_modules/popper.js/dist/umd/popper.js",
-              "node_modules/jquery/dist/jquery.js",
-              "node_modules/jquery/dist/core.js"
-            ]
+            "scripts": []
           }
         },
         "lint": {
@@ -125,19 +115,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "realm-of-card:serve"
+            "devServerTarget": "realmofcards:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "realm-of-card:serve:production"
+              "devServerTarget": "realmofcards:serve:production"
             }
           }
         }
       }
-    }
-  },
-  "defaultProject": "realm-of-card",
-  "cli": {
-    "analytics": "ebad1e1a-b5e5-43d6-b80b-f4f99051b70a"
-  }
+    }},
+  "defaultProject": "realmofcards"
 }
