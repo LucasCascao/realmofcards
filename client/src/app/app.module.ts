@@ -24,6 +24,10 @@ import { CreditcardRegisterComponent } from './buy-components/creditcard-registe
 import { CreditcardAlterComponent } from './buy-components/creditcard-alter/creditcard-alter.component';
 import { CreditcardDeleteComponent } from './buy-components/creditcard-delete/creditcard-delete.component';
 import { CreditcardListComponent } from './buy-components/creditcard-list/creditcard-list.component';
+import { UserPasswordAlterComponent } from './user-components/user-password-alter/user-password-alter.component';
+import { CartComponent } from './buy-components/cart/cart.component';
+import { OrderResumeComponent } from './buy-components/order-resume/order-resume.component';
+import { PaymentPageComponent } from './buy-components/payment-page/payment-page.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,11 @@ import { CreditcardListComponent } from './buy-components/creditcard-list/credit
     CreditcardRegisterComponent,
     CreditcardAlterComponent,
     CreditcardDeleteComponent,
-    CreditcardListComponent
+    CreditcardListComponent,
+    UserPasswordAlterComponent,
+    CartComponent,
+    OrderResumeComponent,
+    PaymentPageComponent
   ],
   imports: [
     BrowserModule,

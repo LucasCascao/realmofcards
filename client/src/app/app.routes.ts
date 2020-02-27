@@ -16,6 +16,10 @@ import {CreditcardRegisterComponent} from './buy-components/creditcard-register/
 import {CreditcardAlterComponent} from './buy-components/creditcard-alter/creditcard-alter.component';
 import {CreditcardDeleteComponent} from './buy-components/creditcard-delete/creditcard-delete.component';
 import {CreditcardListComponent} from './buy-components/creditcard-list/creditcard-list.component';
+import {UserPasswordAlterComponent} from './user-components/user-password-alter/user-password-alter.component';
+import {CartComponent} from './buy-components/cart/cart.component';
+import {OrderResumeComponent} from './buy-components/order-resume/order-resume.component';
+import {PaymentPageComponent} from "./buy-components/payment-page/payment-page.component";
 
 export const ROUTES: Routes = [
   // {
@@ -24,14 +28,15 @@ export const ROUTES: Routes = [
   //     {path: 'product-detail', component: ProductDetailComponent}
   //   ]
   // },
-  {path: '', component: ProductMarketPageComponent},
+  {path: '', component: LoginComponent},
+  {path: 'product-market-page', component: ProductMarketPageComponent},
   {path: 'user-details', component: UserDetailsComponent},
-  {path: 'login', component: LoginComponent},
   {path: 'product-detail', component: ProductDetailComponent},
   {path: 'user-alter', component: UserAlterComponent},
   {path: 'user-register', component: UserRegisterComponent},
   {path: 'user-delete', component: UserDeleteComponent},
   {path: 'user-orders', component: UserOrdersComponent},
+  {path: 'user-password-alter', component: UserPasswordAlterComponent},
   {path: 'address-register', component: AddressRegisterComponent},
   {path: 'address-alter', component: AddressAlterComponent},
   {path: 'address-delete', component: AddressDeleteComponent},
@@ -39,5 +44,8 @@ export const ROUTES: Routes = [
   {path: 'creditcard-register', component: CreditcardRegisterComponent},
   {path: 'creditcard-alter', component: CreditcardAlterComponent},
   {path: 'creditcard-delete', component: CreditcardDeleteComponent},
-  {path: 'creditcard-list', component: CreditcardListComponent}
+  {path: 'creditcard-list', component: CreditcardListComponent},
+  {path: 'cart', component: CartComponent},
+  {path: 'payment-page', component: PaymentPageComponent},
+  {path: 'order-resume', component: OrderResumeComponent}
 ];

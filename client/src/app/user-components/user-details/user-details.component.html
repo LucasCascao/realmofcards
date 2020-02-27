@@ -1,6 +1,6 @@
 
 <div class="container">
-  <h1 class="mt-4 mb-3">Editar perfil</h1>
+  <h1 class="mt-4 mb-3">Detalhes do perfil</h1>
   <hr>
   <div class="row">
     <!-- edit form column -->
@@ -9,41 +9,26 @@
       <h3>Informações pessoais</h3>
 
       <div class="form-group">
-        <label class="col-lg-3 control-label">Primeiro nome:</label>
-        <div class="col-lg-8">
-          <p>Lucas</p>
-        </div>
+        <label class="col-lg-10 control-label"><strong>Primeiro nome:</strong> Lucas</label>
       </div>
       <div class="form-group">
-        <label class="col-lg-3 control-label">Ultimo nome:</label>
-        <div class="col-lg-8">
-          <p>De Almeida Rama Cascão</p>
-        </div>
+        <label class="col-lg-10 control-label"><strong>Ultimo nome:</strong> De Almeida Rama Cascão</label>
       </div>
       <div class="form-group">
-        <label class="col-lg-3 control-label">Email:</label>
-        <div class="col-lg-8">
-          <p>lucas.cascao@fatec.sp.gov.br</p>
-        </div>
+        <label class="col-lg-10 control-label"><strong>Email:</strong> lucas.cascao@fatec.sp.gov.br</label>
       </div>
       <div class="form-group">
-        <label class="col-lg-3 control-label">Estado:</label>
-        <div class="col-lg-8">
-          <p>SP</p>
-        </div>
+        <label class="col-lg-10 control-label"><strong>Estado:</strong> SP</label>
       </div>
       <div class="form-group">
-        <label class="col-md-3 control-label">Nome de usuário:</label>
+        <label class="col-md-10 control-label"><strong>Nome de usuário:</strong> lucascascao</label>
+      </div>
+      <div class="form-group">
+        <label class="col-md-10 control-label"></label>
         <div class="col-md-8">
-          <p>lucascascao</p>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-3 control-label"></label>
-        <div class="col-md-8">
-          <input type="button" class="btn btn-primary" value="Alterar">
+          <input type="button" class="btn btn-primary" [routerLink]="['/user-alter']" value="Alterar">
           <span></span>
-          <input type="button" class="btn btn-danger" value="Excluir Conta">
+          <input type="button" class="btn btn-danger" [routerLink]="['/user-delete']" value="Excluir Conta">
         </div>
       </div>
     </div>

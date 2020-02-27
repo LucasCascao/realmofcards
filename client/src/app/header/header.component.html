@@ -1,53 +1,21 @@
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a [routerLink]="['/']" class="navbar-brand" >Realm of Cards</a>
+    <a [routerLink]="['/product-market-page']" class="navbar-brand" >Realm of Cards</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProduto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Produto
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-            <a [routerLink]="['/']" class="dropdown-item">Todos os produtos</a>
-            <a [routerLink]="['/product-detail']" class="dropdown-item">Produto único</a>
-          </div>
-        </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCliente" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Cliente
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-            <a [routerLink]="['/user-register']" class="dropdown-item">Cadastro cliente</a>
-            <a [routerLink]="['/user-alter']" class="dropdown-item">Alterar cliente</a>
-            <a [routerLink]="['/user-details']" class="dropdown-item">Detalhes cliente</a>
-            <a [routerLink]="['/user-delete']" class="dropdown-item">Deletar cliente</a>
             <a [routerLink]="['/user-orders']" class="dropdown-item">Pedidos</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAddress" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Endereço
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-            <a [routerLink]="['/address-register']" class="dropdown-item">Cadastro endereço</a>
-            <a [routerLink]="['/address-alter']" class="dropdown-item">Alterar endereço</a>
-            <a [routerLink]="['/address-delete']" class="dropdown-item">Deletar endereço</a>
-            <a [routerLink]="['/address-list']" class="dropdown-item">Lista de endereços</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCreditcard" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Cartão de Credito
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-            <a [routerLink]="['/creditcard-register']" class="dropdown-item">Cadastro cartão de credito</a>
-            <a [routerLink]="['/creditcard-alter']" class="dropdown-item">Alterar cartão de credito</a>
-            <a [routerLink]="['/creditcard-delete']" class="dropdown-item">Deletar cartão de credito</a>
-            <a [routerLink]="['/creditcard-list']" class="dropdown-item">Lista cartão de credito</a>
+            <a [routerLink]="['/user-details']" class="dropdown-item">Meu perfil</a>
+            <a [routerLink]="['/user-password-alter']" class="dropdown-item">Alterar Senha</a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -55,7 +23,10 @@
             Outros
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-            <a [routerLink]="['/login']" class="dropdown-item">Login</a>
+            <a [routerLink]="['/']" class="dropdown-item">Login</a>
+            <a [routerLink]="['/cart']" class="dropdown-item">Carrinho</a>
+            <a [routerLink]="['/order-resume']" class="dropdown-item">Resumo do pedido</a>
+            <a [routerLink]="['/payment-page']" class="dropdown-item">Pagamento</a>
           </div>
         </li>
       </ul>

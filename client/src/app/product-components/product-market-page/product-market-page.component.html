@@ -45,42 +45,7 @@
 
   <h1 class="my-4">Bem-vindo ao Realm of Cards</h1>
 
-  <!-- Marketing Icons Section -->
-  <!--  <div class="row">-->
-  <!--    <div class="col-lg-4 mb-4">-->
-  <!--      <div class="card h-100">-->
-  <!--        <h4 class="card-header">Card Title</h4>-->
-  <!--        <div class="card-body">-->
-  <!--          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>-->
-  <!--        </div>-->
-  <!--        <div class="card-footer">-->
-  <!--          <a href="#" class="btn btn-primary">Learn More</a>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--    <div class="col-lg-4 mb-4">-->
-  <!--      <div class="card h-100">-->
-  <!--        <h4 class="card-header">Card Title</h4>-->
-  <!--        <div class="card-body">-->
-  <!--          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>-->
-  <!--        </div>-->
-  <!--        <div class="card-footer">-->
-  <!--          <a href="#" class="btn btn-primary">Learn More</a>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--    <div class="col-lg-4 mb-4">-->
-  <!--      <div class="card h-100">-->
-  <!--        <h4 class="card-header">Card Title</h4>-->
-  <!--        <div class="card-body">-->
-  <!--          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>-->
-  <!--        </div>-->
-  <!--        <div class="card-footer">-->
-  <!--          <a href="#" class="btn btn-primary">Learn More</a>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
+
 
   <!-- /.row -->
 
@@ -88,9 +53,10 @@
   <h2>Cartas a venda: </h2>
 
   <div class="row">
+
     <div class="col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="/assets/images/card_2.png" alt=""></a>
+        <a [routerLink]="['/product-detail']"><img class="card-img-top" src="/assets/images/card_2.png" alt=""></a>
         <div class="card-body">
           <h4 class="card-title">
             <a href="#">Angel of Serenity</a>
@@ -98,14 +64,15 @@
           <p class="card-text">Categoria de jogo: Magic</p>
           <p class="card-text">Categoria de carta: Monstro</p>
           <p class="card-text">Valor: R$ 15,00</p>
-          <a [routerLink]="['product-details']" class="btn btn-lg btn-secondary btn-block" href="#">Visualizar</a>
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Adquirir</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/product-detail']">Visualizar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/cart']">Comprar</a>
         </div>
       </div>
     </div>
+
     <div class="col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="/assets/images/card_2.png" alt=""></a>
+        <a [routerLink]="['/product-detail']"><img class="card-img-top" src="/assets/images/card_2.png" alt=""></a>
         <div class="card-body">
           <h4 class="card-title">
             <a href="#">Angel of Serenity</a>
@@ -113,14 +80,15 @@
           <p class="card-text">Categoria de jogo: Magic</p>
           <p class="card-text">Categoria de carta: Monstro</p>
           <p class="card-text">Valor: R$ 15,00</p>
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Visualizar</a>
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Comprar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/product-detail']">Visualizar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/cart']">Comprar</a>
         </div>
       </div>
     </div>
+
     <div class="col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="/assets/images/card_2.png" alt=""></a>
+        <a [routerLink]="['/product-detail']"><img class="card-img-top" src="/assets/images/card_2.png" alt=""></a>
         <div class="card-body">
           <h4 class="card-title">
             <a href="#">Angel of Serenity</a>
@@ -128,14 +96,15 @@
           <p class="card-text">Categoria de jogo: Magic</p>
           <p class="card-text">Categoria de carta: Monstro</p>
           <p class="card-text">Valor: R$ 15,00</p>
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Visualizar</a>
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Comprar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/product-detail']">Visualizar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/cart']">Comprar</a>
         </div>
       </div>
     </div>
+
     <div class="col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="/assets/images/card_2.png" alt=""></a>
+        <a [routerLink]="['/product-detail']"><img class="card-img-top" src="/assets/images/card_2.png" alt=""></a>
         <div class="card-body">
           <h4 class="card-title">
             <a href="#">Angel of Serenity</a>
@@ -143,14 +112,15 @@
           <p class="card-text">Categoria de jogo: Magic</p>
           <p class="card-text">Categoria de carta: Monstro</p>
           <p class="card-text">Valor: R$ 15,00</p>
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Visualizar</a>
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Comprar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/product-detail']">Visualizar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/cart']">Comprar</a>
         </div>
       </div>
     </div>
+
     <div class="col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="/assets/images/card_2.png" alt=""></a>
+        <a [routerLink]="['/product-detail']"><img class="card-img-top" src="/assets/images/card_2.png" alt=""></a>
         <div class="card-body">
           <h4 class="card-title">
             <a href="#">Angel of Serenity</a>
@@ -158,14 +128,15 @@
           <p class="card-text">Categoria de jogo: Magic</p>
           <p class="card-text">Categoria de carta: Monstro</p>
           <p class="card-text">Valor: R$ 15,00</p>
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Visualizar</a>
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Comprar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/product-detail']">Visualizar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/cart']">Comprar</a>
         </div>
       </div>
     </div>
+
     <div class="col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="/assets/images/card_2.png" alt=""></a>
+        <a [routerLink]="['/product-detail']"><img class="card-img-top" src="/assets/images/card_2.png" alt=""></a>
         <div class="card-body">
           <h4 class="card-title">
             <a href="#">Angel of Serenity</a>
@@ -173,12 +144,12 @@
           <p class="card-text">Categoria de jogo: Magic</p>
           <p class="card-text">Categoria de carta: Monstro</p>
           <p class="card-text">Valor: R$ 15,00</p>
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Visualizar</a>
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Comprar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/product-detail']">Visualizar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/cart']">Comprar</a>
         </div>
       </div>
     </div>
-  </div>
+
   <!-- /.row -->
 
   <!-- Features Section -->
