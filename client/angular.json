@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "realmofcards"
+    }
+  },
+  "defaultProject": "realmofcards",
+  "cli": {
+    "analytics": "89b4d522-7f1b-4745-9ff4-b65436d6727d"
+  }
 }

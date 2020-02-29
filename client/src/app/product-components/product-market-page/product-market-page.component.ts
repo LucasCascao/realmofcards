@@ -9,7 +9,51 @@ export class ProductMarketPageComponent implements OnInit {
 
   constructor() { }
 
+  cartas = [
+    {
+      nome: 'Angel of Serenity',
+      value: '15,00',
+      imageUrl: '/assets/images/card_2.png',
+      catJogo: 'Magic',
+      catCarta: 'Monstro'
+    },
+    {
+      nome: 'Angel of Serenity',
+      value: '15,00',
+      imageUrl: '/assets/images/card_2.png',
+      catJogo: 'Magic',
+      catCarta: 'Monstro'
+    },
+    {
+      nome: 'Angel of Serenity',
+      value: '15,00',
+      imageUrl: '/assets/images/card_2.png',
+      catJogo: 'Magic',
+      catCarta: 'Monstro'
+    },
+    {
+      nome: 'Angel of Serenity',
+      value: '15,00',
+      imageUrl: '/assets/images/card_2.png',
+      catJogo: 'Magic',
+      catCarta: 'Monstro'
+    },
+    {
+      nome: 'Angel of Serenity',
+      value: '15,00',
+      imageUrl: '/assets/images/card_2.png',
+      catJogo: 'Magic',
+      catCarta: 'Monstro'
+    },
+    {
+      nome: 'Angel of Serenity',
+      value: '15,00',
+      imageUrl: '/assets/images/card_2.png',
+      catJogo: 'Magic',
+      catCarta: 'Monstro'
+    }
+  ];
+
   ngOnInit(): void {
   }
-
 }

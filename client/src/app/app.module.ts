@@ -28,6 +28,7 @@ import { UserPasswordAlterComponent } from './user-components/user-password-alte
 import { CartComponent } from './buy-components/cart/cart.component';
 import { OrderResumeComponent } from './buy-components/order-resume/order-resume.component';
 import { PaymentPageComponent } from './buy-components/payment-page/payment-page.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { PaymentPageComponent } from './buy-components/payment-page/payment-page
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

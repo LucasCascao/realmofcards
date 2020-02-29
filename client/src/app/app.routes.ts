@@ -19,15 +19,9 @@ import {CreditcardListComponent} from './buy-components/creditcard-list/creditca
 import {UserPasswordAlterComponent} from './user-components/user-password-alter/user-password-alter.component';
 import {CartComponent} from './buy-components/cart/cart.component';
 import {OrderResumeComponent} from './buy-components/order-resume/order-resume.component';
-import {PaymentPageComponent} from "./buy-components/payment-page/payment-page.component";
+import {PaymentPageComponent} from './buy-components/payment-page/payment-page.component';
 
 export const ROUTES: Routes = [
-  // {
-  //   path: '', component: HomeComponent,
-  //   children: [
-  //     {path: 'product-detail', component: ProductDetailComponent}
-  //   ]
-  // },
   {path: '', component: LoginComponent},
   {path: 'product-market-page', component: ProductMarketPageComponent},
   {path: 'user-details', component: UserDetailsComponent},
