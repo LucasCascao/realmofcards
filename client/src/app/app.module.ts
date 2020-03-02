@@ -20,15 +20,25 @@ import { AddressRegisterComponent } from './address-components/address-register/
 import { AddressAlterComponent } from './address-components/address-alter/address-alter.component';
 import { AddressDeleteComponent } from './address-components/address-delete/address-delete.component';
 import { AddressListComponent } from './address-components/address-list/address-list.component';
-import { CreditcardRegisterComponent } from './buy-components/creditcard-register/creditcard-register.component';
-import { CreditcardAlterComponent } from './buy-components/creditcard-alter/creditcard-alter.component';
-import { CreditcardDeleteComponent } from './buy-components/creditcard-delete/creditcard-delete.component';
-import { CreditcardListComponent } from './buy-components/creditcard-list/creditcard-list.component';
+import { CreditcardRegisterComponent } from './buy-components/creditcard/creditcard-register/creditcard-register.component';
+import { CreditcardAlterComponent } from './buy-components/creditcard/creditcard-alter/creditcard-alter.component';
+import { CreditcardDeleteComponent } from './buy-components/creditcard/creditcard-delete/creditcard-delete.component';
+import { CreditcardListComponent } from './buy-components/creditcard/creditcard-list/creditcard-list.component';
 import { UserPasswordAlterComponent } from './user-components/user-password-alter/user-password-alter.component';
 import { CartComponent } from './buy-components/cart/cart.component';
 import { OrderResumeComponent } from './buy-components/order-resume/order-resume.component';
 import { PaymentPageComponent } from './buy-components/payment-page/payment-page.component';
 import {FormsModule} from '@angular/forms';
+import {AuthService} from './login/auth.service';
+import { BuyConfirmComponent } from './buy-components/buy-confirm/buy-confirm.component';
+import { CardRegisterComponent } from './admin-components/cards/card-register/card-register.component';
+import { CardListComponent } from './admin-components/cards/card-list/card-list.component';
+import { CardAlterComponent } from './admin-components/cards/card-alter/card-alter.component';
+import { CardDeleteComponent } from './admin-components/cards/card-delete/card-delete.component';
+import { AdminPageComponent } from './admin-components/admin-page/admin-page.component';
+import { CardActiveManagemantComponent } from './admin-components/cards/card-active-managemant/card-active-managemant.component';
+import { CardListInactiveComponent } from './admin-components/cards/card-list-inactive/card-list-inactive.component';
+import { CardActiveComponent } from './admin-components/cards/card-active/card-active.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +64,16 @@ import {FormsModule} from '@angular/forms';
     UserPasswordAlterComponent,
     CartComponent,
     OrderResumeComponent,
-    PaymentPageComponent
+    PaymentPageComponent,
+    BuyConfirmComponent,
+    CardRegisterComponent,
+    CardListComponent,
+    CardAlterComponent,
+    CardDeleteComponent,
+    AdminPageComponent,
+    CardActiveManagemantComponent,
+    CardListInactiveComponent,
+    CardActiveComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +81,7 @@ import {FormsModule} from '@angular/forms';
     RouterModule.forRoot(ROUTES),
     FormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

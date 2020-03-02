@@ -1,73 +1,28 @@
 <!-- Page Content -->
 <div class="container">
-
   <!-- Page Heading/Breadcrumbs -->
   <h1 class="mt-4 mb-3">Lista de endereços</h1>
-
   <hr>
-
-  <a class="btn btn-primary" [routerLink]="['/address-register']">Adcionar novo endereco
+  <a class="btn btn-secondary" [routerLink]="['/address-register']">Adcionar novo endereco
     <span class="glyphicon glyphicon-chevron-right"></span>
   </a>
-
   <hr>
-
   <!-- Project One -->
-  <div class="row">
+  <div class="row" *ngFor="let endereco of enderecos">
     <div class="col-md-5">
-      <p class="card-text"><strong>Logradouro:</strong> Rua Passos</p>
-      <p class="card-text"><strong>Numero:</strong> 876</p>
-      <p class="card-text"><strong>Complemento:</strong> Casa do muro laranja com o portão branco</p>
-      <p class="card-text"><strong>CEP:</strong> 08665-410</p>
-      <p class="card-text"><strong>Bairro:</strong> Cidade Edson</p>
-      <p class="card-text"><strong>Cidade:</strong> Suzano</p>
-      <p class="card-text"><strong>Estado:</strong> SP</p>
-      <a class="btn btn-primary" [routerLink]="['/creditcard-list']">Selecionar esse endereço</a>
+      <p class="card-text"><strong>Logradouro: </strong>{{endereco.logradouro}}</p>
+      <p class="card-text"><strong>Numero: </strong>{{endereco.numero}}</p>
+      <p class="card-text"><strong>Complemento: </strong>{{endereco.complemento}}</p>
+      <p class="card-text"><strong>CEP: </strong>{{endereco.cep}}</p>
+      <p class="card-text"><strong>Bairro: </strong>{{endereco.bairro}}</p>
+      <p class="card-text"><strong>Cidade: </strong>{{endereco.cidade}}</p>
+      <p class="card-text"><strong>Estado: </strong>{{endereco.estado}}</p>
+      <a class="btn btn-secondary" [routerLink]="['/payment-page']">Selecionar esse endereço</a>
       <a class="btn btn-danger float-right" [routerLink]="['/address-delete']">Excluir</a>
       <a class="btn btn-warning float-right" [routerLink]="['/address-alter']">Editar</a>
+      <hr>
     </div>
   </div>
   <!-- /.row -->
-
-  <hr>
-
-  <!-- Project One -->
-  <div class="row">
-    <div class="col-md-5">
-      <p class="card-text"><strong>Logradouro:</strong> Rua Passos</p>
-      <p class="card-text"><strong>Numero:</strong> 876</p>
-      <p class="card-text"><strong>Complemento:</strong> Casa do muro laranja com o portão branco</p>
-      <p class="card-text"><strong>CEP:</strong> 08665-410</p>
-      <p class="card-text"><strong>Bairro:</strong> Cidade Edson</p>
-      <p class="card-text"><strong>Cidade:</strong> Suzano</p>
-      <p class="card-text"><strong>Estado:</strong> SP</p>
-      <a class="btn btn-primary" [routerLink]="['/creditcard-list']">Selecionar esse endereço</a>
-      <a class="btn btn-danger float-right" [routerLink]="['/address-delete']">Excluir</a>
-      <a class="btn btn-warning float-right" [routerLink]="['/address-alter']">Editar</a>
-    </div>
-  </div>
-  <!-- /.row -->
-
-  <hr>
-
-  <!-- Project One -->
-  <div class="row">
-    <div class="col-md-5">
-      <p class="card-text"><strong>Logradouro:</strong> Rua Passos</p>
-      <p class="card-text"><strong>Numero:</strong> 876</p>
-      <p class="card-text"><strong>Complemento:</strong> Casa do muro laranja com o portão branco</p>
-      <p class="card-text"><strong>CEP:</strong> 08665-410</p>
-      <p class="card-text"><strong>Bairro:</strong> Cidade Edson</p>
-      <p class="card-text"><strong>Cidade:</strong> Suzano</p>
-      <p class="card-text"><strong>Estado:</strong> SP</p>
-      <a class="btn btn-primary" [routerLink]="['/creditcard-list']">Selecionar esse endereço</a>
-      <a class="btn btn-danger float-right" [routerLink]="['/address-delete']">Excluir</a>
-      <a class="btn btn-warning float-right" [routerLink]="['/address-alter']">Editar</a>
-    </div>
-  </div>
-  <!-- /.row -->
-
-  <hr>
-
 </div>
 <!-- /.container -->

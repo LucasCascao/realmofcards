@@ -9,6 +9,12 @@ export class CreditcardListComponent implements OnInit {
 
   constructor() { }
 
+  cartoes = [
+    9999,
+    9999,
+    9999
+  ]
+
   ngOnInit(): void {
   }
 

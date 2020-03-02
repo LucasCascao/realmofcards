@@ -2,8 +2,9 @@
   <h1 class="mt-4 mb-3">Resumo da compra</h1>
   <hr>
   <div class="row">
-    <h3 class="mt-4 mb-3">Produto solicitado</h3>
-
+    <div class="col-md-3">
+      <h3 class="mt-4 mb-3">Produto solicitado</h3>
+    </div>
     <hr>
 
     <!-- Project One -->
@@ -22,15 +23,36 @@
   </div>
   <hr>
 
-  <div class="row"><h3 class="mt-4 mb-3">Forma de pagamento solicitada</h3></div>
   <div class="row">
-    <!-- Project One -->
-    <div class="row">
-      <div class="col-md-20">
-        <p class="card-text"><strong>Forma de pagamento:</strong> Certão de crédito final 5856</p>
-        <p></p>
-        <p class="card-text"><strong>Valor total:</strong> R$ 45,00</p>
-      </div>
+    <div class="col-md-12">
+      <h3 class="mt-4 mb-3">Forma de pagamento solicitada</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p class="card-text"><strong>Forma de pagamento: </strong>Certão de crédito final 5856.</p>
+      <p class="card-text"><strong>Cupom: </strong> Nenhum cupom inserido.</p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="mt-4 mb-3">Endereço solicitado</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p class="card-text"><strong>Endereço: </strong> Rua Passos, n° 876, Cidade Edson, Suzano-SP 08665-410.</p>
+      <p class="card-text"><strong>Valor de frete para esse endereço: </strong>R$ 12,65</p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-9">
+      <h3 class="mt-4 mb-3"><strong>Valor total a ser pago: </strong> R$ 57,65</h3>
+    </div>
+    <div class="col-md-3">
+      <a class=" mt-4 mb-3 btn btn-secondary float-lg-right" [routerLink]="['/buy-confirm']">Confirmar compra</a>
     </div>
   </div>
   <hr>

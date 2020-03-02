@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <!-- form card login -->
+          <div class="card rounded shadow shadow-sm">
+            <div class="card-header">
+              <h3 class="mb-0">Ativar carta</h3>
+            </div>
+            <div class="card-body">
+              <p>Confirmação e inserção da quantidade em estoque para que a carta <strong>{{carta.nome}}</strong> seja ativada.</p>
+              <div class="row mb-md-3">
+                <div class="col-lg-6 col-md-8 float-left">
+                  <label class="card-text" for="idEstoque">Quantidade inserida no estoque: </label>
+                </div>
+                <div class="col-lg-3 col-md-8 float-left">
+                  <input type="number" id="idEstoque" class="form-control float-left" min="1">
+                </div>
+              </div>
+              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['/admin-product-inactive-list']" value="Cancelar">
+              <input type="button" class="btn btn-danger btn-lg float-right" [routerLink]="['/admin-product-inactive-list']" value="Ativar">
+            </div>
+            <!--/card-block-->
+          </div>
+          <!-- /form card login -->
+        </div>
+      </div>
+      <!--/row-->
+    </div>
+    <!--/col-->
+  </div>
+  <!--/row-->
+</div>
+<!--/container-->

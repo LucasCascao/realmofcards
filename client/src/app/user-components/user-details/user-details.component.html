@@ -6,8 +6,6 @@
     <!-- edit form column -->
     <div class="col-md-9 personal-info">
 
-      <h3>Informações pessoais</h3>
-
       <div class="form-group">
         <label class="col-lg-10 control-label"><strong>Primeiro nome:</strong> Lucas</label>
       </div>
@@ -15,13 +13,19 @@
         <label class="col-lg-10 control-label"><strong>Ultimo nome:</strong> De Almeida Rama Cascão</label>
       </div>
       <div class="form-group">
-        <label class="col-lg-10 control-label"><strong>Email:</strong> lucas.cascao@fatec.sp.gov.br</label>
+        <label class="col-lg-10 control-label"><strong>Email:</strong> lucas.cascao@gmail.com</label>
       </div>
       <div class="form-group">
-        <label class="col-lg-10 control-label"><strong>Estado:</strong> SP</label>
+        <label class="col-lg-10 control-label"><strong>CPF:</strong> 433.836.258-85</label>
       </div>
       <div class="form-group">
         <label class="col-md-10 control-label"><strong>Nome de usuário:</strong> lucascascao</label>
+      </div>
+      <div class="form-group">
+        <a class="col-md-3 btn btn-secondary" [routerLink]="['/address-list']">Endereços cadastrados</a>
+      </div>
+      <div class="form-group">
+        <a class="col-md-3 btn btn-secondary" [routerLink]="['/creditcard-list']">Cartões cadastrados</a>
       </div>
       <div class="form-group">
         <label class="col-md-10 control-label"></label>
@@ -35,40 +39,3 @@
   </div>
 </div>
 <hr>
-
-<!--  Usar para componente de cadastro-->
-<!--  <div class="row">-->
-<!--    <div class="col-lg-8 mb-4">-->
-<!--      <h3>Send us a Message</h3>-->
-<!--      <form name="sentMessage" id="contactForm" novalidate>-->
-<!--        <div class="control-group form-group">-->
-<!--          <div class="controls">-->
-<!--            <label>Full Name:</label>-->
-<!--            <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">-->
-<!--            <p class="help-block"></p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="control-group form-group">-->
-<!--          <div class="controls">-->
-<!--            <label>Phone Number:</label>-->
-<!--            <input type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number.">-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="control-group form-group">-->
-<!--          <div class="controls">-->
-<!--            <label>Email Address:</label>-->
-<!--            <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address.">-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="control-group form-group">-->
-<!--          <div class="controls">-->
-<!--            <label>Message:</label>-->
-<!--            <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div id="success"></div>-->
-<!--        &lt;!&ndash; For success/fail messages &ndash;&gt;-->
-<!--        <button type="submit" class="btn btn-primary" id="sendMessageButton">Send Message</button>-->
-<!--      </form>-->
-<!--    </div>-->
-<!--  </div>-->

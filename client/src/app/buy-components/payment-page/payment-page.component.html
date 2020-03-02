@@ -1,40 +1,38 @@
 <div class="container">
-  <h1 class="my-4">Forma de Pagamento</h1>
-  <div class="row">
-    <div class="col-lg-4 mb-4">
+  <h1 class="my-4">Endereço de entrega</h1>
+  <div class="row"><!-- Inicio Row -->
+    <div class="col-lg-8 mb-4">
       <div class="card h-100">
-        <h4 class="card-header">Cartão de crédito</h4>
+        <h4 class="card-header">Endereço</h4>
         <div class="card-body">
-          <p class="card-text">Cartão selecionado com o final: 8595</p>
-          <a class="btn btn-secondary" [routerLink]="['/creditcard-list']">Trocar</a>
-        </div>
-        <div class="card-footer">
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" id="radio" name="defaultExample2" checked>
-            <label class="custom-control-label" for="radio">Escolha</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 mb-4">
-      <div class="card h-100">
-        <h4 class="card-header">Boleto bancario</h4>
-        <div class="card-body">
-          <p class="card-text">Boleto bancario.</p>
-        </div>
-        <div class="card-footer">
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" id="radio2" name="defaultExample2" checked>
-            <label class="custom-control-label" for="radio2">Escolha</label>
-          </div>
+          <p class="card-text">Rua Passos, n° 876, Cidade Edson, Suzano-SP.</p>
+          <p class="card-text"><strong>Valor de frete para esse endereço: </strong>R$ 12,65</p>
+          <a class="btn btn-secondary" [routerLink]="['/address-list']">Trocar</a>
         </div>
       </div>
     </div>
   </div>
   <hr>
-  <h1 class="my-4">Selecione o endereço</h1>
+  <h1 class="my-4">Cupom</h1>
   <div class="row">
     <div class="col-lg-8 mb-4">
+      <div class="card h-100">
+        <h4 class="card-header">Cupom</h4>
+        <div class="card-body">
+          <div class="col-md-8">
+            <label class="card-text">Insira o código do cupom no campo de texto abaixo: </label>
+            <input type="text" class="form-control" maxlength="10">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- Fim Row -->
+  <hr>
+  <!-- Forma de pagamento -->
+  <h1 class="my-4">Forma de Pagamento</h1>
+  <div class="row"><!-- Inicio Row -->
+    <!-- Boleto -->
+    <div class="col-lg-4 mb-4">
       <div class="card h-100">
         <h4 class="card-header">Boleto bancario</h4>
         <div class="card-body">
@@ -42,33 +40,88 @@
         </div>
         <div class="card-footer">
           <div class="custom-control custom-radio">
-            <a class="btn btn-secondary">Trocar</a>
+            <input type="radio" class="custom-control-input" id="radioBoleto" name="defaultExample2" checked>
+            <label class="custom-control-label" for="radioBoleto">Escolha</label>
           </div>
         </div>
       </div>
     </div>
-
-<!--  <div class="col-lg-4 mb-4">-->
-<!--    <div class="card h-100">-->
-<!--      <h4 class="card-header">Card Title</h4>-->
-<!--      <div class="card-body">-->
-<!--        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>-->
-<!--      </div>-->
-<!--      <div class="card-footer">-->
-<!--        <a href="#" class="btn btn-primary">Learn More</a>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="col-lg-4 mb-4">-->
-<!--    <div class="card h-100">-->
-<!--      <h4 class="card-header">Card Title</h4>-->
-<!--      <div class="card-body">-->
-<!--        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>-->
-<!--      </div>-->
-<!--      <div class="card-footer">-->
-<!--        <a href="#" class="btn btn-primary">Learn More</a>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-  </div>
-</div>
+    <!-- 1 Cartão de Credito -->
+    <div class="col-lg-4 mb-4">
+      <div class="card h-100">
+        <h4 class="card-header">1 Cartão de crédito</h4>
+        <div class="card-body">
+          <p class="card-text">Cartão selecionado com o final: 8595</p>
+          <a class="btn btn-secondary" [routerLink]="['/creditcard-list']">Trocar</a>
+          <hr>
+          <select class="form-control">
+            <option>1x R$ 45,00</option>
+            <option>2x R$ 22,50 - Sem juros</option>
+            <option>3x R$ 15,00 - Sem juros</option>
+          </select>
+        </div>
+        <div class="card-footer">
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="radioCartao" name="defaultExample2" checked>
+            <label class="custom-control-label" for="radioCartao">Escolha</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- Fim Row -->
+  <div class="row"><!-- Inicio Row -->
+    <!-- 2 cartões de credito -->
+    <div class="col-lg-8 mb-4">
+      <div class="card h-100">
+        <h4 class="card-header">2 Cartões de crédito</h4>
+        <div class="card-body">
+          <div class="col-lg-6 float-left">
+            <p class="card-text">Cartão selecionado com o final: 8595</p>
+            <a class="btn btn-secondary mb-md-3" [routerLink]="['/creditcard-list']">Trocar</a>
+            <div class="row">
+              <div class="col-lg-2 mb-md-3">
+                <label class="card-text" for="valorCard1">Valor: </label>
+              </div>
+              <div class="col-lg-5 mb-md-3">
+                <input type="text" id="valorCard1" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 float-left">
+            <p class="card-text">Cartão selecionado com o final: 9999</p>
+            <a class="btn btn-secondary mb-md-3" [routerLink]="['/creditcard-list']">Trocar</a>
+            <div class="row">
+              <div class="col-lg-2 mb-md-3">
+                <label class="card-text" for="valorCard2">Valor: </label>
+              </div>
+              <div class="col-lg-5 mb-md-3">
+                <input type="text" id="valorCard2" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-2">
+              <p class="card-text">Parcelas: </p>
+            </div>
+            <div class="col-lg-6">
+              <select class="form-control">
+                <option>1x R$ 45,00</option>
+                <option>2x R$ 22,50 - Sem juros</option>
+                <option>3x R$ 15,00 - Sem juros</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="radio2Cartao" name="defaultExample2" checked>
+            <label class="custom-control-label" for="radio2Cartao">Escolha</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- Fim Row -->
+  <hr>
+  <a class="btn btn-secondary" [routerLink]="['/order-resume']">Confirmar dados</a>
+  <hr>
+</div><!-- Fim Container -->

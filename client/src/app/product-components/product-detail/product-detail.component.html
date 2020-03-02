@@ -1,14 +1,15 @@
 <div class="container">
-  <h1 class="mt-4 mb-3">Angel of Serenity</h1>
+  <h1 class="mt-4 mb-3">{{carta.nome}}</h1>
   <div class="row">
     <div class="col-lg-6">
-      <img class="img-fluid rounded mb-4" src="/assets/images/card_2.png" alt="">
+      <img class="img-fluid rounded mb-4" [src]="carta.imageUrl" alt="">
     </div>
     <div class="col-lg-6">
-      <p class="card-text">Categoria de jogo: Magic</p>
-      <p class="card-text">Categoria de carta: Monstro</p>
-      <p class="card-text">Valor: R$ 15,00</p>
-      <p class="card-text">Valor de frete: gratuíto para todo o país</p>
+      <p class="card-text">Categoria de jogo: {{carta.catJogo}}.</p>
+      <p class="card-text">Categoria de carta: {{carta.catCarta}}.</p>
+      <p class="card-text">Valor: R$ {{carta.value}}.</p>
+      <p class="card-text">Quantidade disponivel: {{carta.estoque}}.</p>
+      <p class="card-text">Descrição: {{carta.descricao}}.</p>
       <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/cart']">Adicionar ao carrinho</a>
     </div>
   </div>

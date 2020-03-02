@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MockCards} from "../../../mock/mock-card.model";
 
 @Component({
   selector: 'app-product-market-page',
@@ -9,51 +10,12 @@ export class ProductMarketPageComponent implements OnInit {
 
   constructor() { }
 
-  cartas = [
-    {
-      nome: 'Angel of Serenity',
-      value: '15,00',
-      imageUrl: '/assets/images/card_2.png',
-      catJogo: 'Magic',
-      catCarta: 'Monstro'
-    },
-    {
-      nome: 'Angel of Serenity',
-      value: '15,00',
-      imageUrl: '/assets/images/card_2.png',
-      catJogo: 'Magic',
-      catCarta: 'Monstro'
-    },
-    {
-      nome: 'Angel of Serenity',
-      value: '15,00',
-      imageUrl: '/assets/images/card_2.png',
-      catJogo: 'Magic',
-      catCarta: 'Monstro'
-    },
-    {
-      nome: 'Angel of Serenity',
-      value: '15,00',
-      imageUrl: '/assets/images/card_2.png',
-      catJogo: 'Magic',
-      catCarta: 'Monstro'
-    },
-    {
-      nome: 'Angel of Serenity',
-      value: '15,00',
-      imageUrl: '/assets/images/card_2.png',
-      catJogo: 'Magic',
-      catCarta: 'Monstro'
-    },
-    {
-      nome: 'Angel of Serenity',
-      value: '15,00',
-      imageUrl: '/assets/images/card_2.png',
-      catJogo: 'Magic',
-      catCarta: 'Monstro'
-    }
-  ];
+  cartas = new MockCards().cards;
 
   ngOnInit(): void {
+  }
+
+  filtrar(cartas: any) {
+
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MockCards} from "../../../mock/mock-card.model";
 
 @Component({
   selector: 'app-product-detail',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class ProductDetailComponent implements OnInit {
 
   constructor() { }
+
+  carta = new MockCards().cards[0];
 
   ngOnInit(): void {
   }
