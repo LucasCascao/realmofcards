@@ -39,6 +39,23 @@ import { AdminPageComponent } from './admin-components/admin-page/admin-page.com
 import { CardActiveManagemantComponent } from './admin-components/cards/card-active-managemant/card-active-managemant.component';
 import { CardListInactiveComponent } from './admin-components/cards/card-list-inactive/card-list-inactive.component';
 import { CardActiveComponent } from './admin-components/cards/card-active/card-active.component';
+import { ClientListComponent } from './admin-components/clients/client-list/client-list.component';
+import { ClientActiveComponent } from './admin-components/clients/client-active/client-active.component';
+import { ClientInactiveComponent } from './admin-components/clients/client-inactive/client-inactive.component';
+import { ClientInactiveListComponent } from './admin-components/clients/client-inactive-list/client-inactive-list.component';
+import { ProductTradeComponent } from './user-components/product-trade/product-trade.component';
+import { ProductGenerateTradeCodeComponent } from './user-components/product-generate-trade-code/product-generate-trade-code.component';
+import { TicketDescontGenerateComponent } from './admin-components/tickets/ticket-descont-generate/ticket-descont-generate.component';
+import { ClientRequestActivationComponent } from './admin-components/clients/client-request-activation/client-request-activation.component';
+import { PendingOrdersComponent } from './admin-components/orders/pending-orders/pending-orders.component';
+import { TransitOrdersComponent } from './admin-components/orders/transit-orders/transit-orders.component';
+import { OrdersDeliveredComponent } from './admin-components/orders/orders-delivered/orders-delivered.component';
+import { TicketValueComponent } from './admin-components/tickets/ticket-value/ticket-value.component';
+import { StockInsertComponent } from './admin-components/stock/stock-insert/stock-insert.component';
+import { RequestTradeComponent } from './admin-components/trade/request-trade/request-trade.component';
+import { TransitTradeComponent } from './admin-components/trade/transit-trade/transit-trade.component';
+import { AnalyzeComponent } from './admin-components/analyze/analyze.component';
+import { ReturnStockComponent } from './admin-components/trade/return-stock/return-stock.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +90,24 @@ import { CardActiveComponent } from './admin-components/cards/card-active/card-a
     AdminPageComponent,
     CardActiveManagemantComponent,
     CardListInactiveComponent,
-    CardActiveComponent
+    CardActiveComponent,
+    ClientListComponent,
+    ClientActiveComponent,
+    ClientInactiveComponent,
+    ClientInactiveListComponent,
+    ProductTradeComponent,
+    ProductGenerateTradeCodeComponent,
+    TicketDescontGenerateComponent,
+    ClientRequestActivationComponent,
+    PendingOrdersComponent,
+    TransitOrdersComponent,
+    OrdersDeliveredComponent,
+    TicketValueComponent,
+    StockInsertComponent,
+    RequestTradeComponent,
+    TransitTradeComponent,
+    AnalyzeComponent,
+    ReturnStockComponent
   ],
   imports: [
     BrowserModule,

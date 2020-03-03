@@ -1,30 +1,46 @@
 <div class="container">
   <h1 class="my-4">Gerenciamento</h1>
+  <h2>Análise</h2>
+  <hr>
+  <!--  Row de produtos-->
+  <div class="row">
+    <div class="col-lg-3 col-sm-6 portfolio-item">
+      <div class="card h-100">
+        <div class="card-body">
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/analyze']">Gráfico de vendas</a>
+        </div>
+      </div>
+    </div>
+  </div>
   <h2>Produto</h2>
   <hr>
 <!--  Row de produtos-->
   <div class="row">
-    <div class="col-lg-4 col-sm-6 portfolio-item">
+    <div class="col-lg-3 col-sm-6 portfolio-item">
       <div class="card h-100">
         <div class="card-body">
-          <p class="card-text"><strong>Cadastrar novo produto</strong></p>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-product-register']">Cadastrar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-product-register']">Novo produto</a>
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-sm-6 portfolio-item">
+    <div class="col-lg-3 col-sm-6 portfolio-item">
       <div class="card h-100">
         <div class="card-body">
-          <p class="card-text"><strong>Produtos ativos</strong></p>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-product-list']">Mostrar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-product-list']">Produtos ativos</a>
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-sm-6 portfolio-item">
+    <div class="col-lg-3 col-sm-6 portfolio-item">
       <div class="card h-100">
         <div class="card-body">
-          <p class="card-text"><strong>Produtos inativos</strong></p>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-product-inactive-list']">Mostrar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-product-inactive-list']">Produtos inativos</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6 portfolio-item">
+      <div class="card h-100">
+        <div class="card-body">
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/stock-insert']">Estoque</a>
         </div>
       </div>
     </div>
@@ -34,19 +50,24 @@
   <hr>
 <!--  Row de Clientes-->
   <div class="row">
-    <div class="col-lg-6 col-sm-6 portfolio-item">
+    <div class="col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
         <div class="card-body">
-          <p class="card-text"><strong>Clientes ativos</strong></p>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-product-register']">Mostrar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-client-list']">Clientes ativos</a>
         </div>
       </div>
     </div>
-    <div class="col-lg-6 col-sm-6 portfolio-item">
+    <div class="col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
         <div class="card-body">
-          <p class="card-text"><strong>Clientes inativos</strong></p>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-product-register']">Mostrar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-client-inactive-list']">Clientes inativos</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-6 portfolio-item">
+      <div class="card h-100">
+        <div class="card-body">
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-client-request-activation']">Solicitação de ativação</a>
         </div>
       </div>
     </div>
@@ -59,24 +80,7 @@
     <div class="col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
         <div class="card-body">
-          <p class="card-text"><strong>Gerar cupom de desconto</strong></p>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-product-register']">Mostrar</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <p class="card-text"><strong>Pedidos com cupom de desconto</strong></p>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-product-register']">Mostrar</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <p class="card-text"><strong>Pedidos com cupom de troca</strong></p>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-product-register']">Mostrar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-ticket-value']">Gerar cupom de desconto</a>
         </div>
       </div>
     </div>
@@ -88,8 +92,40 @@
     <div class="col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
         <div class="card-body">
-          <p class="card-text"><strong>Todos os pedidos</strong></p>
-          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-product-register']">Mostrar</a>
+          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['/pending-orders']">Vendas Pendentes</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-6 portfolio-item">
+      <div class="card h-100">
+        <div class="card-body">
+          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['/transit-orders']">Em Trasito</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-6 portfolio-item">
+      <div class="card h-100">
+        <div class="card-body">
+          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['/orders-delivered']">Pedidos Entregues</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2>Pedidos em troca</h2>
+  <hr>
+  <!--  Row de Cupons-->
+  <div class="row">
+    <div class="col-lg-6 col-sm-6 portfolio-item">
+      <div class="card h-100">
+        <div class="card-body">
+          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['/request-trade']">Pendentes de aprovação</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 portfolio-item">
+      <div class="card h-100">
+        <div class="card-body">
+          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['/transit-trade']">Em transito</a>
         </div>
       </div>
     </div>

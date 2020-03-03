@@ -28,6 +28,23 @@ import {CardListComponent} from './admin-components/cards/card-list/card-list.co
 import {AdminPageComponent} from './admin-components/admin-page/admin-page.component';
 import {CardListInactiveComponent} from './admin-components/cards/card-list-inactive/card-list-inactive.component';
 import {CardActiveComponent} from './admin-components/cards/card-active/card-active.component';
+import {ProductTradeComponent} from './user-components/product-trade/product-trade.component';
+import {ProductGenerateTradeCodeComponent} from './user-components/product-generate-trade-code/product-generate-trade-code.component';
+import {ClientListComponent} from './admin-components/clients/client-list/client-list.component';
+import {ClientInactiveListComponent} from './admin-components/clients/client-inactive-list/client-inactive-list.component';
+import {ClientInactiveComponent} from './admin-components/clients/client-inactive/client-inactive.component';
+import {ClientActiveComponent} from './admin-components/clients/client-active/client-active.component';
+import {ClientRequestActivationComponent} from './admin-components/clients/client-request-activation/client-request-activation.component';
+import {PendingOrdersComponent} from './admin-components/orders/pending-orders/pending-orders.component';
+import {TransitOrdersComponent} from './admin-components/orders/transit-orders/transit-orders.component';
+import {OrdersDeliveredComponent} from './admin-components/orders/orders-delivered/orders-delivered.component';
+import {TicketDescontGenerateComponent} from './admin-components/tickets/ticket-descont-generate/ticket-descont-generate.component';
+import {TicketValueComponent} from './admin-components/tickets/ticket-value/ticket-value.component';
+import {StockInsertComponent} from './admin-components/stock/stock-insert/stock-insert.component';
+import {RequestTradeComponent} from './admin-components/trade/request-trade/request-trade.component';
+import {TransitTradeComponent} from './admin-components/trade/transit-trade/transit-trade.component';
+import {AnalyzeComponent} from './admin-components/analyze/analyze.component';
+import {ReturnStockComponent} from './admin-components/trade/return-stock/return-stock.component';
 
 export const ROUTES: Routes = [
   {path: '', component: LoginComponent},
@@ -39,6 +56,8 @@ export const ROUTES: Routes = [
   {path: 'user-delete', component: UserDeleteComponent},
   {path: 'user-orders', component: UserOrdersComponent},
   {path: 'user-password-alter', component: UserPasswordAlterComponent},
+  {path: 'user-product-trade', component: ProductTradeComponent},
+  {path: 'user-product-generate-trade-code', component: ProductGenerateTradeCodeComponent},
   {path: 'address-register', component: AddressRegisterComponent},
   {path: 'address-alter', component: AddressAlterComponent},
   {path: 'address-delete', component: AddressDeleteComponent},
@@ -57,5 +76,20 @@ export const ROUTES: Routes = [
   {path: 'admin-product-delete', component: CardDeleteComponent},
   {path: 'admin-product-list', component: CardListComponent},
   {path: 'admin-product-inactive-list', component: CardListInactiveComponent},
-  {path: 'admin-product-active', component: CardActiveComponent}
+  {path: 'admin-product-active', component: CardActiveComponent},
+  {path: 'stock-insert', component: StockInsertComponent},
+  {path: 'admin-client-list', component: ClientListComponent},
+  {path: 'admin-client-inactive-list', component: ClientInactiveListComponent},
+  {path: 'admin-client-inactive', component: ClientInactiveComponent},
+  {path: 'admin-client-request-activation', component: ClientRequestActivationComponent},
+  {path: 'admin-client-active', component: ClientActiveComponent},
+  {path: 'admin-ticket-value', component: TicketValueComponent},
+  {path: 'admin-generate-discount-ticket', component: TicketDescontGenerateComponent},
+  {path: 'pending-orders', component: PendingOrdersComponent},
+  {path: 'transit-orders', component: TransitOrdersComponent},
+  {path: 'orders-delivered', component: OrdersDeliveredComponent},
+  {path: 'request-trade', component: RequestTradeComponent},
+  {path: 'transit-trade', component: TransitTradeComponent},
+  {path: 'return-stock', component: ReturnStockComponent},
+  {path: 'analyze', component: AnalyzeComponent}
 ];

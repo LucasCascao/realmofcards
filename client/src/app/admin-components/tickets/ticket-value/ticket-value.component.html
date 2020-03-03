@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <!-- form card login -->
+          <div class="card rounded shadow shadow-sm">
+            <div class="card-header">
+              <h3 class="mb-0">Cupom de Desconto</h3>
+            </div>
+            <div class="card-body">
+              <div class="col-lg-6 float-left">
+                <p>Insira o valor do desconto: </p>
+              </div>
+              <div class="col-lg-6 float-left">
+                <input type="number" min="0.1">
+              </div>
+
+            </div>
+            <!--/card-block-->
+            <div class="card-footer">
+              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['/admin-page']" value="Voltar">
+              <input type="button" class="btn btn-success btn-lg float-right" [routerLink]="['/admin-generate-discount-ticket']" value="Gerar">
+            </div>
+          </div>
+          <!-- /form card login -->
+        </div>
+      </div>
+      <!--/row-->
+    </div>
+    <!--/col-->
+  </div>
+  <!--/row-->
+</div>
+<!--/container-->

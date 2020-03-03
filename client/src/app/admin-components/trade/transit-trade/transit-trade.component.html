@@ -1,0 +1,46 @@
+<div class="container">
+  <h1 class="my-4">Pedidos de Troca em Transito</h1>
+  <hr>
+  <div class="row">
+    <div class="col-lg-10 offset-1">
+      <div class="col-lg-10 float-left">
+        <input type="text" class="form-control" placeholder="Pesquisar pedido">
+      </div>
+      <div class="col-lg-2 float-right">
+        <input type="button" (click)="filtrar(clients)" class="btn btn-secondary" value="Pesquisar">
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div *ngFor="let client of clients" class="col-lg-12 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="col-md-3 float-left">
+            <img class="card-img-top" [src]="carta.imageUrl" alt="">
+          </div>
+          <div class="col-md-3 float-left">
+            <p class="card-text"><strong>Produto:</strong> {{carta.nome}}</p>
+            <p class="card-text"><strong>Categoria:</strong> {{carta.catCarta}}</p>
+            <p class="card-text"><strong>Jogo:</strong> {{carta.catJogo}}</p>
+            <p class="card-text"><strong>Quantidade requisitada:</strong> 3</p>
+            <p class="card-text"><strong>Parcela:</strong> 1x 52.45</p>
+            <p class="card-text"><strong>Data da compra:</strong> 20/02/2020</p>
+          </div>
+          <div class="col-md-4 float-left">
+            <p class="card-text"><strong>Cliente:</strong> {{client.firstName}} {{client.lastName}}</p>
+            <p class="card-text"><strong>Email:</strong> {{client.email}}</p>
+            <p class="card-text"><strong>Forma de pagamento:</strong> 2 cartões</p>
+            <p class="card-text"><strong>Cartão final 9999:</strong> 20.00</p>
+            <p class="card-text"><strong>Cartão final 5859:</strong> 32.45</p>
+            <p class="card-text"><strong>Data da solicitação de troca:</strong> 01/03/2020</p>
+            <p class="card-text"><strong>Data da chegada do produto:</strong> 04/03/2020</p>
+          </div>
+          <div class="col-md-1 float-left">
+            <a class="btn btn-success mb-md-3" [routerLink]="['/return-stock']">Confirmar Entrega</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

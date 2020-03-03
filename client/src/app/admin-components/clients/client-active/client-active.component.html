@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <!-- form card login -->
+          <div class="card rounded shadow shadow-sm">
+            <div class="card-header">
+              <h3 class="mb-0">Ativar carta</h3>
+            </div>
+            <div class="card-body">
+              <p>Confirmação de ativação da conta co cliente <strong>{{client.firstName}} {{client.lastName}}</strong>.</p>
+              <p>Clique no botão "Ativar" para confirmar a ativação ou em "Cancelar" para encerrar o procedimento sem a ativação.</p>
+              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['/admin-client-request-activation']" value="Cancelar">
+              <input type="button" class="btn btn-success btn-lg float-right" [routerLink]="['/admin-client-request-activation']" value="Ativar">
+            </div>
+            <!--/card-block-->
+          </div>
+          <!-- /form card login -->
+        </div>
+      </div>
+      <!--/row-->
+    </div>
+    <!--/col-->
+  </div>
+  <!--/row-->
+</div>
+<!--/container-->

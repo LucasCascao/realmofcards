@@ -10,8 +10,6 @@ import {MockCards} from '../../../../mock/mock-card.model';
 })
 export class CardListComponent implements OnInit {
 
-  categorias: Category[] = new MockCategory().categories;
-
   cartas = new MockCards().cards;
 
   constructor() { }
