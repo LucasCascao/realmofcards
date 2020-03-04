@@ -6,13 +6,15 @@
           <!-- form card login -->
           <div class="card rounded shadow shadow-sm">
             <div class="card-header">
-              <h3 class="mb-0">Solicitar troca</h3>
+              <h3 class="mb-0">Retornar Produto para o Estoque</h3>
             </div>
             <div class="card-body">
-              <p>Troca do produto: carta <strong>{{carta.nome}}</strong>, pertecente ao cliente <strong>{{cliente.firstName}}</strong>.</p>
-              <p>Clique no botão abaixo para confirmar a troca.</p>
-              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['/user-orders']" value="Cancelar">
-              <input type="button" class="btn btn-danger btn-lg float-right" [routerLink]="['/user-product-generate-trade-code']" value="Confirmar Troca">
+              <p>Confirmação para inserir o(s) produto(s) de volta ao estoque:</p>
+              <ul>
+                <li><strong>1 un - {{carta.nome}}</strong>.</li>
+              </ul>
+              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['/devolution-transit']" value="Negar">
+              <input type="button" class="btn btn-success btn-lg float-right" [routerLink]="['/devolution-transit']" value="Inserir">
             </div>
             <!--/card-block-->
           </div>

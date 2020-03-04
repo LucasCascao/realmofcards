@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center mb-md-3">
+      <div class="row">
+        <div class="col-lg-7 col-md-8 mx-auto">
+          <!-- form card login -->
+          <div class="card rounded shadow shadow-sm">
+            <div class="card-header">
+              <h3 class="mb-0">Confirmação da solicitação de devolução</h3>
+            </div>
+            <div class="card-body">
+              <p>Solicitação de devolução do produto <strong>{{carta.nome}}</strong> realizada com sucesso.</p>
+              <p>Verifique o status do pedido para acompanhar o andamento da troca.</p>
+            </div>
+            <div class="card-footer">
+              <a class="btn btn-secondary float-right" [routerLink]="['/user-orders']">Voltar a tela de pedidos</a>
+            </div>
+            <!--/card-block-->
+          </div>
+          <!-- /form card login -->
+        </div>
+      </div>
+      <!--/row-->
+    </div>
+    <!--/col-->
+  </div>
+  <!--/row-->
+</div>
+<!--/container-->

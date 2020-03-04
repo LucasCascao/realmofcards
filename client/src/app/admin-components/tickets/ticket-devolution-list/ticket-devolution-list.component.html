@@ -1,0 +1,39 @@
+<div class="container">
+  <h1 class="my-4">Lista de Cupons de Devolução</h1>
+  <hr>
+  <div class="row">
+    <div class="col-lg-10 offset-1">
+      <div class="col-lg-10 float-left">
+        <input type="text" class="form-control" placeholder="Pesquisar produto">
+      </div>
+      <div class="col-lg-2 float-right">
+        <input type="button" (click)="filtrar(tickets)" class="btn btn-secondary" value="Pesquisar">
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div *ngFor="let ticket of tickets" class="col-lg-12 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="col-md-6 float-left">
+            <p class="card-text"><strong>Numero do Pedido:</strong> 785494846</p>
+            <p class="card-text"><strong>Nome do cliente:</strong> {{client.firstName}} {{client.lastName}}</p>
+            <p class="card-text"><strong>Nome do produto:</strong> {{carta.nome}}</p>
+            <p class="card-text"><strong>Valor total:</strong> R$ {{carta.value}}</p>
+            <p class="card-text"><strong>Quantidade:</strong> 3.</p>
+          </div>
+          <div class="col-md-6 float-left">
+            <h3 class="card-text"><strong>Cupom de Troca:</strong> {{ticket}}</h3>
+            <p class="card-text"><strong>Data da emissão:</strong> 03/03/2020</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <a [routerLink]="['/admin-page']" class="btn btn-secondary float-left">Voltar</a>
+    </div>
+  </div>
+</div>

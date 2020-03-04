@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="my-4">Pedidos Pendentes</h1>
+  <h1 class="my-4">Pedidos de Devolução Pendentes</h1>
   <hr>
   <div class="row">
     <div class="col-lg-10 offset-1">
@@ -33,10 +33,11 @@
             <p class="card-text"><strong>Forma de pagamento:</strong> 2 cartões</p>
             <p class="card-text"><strong>Cartão final 9999:</strong> 20.00</p>
             <p class="card-text"><strong>Cartão final 5859:</strong> 32.45</p>
+            <p class="card-text"><strong>Data da solicitação de devolução:</strong> 01/03/2020</p>
           </div>
           <div class="col-md-2 float-left">
-            <a class="btn btn-success mb-md-3" [routerLink]="['/pending-orders']">Despachar para Entrega</a>
-<!--            <a class="btn btn-danger mb-md-3" [routerLink]="['/pending-orders']">Negar</a>-->
+            <a class="btn btn-success mb-md-3" [routerLink]="['/devolution-request']">Aprovar Devolução</a>
+            <!--            <a class="btn btn-danger mb-md-3" [routerLink]="['/pending-orders']">Negar</a>-->
           </div>
         </div>
       </div>

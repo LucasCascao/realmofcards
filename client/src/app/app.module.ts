@@ -56,6 +56,17 @@ import { RequestTradeComponent } from './admin-components/trade/request-trade/re
 import { TransitTradeComponent } from './admin-components/trade/transit-trade/transit-trade.component';
 import { AnalyzeComponent } from './admin-components/analyze/analyze.component';
 import { ReturnStockComponent } from './admin-components/trade/return-stock/return-stock.component';
+import { DevolutionComponent } from './user-components/devolution/devolution.component';
+import { DevolutionFinalizationComponent } from './user-components/devolution-finalization/devolution-finalization.component';
+import { DevolutionRequestComponent } from './admin-components/devolution/devolution-request/devolution-request.component';
+import { DevolutionStockComponent } from './admin-components/devolution/devolution-stock/devolution-stock.component';
+import { DevolutionTransitComponent } from './admin-components/devolution/devolution-transit/devolution-transit.component';
+import { ProviderRegisterComponent } from './admin-components/provider/provider-register/provider-register.component';
+import { ProviderListComponent } from './admin-components/provider/provider-list/provider-list.component';
+import { ProviderInativeComponent } from './admin-components/provider/provider-inative/provider-inative.component';
+import { TicketListComponent } from './admin-components/tickets/ticket-list/ticket-list.component';
+import { TicketDevolutionListComponent } from './admin-components/tickets/ticket-devolution-list/ticket-devolution-list.component';
+import { TicketTradeListComponent } from './admin-components/tickets/ticket-trade-list/ticket-trade-list.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +118,18 @@ import { ReturnStockComponent } from './admin-components/trade/return-stock/retu
     RequestTradeComponent,
     TransitTradeComponent,
     AnalyzeComponent,
-    ReturnStockComponent
+    ReturnStockComponent,
+    DevolutionComponent,
+    DevolutionFinalizationComponent,
+    DevolutionRequestComponent,
+    DevolutionStockComponent,
+    DevolutionTransitComponent,
+    ProviderRegisterComponent,
+    ProviderListComponent,
+    ProviderInativeComponent,
+    TicketListComponent,
+    TicketDevolutionListComponent,
+    TicketTradeListComponent
   ],
   imports: [
     BrowserModule,

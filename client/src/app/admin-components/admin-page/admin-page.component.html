@@ -57,20 +57,20 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-client-inactive-list']">Clientes inativos</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-client-request-activation']">Solicitação de ativação</a>
-        </div>
-      </div>
-    </div>
+<!--    <div class="col-lg-4 col-sm-6 portfolio-item">-->
+<!--      <div class="card h-100">-->
+<!--        <div class="card-body">-->
+<!--          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-client-inactive-list']">Clientes inativos</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col-lg-4 col-sm-6 portfolio-item">-->
+<!--      <div class="card h-100">-->
+<!--        <div class="card-body">-->
+<!--          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-client-request-activation']">Solicitação de ativação</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
     <hr>
   </div>
   <h2>Cupons</h2>
@@ -81,6 +81,20 @@
       <div class="card h-100">
         <div class="card-body">
           <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-ticket-value']">Gerar cupom de desconto</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-6 portfolio-item">
+      <div class="card h-100">
+        <div class="card-body">
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/ticket-devolution-list']">Cupons de Devolução</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-6 portfolio-item">
+      <div class="card h-100">
+        <div class="card-body">
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/ticket-trade-list']">Cupons de Troca</a>
         </div>
       </div>
     </div>
@@ -126,6 +140,24 @@
       <div class="card h-100">
         <div class="card-body">
           <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['/transit-trade']">Em transito</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2>Pedidos em devolução</h2>
+  <hr>
+  <div class="row">
+    <div class="col-lg-6 col-sm-6 portfolio-item">
+      <div class="card h-100">
+        <div class="card-body">
+          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['/devolution-request']">Pendentes de aprovação</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 portfolio-item">
+      <div class="card h-100">
+        <div class="card-body">
+          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['/devolution-transit']">Em transito</a>
         </div>
       </div>
     </div>

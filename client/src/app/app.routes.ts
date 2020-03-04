@@ -45,6 +45,16 @@ import {RequestTradeComponent} from './admin-components/trade/request-trade/requ
 import {TransitTradeComponent} from './admin-components/trade/transit-trade/transit-trade.component';
 import {AnalyzeComponent} from './admin-components/analyze/analyze.component';
 import {ReturnStockComponent} from './admin-components/trade/return-stock/return-stock.component';
+import {DevolutionComponent} from './user-components/devolution/devolution.component';
+import {DevolutionFinalizationComponent} from './user-components/devolution-finalization/devolution-finalization.component';
+import {DevolutionRequestComponent} from './admin-components/devolution/devolution-request/devolution-request.component';
+import {DevolutionTransitComponent} from './admin-components/devolution/devolution-transit/devolution-transit.component';
+import {DevolutionStockComponent} from './admin-components/devolution/devolution-stock/devolution-stock.component';
+import {ProviderRegisterComponent} from './admin-components/provider/provider-register/provider-register.component';
+import {ProviderInativeComponent} from './admin-components/provider/provider-inative/provider-inative.component';
+import {ProviderListComponent} from './admin-components/provider/provider-list/provider-list.component';
+import {TicketDevolutionListComponent} from './admin-components/tickets/ticket-devolution-list/ticket-devolution-list.component';
+import {TicketTradeListComponent} from './admin-components/tickets/ticket-trade-list/ticket-trade-list.component';
 
 export const ROUTES: Routes = [
   {path: '', component: LoginComponent},
@@ -58,6 +68,8 @@ export const ROUTES: Routes = [
   {path: 'user-password-alter', component: UserPasswordAlterComponent},
   {path: 'user-product-trade', component: ProductTradeComponent},
   {path: 'user-product-generate-trade-code', component: ProductGenerateTradeCodeComponent},
+  {path: 'user-devolution', component: DevolutionComponent},
+  {path: 'user-devolution-finalization', component: DevolutionFinalizationComponent},
   {path: 'address-register', component: AddressRegisterComponent},
   {path: 'address-alter', component: AddressAlterComponent},
   {path: 'address-delete', component: AddressDeleteComponent},
@@ -91,5 +103,14 @@ export const ROUTES: Routes = [
   {path: 'request-trade', component: RequestTradeComponent},
   {path: 'transit-trade', component: TransitTradeComponent},
   {path: 'return-stock', component: ReturnStockComponent},
-  {path: 'analyze', component: AnalyzeComponent}
+  {path: 'devolution-request', component: DevolutionRequestComponent},
+  {path: 'devolution-transit', component: DevolutionTransitComponent},
+  {path: 'devolution-stock', component: DevolutionStockComponent},
+  {path: 'return-stock', component: ReturnStockComponent},
+  {path: 'analyze', component: AnalyzeComponent},
+  {path: 'provider-register', component: ProviderRegisterComponent},
+  {path: 'provider-delete', component: ProviderInativeComponent},
+  {path: 'provider-list', component: ProviderListComponent},
+  {path: 'ticket-devolution-list', component: TicketDevolutionListComponent},
+  {path: 'ticket-trade-list', component: TicketTradeListComponent}
 ];
