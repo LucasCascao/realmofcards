@@ -2,28 +2,33 @@ package br.com.cascao.realmofcard.endpoint;
 
 import br.com.cascao.realmofcard.domain.CardBean;
 import br.com.cascao.realmofcard.domain.TypeBean;
+import br.com.cascao.realmofcard.repository.CartaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/carta")
 public class CardEndpoint {
 
-    private CardBean cardBean;
-    private TypeBean typeBean;
+    @Autowired
+    private CartaRepository cartaRepository;
 
     @GetMapping()
-    public CardBean getCard(){
-        this.cardBean = new CardBean();
-        this.typeBean = new TypeBean();
+    public List<CardBean> get(){
+        return cartaRepository.findAll();
+    }
 
-        this.typeBean.setNomeCategoria("Monstro");
+//    @GetMapping(value = "/{id}")
+//    public CardBean get(@PathVariable Long id){
+//        return cartaRepository.findById(id);
+//    }
 
-        this.cardBean.setName("Mago Negro");
-        this.cardBean.setType(typeBean);
-        return this.cardBean;
+    @PostMapping()
+    public CardBean post(@RequestParam CardBean cardBean){
+        return cartaRepository.save(cardBean);
     }
 
 }

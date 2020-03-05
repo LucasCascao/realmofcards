@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/biblioteca
+    url: jdbc:postgresql://localhost:5432/realmofcards
     username: postgres
     password: 48299871
     initialization-mode: always
@@ -11,6 +11,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+    database: postgresql
+    show-sql: true
 
 
   session:

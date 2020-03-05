@@ -12,7 +12,9 @@ import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Resultado;
 import br.com.cascao.realmofcard.negocio.IStrategy;
 import br.com.cascao.realmofcard.negocio.pessoa.ValidaDadosPessoa;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Fachada implements IFachada{
 	
 	private Map<String, IDAO> daos;

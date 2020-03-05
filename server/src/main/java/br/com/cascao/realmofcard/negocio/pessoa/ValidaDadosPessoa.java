@@ -8,6 +8,7 @@ public class ValidaDadosPessoa implements IStrategy{
 
 	@Override
 	public String processar(EntidadeDominio entidade) {
+
 		Pessoa pessoa = (Pessoa) entidade;
 		StringBuilder msg = new StringBuilder();
 		
