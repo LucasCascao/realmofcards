@@ -13,6 +13,7 @@ import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Resultado;
 import br.com.cascao.realmofcard.negocio.IStrategy;
 import br.com.cascao.realmofcard.negocio.pessoa.ValidaDadosPessoa;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,6 +26,9 @@ public class Fachada implements IFachada{
     private Map<String, Map<String, List<IStrategy>>> regrasNegocio;
     private StringBuilder sb = new StringBuilder();
     private Resultado resultado;
+
+    @Autowired
+	PessoaJPADAO pessoaJPADAO;
 	
 	public Fachada() {
 		// Instanciando mapas de daos e regras de neg�cio macro
@@ -34,7 +38,7 @@ public class Fachada implements IFachada{
 		regrasNegocio = new HashMap<String, Map<String,List<IStrategy>>>();
 		
 		// Instanciando o mapa de DAOs;
-		daos.put(Pessoa.class.getName(), new PessoaJPADAO());
+		daos.put(Pessoa.class.getName(), pessoaJPADAO);
 
 		//------------------------ Hash Pessoa ----------------------------//
 		

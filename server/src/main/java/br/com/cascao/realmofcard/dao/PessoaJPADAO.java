@@ -4,8 +4,14 @@ import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.Transient;
 import java.sql.Connection;
 import java.util.List;
 
@@ -27,7 +33,6 @@ public class PessoaJPADAO extends AbstractDAO{
 
 	public PessoaJPADAO() {
 		super( "pessoa", "id");
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -47,18 +52,6 @@ public class PessoaJPADAO extends AbstractDAO{
 
 	@Override
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
-
-		List<Pessoa> pessoas = null;
-//		Pessoa pessoa = pessoaRepository.findById(entidade.getId());
-
-//		if(entidade.getId() != null){
-//			pessoas = new ArrayList<>();
-//			pessoas.add();
-//			return pessoas;
-//		}else{
-
-			return (List<EntidadeDominio>) (List)  pessoaRepository.findAll();
-
-//		}
+		return (List<EntidadeDominio>) (List)  pessoaRepository.findAll();
 	}
 }
