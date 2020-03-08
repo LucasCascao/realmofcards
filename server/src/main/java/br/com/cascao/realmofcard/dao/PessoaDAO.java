@@ -133,7 +133,7 @@ public class PessoaDAO extends AbstractDAO{
 				
 				if(rs.next()) {
 					pessoa.setNome(rs.getString("pes_nome"));
-					pessoa.setDtCadastro(rs.getDate("pes_data_nascimento"));
+//					pessoa.setDtCadastro(rs.getDate("pes_data_nascimento"));
 					pessoa.setSexo(rs.getString("pes_sexo"));
 				}
 				

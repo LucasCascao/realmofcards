@@ -1,9 +1,11 @@
 package br.com.cascao.realmofcard.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -21,26 +23,24 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	private String nome;
-
-	private String sexo;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "pes_id")
 	private Integer id;
 
 	@Column(name = "pes_nome")
-	private String firstName;
+	private String nome;
 
 	@Column(name = "pes_sobrenome")
-	private String lastName;
+	private String sobrenome;
 
+	@JsonFormat(pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "pes_data_nascimento")
 	private Date dataNascimento;
 
 	@Column(name = "pes_sexo")
-	private String sex;
+	private String sexo;
 
 	@Column(name = "pes_cpf")
 	private String cpf;

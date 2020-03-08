@@ -2,6 +2,7 @@ package br.com.cascao.realmofcard.web.fachada;
 
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Resultado;
+import org.springframework.stereotype.Component;
 
 public interface IFachada {
 	

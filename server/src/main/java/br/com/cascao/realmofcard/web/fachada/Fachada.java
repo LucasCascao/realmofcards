@@ -7,6 +7,7 @@ import java.util.Map;
 
 import br.com.cascao.realmofcard.dao.IDAO;
 import br.com.cascao.realmofcard.dao.PessoaDAO;
+import br.com.cascao.realmofcard.dao.PessoaJPADAO;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Resultado;
@@ -33,7 +34,7 @@ public class Fachada implements IFachada{
 		regrasNegocio = new HashMap<String, Map<String,List<IStrategy>>>();
 		
 		// Instanciando o mapa de DAOs;
-		daos.put(Pessoa.class.getName(), new PessoaDAO());
+		daos.put(Pessoa.class.getName(), new PessoaJPADAO());
 
 		//------------------------ Hash Pessoa ----------------------------//
 		

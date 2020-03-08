@@ -28,23 +28,23 @@ CREATE TABLE cartao (
 );
 
 CREATE TABLE categoria_carta (
-    cat_id    INT NOT NULL,
+    cat_id    SERIAL NOT NULL,
     cat_nome  VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE cidade (
-    cid_id      INT NOT NULL,
+    cid_id      serial NOT NULL,
     cid_nome    VARCHAR(60) NOT NULL,
     cid_est_id  INT NOT NULL
 );
 
 CREATE TABLE cliente (
-    cli_id         INT NOT NULL,
+    cli_id         SERIAL NOT NULL,
     cli_pessoa_id  INT NOT NULL
 );
 
 CREATE TABLE endereco (
-    end_id          INT NOT NULL,
+    end_id          SERIAL NOT NULL,
     end_logradouro  VARCHAR(80) NOT NULL,
     end_numero      VARCHAR(6) NOT NULL,
     end_bairro      VARCHAR(70) NOT NULL,
@@ -55,49 +55,49 @@ CREATE TABLE endereco (
 );
 
 CREATE TABLE estado (
-    est_id     INT NOT NULL,
+    est_id     SERIAL NOT NULL,
     est_sigla  VARCHAR(2),
     est_nome   VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE estoque (
-    est_id          INT NOT NULL,
+    est_id          SERIAL NOT NULL,
     est_quantidade  INT NOT NULL,
     est_carta_id    INT NOT NULL
 );
 
 CREATE TABLE item_pedido (
-    ipd_id          INT NOT NULL,
+    ipd_id          SERIAL NOT NULL,
     ipd_quantidade  INT NOT NULL,
     ipd_carta_id    INT NOT NULL,
     ipd_pedido_id   INT NOT NULL
 );
 
 CREATE TABLE jogo (
-    jog_id    INT NOT NULL,
+    jog_id    SERIAL NOT NULL,
     jog_nome  VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE jogo_categoria_carta (
-    jct_carta_id  INT NOT NULL,
+    jct_carta_id  SERIAL NOT NULL,
     jct_jogo_id   INT NOT NULL
 );
 
 CREATE TABLE log_pedido (
-    log_id         INT NOT NULL,
+    log_id         SERIAL NOT NULL,
     log_descricao  VARCHAR(250) NOT NULL,
     log_pedido_id  INT NOT NULL
 );
 
 CREATE TABLE pedido (
-    ped_id                INT NOT NULL,
+    ped_id                SERIAL NOT NULL,
     ped_administrador_id  INT NOT NULL,
     ped_clientei_id       INT NOT NULL,
     ped_pedido_id         INT NOT NULL
 );
 
 CREATE TABLE pessoa (
-    pes_id               INT NOT NULL,
+    pes_id               SERIAL NOT NULL,
     pes_nome             VARCHAR(30) NOT NULL,
     pes_sobrenome        VARCHAR(60),
     pes_sexo             VARCHAR(1) NOT NULL,
@@ -109,12 +109,12 @@ CREATE TABLE pessoa (
 );
 
 CREATE TABLE status_carta (
-    scr_id      INT NOT NULL,
+    scr_id      SERIAL NOT NULL,
     scr_status  INT NOT NULL
 );
 
 CREATE TABLE status_pedido (
-    spd_id      INT NOT NULL,
+    spd_id      SERIAL NOT NULL,
     spd_status  INT NOT NULL
 );
 
