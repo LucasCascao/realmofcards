@@ -5,40 +5,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import br.com.cascao.realmofcard.dao.IDAO;
-import br.com.cascao.realmofcard.dao.PessoaDAO;
-import br.com.cascao.realmofcard.dao.PessoaJPADAO;
+import br.com.cascao.realmofcard.dao.PessoaService;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Resultado;
 import br.com.cascao.realmofcard.negocio.IStrategy;
 import br.com.cascao.realmofcard.negocio.pessoa.ValidaDadosPessoa;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import br.com.cascao.realmofcard.service.IService;
 
-@Component
-public class Fachada implements IFachada{
+@Service
+public class Fachada implements IFachada {
 	
-	private Map<String, IDAO> daos;
+	private Map<String, IService> daos;
 
-    // Mapa Macro, com TODAS as regras de negócio
-    // Observe: ele ó um mapa de um mapa. O mapa que está dentro possui para cada chave uma lista de strategy
     private Map<String, Map<String, List<IStrategy>>> regrasNegocio;
     private StringBuilder sb = new StringBuilder();
     private Resultado resultado;
-
+    
+    private PessoaService pessoaService;
+    
     @Autowired
-	PessoaJPADAO pessoaJPADAO;
-	
-	public Fachada() {
-		// Instanciando mapas de daos e regras de neg�cio macro
-		daos = new HashMap<String, IDAO>();
+	public Fachada(PessoaService pessoaService) {
+    	this.pessoaService = pessoaService;
+		daos = new HashMap<String, IService>();
 		
-		// Instanciando o mapa macro;
 		regrasNegocio = new HashMap<String, Map<String,List<IStrategy>>>();
 		
 		// Instanciando o mapa de DAOs;
-		daos.put(Pessoa.class.getName(), pessoaJPADAO);
+		daos.put(Pessoa.class.getName(), this.pessoaService);
 
 		//------------------------ Hash Pessoa ----------------------------//
 		
@@ -100,7 +99,7 @@ public class Fachada implements IFachada{
 		executarRegras(entidade, rnsEntidade);
 		
 		if(sb.length() == 0) {
-			IDAO dao = daos.get(nmClasse);
+			IService dao = daos.get(nmClasse);
 			dao.salvar(entidade);
 			resultado.addEntidade(entidade);
 		}else {
@@ -123,7 +122,7 @@ public class Fachada implements IFachada{
         executarRegras(entidade, rnsEntidade);
 
         if (sb.length() == 0) {
-            IDAO dao = daos.get(nmClasse);
+        	IService dao = daos.get(nmClasse);
             dao.alterar(entidade);
             resultado.addEntidade(entidade);
         } else {
@@ -139,7 +138,7 @@ public class Fachada implements IFachada{
 		resultado = new Resultado();
         String nmClasse = entidade.getClass().getName();
 
-        IDAO dao = daos.get(nmClasse);
+        IService dao = daos.get(nmClasse);
         resultado.addEntidade(entidade);
         dao.excluir(entidade);
 
@@ -150,8 +149,8 @@ public class Fachada implements IFachada{
 	public Resultado consultar(EntidadeDominio entidade) {
 		resultado = new Resultado();
         String nmClasse = entidade.getClass().getName();
-
-        IDAO dao = daos.get(nmClasse);
+        
+        IService dao = daos.get(nmClasse);
         resultado.setEntidades(dao.consultar(entidade));
 
         return resultado;
@@ -162,7 +161,7 @@ public class Fachada implements IFachada{
 		resultado = new Resultado();
         String nmClasse = entidade.getClass().getName();
 
-        IDAO dao = daos.get(nmClasse);
+        IService dao = daos.get(nmClasse);
         resultado.setEntidades(dao.consultar(entidade));
         return resultado;
 	}
