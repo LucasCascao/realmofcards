@@ -25,18 +25,22 @@ public class PessoaService implements IService{
 	@Override
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
 		List<EntidadeDominio> pessoas = new ArrayList<EntidadeDominio>();
+		if(entidade.getId() != null){
+			pessoaDAO.findById(entidade.getId()).map( p -> pessoas.add(p));
+			return pessoas;
+		}
 		pessoaDAO.findAll().stream().forEach(p -> pessoas.add(p));
 		return pessoas;
 	}
 
 	@Override
 	public void alterar(EntidadeDominio entidade) {
-		// TODO Auto-generated method stub
+		entidade = pessoaDAO.save((Pessoa)entidade);
 	}
 
 	@Override
 	public void excluir(EntidadeDominio entidade) {
-		// TODO Auto-generated method stub
+		pessoaDAO.deleteById(entidade.getId());
 	}
 
 	@Override
