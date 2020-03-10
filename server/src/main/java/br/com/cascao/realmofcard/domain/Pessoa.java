@@ -34,7 +34,7 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 	@Column(name = "pes_sobrenome")
 	private String sobrenome;
 
-	@JsonFormat(pattern="dd/MM/yyyy")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "pes_data_nascimento")
 	private Date dataNascimento;

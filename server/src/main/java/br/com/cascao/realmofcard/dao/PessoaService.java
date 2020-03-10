@@ -24,12 +24,20 @@ public class PessoaService implements IService{
 	
 	@Override
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
-		List<EntidadeDominio> pessoas = new ArrayList<EntidadeDominio>();
-		if(entidade.getId() != null){
+		List<EntidadeDominio> pessoas = new ArrayList<>();
+		Pessoa pessoa = (Pessoa) entidade;
+		if(pessoa.getId() != null){
 			pessoaDAO.findById(entidade.getId()).map( p -> pessoas.add(p));
 			return pessoas;
 		}
-		pessoaDAO.findAll().stream().forEach(p -> pessoas.add(p));
+		if(pessoa.getId() == null && pessoa.getEmail() != null){
+			pessoas.add(pessoaDAO.findByEmail(pessoa.getEmail()));
+			return pessoas;
+		}
+		if(pessoa.getUsername() == null){
+			pessoaDAO.findAll().stream().forEach( p -> pessoas.add(p));
+		}
+
 		return pessoas;
 	}
 

@@ -3,13 +3,7 @@ package br.com.cascao.realmofcard.endpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
@@ -29,8 +23,8 @@ public class PessoaEndpoint {
 
     
     @GetMapping
-    public ResponseEntity<Resultado> consultar(Pessoa pessoa){
-        return ResponseEntity.ok().body(fachada.consultar(pessoa));
+    public ResponseEntity<Resultado> consultar(){
+        return ResponseEntity.ok().body(fachada.consultar(new Pessoa()));
     }
 
     @PostMapping()
@@ -39,13 +33,13 @@ public class PessoaEndpoint {
         return ResponseEntity.ok(fachada.salvar(pessoa));
     }
 
-  /*@RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public ResponseEntity<?> get(@PathVariable Integer id){
-        return ResponseEntity.ok(pessoaRepository.findById(id));
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity<?> delete(@RequestBody Pessoa pessoa){
+        return ResponseEntity.ok().body(fachada.excluir(pessoa));
     }
 
-    @DeleteMapping()
-    public void delete(@RequestBody Pessoa pessoa){
-        pessoaRepository.deleteById(pessoa.getId());
-    }*/
+    @PutMapping()
+    public ResponseEntity<?> alterar(@RequestBody Pessoa pessoa){
+        return ResponseEntity.ok().body(fachada.alterar(pessoa));
+    }
 }
