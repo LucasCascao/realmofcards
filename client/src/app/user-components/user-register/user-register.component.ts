@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Client } from 'src/model/client.model';
+import {ClienteService} from '../../../services/cliente.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-register',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserRegisterComponent implements OnInit {
 
-  constructor() { }
+  client: Client = new Client();
+
+  constructor(private clienteService: ClienteService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  cadastrar() {
+    this.clienteService.addCliente(this.client).subscribe(dado => this.client = dado);
+    this.router.navigate(['/']);
   }
 
 }

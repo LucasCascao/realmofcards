@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Client} from "../../../model/client.model";
+import {ClienteService} from "../../../services/cliente.service";
 
 @Component({
   selector: 'app-user-details',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDetailsComponent implements OnInit {
 
-  constructor() { }
+  client: Client = new Client();
+
+  constructor(private clientService: ClienteService) { }
 
   ngOnInit(): void {
+    this.getCliente();
+  }
+
+  getCliente() {
+    // tslint:disable-next-line:radix
+    this.client.id = Number.parseInt(sessionStorage.getItem('clienteLogadoId'));
+    this.clientService.getClientes(this.client).subscribe( dado => this.client = dado.entidades[0]);
   }
 
 }

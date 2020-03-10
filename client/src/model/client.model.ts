@@ -1,5 +1,11 @@
-export class Usuario {
+export class Client {
+  id: number;
   username: string;
   password: string;
-  status: number;
+  nome: string;
+  sobrenome: string;
+  dataNascimento: Date;
+  sexo: string;
+  email: string;
+  cpf: string;
 }

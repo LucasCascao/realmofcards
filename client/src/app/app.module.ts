@@ -67,6 +67,8 @@ import { ProviderInativeComponent } from './admin-components/provider/provider-i
 import { TicketListComponent } from './admin-components/tickets/ticket-list/ticket-list.component';
 import { TicketDevolutionListComponent } from './admin-components/tickets/ticket-devolution-list/ticket-devolution-list.component';
 import { TicketTradeListComponent } from './admin-components/tickets/ticket-trade-list/ticket-trade-list.component';
+import {ClienteService} from "../services/cliente.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -135,9 +137,10 @@ import { TicketTradeListComponent } from './admin-components/tickets/ticket-trad
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(ROUTES),
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, ClienteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

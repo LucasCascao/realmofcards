@@ -18,6 +18,7 @@ export class AppComponent {
     this.authService.mostrarMenuEmitter.subscribe(
       mostrar => this.mostrarMenu = mostrar
     );
+    localStorage.setItem('teste', 'teste');
   }
 
 }

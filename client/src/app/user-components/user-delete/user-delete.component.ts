@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {ClienteService} from '../../../services/cliente.service';
 
 @Component({
   selector: 'app-user-delete',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDeleteComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private clienteService: ClienteService) { }
 
   ngOnInit(): void {
+  }
+
+  excluirConta() {
+    // tslint:disable-next-line:radix
+    this.clienteService.deleteCliente(Number.parseInt(sessionStorage.getItem('clienteLogadoId')));
+    // this.router.navigate(['/']);
   }
 
 }
