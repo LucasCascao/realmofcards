@@ -15,7 +15,9 @@ export class UserAlterComponent implements OnInit {
   constructor(private clientService: ClienteService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getCliente();
+    // this.getCliente();
+    this.client = JSON.parse(localStorage.getItem('userAutenticado'))[0];
+    console.log(this.client);
   }
 
   getCliente() {

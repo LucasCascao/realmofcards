@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from './login/auth.service';
+import {Observable} from 'rxjs';
+import {Client} from '../model/client.model';
+import {ResultClient} from '../model/result-client.model';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +21,6 @@ export class AppComponent {
     this.authService.mostrarMenuEmitter.subscribe(
       mostrar => this.mostrarMenu = mostrar
     );
-    localStorage.setItem('teste', 'teste');
   }
 
 }

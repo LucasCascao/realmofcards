@@ -12,7 +12,7 @@
         <div class="form-group">
           <label class="col-lg-3 control-label"><strong>Primeiro nome:</strong></label>
           <div class="col-lg-8">
-            <input [(ngModel)]="client.nome" [ngModelOptions]="{standalone: true}" class="form-control" type="text" value="">
+            <input [(ngModel)]="client.nome" [ngModelOptions]="{standalone: true}" class="form-control" type="text" required>
           </div>
         </div>
         <div class="form-group">
@@ -75,7 +75,7 @@
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
-            <input type="button" class="btn btn-secondary btn-lg float-right" (click)="cadastrar()" value="Cadastrar">
+            <input type="submit" class="btn btn-secondary btn-lg float-right" (click)="cadastrar()" value="Cadastrar">
             <span></span>
             <input type="reset" class="btn btn-default btn-lg float-left" [routerLink]="['/']" value="Cancelar">
           </div>
