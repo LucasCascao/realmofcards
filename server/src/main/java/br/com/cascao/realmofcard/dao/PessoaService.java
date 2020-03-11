@@ -31,7 +31,7 @@ public class PessoaService implements IService{
 			return pessoas;
 		}
 		if(pessoa.getId() == null && pessoa.getEmail() != null){
-			pessoas.add(pessoaDAO.findByEmail(pessoa.getEmail()));
+			pessoas.add(pessoaDAO.findByEmailAndPassword(pessoa.getEmail()));
 			return pessoas;
 		}
 		if(pessoa.getUsername() == null){

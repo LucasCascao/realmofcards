@@ -14,27 +14,25 @@ import br.com.cascao.realmofcard.web.fachada.Fachada;
 @CrossOrigin
 @RequestMapping("/pessoas")
 public class PessoaEndpoint {
-
-    /*@Autowired
-    private PessoaService pessoaService;*/
     
     @Autowired
     private Fachada fachada;
 
-    
-    @GetMapping
-    public ResponseEntity<Resultado> consultar(){
-        return ResponseEntity.ok().body(fachada.consultar(new Pessoa()));
+    @PostMapping()
+    public ResponseEntity<Resultado> consultar(@RequestBody Pessoa pessoa){
+        return ResponseEntity.ok().body(fachada.consultar(pessoa));
     }
 
-    @PostMapping()
+    @PostMapping(path = "/cria")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> salvar(@RequestBody Pessoa pessoa){
         return ResponseEntity.ok(fachada.salvar(pessoa));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity<?> delete(@RequestBody Pessoa pessoa){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Integer id){
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(id);
         return ResponseEntity.ok().body(fachada.excluir(pessoa));
     }
 

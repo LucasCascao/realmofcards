@@ -12,19 +12,37 @@ public class ValidaDadosPessoa implements IStrategy{
 		Pessoa pessoa = (Pessoa) entidade;
 		StringBuilder msg = new StringBuilder();
 		
-		System.out.println(pessoa.getNome());
-		
-		if (pessoa.getNome().trim().equals("")) {
-            msg.append("O nome � obrigat�rio.");
+		if (pessoa.getNome() == null) {
+            msg.append("O campo nome é obrigatório.");
         }
 		
-		if (pessoa.getSexo().trim().equals("")) {
-            msg.append("O sexo � obrigat�rio.");
+		if (pessoa.getSexo() == null) {
+            msg.append("O campo sexo é obrigatório.");
         }
 		
-		if (pessoa.getDataNascimento().toString().trim().equals("")) {
-            msg.append("O data de nascimento � obrigat�rio.");
+		if (pessoa.getDataNascimento() == null) {
+            msg.append("O campo data de nascimento é obrigatório.");
         }
+
+		if(pessoa.getCpf() == null){
+			msg.append("O campo CPF é obrigatório.");
+		}
+
+		if(pessoa.getEmail() == null || pessoa.getEmail().trim().equals("")){
+			msg.append("O campo email é obrigatório.");
+		}
+
+		if(pessoa.getUsername() == null || pessoa.getUsername().trim().equals("")){
+			msg.append("O campo usuário é obrigatório.");
+		}
+
+		if(pessoa.getPassword() == null || pessoa.getPassword().trim().equals("")){
+			msg.append("O campo senha é obrigatório.");
+		}
+
+		if(pessoa.getSobrenome() == null || pessoa.getSobrenome().trim().equals("")){
+			msg.append("O campo sobrenome é obrigatório.");
+		}
 		
 		return msg.toString();
 	}
