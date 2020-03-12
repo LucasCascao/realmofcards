@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Client} from '../../../model/client.model';
+import {Person} from '../../../model/person.model';
 import {ClienteService} from '../../../services/cliente.service';
 import {Router} from "@angular/router";
 
@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class UserAlterComponent implements OnInit {
 
-  client: Client = new Client();
+  client: Person = new Person();
 
   constructor(private clientService: ClienteService, private router: Router) { }
 

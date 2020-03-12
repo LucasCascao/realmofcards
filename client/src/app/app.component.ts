@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from './login/auth.service';
 import {Observable} from 'rxjs';
-import {Client} from '../model/client.model';
+import {Person} from '../model/person.model';
 import {ResultClient} from '../model/result-client.model';
 
 @Component({

@@ -1,4 +1,4 @@
-export class Client {
+export class Person {
   id: number;
   username: string;
   password: string;
@@ -6,6 +6,6 @@ export class Client {
   sobrenome: string;
   dataNascimento: Date;
   sexo: string;
-  email: string;
   cpf: string;
+  email: string;
 }

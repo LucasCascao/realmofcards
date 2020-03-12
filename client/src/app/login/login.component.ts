@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from './auth.service';
-import {Client} from '../../model/client.model';
+import {Person} from '../../model/person.model';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +9,7 @@ import {Client} from '../../model/client.model';
 })
 export class LoginComponent implements OnInit {
 
-  public usuario: Client = new Client();
+  public usuario: Person = new Person();
 
   constructor(private authService: AuthService) { }
 

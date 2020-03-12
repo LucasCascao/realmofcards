@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MockCards} from "../../../mock/mock-card.model";
-import {Client} from "../../../model/client.model";
+import {Person} from "../../../model/person.model";
 
 @Component({
   selector: 'app-product-market-page',
@@ -11,7 +11,7 @@ export class ProductMarketPageComponent implements OnInit {
 
   constructor() { }
 
-  client: Client;
+  client: Person;
 
   cartas = new MockCards().cards;
 

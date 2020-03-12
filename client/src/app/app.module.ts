@@ -69,6 +69,7 @@ import { TicketDevolutionListComponent } from './admin-components/tickets/ticket
 import { TicketTradeListComponent } from './admin-components/tickets/ticket-trade-list/ticket-trade-list.component';
 import {ClienteService} from "../services/cliente.service";
 import {HttpClientModule} from "@angular/common/http";
+import {Util} from "./shared/app.util";
 
 @NgModule({
   declarations: [
@@ -140,7 +141,7 @@ import {HttpClientModule} from "@angular/common/http";
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, ClienteService],
+  providers: [AuthService, ClienteService, Util],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

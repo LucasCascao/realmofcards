@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Client} from '../../model/client.model';
+import {Person} from '../../model/person.model';
 import {Router} from '@angular/router';
 import {ClienteService} from '../../services/cliente.service';
 import {ResultClient} from '../../model/result-client.model';
@@ -9,7 +9,7 @@ import {ResultClient} from '../../model/result-client.model';
 })
 export class AuthService {
 
-  clients: Client[] = [];
+  clients: Person[] = [];
   resultado: ResultClient = new ResultClient();
 
   mostrarMenuEmitter = new EventEmitter<boolean>();
@@ -19,7 +19,7 @@ export class AuthService {
 
   constructor(private router: Router, private clienteService: ClienteService) { }
 
-  async signIn(client: Client) {
+  async signIn(client: Person) {
 
     this.clienteService.getClientes(client).subscribe(dado => {
       this.resultado = dado;

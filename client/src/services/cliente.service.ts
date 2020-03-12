@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {Client} from '../model/client.model';
+import {Person} from '../model/person.model';
 import {catchError, tap} from 'rxjs/operators';
 import {ResultClient} from '../model/result-client.model';
 
-import {API_URL} from '../app/shared/app.app';
+import {API_URL} from '../app/shared/app.api';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -21,28 +21,19 @@ export class ClienteService {
 
   constructor(private http: HttpClient) { }
 
-  getClientes(client: Client): Observable<ResultClient> {
-    return this.http.post<ResultClient>(`${API_URL}/pessoas`, client, httpOptions);
+  getClientes(person: Person): Observable<ResultClient> {
+    return this.http.post<ResultClient>(`${API_URL}/pessoas`, person, httpOptions);
   }
 
-  addCliente(client: Client, resultado: ResultClient): Observable<ResultClient> {
-    return  this.http.post<ResultClient>(`${API_URL}/pessoas/cria`, client);
+  addCliente(person: Person): Observable<ResultClient> {
+    return  this.http.post<ResultClient>(`${API_URL}/pessoas/cria`, person);
   }
 
-  updateCliente(client): Observable<ResultClient> {
-    return this.http.put<ResultClient>(`${ apiUrl }`, client);
+  updateCliente(person): Observable<ResultClient> {
+    return this.http.put<ResultClient>(`${API_URL}/pessoas/`, person);
   }
 
-  deleteCliente(client: Client): Observable<ResultClient> {
-    return this.http.delete<ResultClient>(`${API_URL}/pessoas/${client.id}`);
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      console.error(error);
-
-      return of(result as T);
-    };
+  deleteCliente(person: Person): Observable<ResultClient> {
+    return this.http.delete<ResultClient>(`${API_URL}/pessoas/${person.id}`);
   }
 }
