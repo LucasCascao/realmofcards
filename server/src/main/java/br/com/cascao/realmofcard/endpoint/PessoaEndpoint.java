@@ -26,7 +26,7 @@ public class PessoaEndpoint {
     @PostMapping(path = "/cria")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> salvar(@RequestBody Pessoa pessoa){
-        return ResponseEntity.ok(fachada.salvar(pessoa));
+        return ResponseEntity.ok().body(fachada.salvar(pessoa));
     }
 
     @DeleteMapping("/{id}")

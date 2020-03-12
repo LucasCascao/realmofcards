@@ -1,16 +1,10 @@
-
-CREATE TABLE administrador (
-    adm_id         INT NOT NULL,
-    adm_pessoa_id  INT NOT NULL
-);
-
 CREATE TABLE bandeira (
-    ban_id    INT NOT NULL,
+    ban_id    SERIAL NOT NULL,
     ban_nome  VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE carta (
-    car_id            INT NOT NULL,
+    car_id            SERIAL NOT NULL,
     car_nome          VARCHAR(50) NOT NULL,
     car_descricao     VARCHAR(250) NOT NULL,
     car_valor         DECIMAL(4, 2) NOT NULL,
@@ -20,11 +14,11 @@ CREATE TABLE carta (
 );
 
 CREATE TABLE cartao (
-    crt_id                INT NOT NULL,
+    crt_id                SERIAL NOT NULL,
     crt_numero            VARCHAR(16) NOT NULL,
     crt_codigo_seguranca  VARCHAR(3) NOT NULL,
     crt_bandeira_id       INT NOT NULL,
-    crt_clientei_id       INT NOT NULL
+    crt_usuario_id       INT NOT NULL
 );
 
 CREATE TABLE categoria_carta (
@@ -33,14 +27,9 @@ CREATE TABLE categoria_carta (
 );
 
 CREATE TABLE cidade (
-    cid_id      serial NOT NULL,
+    cid_id      SERIAL NOT NULL,
     cid_nome    VARCHAR(60) NOT NULL,
-    cid_est_id  INT NOT NULL
-);
-
-CREATE TABLE cliente (
-    cli_id         SERIAL NOT NULL,
-    cli_pessoa_id  INT NOT NULL
+    cid_estado_id  INT NOT NULL
 );
 
 CREATE TABLE endereco (
@@ -50,8 +39,8 @@ CREATE TABLE endereco (
     end_bairro      VARCHAR(70) NOT NULL,
     end_cep         VARCHAR(8) NOT NULL,
     end_comentario  VARCHAR(200) NOT NULL,
-    end_cid_id      INT NOT NULL,
-    end_cli_id      INT NOT NULL
+    end_cidade_id      INT NOT NULL,
+    end_usuario_id      INT NOT NULL
 );
 
 CREATE TABLE estado (
@@ -92,7 +81,7 @@ CREATE TABLE log_pedido (
 CREATE TABLE pedido (
     ped_id                SERIAL NOT NULL,
     ped_administrador_id  INT NOT NULL,
-    ped_clientei_id       INT NOT NULL,
+    ped_cliente_id        INT NOT NULL,
     ped_pedido_id         INT NOT NULL
 );
 
@@ -102,10 +91,7 @@ CREATE TABLE pessoa (
     pes_sobrenome        VARCHAR(60),
     pes_sexo             VARCHAR(1) NOT NULL,
     pes_data_nascimento  DATE NOT NULL,
-    pes_cpf              VARCHAR(11) NOT NULL,
-    pes_email            VARCHAR(80) NOT NULL,
-    pes_nome_usuario     VARCHAR(30) NOT NULL,
-    pes_senha            VARCHAR(30) NOT NULL
+    pes_cpf              VARCHAR(11) NOT NULL
 );
 
 CREATE TABLE status_carta (
@@ -118,7 +104,20 @@ CREATE TABLE status_pedido (
     spd_status  INT NOT NULL
 );
 
-ALTER TABLE administrador ADD CONSTRAINT administrador_pk PRIMARY KEY ( adm_id );
+CREATE TABLE user_type(
+    tus_id         SERIAL NOT NULL,
+    tus_nome_tipo  VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE usuario(
+    usu_id				 SERIAL NOT NULL,
+    usu_email            VARCHAR(80) NOT NULL,
+    usu_nome_usuario     VARCHAR(30) NOT NULL,
+    usu_senha            VARCHAR(30) NOT NULL,
+    usu_ativo            BOOLEAN NOT NULL,
+    usu_type_user_id     INT NOT NULL,
+    usu_pessoa_id        INT NOT NULL
+);
 
 ALTER TABLE bandeira ADD CONSTRAINT bandeira_pk PRIMARY KEY ( ban_id );
 
@@ -129,8 +128,6 @@ ALTER TABLE cartao ADD CONSTRAINT cartao_pk PRIMARY KEY ( crt_id );
 ALTER TABLE categoria_carta ADD CONSTRAINT categoria_carta_pk PRIMARY KEY ( cat_id );
 
 ALTER TABLE cidade ADD CONSTRAINT cidade_pk PRIMARY KEY ( cid_id );
-
-ALTER TABLE cliente ADD CONSTRAINT cliente_pk PRIMARY KEY ( cli_id );
 
 ALTER TABLE endereco ADD CONSTRAINT endereco_pk PRIMARY KEY ( end_id );
 
@@ -152,9 +149,9 @@ ALTER TABLE status_carta ADD CONSTRAINT carta_status_pk PRIMARY KEY ( scr_id );
 
 ALTER TABLE status_pedido ADD CONSTRAINT status_pedido_pk PRIMARY KEY ( spd_id );
 
-ALTER TABLE administrador
-    ADD CONSTRAINT administrador_pessoa_fk FOREIGN KEY ( adm_pessoa_id )
-        REFERENCES pessoa ( pes_id );
+ALTER TABLE usuario ADD CONSTRAINT usuario_pk PRIMARY KEY ( usu_id );
+
+ALTER TABLE user_type ADD CONSTRAINT user_type_pk PRIMARY KEY ( tus_id );
 
 ALTER TABLE carta
     ADD CONSTRAINT carta_carta_status_fk FOREIGN KEY ( car_status_id )
@@ -173,24 +170,28 @@ ALTER TABLE cartao
         REFERENCES bandeira ( ban_id );
 
 ALTER TABLE cartao
-    ADD CONSTRAINT cartao_cliente_fk FOREIGN KEY ( crt_clientei_id )
-        REFERENCES cliente ( cli_id );
+    ADD CONSTRAINT cartao_usuario_fk FOREIGN KEY ( crt_usuario_id )
+        REFERENCES usuario ( usu_id );
 
 ALTER TABLE cidade
-    ADD CONSTRAINT cidade_estado_fk FOREIGN KEY ( cid_est_id )
+    ADD CONSTRAINT cidade_estado_fk FOREIGN KEY ( cid_estado_id )
         REFERENCES estado ( est_id );
 
-ALTER TABLE cliente
-    ADD CONSTRAINT cliente_pessoa_fk FOREIGN KEY ( cli_pessoa_id )
+ALTER TABLE usuario
+    ADD CONSTRAINT usuario_pessoa_fk FOREIGN KEY ( usu_pessoa_id )
         REFERENCES pessoa ( pes_id );
 
+ALTER TABLE usuario
+    ADD CONSTRAINT usuario_type_fk FOREIGN KEY ( usu_type_user_id )
+        REFERENCES user_type ( tus_id );
+
 ALTER TABLE endereco
-    ADD CONSTRAINT endereco_cidade_fk FOREIGN KEY ( end_cid_id )
+    ADD CONSTRAINT endereco_cidade_fk FOREIGN KEY ( end_cidade_id )
         REFERENCES cidade ( cid_id );
 
 ALTER TABLE endereco
-    ADD CONSTRAINT endereco_cliente_fk FOREIGN KEY ( end_cli_id )
-        REFERENCES cliente ( cli_id );
+    ADD CONSTRAINT endereco_usuario_fk FOREIGN KEY ( end_usuario_id )
+        REFERENCES usuario ( usu_id );
 
 ALTER TABLE estoque
     ADD CONSTRAINT estoque_carta_fk FOREIGN KEY ( est_carta_id )
@@ -218,11 +219,11 @@ ALTER TABLE log_pedido
 
 ALTER TABLE pedido
     ADD CONSTRAINT pedido_administrador_fk FOREIGN KEY ( ped_administrador_id )
-        REFERENCES administrador ( adm_id );
+        REFERENCES usuario ( usu_id );
 
 ALTER TABLE pedido
-    ADD CONSTRAINT pedido_cliente_fk FOREIGN KEY ( ped_clientei_id )
-        REFERENCES cliente ( cli_id );
+    ADD CONSTRAINT pedido_cliente_fk FOREIGN KEY ( ped_cliente_id )
+        REFERENCES usuario ( usu_id );
 
 ALTER TABLE pedido
     ADD CONSTRAINT pedido_status_pedido_fk FOREIGN KEY ( ped_pedido_id )

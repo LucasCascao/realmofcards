@@ -30,13 +30,8 @@ public class PessoaService implements IService{
 			pessoaDAO.findById(entidade.getId()).map( p -> pessoas.add(p));
 			return pessoas;
 		}
-		if(pessoa.getId() == null && pessoa.getEmail() != null){
-			pessoas.add(pessoaDAO.findByEmailAndPassword(pessoa.getEmail()));
-			return pessoas;
-		}
-		if(pessoa.getUsername() == null){
-			pessoaDAO.findAll().stream().forEach( p -> pessoas.add(p));
-		}
+
+		pessoaDAO.findAll().stream().forEach( p -> pessoas.add(p));
 
 		return pessoas;
 	}

@@ -14,15 +14,15 @@ export class UserDetailsComponent implements OnInit {
   constructor(private clientService: ClienteService) { }
 
   ngOnInit(): void {
-    // this.getCliente();
-    this.client = JSON.parse(localStorage.getItem('userAutenticado'))[0];
-    console.log(this.client);
+    this.getCliente();
+    // this.client = JSON.parse(localStorage.getItem('userAutenticado'))[0];
+    // console.log(this.client);
   }
 
   getCliente() {
-    // tslint:disable-next-line:radix
-    // this.client.id = Number.parseInt(sessionStorage.getItem('clienteLogadoId'));
-    // this.clientService.getClientes(this.client).subscribe( dado => this.client = dado.entidades[0]);
+    //tslint:disable-next-line:radix
+    this.client.id = Number.parseInt(sessionStorage.getItem('clienteLogadoId'));
+    this.clientService.getClientes(this.client).subscribe( dado => this.client = dado.entidades[0]);
   }
 
 }

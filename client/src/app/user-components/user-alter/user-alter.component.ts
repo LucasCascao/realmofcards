@@ -15,9 +15,7 @@ export class UserAlterComponent implements OnInit {
   constructor(private clientService: ClienteService, private router: Router) { }
 
   ngOnInit(): void {
-    // this.getCliente();
-    this.client = JSON.parse(localStorage.getItem('userAutenticado'))[0];
-    console.log(this.client);
+    this.getCliente();
   }
 
   getCliente() {
@@ -27,8 +25,26 @@ export class UserAlterComponent implements OnInit {
   }
 
   alterarCliente() {
-    this.clientService.updateCliente(this.client);
-    this.router.navigate(['/user-details']);
+    this.clientService.updateCliente(this.client).subscribe(
+      resultado => {
+        if (resultado.msg == null) {
+          console.log(resultado);
+          console.log('Produto alterado com sucesso.');
+          this.client = resultado.entidades[0];
+          localStorage.setItem('userAutenticado', JSON.stringify(this.client));
+          this.router.navigate(['/user-details']);
+        }
+      },
+      erro => {
+        switch(erro.status) {
+          case 400:
+            console.log(erro.error.mensagem);
+            break;
+          case 404:
+            console.log('Produto não localizado.');
+            break;
+        }
+      }
+    );
   }
-
 }

@@ -10,8 +10,6 @@ import {Client} from '../../../model/client.model';
 })
 export class UserDeleteComponent implements OnInit {
 
-  clientName = sessionStorage.getItem('clienteLogadoNome');
-
   constructor(private router: Router, private clienteService: ClienteService) { }
 
   ngOnInit(): void {
@@ -24,7 +22,16 @@ export class UserDeleteComponent implements OnInit {
     // tslint:disable-next-line:radix
     client.id = Number.parseInt(sessionStorage.getItem('clienteLogadoId'));
 
-    this.clienteService.deleteCliente(client);
+    this.clienteService.deleteCliente(client).subscribe(
+      resultado => {
+        console.log('Produto excluído com sucesso.');
+      },
+      erro => {
+        if ( erro.status === 404) {
+          console.log('Produto não localizado.');
+        }
+      });
+
     this.router.navigate(['/']);
   }
 

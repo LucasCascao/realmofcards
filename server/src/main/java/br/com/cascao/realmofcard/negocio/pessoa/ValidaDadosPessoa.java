@@ -28,18 +28,6 @@ public class ValidaDadosPessoa implements IStrategy{
 			msg.append("O campo CPF é obrigatório.");
 		}
 
-		if(pessoa.getEmail() == null || pessoa.getEmail().trim().equals("")){
-			msg.append("O campo email é obrigatório.");
-		}
-
-		if(pessoa.getUsername() == null || pessoa.getUsername().trim().equals("")){
-			msg.append("O campo usuário é obrigatório.");
-		}
-
-		if(pessoa.getPassword() == null || pessoa.getPassword().trim().equals("")){
-			msg.append("O campo senha é obrigatório.");
-		}
-
 		if(pessoa.getSobrenome() == null || pessoa.getSobrenome().trim().equals("")){
 			msg.append("O campo sobrenome é obrigatório.");
 		}
