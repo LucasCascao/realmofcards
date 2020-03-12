@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {ClienteService} from '../../../services/cliente.service';
-import {Client} from '../../../model/client.model';
+import {Person} from '../../../model/person.model';
 
 @Component({
   selector: 'app-user-delete',
@@ -17,7 +17,7 @@ export class UserDeleteComponent implements OnInit {
 
   excluirConta() {
 
-    const client = new Client();
+    const client = new Person();
 
     // tslint:disable-next-line:radix
     client.id = Number.parseInt(sessionStorage.getItem('clienteLogadoId'));

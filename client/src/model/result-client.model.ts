@@ -1,6 +1,6 @@
-import {Client} from './client.model';
+import {Person} from './person.model';
 
 export class ResultClient {
   msg: string;
-  entidades: Array<Client>;
+  entidades: Array<Person>;
 }
