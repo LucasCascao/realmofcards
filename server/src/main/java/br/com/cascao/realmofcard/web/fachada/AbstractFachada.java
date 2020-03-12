@@ -1,6 +1,6 @@
 package br.com.cascao.realmofcard.web.fachada;
 
-import br.com.cascao.realmofcard.dao.PessoaService;
+import br.com.cascao.realmofcard.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

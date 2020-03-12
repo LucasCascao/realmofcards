@@ -1,4 +1,4 @@
-package br.com.cascao.realmofcard.dao;
+package br.com.cascao.realmofcard.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,14 +8,14 @@ import org.springframework.stereotype.Repository;
 
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
-import br.com.cascao.realmofcard.repository.PessoaDAO;
+import br.com.cascao.realmofcard.repository.PessoaRepository;
 import br.com.cascao.realmofcard.service.IService;
 
 @Repository
 public class PessoaService implements IService{
 
 	@Autowired
-	PessoaDAO pessoaDAO;
+	PessoaRepository pessoaDAO;
 
 	@Override
 	public EntidadeDominio salvar(EntidadeDominio entidade) {
@@ -45,11 +45,4 @@ public class PessoaService implements IService{
 	public void excluir(EntidadeDominio entidade) {
 		pessoaDAO.deleteById(entidade.getId());
 	}
-
-	@Override
-	public EntidadeDominio visualizar(EntidadeDominio entidade) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

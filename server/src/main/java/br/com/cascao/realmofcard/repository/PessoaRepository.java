@@ -9,12 +9,7 @@ import br.com.cascao.realmofcard.domain.Pessoa;
 
 @Repository
 @Transactional
-public interface PessoaDAO extends JpaRepository<Pessoa, Integer> {
-
-//    Pessoa findByEmailAndPassword(String email, String password);
+public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
 
     boolean existsPessoaByCpf(Integer id);
-
-//    boolean existsPessoaByEmail(String email);
-
 }

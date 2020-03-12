@@ -9,8 +9,10 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-//    Pessoa findByPessoa(Pessoa pessoa);
+    Pessoa findByPessoa(Pessoa pessoa);
+
+    boolean existsByEmailAndPassword(String email, String senha);
 
 }

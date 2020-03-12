@@ -1,16 +1,15 @@
 package br.com.cascao.realmofcard.negocio.pessoa;
 
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
-import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Usuario;
 import br.com.cascao.realmofcard.negocio.IStrategy;
-import br.com.cascao.realmofcard.repository.PessoaDAO;
+import br.com.cascao.realmofcard.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ValidaExistenciaPessoa implements IStrategy {
 
     @Autowired
-    PessoaDAO pessoaDAO;
+    PessoaRepository pessoaDAO;
 
     @Override
     public String processar(EntidadeDominio entidade) {
