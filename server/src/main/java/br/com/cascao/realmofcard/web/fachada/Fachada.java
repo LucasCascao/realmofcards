@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.cascao.realmofcard.negocio.usuario.ValidaDadosUsuario;
+import br.com.cascao.realmofcard.negocio.usuario.ValidaExistenciaUsuario;
 import br.com.cascao.realmofcard.service.UsuarioService;
 import br.com.cascao.realmofcard.domain.Usuario;
 import br.com.cascao.realmofcard.negocio.pessoa.ValidaExistenciaPessoa;
@@ -43,10 +45,12 @@ public class Fachada implements IFachada {
 		//------------------------ Hash Pessoa ----------------------------//
 		
 		ValidaDadosPessoa validaDadosPessoa = new ValidaDadosPessoa();
+//		ValidaExistenciaPessoa validaExistenciaPessoa = new ValidaExistenciaPessoa();
 		
 		List<IStrategy> rnsPessoaSalvar = new ArrayList<IStrategy>();
 
 		rnsPessoaSalvar.add(validaDadosPessoa);
+//		rnsPessoaSalvar.add(validaExistenciaPessoa);
 
 		List<IStrategy> rnsPessoaAlterar = new ArrayList<IStrategy>();
 
@@ -62,12 +66,14 @@ public class Fachada implements IFachada {
 		//------------------------ Hash Usuario ----------------------------//
 
 		ValidaSenhaUsuario validaSenhaUsuario = new ValidaSenhaUsuario();
-		ValidaExistenciaPessoa validaExistenciaPessoa = new ValidaExistenciaPessoa();
+		ValidaExistenciaUsuario validaExistenciaUsuario = new ValidaExistenciaUsuario();
+		ValidaDadosUsuario validaDadosUsuario = new ValidaDadosUsuario();
 
 		List<IStrategy> rnsUsuarioSalvar = new ArrayList<IStrategy>();
 
 		rnsUsuarioSalvar.add(validaSenhaUsuario);
-		rnsUsuarioSalvar.add(validaExistenciaPessoa);
+		rnsUsuarioSalvar.add(validaExistenciaUsuario);
+		rnsUsuarioSalvar.add(validaDadosUsuario);
 
 		Map<String, List<IStrategy>> mapaUsuario = new HashMap<String, List<IStrategy>>();
 
@@ -76,7 +82,7 @@ public class Fachada implements IFachada {
 		regrasNegocio.put(Usuario.class.getName(), mapaUsuario);
 
 	}
-	
+
 	private void executarRegras(EntidadeDominio entidade, List<IStrategy> rnsEntidade) {
         for (IStrategy rn : rnsEntidade) {
             String msg = rn.processar(entidade);
