@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -40,6 +41,7 @@ public class Usuario extends EntidadeDominio implements Serializable{
 	@Column(name = "usu_ativo")
 	private String ativo;
 
+	@Transient
 	@ManyToOne()
 	@JoinColumn(name = "usu_type_user_id")
 	private TipoUsuario tipoUsuario;

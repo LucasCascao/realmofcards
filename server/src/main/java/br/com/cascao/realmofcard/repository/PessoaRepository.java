@@ -11,5 +11,5 @@ import br.com.cascao.realmofcard.domain.Pessoa;
 @Transactional
 public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
 
-    boolean existsPessoaByCpf(Integer id);
+    boolean existsPessoaByCpf(String id);
 }

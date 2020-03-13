@@ -1,10 +1,9 @@
 package br.com.cascao.realmofcard.service;
 
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
-import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Usuario;
+import br.com.cascao.realmofcard.repository.PessoaRepository;
 import br.com.cascao.realmofcard.repository.UsuarioRepository;
-import br.com.cascao.realmofcard.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,34 +14,43 @@ import java.util.List;
 public class UsuarioService implements IService{
 
 	@Autowired
-	UsuarioRepository usuarioDAO;
+	UsuarioRepository usuarioRepository;
+
+	@Autowired
+	PessoaRepository pessoaRepository;
 
 	@Override
 	public EntidadeDominio salvar(EntidadeDominio entidade) {
-		return usuarioDAO.save((Usuario) entidade);
+		Usuario usuario = (Usuario) entidade;
+		usuario.setPessoa(pessoaRepository.save(usuario.getPessoa()));
+		return usuarioRepository.save(usuario);
 	}
 	
 	@Override
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
+
 		List<EntidadeDominio> usuarios = new ArrayList<>();
 		Usuario usuario = (Usuario) entidade;
+
 		if(usuario.getId() != null){
-			usuarioDAO.findById(entidade.getId()).map( p -> usuarios.add(p));
+			usuarioRepository.findById(entidade.getId()).map(p -> usuarios.add(p));
 			return usuarios;
 		}
 
-		usuarioDAO.findAll().stream().forEach( p -> usuarios.add(p));
+//		if(usuario.getUsername())
+
+		usuarioRepository.findAll().stream().forEach(p -> usuarios.add(p));
 
 		return usuarios;
 	}
 
 	@Override
 	public void alterar(EntidadeDominio entidade) {
-		entidade = usuarioDAO.save((Usuario) entidade);
+		entidade = usuarioRepository.save((Usuario) entidade);
 	}
 
 	@Override
 	public void excluir(EntidadeDominio entidade) {
-		usuarioDAO.deleteById(entidade.getId());
+		usuarioRepository.deleteById(entidade.getId());
 	}
 }

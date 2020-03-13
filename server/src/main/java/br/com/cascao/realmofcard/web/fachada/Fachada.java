@@ -24,7 +24,7 @@ import br.com.cascao.realmofcard.service.IService;
 
 @Service
 public class Fachada implements IFachada {
-	
+
 	private Map<String, IService> daos;
 
     private Map<String, Map<String, List<IStrategy>>> regrasNegocio;
@@ -33,7 +33,11 @@ public class Fachada implements IFachada {
     
     @Autowired
 	public Fachada(PessoaService pessoaService,
-				   UsuarioService usuarioService) {
+				   UsuarioService usuarioService,
+				   ValidaDadosPessoa validaDadosPessoa,
+				   ValidaExistenciaPessoa validaExistenciaPessoa,
+				   ValidaDadosUsuario validaDadosUsuario,
+				   ValidaExistenciaUsuario validaExistenciaUsuario) {
 
     	daos = new HashMap<String, IService>();
 		
@@ -44,13 +48,10 @@ public class Fachada implements IFachada {
 
 		//------------------------ Hash Pessoa ----------------------------//
 		
-		ValidaDadosPessoa validaDadosPessoa = new ValidaDadosPessoa();
-//		ValidaExistenciaPessoa validaExistenciaPessoa = new ValidaExistenciaPessoa();
-		
 		List<IStrategy> rnsPessoaSalvar = new ArrayList<IStrategy>();
 
 		rnsPessoaSalvar.add(validaDadosPessoa);
-//		rnsPessoaSalvar.add(validaExistenciaPessoa);
+		rnsPessoaSalvar.add(validaExistenciaPessoa);
 
 		List<IStrategy> rnsPessoaAlterar = new ArrayList<IStrategy>();
 
@@ -65,13 +66,9 @@ public class Fachada implements IFachada {
 
 		//------------------------ Hash Usuario ----------------------------//
 
-		ValidaSenhaUsuario validaSenhaUsuario = new ValidaSenhaUsuario();
-		ValidaExistenciaUsuario validaExistenciaUsuario = new ValidaExistenciaUsuario();
-		ValidaDadosUsuario validaDadosUsuario = new ValidaDadosUsuario();
 
 		List<IStrategy> rnsUsuarioSalvar = new ArrayList<IStrategy>();
 
-		rnsUsuarioSalvar.add(validaSenhaUsuario);
 		rnsUsuarioSalvar.add(validaExistenciaUsuario);
 		rnsUsuarioSalvar.add(validaDadosUsuario);
 

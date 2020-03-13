@@ -4,7 +4,9 @@ import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Usuario;
 import br.com.cascao.realmofcard.negocio.IStrategy;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ValidaSenhaUsuario implements IStrategy{
 
 	@Override
