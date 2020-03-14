@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from './login/auth.service';
 import {Observable} from 'rxjs';
 import {Person} from '../model/person.model';
-import {ResultClient} from '../model/result-client.model';
+import {ResultClient} from '../model/result-person.model';
 
 @Component({
   selector: 'app-root',

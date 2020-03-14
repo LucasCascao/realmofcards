@@ -5,5 +5,7 @@ export class User {
   username: string;
   password: string;
   email: string;
-  person: Person;
+  tipoUsuario;
+  ativo;
+  pessoa: Person;
 }

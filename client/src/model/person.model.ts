@@ -1,3 +1,5 @@
+import {Telefone} from './telefone.model.js';
+
 export class Person {
   id: number;
   username: string;
@@ -8,4 +10,5 @@ export class Person {
   sexo: string;
   cpf: string;
   email: string;
+  telefone: Telefone[];
 }

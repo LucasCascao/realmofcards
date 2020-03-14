@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Person} from '../model/person.model';
 import {catchError, tap} from 'rxjs/operators';
-import {ResultClient} from '../model/result-client.model';
+import {ResultClient} from '../model/result-person.model';
 
 import {API_URL} from '../app/shared/app.api';
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MockClient} from '../../../../mock/mock-cliente.model';
 import {Person} from '../../../../model/person.model';
 import {ClienteService} from '../../../../services/cliente.service';
-import {ResultClient} from '../../../../model/result-client.model';
+import {ResultClient} from '../../../../model/result-person.model';
 
 @Component({
   selector: 'app-client-list',
