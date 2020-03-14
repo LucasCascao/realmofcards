@@ -7,6 +7,7 @@ import java.util.Map;
 
 import br.com.cascao.realmofcard.negocio.usuario.ValidaDadosUsuario;
 import br.com.cascao.realmofcard.negocio.usuario.ValidaExistenciaUsuario;
+import br.com.cascao.realmofcard.service.AutenticaService;
 import br.com.cascao.realmofcard.service.UsuarioService;
 import br.com.cascao.realmofcard.domain.Usuario;
 import br.com.cascao.realmofcard.negocio.pessoa.ValidaExistenciaPessoa;
