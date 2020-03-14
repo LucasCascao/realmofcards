@@ -37,7 +37,11 @@ public class UsuarioService implements IService{
 			return usuarios;
 		}
 
-//		if(usuario.getUsername())
+		if(usuarioRepository.existsByEmailAndPassword(usuario.getEmail(), usuario.getPassword())) {
+			usuario.setPassword(null);
+			usuarios.add(usuario);
+			return usuarios;
+		}
 
 		usuarioRepository.findAll().stream().forEach(p -> usuarios.add(p));
 

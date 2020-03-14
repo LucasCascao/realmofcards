@@ -3,38 +3,31 @@ package br.com.cascao.realmofcard.negocio.pessoa;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.negocio.IStrategy;
+import br.com.cascao.realmofcard.validator.StringValidador;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ValidaDadosPessoa implements IStrategy{
+
+	@Autowired
+	StringValidador stringValidador;
 
 	@Override
 	public String processar(EntidadeDominio entidade) {
 
 		Pessoa pessoa = (Pessoa) entidade;
 		StringBuilder msg = new StringBuilder();
-		
-		if (pessoa.getNome() == null || pessoa.getNome().trim().equals("")) {
-            msg.append("O campo nome é obrigatório.");
-        }
-		
-		if (pessoa.getSexo() == null || pessoa.getSexo().trim().equals("")) {
-            msg.append("O campo sexo é obrigatório.");
-        }
-		
-		if (pessoa.getDataNascimento() == null || pessoa.getDataNascimento().toString().equals("")) {
-            msg.append("O campo data de nascimento é obrigatório.");
-        }
 
+		msg.append(stringValidador.validar(pessoa.getNome(), "nome"));
+		msg.append(stringValidador.validar(pessoa.getSobrenome(), "sobrenome"));
 		if(pessoa.getCpf() == null || pessoa.getCpf().trim().equals("")){
 			msg.append("O campo CPF é obrigatório.");
 		}else if( pessoa.getCpf().length() != 11){
 			msg.append("CPF invalido.");
 		}
-
-		if(pessoa.getSobrenome() == null || pessoa.getSobrenome().trim().equals("")){
-			msg.append("O campo sobrenome é obrigatório.");
-		}
+		msg.append(stringValidador.validar(pessoa.getDataNascimento(), "data de nascimento"));
+		msg.append(stringValidador.validar(pessoa.getSexo(), "sexo"));
 		
 		return msg.toString();
 	}
