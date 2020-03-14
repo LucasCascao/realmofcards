@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -18,31 +19,34 @@ import java.util.Date;
 @Setter
 @Component
 @Entity
-@Table(name = "pessoa")
-public class Pessoa extends EntidadeDominio implements Serializable{
+@Table(name = "usuario")
+public class Usuario extends EntidadeDominio implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "pes_id")
+	@Column(name = "usu_id")
 	private Integer id;
 
-	@Column(name = "pes_nome")
-	private String nome;
+	@Column(name = "usu_email")
+	private String email;
 
-	@Column(name = "pes_sobrenome")
-	private String sobrenome;
+	@Column(name = "usu_nome_usuario")
+	private String username;
 
-	@JsonFormat(pattern="yyyy-MM-dd")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Column(name = "pes_data_nascimento")
-	private Date dataNascimento;
+	@Column(name = "usu_senha")
+	private String password;
 
-	@Column(name = "pes_sexo")
-	private String sexo;
+	@Column(name = "usu_ativo")
+	private String ativo;
 
-	@Column(name = "pes_cpf")
-	private String cpf;
+	@Transient
+	@ManyToOne()
+	@JoinColumn(name = "usu_type_user_id")
+	private TipoUsuario tipoUsuario;
 
+	@JoinColumn(name = "usu_pessoa_id")
+	@OneToOne()
+	private Pessoa pessoa;
 }

@@ -5,79 +5,82 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.com.cascao.realmofcard.dao.IDAO;
-import br.com.cascao.realmofcard.dao.PessoaDAO;
-import br.com.cascao.realmofcard.dao.PessoaJPADAO;
+import br.com.cascao.realmofcard.negocio.usuario.ValidaDadosUsuario;
+import br.com.cascao.realmofcard.negocio.usuario.ValidaExistenciaUsuario;
+import br.com.cascao.realmofcard.service.AutenticaService;
+import br.com.cascao.realmofcard.service.UsuarioService;
+import br.com.cascao.realmofcard.domain.Usuario;
+import br.com.cascao.realmofcard.negocio.pessoa.ValidaExistenciaPessoa;
+import br.com.cascao.realmofcard.negocio.usuario.ValidaSenhaUsuario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.com.cascao.realmofcard.service.PessoaService;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Resultado;
 import br.com.cascao.realmofcard.negocio.IStrategy;
 import br.com.cascao.realmofcard.negocio.pessoa.ValidaDadosPessoa;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import br.com.cascao.realmofcard.service.IService;
 
-@Component
-public class Fachada implements IFachada{
-	
-	private Map<String, IDAO> daos;
+@Service
+public class Fachada implements IFachada {
 
-    // Mapa Macro, com TODAS as regras de negócio
-    // Observe: ele ó um mapa de um mapa. O mapa que está dentro possui para cada chave uma lista de strategy
+	private Map<String, IService> daos;
+
     private Map<String, Map<String, List<IStrategy>>> regrasNegocio;
     private StringBuilder sb = new StringBuilder();
     private Resultado resultado;
-
+    
     @Autowired
-	PessoaJPADAO pessoaJPADAO;
-	
-	public Fachada() {
-		// Instanciando mapas de daos e regras de neg�cio macro
-		daos = new HashMap<String, IDAO>();
+	public Fachada(PessoaService pessoaService,
+				   UsuarioService usuarioService,
+				   ValidaDadosPessoa validaDadosPessoa,
+				   ValidaExistenciaPessoa validaExistenciaPessoa,
+				   ValidaDadosUsuario validaDadosUsuario,
+				   ValidaExistenciaUsuario validaExistenciaUsuario) {
+
+    	daos = new HashMap<String, IService>();
 		
-		// Instanciando o mapa macro;
 		regrasNegocio = new HashMap<String, Map<String,List<IStrategy>>>();
-		
-		// Instanciando o mapa de DAOs;
-		daos.put(Pessoa.class.getName(), pessoaJPADAO);
+
+		daos.put(Pessoa.class.getName(), pessoaService);
+		daos.put(Usuario.class.getName(), usuarioService);
 
 		//------------------------ Hash Pessoa ----------------------------//
 		
-		//Criando as regras de negócio de Pessoa
-		
-		ValidaDadosPessoa validarDadosPessoa = new ValidaDadosPessoa();
-		
-		//Criando a lista para guardar as régras de negocios de salvar Pessoa
-		
 		List<IStrategy> rnsPessoaSalvar = new ArrayList<IStrategy>();
-		
-		//Atribuindo a regra de negócio para a lista
-		
-		rnsPessoaSalvar.add(validarDadosPessoa);
-		
-		//Criando a lista para guardar as régras de negocios de salvar Pessoa
-		
+
+		rnsPessoaSalvar.add(validaDadosPessoa);
+		rnsPessoaSalvar.add(validaExistenciaPessoa);
+
 		List<IStrategy> rnsPessoaAlterar = new ArrayList<IStrategy>();
-		
-		//Atribuindo a regra de negócio para a lista
-		
-		rnsPessoaAlterar.add(validarDadosPessoa);
-		
-		//Criando mapa que represente todas as regras da entidade Pessoa
+
+		rnsPessoaAlterar.add(validaDadosPessoa);
 		
 		Map<String,List<IStrategy>> mapaLeitor = new HashMap<String,List<IStrategy>>();
-		
-		//Atribuindo as listas de IStrategy aos seus respectivos comandos
 		
 		mapaLeitor.put("SALVAR",rnsPessoaSalvar);
 		mapaLeitor.put("ALTERAR",rnsPessoaAlterar);
 		
-		//Atribuindo o mapa completo da entidade Pessoa no mapa geral
-		
 		regrasNegocio.put(Pessoa.class.getName(), mapaLeitor);
-		
-		//---------------------------- Fim das Regras de Neg�cio -----------------------------//
+
+		//------------------------ Hash Usuario ----------------------------//
+
+
+		List<IStrategy> rnsUsuarioSalvar = new ArrayList<IStrategy>();
+
+		rnsUsuarioSalvar.add(validaExistenciaUsuario);
+		rnsUsuarioSalvar.add(validaDadosUsuario);
+
+		Map<String, List<IStrategy>> mapaUsuario = new HashMap<String, List<IStrategy>>();
+
+		mapaUsuario.put("SALVAR",rnsUsuarioSalvar);
+
+		regrasNegocio.put(Usuario.class.getName(), mapaUsuario);
+
 	}
-	
+
 	private void executarRegras(EntidadeDominio entidade, List<IStrategy> rnsEntidade) {
         for (IStrategy rn : rnsEntidade) {
             String msg = rn.processar(entidade);
@@ -86,21 +89,20 @@ public class Fachada implements IFachada{
             }
         }
     }
-	
+
 	@Override
 	public Resultado salvar(EntidadeDominio entidade) {
 		
 		resultado = new Resultado();
 		sb.setLength(0);
 		String nmClasse = entidade.getClass().getName();
-		System.out.println(nmClasse);
 		Map<String, List<IStrategy>> mapaEntidade = regrasNegocio.get(nmClasse);
 		List<IStrategy> rnsEntidade = mapaEntidade.get("SALVAR");
 		
 		executarRegras(entidade, rnsEntidade);
 		
 		if(sb.length() == 0) {
-			IDAO dao = daos.get(nmClasse);
+			IService dao = daos.get(nmClasse);
 			dao.salvar(entidade);
 			resultado.addEntidade(entidade);
 		}else {
@@ -123,7 +125,7 @@ public class Fachada implements IFachada{
         executarRegras(entidade, rnsEntidade);
 
         if (sb.length() == 0) {
-            IDAO dao = daos.get(nmClasse);
+        	IService dao = daos.get(nmClasse);
             dao.alterar(entidade);
             resultado.addEntidade(entidade);
         } else {
@@ -139,7 +141,7 @@ public class Fachada implements IFachada{
 		resultado = new Resultado();
         String nmClasse = entidade.getClass().getName();
 
-        IDAO dao = daos.get(nmClasse);
+        IService dao = daos.get(nmClasse);
         resultado.addEntidade(entidade);
         dao.excluir(entidade);
 
@@ -150,8 +152,8 @@ public class Fachada implements IFachada{
 	public Resultado consultar(EntidadeDominio entidade) {
 		resultado = new Resultado();
         String nmClasse = entidade.getClass().getName();
-
-        IDAO dao = daos.get(nmClasse);
+        
+        IService dao = daos.get(nmClasse);
         resultado.setEntidades(dao.consultar(entidade));
 
         return resultado;
@@ -162,7 +164,7 @@ public class Fachada implements IFachada{
 		resultado = new Resultado();
         String nmClasse = entidade.getClass().getName();
 
-        IDAO dao = daos.get(nmClasse);
+        IService dao = daos.get(nmClasse);
         resultado.setEntidades(dao.consultar(entidade));
         return resultado;
 	}

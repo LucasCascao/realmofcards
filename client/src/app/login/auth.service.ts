@@ -1,27 +1,41 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Usuario} from '../../model/usuario.model';
+import {Person} from '../../model/person.model';
 import {Router} from '@angular/router';
+import {ClienteService} from '../../services/cliente.service';
+import {ResultClient} from '../../model/result-person.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private usuarioAutenticado = false;
+  clients: Person[] = [];
+  resultado: ResultClient = new ResultClient();
 
   mostrarMenuEmitter = new EventEmitter<boolean>();
 
-  constructor(private router: Router) { }
+  usuarioAutenticado = false;
 
-  signIn(usuario: Usuario) {
-    if (usuario.username === 'lucas.cascao@gmail.com' && usuario.password === '123456') {
-      this.usuarioAutenticado = true;
-      this.mostrarMenuEmitter.emit(true);
-      this.router.navigate(['/product-market-page']);
-    } else {
-      this.usuarioAutenticado = false;
-      this.mostrarMenuEmitter.emit(false);
-    }
+
+  constructor(private router: Router, private clienteService: ClienteService) { }
+
+  async signIn(person: Person) {
+
+    await this.clienteService.getClientes(person).subscribe(dado => {
+      this.resultado = dado;
+      this.clients = dado.entidades;
+      this.clients = this.resultado.entidades;
+
+      if (person.email === this.clients[0].email && person.password === this.clients[0].password) {
+        this.usuarioAutenticado = true;
+        this.mostrarMenuEmitter.emit(true);
+        localStorage.setItem('userAutenticado', JSON.stringify(this.clients));
+        this.router.navigate(['/product-market-page']);
+        sessionStorage.setItem('clienteLogadoId', this.clients[0].id.toString());
+      } else {
+        alert('Login ou senha invalida');
+      }
+    });
   }
 
 }

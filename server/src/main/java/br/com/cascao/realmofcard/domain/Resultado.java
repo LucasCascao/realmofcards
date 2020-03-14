@@ -1,10 +1,13 @@
 package br.com.cascao.realmofcard.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
 //extends EntidadeAplicacao 
-
+@Component
 public class Resultado {
 
 	private String msg;

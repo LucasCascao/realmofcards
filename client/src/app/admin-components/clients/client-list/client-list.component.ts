@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MockClient} from '../../../../mock/mock-cliente.model';
+import {Person} from '../../../../model/person.model';
+import {ClienteService} from '../../../../services/cliente.service';
+import {ResultClient} from '../../../../model/result-person.model';
 
 @Component({
   selector: 'app-client-list',
@@ -8,11 +11,21 @@ import {MockClient} from '../../../../mock/mock-cliente.model';
 })
 export class ClientListComponent implements OnInit {
 
-  clients = new MockClient().pessoas;
+  resultClient: ResultClient;
 
-  constructor() { }
+  clients: Array<Person>;
+
+  constructor(private clienteService: ClienteService) { }
 
   ngOnInit(): void {
+    this.listar();
+  }
+
+  listar() {
+    console.log(this.resultClient);
+    this.clienteService.getClientes(new Person()).subscribe(dados => {
+      this.clients = dados.entidades;
+    });
   }
 
   filtrar(cartas: any) {
