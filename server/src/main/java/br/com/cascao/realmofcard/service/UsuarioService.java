@@ -40,6 +40,7 @@ public class UsuarioService implements IService{
 		}
 
 		if(usuario.getEmail() != null) {
+			usuario.setId(usuarioRepository.findByEmail(usuario.getEmail()).getId());
 			usuarios.add(usuario);
 			return usuarios;
 		}
@@ -51,7 +52,10 @@ public class UsuarioService implements IService{
 
 	@Override
 	public void alterar(EntidadeDominio entidade) {
-		entidade = usuarioRepository.save((Usuario) entidade);
+		Usuario usuario = (Usuario) entidade;
+		usuario.setPassword(usuarioRepository.findUsuarioById(usuario.getId()).getPassword());
+		entidade = usuarioRepository.save(usuario);
+		usuario.setPassword(null);
 	}
 
 	@Override

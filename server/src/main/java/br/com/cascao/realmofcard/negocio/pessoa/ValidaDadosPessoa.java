@@ -25,14 +25,15 @@ public class ValidaDadosPessoa implements IStrategy{
 
 		msg.append(stringValidador.validar(pessoa.getNome(), "nome"));
 		msg.append(stringValidador.validar(pessoa.getSobrenome(), "sobrenome"));
-		if(pessoa.getCpf() == null || pessoa.getCpf().trim().equals("")){
-			msg.append("O campo CPF é obrigatório.");
-		}else if( pessoa.getCpf().length() != 11){
-			msg.append("CPF invalido.");
+		if(pessoa.getId() == null){
+			if(pessoa.getCpf() == null || pessoa.getCpf().trim().equals("")){
+				msg.append("O campo CPF é obrigatório.");
+			}else if( pessoa.getCpf().length() != 11){
+				msg.append("CPF invalido.");
+			}
 		}
 		msg.append(stringValidador.validar(pessoa.getDataNascimento(), "data de nascimento"));
 		msg.append(stringValidador.validar(pessoa.getSexo(), "sexo"));
-//		msg.append(validaDadosUsuario.processar(pessoa.getUsuario()));
 		
 		return msg.toString();
 	}
