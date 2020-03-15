@@ -1,7 +1,7 @@
 package br.com.cascao.realmofcard.repository;
 
 import br.com.cascao.realmofcard.domain.Pessoa;
-import br.com.cascao.realmofcard.domain.Usuario;
+import br.com.cascao.realmofcard.domain.TipoUsuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,10 +9,5 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-
-    Boolean existsByEmailAndPassword(String email, String senha);
-
-    Boolean existsByEmail(String email);
-
+public interface TipoUsuarioRepository extends JpaRepository<TipoUsuario, Integer> {
 }

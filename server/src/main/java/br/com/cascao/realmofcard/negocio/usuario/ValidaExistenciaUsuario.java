@@ -1,6 +1,7 @@
 package br.com.cascao.realmofcard.negocio.usuario;
 
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
+import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Usuario;
 import br.com.cascao.realmofcard.negocio.IStrategy;
 import br.com.cascao.realmofcard.negocio.pessoa.ValidaExistenciaPessoa;
@@ -22,17 +23,12 @@ public class ValidaExistenciaUsuario implements IStrategy {
     @Override
     public String processar(EntidadeDominio entidade) {
 
-        Usuario usuario = (Usuario) entidade;
+        Pessoa pessoa = (Pessoa) entidade;
         StringBuilder msg = new StringBuilder();
 
-        if(usuarioRepository.existsByEmail(usuario.getEmail()) == null){
+        if(usuarioRepository.existsByEmail(pessoa.getUsuario().getEmail())){
             msg.append("Email já cadastrado.");
         }
-        if(usuarioRepository.existsByUsername(usuario.getUsername()) == null){
-            msg.append("Nome de usuário já cadastrado.");
-        }
-
-        msg.append(validaExistenciaPessoa.processar(usuario.getPessoa()));
 
         return msg.toString();
     }

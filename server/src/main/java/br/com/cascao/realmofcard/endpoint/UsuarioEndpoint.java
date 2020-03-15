@@ -22,19 +22,6 @@ public class UsuarioEndpoint {
         return ResponseEntity.ok().body(fachada.consultar(usuario));
     }
 
-    @PostMapping(path = "/cria")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> salvar(@RequestBody Usuario usuario){
-        return ResponseEntity.ok().body(fachada.salvar(usuario));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id){
-        Usuario usuario = new Usuario();
-        usuario.setId(id);
-        return ResponseEntity.ok().body(fachada.excluir(usuario));
-    }
-
     @PutMapping()
     public ResponseEntity<?> alterar(@RequestBody Usuario usuario){
         return ResponseEntity.ok().body(fachada.alterar(usuario));

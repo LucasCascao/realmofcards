@@ -1,6 +1,7 @@
 package br.com.cascao.realmofcard.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,21 +33,13 @@ public class Usuario extends EntidadeDominio implements Serializable{
 	@Column(name = "usu_email")
 	private String email;
 
-	@Column(name = "usu_nome_usuario")
-	private String username;
-
 	@Column(name = "usu_senha")
 	private String password;
 
 	@Column(name = "usu_ativo")
-	private String ativo;
+	private Boolean ativo;
 
-	@Transient
 	@ManyToOne()
 	@JoinColumn(name = "usu_type_user_id")
 	private TipoUsuario tipoUsuario;
-
-	@JoinColumn(name = "usu_pessoa_id")
-	@OneToOne()
-	private Pessoa pessoa;
 }

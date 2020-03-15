@@ -1,8 +1,10 @@
 package br.com.cascao.realmofcard.service;
 
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
+import br.com.cascao.realmofcard.domain.TipoUsuario;
 import br.com.cascao.realmofcard.domain.Usuario;
 import br.com.cascao.realmofcard.repository.PessoaRepository;
+import br.com.cascao.realmofcard.repository.TipoUsuarioRepository;
 import br.com.cascao.realmofcard.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,15 +19,15 @@ public class UsuarioService implements IService{
 	UsuarioRepository usuarioRepository;
 
 	@Autowired
-	PessoaRepository pessoaRepository;
+	TipoUsuarioRepository tipoUsuarioRepository;
 
 	@Override
 	public EntidadeDominio salvar(EntidadeDominio entidade) {
 		Usuario usuario = (Usuario) entidade;
-		usuario.setPessoa(pessoaRepository.save(usuario.getPessoa()));
+		usuario.setTipoUsuario(tipoUsuarioRepository.findAll().get(usuario.getTipoUsuario().getId()-1));
 		return usuarioRepository.save(usuario);
 	}
-	
+
 	@Override
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
 
@@ -33,12 +35,11 @@ public class UsuarioService implements IService{
 		Usuario usuario = (Usuario) entidade;
 
 		if(usuario.getId() != null){
-			usuarioRepository.findById(entidade.getId()).map(p -> usuarios.add(p));
+			usuarioRepository.findById(usuario.getId()).map(p -> usuarios.add(p));
 			return usuarios;
 		}
 
-		if(usuarioRepository.existsByEmailAndPassword(usuario.getEmail(), usuario.getPassword())) {
-			usuario.setPassword(null);
+		if(usuario.getEmail() != null) {
 			usuarios.add(usuario);
 			return usuarios;
 		}
@@ -55,6 +56,7 @@ public class UsuarioService implements IService{
 
 	@Override
 	public void excluir(EntidadeDominio entidade) {
-		usuarioRepository.deleteById(entidade.getId());
+		Usuario usuario = (Usuario) entidade;
+		usuarioRepository.deleteById(usuario.getId());
 	}
 }

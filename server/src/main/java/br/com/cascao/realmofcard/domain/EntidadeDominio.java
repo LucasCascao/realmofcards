@@ -19,9 +19,4 @@ import java.util.Date;
 @NoArgsConstructor
 @Component
 public class EntidadeDominio implements IEntidade {
-
-	private Integer id;
-
-	private LocalDateTime dtCadastro;
-
 }
