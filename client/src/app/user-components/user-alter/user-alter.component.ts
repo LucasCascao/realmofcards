@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Person} from '../../../model/person.model';
+import {Person} from '../../../model/domain/person.model';
 import {ClienteService} from '../../../services/cliente.service';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
+import {Util} from "../../shared/app.util";
 
 @Component({
   selector: 'app-user-alter',
@@ -12,31 +13,30 @@ export class UserAlterComponent implements OnInit {
 
   client: Person = new Person();
 
-  constructor(private clientService: ClienteService, private router: Router) { }
+  constructor(private clientService: ClienteService, private router: Router, private route: ActivatedRoute, private util: Util) { }
 
   ngOnInit(): void {
+    this.client.id = this.route.snapshot.params.id;
     this.getCliente();
   }
 
-  getCliente() {
-    // tslint:disable-next-line:radix
-    this.client.id = Number.parseInt(sessionStorage.getItem('clienteLogadoId'));
-    this.clientService.getClientes(this.client).subscribe( dado => this.client = dado.entidades[0]);
+  async getCliente() {
+    await this.clientService.getClientes(this.client).subscribe( dado => this.client = dado.entidades[0]);
   }
 
   alterarCliente() {
     this.clientService.updateCliente(this.client).subscribe(
       resultado => {
         if (resultado.msg == null) {
-          console.log(resultado);
           console.log('Produto alterado com sucesso.');
           this.client = resultado.entidades[0];
-          localStorage.setItem('userAutenticado', JSON.stringify(this.client));
-          this.router.navigate(['/user-details']);
+          this.router.navigate(['/app-logado', resultado.entidades[0].id]);
+        }else{
+          alert(this.util.getMensagensSeparadas(resultado.msg));
         }
       },
       erro => {
-        switch(erro.status) {
+        switch (erro.status) {
           case 400:
             console.log(erro.error.mensagem);
             break;

@@ -71,6 +71,7 @@ import {ClienteService} from '../services/cliente.service';
 import {HttpClientModule} from '@angular/common/http';
 import {Util} from './shared/app.util';
 import {UsuarioService} from '../services/usuario.service';
+import { AppLogadoComponent } from './app-logado/app-logado.component';
 
 @NgModule({
   declarations: [
@@ -133,7 +134,8 @@ import {UsuarioService} from '../services/usuario.service';
     ProviderInativeComponent,
     TicketListComponent,
     TicketDevolutionListComponent,
-    TicketTradeListComponent
+    TicketTradeListComponent,
+    AppLogadoComponent
   ],
   imports: [
     BrowserModule,

@@ -10,7 +10,7 @@
       <div class="card h-100">
         <div class="card-body">
           <div class="col-md-3 float-left">
-            <a [routerLink]="['/product-detail']">
+            <a [routerLink]="['../product-detail']">
               <img class="img-fluid rounded mb-3 mb-md-0" [src]="carta.imageUrl" alt="">
             </a>
           </div>
@@ -23,7 +23,7 @@
             </p>
           </div>
           <div class="col-md-2 float-left">
-            <a [routerLink]="['/product-market-page']"><button class="btn btn-secondary float-right">Remover do carrinho</button></a>
+            <a [routerLink]="['../product-market-page']"><button class="btn btn-secondary float-right">Remover do carrinho</button></a>
           </div>
         </div>
       </div>
@@ -31,8 +31,8 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <a [routerLink]="['/product-market-page']" class="btn btn-secondary float-left">Continuar comprando</a>
-      <a [routerLink]="['/payment-page']" class="btn btn-success float-right">Finalizar compra</a>
+      <a [routerLink]="['../product-market-page']" class="btn btn-secondary float-left">Continuar comprando</a>
+      <a [routerLink]="['../payment-page']" class="btn btn-success float-right">Finalizar compra</a>
     </div>
   </div>
 

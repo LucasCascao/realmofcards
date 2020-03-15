@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Person} from '../../../model/person.model';
+import {Person} from '../../../model/domain/person.model';
 import {ClienteService} from '../../../services/cliente.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-user-details',
@@ -11,18 +12,19 @@ export class UserDetailsComponent implements OnInit {
 
   client: Person = new Person();
 
-  constructor(private clientService: ClienteService) { }
+  constructor(private clientService: ClienteService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.client.id = this.route.snapshot.params.id;
     this.getCliente();
     // this.client = JSON.parse(localStorage.getItem('userAutenticado'))[0];
     // console.log(this.client);
   }
 
-  getCliente() {
-    //tslint:disable-next-line:radix
-    this.client.id = Number.parseInt(sessionStorage.getItem('clienteLogadoId'));
-    this.clientService.getClientes(this.client).subscribe( dado => this.client = dado.entidades[0]);
+  async getCliente() {
+    await this.clientService.getClientes(this.client).subscribe( dado => {
+      this.client = dado.entidades[0];
+    });
   }
 
 }

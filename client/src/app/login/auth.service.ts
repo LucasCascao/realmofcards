@@ -1,37 +1,38 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Person} from '../../model/person.model';
+import {Person} from '../../model/domain/person.model';
 import {Router} from '@angular/router';
 import {ClienteService} from '../../services/cliente.service';
-import {ResultClient} from '../../model/result-person.model';
+import {ResultClient} from '../../model/results/result-person.model';
+import {User} from '../../model/domain/user.model';
+import {ResultUser} from '../../model/results/result-user.model';
+import {UsuarioService} from '../../services/usuario.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  clients: Person[] = [];
-  resultado: ResultClient = new ResultClient();
+  clients: Person = new Person();
+  resultado: ResultUser = new ResultUser();
 
   mostrarMenuEmitter = new EventEmitter<boolean>();
 
   usuarioAutenticado = false;
 
 
-  constructor(private router: Router, private clienteService: ClienteService) { }
+  constructor(private router: Router, private usuarioService: UsuarioService) { }
 
-  async signIn(person: Person) {
+  async signIn(user: User) {
 
-    await this.clienteService.getClientes(person).subscribe(dado => {
+    await this.usuarioService.getUsers(user).subscribe(dado => {
       this.resultado = dado;
-      this.clients = dado.entidades;
-      this.clients = this.resultado.entidades;
+      this.clients.usuario = dado.entidades[0];
 
-      if (person.email === this.clients[0].email && person.password === this.clients[0].password) {
+      if (dado.msg === null) {
+        sessionStorage.setItem('userId', String(this.clients.id));
         this.usuarioAutenticado = true;
         this.mostrarMenuEmitter.emit(true);
-        localStorage.setItem('userAutenticado', JSON.stringify(this.clients));
-        this.router.navigate(['/product-market-page']);
-        sessionStorage.setItem('clienteLogadoId', this.clients[0].id.toString());
+        this.router.navigate(['/app-logado', this.clients.usuario.id]);
       } else {
         alert('Login ou senha invalida');
       }

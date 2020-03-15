@@ -18,11 +18,11 @@
         <div class="card-body">
           <div class="col-md-9 float-left">
             <p class="card-text"><strong>Cliente:</strong> {{client.nome}} {{client.sobrenome}}</p>
-            <p class="card-text"><strong>Email:</strong> {{client.email}}</p>
+            <p class="card-text"><strong>Email:</strong> {{client.usuario.email}}</p>
             <p class="card-text"><strong>Numero de pedidos realizados:</strong> {{clients.length}}</p>
           </div>
           <div class="col-md-3 float-left">
-            <a class="btn btn-secondary mb-md-3" [routerLink]="['/user-orders']">Pedidos</a>
+            <a class="btn btn-secondary mb-md-3" [routerLink]="['../user-orders']">Pedidos</a>
           </div>
         </div>
       </div>
