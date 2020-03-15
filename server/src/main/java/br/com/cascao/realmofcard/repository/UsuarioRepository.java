@@ -11,6 +11,10 @@ import javax.transaction.Transactional;
 @Transactional
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
+    Usuario findUsuarioById(Integer id);
+
+    Usuario findByEmail(String email);
+
     Boolean existsByEmailAndPassword(String email, String senha);
 
     Boolean existsByEmail(String email);

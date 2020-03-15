@@ -60,7 +60,9 @@ public class Fachada implements IFachada {
 		List<IStrategy> rnsPessoaAlterar = new ArrayList<IStrategy>();
 
 		rnsPessoaAlterar.add(validaDadosPessoa);
-		
+		rnsPessoaAlterar.add(validaDadosUsuario);
+		rnsPessoaAlterar.add(validaExistenciaUsuario);
+
 		Map<String,List<IStrategy>> mapaLeitor = new HashMap<String,List<IStrategy>>();
 		
 		mapaLeitor.put("SALVAR",rnsPessoaSalvar);
