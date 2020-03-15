@@ -26,8 +26,14 @@ public class ValidaExistenciaUsuario implements IStrategy {
         Pessoa pessoa = (Pessoa) entidade;
         StringBuilder msg = new StringBuilder();
 
-        if(usuarioRepository.existsByEmail(pessoa.getUsuario().getEmail())){
-            msg.append("Email já cadastrado.");
+        Usuario usuarioRecebido = pessoa.getUsuario();
+
+        Usuario usuarioValidador = usuarioRepository.findByEmail(usuarioRecebido.getEmail());
+
+        if(usuarioValidador != null){
+            if(usuarioRecebido.getId() != usuarioValidador.getId()){
+                msg.append("Email já cadastrado.");
+            }
         }
 
         return msg.toString();

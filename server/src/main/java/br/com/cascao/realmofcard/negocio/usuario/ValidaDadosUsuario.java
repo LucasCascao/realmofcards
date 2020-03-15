@@ -28,7 +28,10 @@ public class ValidaDadosUsuario implements IStrategy {
         StringBuilder msg = new StringBuilder();
 
         msg.append(stringValidador.validar(pessoa.getUsuario().getEmail(), "email"));
-        msg.append(stringValidador.validar(pessoa.getUsuario().getPassword(), "senha"));
+
+        if(pessoa.getId() == null){
+            msg.append(stringValidador.validar(pessoa.getUsuario().getPassword(), "senha"));
+        }
 
         return msg.toString();
     }

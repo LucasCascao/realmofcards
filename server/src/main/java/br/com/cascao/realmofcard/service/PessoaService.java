@@ -52,7 +52,10 @@ public class PessoaService implements IService{
 
 	@Override
 	public void alterar(EntidadeDominio entidade) {
-		entidade = pessoaRepository.save((Pessoa)entidade);
+		Pessoa  pessoa = (Pessoa) entidade;
+		pessoa.getUsuario().setPassword(usuarioRepository.findUsuarioById(pessoa.getUsuario().getId()).getPassword());
+		pessoa = pessoaRepository.save(pessoa);
+		pessoa.getUsuario().setPassword(null);
 	}
 
 	@Override
