@@ -1,14 +1,12 @@
-import {Telefone} from './telefone.model.js';
+import {Telefone} from './telefone.model.js.js';
+import {User} from "./user.model";
 
 export class Person {
   id: number;
-  username: string;
-  password: string;
   nome: string;
   sobrenome: string;
   dataNascimento: Date;
   sexo: string;
   cpf: string;
-  email: string;
-  telefone: Telefone[];
+  usuario: User;
 }

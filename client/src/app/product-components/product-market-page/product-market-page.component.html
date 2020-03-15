@@ -60,14 +60,14 @@
     <div *ngFor="let carta of cartas"
       class="col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
-        <a [routerLink]="['/product-detail']"><img class="card-img-top" [src]="carta.imageUrl" alt=""></a>
+        <a [routerLink]="['../product-detail']"><img class="card-img-top" [src]="carta.imageUrl" alt=""></a>
         <div class="card-body">
           <h4 class="card-title">{{carta.nome}}</h4>
           <p class="card-text">Categoria de jogo: {{carta.catJogo}}</p>
           <p class="card-text">Categoria de carta: {{carta.catCarta}}</p>
           <p class="card-text">Valor: R$ {{carta.value}}</p>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/product-detail']">Visualizar</a>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/cart']">Comprar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../product-detail']">Visualizar</a>
+          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../cart']">Comprar</a>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a [routerLink]="['/product-market-page']" class="navbar-brand" >Realm of Cards</a>
+    <a [routerLink]="['product-market-page']" class="navbar-brand" >Realm of Cards</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,21 +10,21 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCliente" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{nomeCliente}}
+            Minha Conta
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-            <a [routerLink]="['/user-orders']" class="dropdown-item">Pedidos</a>
-            <a [routerLink]="['/user-details']" class="dropdown-item">Meu perfil</a>
-            <a [routerLink]="['/user-password-alter']" class="dropdown-item">Alterar Senha</a>
+            <a [routerLink]="['user-orders']" class="dropdown-item">Pedidos</a>
+            <a [routerLink]="['user-details',id]" class="dropdown-item">Meu perfil</a>
+            <a [routerLink]="['user-password-alter']" class="dropdown-item">Alterar Senha</a>
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link" [routerLink]="['/cart']" id="navbarDropdownCarrinho" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link" [routerLink]="['cart']" id="navbarDropdownCarrinho" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Carrinho
           </a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link" [routerLink]="['/admin-page']" id="navbarDropdownAdministrador" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link" [routerLink]="['admin-page']" id="navbarDropdownAdministrador" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Administrador
           </a>
         </li>

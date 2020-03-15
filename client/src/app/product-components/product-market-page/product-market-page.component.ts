@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MockCards} from "../../../mock/mock-card.model";
-import {Person} from "../../../model/person.model";
+import {Person} from "../../../model/domain/person.model";
 
 @Component({
   selector: 'app-product-market-page',

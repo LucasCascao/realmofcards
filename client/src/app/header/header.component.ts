@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Person} from '../../model/domain/person.model';
+import {ClienteService} from '../../services/cliente.service';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  nomeCliente = sessionStorage.getItem('clienteLogadoNome');
+  client: Person = new Person();
 
-  constructor() { }
+  @Input()
+  id?;
 
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute, private clienteService: ClienteService) { }
+
+  ngOnInit() {
+    this.client.id = this.id;
+    this.getUser();
+  }
+
+  async getUser() {
+    await this.clienteService.getClientes(this.client).subscribe(resultado => {
+      this.client = resultado.entidades[0];
+    });
   }
 
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from './auth.service';
-import {Person} from '../../model/person.model';
+import {Person} from '../../model/domain/person.model';
 import {AuthUserService} from "../../services/auth-user.service";
-import {User} from "../../model/user.model";
+import {User} from "../../model/domain/user.model";
 import {Router} from "@angular/router";
+import {UsuarioService} from "../../services/usuario.service";
+import {Util} from "../shared/app.util";
 
 @Component({
   selector: 'app-login',
@@ -14,20 +16,22 @@ export class LoginComponent implements OnInit {
 
   public usuario: User = new User();
 
-  constructor(private authService: AuthUserService, private router: Router) { }
+  constructor(private usuarioService: AuthService, private router: Router, private appUtil: Util) { }
 
   ngOnInit(): void {
   }
 
-  signIn() {
-    this.authService.autenticar(this.usuario).subscribe(resultado => {
-      this.usuario = resultado.entidades[0];
-      if (resultado.msg !== null) {
-        this.router.navigate([ '/product-market-page']);
-      } else {
-        alert('Login ou senha invalido');
-      }
-    });
+  async signIn() {
+    await this.usuarioService.signIn(this.usuario);
+    //   .subscribe(resultado => {
+    //   this.usuario = resultado.entidades[0];
+    //   console.log(resultado);
+    //   if (resultado?.msg !== null) {
+    //     alert(this.appUtil.getMensagensSeparadas(resultado.msg));
+    //   } else {
+    //     this.router.navigate([ '/product-market-page']);
+    //   }
+    // });
   }
 
 }

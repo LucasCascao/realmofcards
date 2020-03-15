@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {Person} from '../model/person.model';
+import {Person} from '../model/domain/person.model';
 import {catchError, tap} from 'rxjs/operators';
-import {ResultClient} from '../model/result-person.model';
+import {ResultClient} from '../model/results/result-person.model';
 
 import {API_URL} from '../app/shared/app.api';
 
@@ -30,7 +30,7 @@ export class ClienteService {
   }
 
   updateCliente(person): Observable<ResultClient> {
-    return this.http.put<ResultClient>(`${API_URL}/pessoas/`, person);
+    return this.http.put<ResultClient>(`${API_URL}/pessoas`, person);
   }
 
   deleteCliente(person: Person): Observable<ResultClient> {

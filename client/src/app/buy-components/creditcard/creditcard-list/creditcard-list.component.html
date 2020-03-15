@@ -3,7 +3,7 @@
   <!-- Page Heading/Breadcrumbs -->
   <h1 class="mt-4 mb-3">Cartões cadastrados</h1>
   <hr>
-  <a class="btn btn-secondary" [routerLink]="['/creditcard-register']">Adcionar novo cartão
+  <a class="btn btn-secondary" [routerLink]="['../creditcard-register']">Adcionar novo cartão
     <span class="glyphicon glyphicon-chevron-right"></span>
   </a>
   <div *ngFor="let cartao of cartoes">
@@ -12,8 +12,8 @@
     <div class="row">
       <div class="col-md-5">
         <p class="card-text"><strong>Cartão final:</strong> {{cartao}}</p>
-        <a class="btn btn-secondary" [routerLink]="['/payment-page']">Selecionar esse cartão</a>
-        <a class="btn btn-danger float-right" [routerLink]="['/creditcard-delete']">Excluir</a>
+        <a class="btn btn-secondary" [routerLink]="['../payment-page']">Selecionar esse cartão</a>
+        <a class="btn btn-danger float-right" [routerLink]="['../creditcard-delete']">Excluir</a>
       </div>
       <hr>
     </div>
