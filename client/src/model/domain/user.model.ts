@@ -1,11 +1,9 @@
 import {Person} from './person.model';
-
+import {TipoUsuario} from './tipo-usuario';
 export class User {
   id: number;
-  username: string;
   password: string;
   email: string;
-  tipoUsuario;
-  ativo;
-  pessoa: Person;
+  tipoUsuario: TipoUsuario;
+  ativo: boolean;
 }

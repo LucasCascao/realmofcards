@@ -3,23 +3,32 @@ package br.com.cascao.realmofcard.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.cascao.realmofcard.domain.Usuario;
+import br.com.cascao.realmofcard.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.repository.PessoaRepository;
-import br.com.cascao.realmofcard.service.IService;
 
 @Repository
 public class PessoaService implements IService{
 
 	@Autowired
-	PessoaRepository pessoaDAO;
+	PessoaRepository pessoaRepository;
+
+	@Autowired
+	UsuarioRepository usuarioRepository;
+
+	@Autowired
+	UsuarioService usuarioService;
 
 	@Override
 	public EntidadeDominio salvar(EntidadeDominio entidade) {
-		return pessoaDAO.save((Pessoa)entidade);
+		Pessoa pessoa = (Pessoa) entidade;
+		pessoa.setUsuario( (Usuario) usuarioService.salvar(pessoa.getUsuario()));
+		return pessoaRepository.save((Pessoa)entidade);
 	}
 	
 	@Override
@@ -27,22 +36,28 @@ public class PessoaService implements IService{
 		List<EntidadeDominio> pessoas = new ArrayList<>();
 		Pessoa pessoa = (Pessoa) entidade;
 		if(pessoa.getId() != null){
-			pessoaDAO.findById(entidade.getId()).map( p -> pessoas.add(p));
+			pessoaRepository.findById(pessoa.getId()).map(p -> pessoas.add(p));
+			pessoa = (Pessoa) pessoas.get(0);
+			pessoa.getUsuario().setPassword(null);
 			return pessoas;
 		}
 
-		pessoaDAO.findAll().stream().forEach( p -> pessoas.add(p));
+		pessoaRepository.findAll().stream().forEach(p -> {
+			p.getUsuario().setPassword(null);
+			pessoas.add(p);
+		});
 
 		return pessoas;
 	}
 
 	@Override
 	public void alterar(EntidadeDominio entidade) {
-		entidade = pessoaDAO.save((Pessoa)entidade);
+		entidade = pessoaRepository.save((Pessoa)entidade);
 	}
 
 	@Override
 	public void excluir(EntidadeDominio entidade) {
-		pessoaDAO.deleteById(entidade.getId());
+		Pessoa pessoa = (Pessoa) entidade;
+		pessoaRepository.deleteById(pessoa.getId());
 	}
 }

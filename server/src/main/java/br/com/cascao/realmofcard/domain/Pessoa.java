@@ -45,4 +45,8 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 	@Column(name = "pes_cpf")
 	private String cpf;
 
+	@JoinColumn(name = "pes_usuario_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	private Usuario usuario;
+
 }

@@ -3,6 +3,7 @@ package br.com.cascao.realmofcard.negocio.pessoa;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.negocio.IStrategy;
+import br.com.cascao.realmofcard.negocio.usuario.ValidaDadosUsuario;
 import br.com.cascao.realmofcard.validator.StringValidador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,9 @@ public class ValidaDadosPessoa implements IStrategy{
 
 	@Autowired
 	StringValidador stringValidador;
+
+	@Autowired
+	ValidaDadosUsuario validaDadosUsuario;
 
 	@Override
 	public String processar(EntidadeDominio entidade) {
@@ -28,6 +32,7 @@ public class ValidaDadosPessoa implements IStrategy{
 		}
 		msg.append(stringValidador.validar(pessoa.getDataNascimento(), "data de nascimento"));
 		msg.append(stringValidador.validar(pessoa.getSexo(), "sexo"));
+//		msg.append(validaDadosUsuario.processar(pessoa.getUsuario()));
 		
 		return msg.toString();
 	}

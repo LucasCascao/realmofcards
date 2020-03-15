@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ClienteService} from '../../../services/cliente.service';
-import {Person} from '../../../model/person.model';
+import {Person} from '../../../model/domain/person.model';
 
 @Component({
   selector: 'app-user-delete',
@@ -10,7 +10,9 @@ import {Person} from '../../../model/person.model';
 })
 export class UserDeleteComponent implements OnInit {
 
-  constructor(private router: Router, private clienteService: ClienteService) { }
+  id;
+
+  constructor(private router: Router, private clienteService: ClienteService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -20,7 +22,7 @@ export class UserDeleteComponent implements OnInit {
     const client = new Person();
 
     // tslint:disable-next-line:radix
-    client.id = Number.parseInt(sessionStorage.getItem('clienteLogadoId'));
+    client.id = this.route.snapshot.params.id;
 
     this.clienteService.deleteCliente(client).subscribe(
       resultado => {

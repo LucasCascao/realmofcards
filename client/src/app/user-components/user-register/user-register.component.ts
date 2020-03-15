@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Person } from 'src/model/person.model';
+import { Person } from 'src/model/domain/person.model';
 import {ClienteService} from '../../../services/cliente.service';
 import {Router} from '@angular/router';
-import {ResultClient} from '../../../model/result-person.model';
+import {ResultClient} from '../../../model/results/result-person.model';
 import {async} from '@angular/core/testing';
 import {Util} from '../../shared/app.util';
 import {UsuarioService} from '../../../services/usuario.service';
-import {ResultUser} from '../../../model/result-user.model';
-import {User} from '../../../model/user.model';
+import {ResultUser} from '../../../model/results/result-user.model';
+import {User} from '../../../model/domain/user.model';
 import {Observable} from 'rxjs';
+import {TipoUsuario} from "../../../model/domain/tipo-usuario";
 
 @Component({
   selector: 'app-user-register',
@@ -19,30 +20,35 @@ export class UserRegisterComponent implements OnInit {
 
   user: User = new User();
 
-  resultUser: ResultUser = new ResultUser();
+  person: Person = new Person();
+
+  resultClient: ResultClient = new ResultClient();
 
   msg = null;
 
   confirmarSenha: string;
 
-  constructor( private usuarioService: UsuarioService, private router: Router, private util: Util) { }
+  constructor( private clienteService: ClienteService, private router: Router, private util: Util) { }
 
   ngOnInit(): void {
-    this.user.pessoa =  new Person();
   }
 
   async cadastrar() {
-    console.log(this.user)
+    this.person.usuario = this.user;
+    this.person.usuario.tipoUsuario = new TipoUsuario();
+    this.person.usuario.tipoUsuario.id = 2;
+    this.person.usuario.ativo = true;
+    console.log(this.person);
     await this.cadastrarPessoa();
   }
 
   async cadastrarPessoa() {
-    await this.usuarioService.addUser(this.user).subscribe(value => {
-      this.resultUser = value;
+    await this.clienteService.addCliente(this.person).subscribe(value => {
+      this.resultClient = value;
       if (value.msg != null) {
         this.msg = this.msg + value.msg;
       } else {
-        this.user = value?.entidades[0];
+        this.person = value?.entidades[0];
       }
       this.msg = value?.msg;
       this.alertar();
@@ -50,7 +56,7 @@ export class UserRegisterComponent implements OnInit {
   }
 
   alertar() {
-    if(this.msg !== null) {
+    if (this.msg !== null) {
       alert(this.util.getMensagensSeparadas(this.msg));
       console.log(this.msg);
     } else {

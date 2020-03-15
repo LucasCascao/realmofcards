@@ -12,31 +12,25 @@
         <div class="form-group">
           <label class="col-lg-3 control-label"><strong>Primeiro nome:</strong></label>
           <div class="col-lg-8">
-            <input [(ngModel)]="client.nome" [ngModelOptions]="{standalone: true}" class="form-control" type="text" value="">
+            <input [(ngModel)]="client.nome" [ngModelOptions]="{standalone: true}" class="form-control" type="text" value="{{client?.nome}}">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label"><strong>Ultimo nome:</strong></label>
           <div class="col-lg-8">
-            <input [(ngModel)]="client.sobrenome" [ngModelOptions]="{standalone: true}" class="form-control" type="text" value="">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label"><strong>CPF:</strong></label>
-          <div class="col-lg-8">
-            <input [(ngModel)]="client.cpf" [ngModelOptions]="{standalone: true}" class="form-control" type="text" value="">
+            <input [(ngModel)]="client.sobrenome" [ngModelOptions]="{standalone: true}" class="form-control" type="text" value="{{client?.sobrenome}}">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label"><strong>Data de nascimento:</strong></label>
           <div class="col-lg-3">
-            <input [(ngModel)]="client.dataNascimento" [ngModelOptions]="{standalone: true}" class="form-control" type="date" value="">
+            <input [(ngModel)]="client.dataNascimento" [ngModelOptions]="{standalone: true}" class="form-control" type="date" value="{{client.dataNascimento}}">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label"><strong>Email:</strong></label>
           <div class="col-lg-8">
-            <input [(ngModel)]="client.email" [ngModelOptions]="{standalone: true}" class="form-control" type="text" value="">
+            <input [(ngModel)]="client.usuario.email" [ngModelOptions]="{standalone: true}" class="form-control" type="text" value="{{client.usuario.email}}">
           </div>
         </div>
         <div class="form-group">
@@ -44,7 +38,7 @@
           <div class="col-md-8">
             <input type="button" class="btn btn-secondary btn-lg float-right" (click)="alterarCliente()" value="Alterar">
             <span></span>
-            <input type="reset" class="btn btn-default btn-lg float-left" [routerLink]="['/user-details']" value="Cancelar">
+            <input type="reset" class="btn btn-default btn-lg float-left" [routerLink]="['../../user-details',client.id]" value="Cancelar">
           </div>
         </div>
       </form>
