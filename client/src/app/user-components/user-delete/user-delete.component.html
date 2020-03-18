@@ -9,8 +9,8 @@
               <h3 class="mb-0">Deletar Conta</h3>
             </div>
             <div class="card-body">
-              <p>É necessário confirmação para que a conta do usuário <strong>Lucas de Almeida Rama Cascão</strong> seja inativada.</p>
-              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['../user-details']" value="Cancelar">
+              <p>É necessário confirmação para que a conta do usuário <strong>{{client?.nome}} {{client?.sobrenome}}</strong> seja inativada.</p>
+              <input type="reset" class="btn btn-default btn-lg float-left" [routerLink]="['../../user-details',client?.usuario?.id]" id="btn_alt_cancelar" name="btn_alt_cancelar" value="Cancelar">
               <input type="button" class="btn btn-danger btn-lg float-right" (click)="excluirConta()" value="Inativar">
             </div>
             <!--/card-block-->

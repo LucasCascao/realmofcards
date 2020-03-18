@@ -3,6 +3,7 @@ import {Person} from '../../../model/domain/person.model';
 import {ClienteService} from '../../../services/cliente.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Util} from "../../shared/app.util";
+import {User} from "../../../model/domain/user.model";
 
 @Component({
   selector: 'app-user-alter',
@@ -12,11 +13,12 @@ import {Util} from "../../shared/app.util";
 export class UserAlterComponent implements OnInit {
 
   client: Person = new Person();
+  user: User = new User();
 
   constructor(private clientService: ClienteService, private router: Router, private route: ActivatedRoute, private util: Util) { }
 
   ngOnInit(): void {
-    this.client.id = this.route.snapshot.params.id;
+    this.client.id = this.route.snapshot.params.id;;
     this.getCliente();
   }
 

@@ -24,66 +24,12 @@ import br.com.cascao.realmofcard.negocio.pessoa.ValidaDadosPessoa;
 import br.com.cascao.realmofcard.service.IService;
 
 @Service
-public class Fachada implements IFachada {
+public class Fachada extends AbstractFachada implements IFachada {
 
-	private Map<String, IService> daos;
-
-    private Map<String, Map<String, List<IStrategy>>> regrasNegocio;
     private StringBuilder sb = new StringBuilder();
     private Resultado resultado;
-    
-    @Autowired
-	public Fachada(PessoaService pessoaService,
-				   UsuarioService usuarioService,
-				   ValidaDadosPessoa validaDadosPessoa,
-				   ValidaExistenciaPessoa validaExistenciaPessoa,
-				   ValidaDadosUsuario validaDadosUsuario,
-				   ValidaExistenciaUsuario validaExistenciaUsuario,
-				   ValidaSenhaUsuario validaSenhaUsuario) {
 
-    	daos = new HashMap<String, IService>();
-		
-		regrasNegocio = new HashMap<String, Map<String,List<IStrategy>>>();
-
-		daos.put(Pessoa.class.getName(), pessoaService);
-		daos.put(Usuario.class.getName(), usuarioService);
-
-		//------------------------ Hash Pessoa ----------------------------//
-		
-		List<IStrategy> rnsPessoaSalvar = new ArrayList<IStrategy>();
-
-		rnsPessoaSalvar.add(validaDadosPessoa);
-		rnsPessoaSalvar.add(validaExistenciaPessoa);
-		rnsPessoaSalvar.add(validaDadosUsuario);
-		rnsPessoaSalvar.add(validaExistenciaUsuario);
-
-		List<IStrategy> rnsPessoaAlterar = new ArrayList<IStrategy>();
-
-		rnsPessoaAlterar.add(validaDadosPessoa);
-		rnsPessoaAlterar.add(validaDadosUsuario);
-		rnsPessoaAlterar.add(validaExistenciaUsuario);
-
-		Map<String,List<IStrategy>> mapaLeitor = new HashMap<String,List<IStrategy>>();
-		
-		mapaLeitor.put("SALVAR",rnsPessoaSalvar);
-		mapaLeitor.put("ALTERAR",rnsPessoaAlterar);
-
-		this.regrasNegocio.put(Pessoa.class.getName(), mapaLeitor);
-
-		//------------------------ Hash Usuario ----------------------------//
-
-
-		List<IStrategy> rnsUsuarioConsultar = new ArrayList<IStrategy>();
-
-		rnsUsuarioConsultar.add(validaSenhaUsuario);
-
-		Map<String, List<IStrategy>> mapaUsuario = new HashMap<String, List<IStrategy>>();
-
-		mapaUsuario.put("CONSULTAR",rnsUsuarioConsultar);
-
-		this.regrasNegocio.put(Usuario.class.getName(), mapaUsuario);
-
-	}
+    public Fachada(){}
 
 	private void executarRegras(EntidadeDominio entidade, List<IStrategy> rnsEntidade) {
         for (IStrategy rn : rnsEntidade) {
@@ -96,7 +42,7 @@ public class Fachada implements IFachada {
 
 	@Override
 	public Resultado salvar(EntidadeDominio entidade) {
-		
+		super.inicializeIStrategy();
 		resultado = new Resultado();
 		sb.setLength(0);
 		String nmClasse = entidade.getClass().getName();
@@ -119,7 +65,8 @@ public class Fachada implements IFachada {
 
 	@Override
 	public Resultado alterar(EntidadeDominio entidade) {
-		resultado = new Resultado();
+		inicializeIStrategy();
+    	resultado = new Resultado();
         sb.setLength(0);
         String nmClasse = entidade.getClass().getName();
 
@@ -142,6 +89,7 @@ public class Fachada implements IFachada {
 
 	@Override
 	public Resultado excluir(EntidadeDominio entidade) {
+		inicializeIStrategy();
 		resultado = new Resultado();
         String nmClasse = entidade.getClass().getName();
 
@@ -154,6 +102,7 @@ public class Fachada implements IFachada {
 
 	@Override
 	public Resultado consultar(EntidadeDominio entidade) {
+		inicializeIStrategy();
     	resultado = new Resultado();
 		sb.setLength(0);
         String nmClasse = entidade.getClass().getName();
@@ -178,6 +127,7 @@ public class Fachada implements IFachada {
 
 	@Override
 	public Resultado visualizar(EntidadeDominio entidade) {
+		inicializeIStrategy();
 		resultado = new Resultado();
         String nmClasse = entidade.getClass().getName();
 
