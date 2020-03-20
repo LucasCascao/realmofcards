@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "estoque")
-public class Estoque {
+public class Estoque extends EntidadeDominio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

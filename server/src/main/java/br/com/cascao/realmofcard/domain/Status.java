@@ -14,14 +14,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Component
 @Entity
-@Table(name = "jogo")
-public class Jogo extends EntidadeDominio {
+@Table(name = "status")
+public class Status extends EntidadeDominio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "jog_id")
+    @Column(name = "sts_id ")
     private Integer id;
 
-    @Column(name = "jog_nome")
-    private String nome;
+    @Column(name = "sts_status")
+    private String status;
 }

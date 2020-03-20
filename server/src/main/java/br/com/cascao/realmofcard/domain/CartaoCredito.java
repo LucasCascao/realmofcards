@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Component
 @Entity
 @Table(name = "cartao")
-public class CartaoCredito {
+public class CartaoCredito extends EntidadeDominio{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,7 +5,7 @@ CREATE TABLE bandeira (
 
 CREATE TABLE carta (
     car_id            SERIAL NOT NULL,
-    car_nome          VARCHAR(50) NOT NULL,
+    car_nome          VARCHAR(50) NOT NULL UNIQUE,
     car_descricao     VARCHAR(250) NOT NULL,
     car_valor         DECIMAL(4, 2) NOT NULL,
     car_jogo_id       INT NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE carta (
 
 CREATE TABLE cartao (
     crt_id                SERIAL NOT NULL,
-    crt_numero            VARCHAR(16) NOT NULL,
+    crt_numero            VARCHAR(16) NOT NULL UNIQUE,
     crt_codigo_seguranca  VARCHAR(3) NOT NULL,
     crt_bandeira_id       INT NOT NULL,
     crt_usuario_id        INT NOT NULL
@@ -64,7 +64,7 @@ CREATE TABLE item_pedido (
 
 CREATE TABLE jogo (
     jog_id    SERIAL NOT NULL,
-    jog_nome  VARCHAR(50) NOT NULL
+    jog_nome  VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE jogo_categoria_carta (
@@ -74,7 +74,8 @@ CREATE TABLE jogo_categoria_carta (
 
 CREATE TABLE log (
     log_id         SERIAL NOT NULL,
-    log_descricao  VARCHAR(250) NOT NULL
+    log_descricao  VARCHAR(250) NOT NULL,
+    log_data_hora  DATE NOT NULL
 );
 
 CREATE TABLE pedido (
@@ -91,18 +92,18 @@ CREATE TABLE pessoa (
     pes_sobrenome        VARCHAR(60),
     pes_sexo             VARCHAR(1) NOT NULL,
     pes_data_nascimento  DATE NOT NULL,
-    pes_cpf              VARCHAR(11) NOT null,
+    pes_cpf              VARCHAR(11) NOT null UNIQUE,
     pes_usuario_id       INT NOT NULL
 );
 
-CREATE TABLE status_carta (
-    scr_id      SERIAL NOT NULL,
-    scr_status  INT NOT NULL
+CREATE TABLE status (
+    sts_id      SERIAL NOT NULL,
+    sts_status  VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE status_pedido (
     spd_id      SERIAL NOT NULL,
-    spd_status  INT NOT NULL
+    spd_status  VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE user_type (
@@ -112,10 +113,10 @@ CREATE TABLE user_type (
 
 CREATE TABLE usuario (
     usu_id				 SERIAL NOT NULL,
-    usu_email            VARCHAR(80) NOT NULL,
+    usu_email            VARCHAR(80) NOT NULL UNIQUE,
     usu_senha            VARCHAR(30) NOT NULL,
-    usu_ativo            BOOLEAN NOT NULL,
-    usu_type_user_id     INT NOT NULL
+    usu_type_user_id     INT NOT NULL,
+    usu_status_id        INT NOT NULL
 );
 
 ALTER TABLE bandeira ADD CONSTRAINT bandeira_pk PRIMARY KEY ( ban_id );
@@ -144,7 +145,7 @@ ALTER TABLE pedido ADD CONSTRAINT pedido_pk PRIMARY KEY ( ped_id );
 
 ALTER TABLE pessoa ADD CONSTRAINT pessoa_pk PRIMARY KEY ( pes_id );
 
-ALTER TABLE status_carta ADD CONSTRAINT carta_status_pk PRIMARY KEY ( scr_id );
+ALTER TABLE status ADD CONSTRAINT status_pk PRIMARY KEY ( sts_id );
 
 ALTER TABLE status_pedido ADD CONSTRAINT status_pedido_pk PRIMARY KEY ( spd_id );
 
@@ -153,8 +154,8 @@ ALTER TABLE usuario ADD CONSTRAINT usuario_pk PRIMARY KEY ( usu_id );
 ALTER TABLE user_type ADD CONSTRAINT user_type_pk PRIMARY KEY ( tus_id );
 
 ALTER TABLE carta
-    ADD CONSTRAINT carta_carta_status_fk FOREIGN KEY ( car_status_id )
-        REFERENCES status_carta ( scr_id );
+    ADD CONSTRAINT carta_status_fk FOREIGN KEY ( car_status_id )
+        REFERENCES status ( sts_id );
 
 ALTER TABLE carta
     ADD CONSTRAINT carta_categoria_carta_fk FOREIGN KEY ( car_categoria_id )
@@ -183,6 +184,10 @@ ALTER TABLE pessoa
 ALTER TABLE usuario
     ADD CONSTRAINT usuario_type_fk FOREIGN KEY ( usu_type_user_id )
         REFERENCES user_type ( tus_id );
+
+ALTER TABLE usuario
+    ADD CONSTRAINT usuario_status_fk FOREIGN KEY ( usu_status_id )
+        REFERENCES status ( sts_id );
 
 ALTER TABLE endereco
     ADD CONSTRAINT endereco_cidade_fk FOREIGN KEY ( end_cidade_id )

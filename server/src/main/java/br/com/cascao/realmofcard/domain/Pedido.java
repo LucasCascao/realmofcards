@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Getter
 @Entity
 @Table(name = "pedido")
-public class Pedido {
+public class Pedido extends EntidadeDominio{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
