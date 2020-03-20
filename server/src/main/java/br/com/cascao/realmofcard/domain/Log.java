@@ -8,20 +8,20 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+@Component
 @AllArgsConstructor
 @NoArgsConstructor
-@Component
+@Setter
+@Getter
 @Entity
-@Table(name = "jogo")
-public class Jogo extends EntidadeDominio {
+@Table(name = "bandeira")
+public class Log extends EntidadeDominio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "jog_id")
+    @Column(name = "est_id")
     private Integer id;
 
-    @Column(name = "jog_nome")
-    private String nome;
+    @Column(name = "log_descricao")
+    private String descricao;
 }

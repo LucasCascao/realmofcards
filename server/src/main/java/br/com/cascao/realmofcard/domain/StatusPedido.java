@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "status_pedido")
-public class StatusPedido {
+public class StatusPedido extends EntidadeDominio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "spd_id")

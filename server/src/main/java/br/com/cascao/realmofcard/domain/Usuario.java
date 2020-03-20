@@ -36,8 +36,9 @@ public class Usuario extends EntidadeDominio implements Serializable{
 	@Column(name = "usu_senha")
 	private String password;
 
-	@Column(name = "usu_ativo")
-	private Boolean ativo;
+	@ManyToOne()
+	@JoinColumn(name = "usu_status_id")
+	private Status status;
 
 	@ManyToOne()
 	@JoinColumn(name = "usu_type_user_id")

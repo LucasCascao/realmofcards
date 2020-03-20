@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "carta")
-public class Carta {
+public class Carta extends EntidadeDominio{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,5 +41,5 @@ public class Carta {
 
     @ManyToOne
     @JoinColumn(name = "car_status_id")
-    private StatusCarta statusCarta;
+    private Status status;
 }

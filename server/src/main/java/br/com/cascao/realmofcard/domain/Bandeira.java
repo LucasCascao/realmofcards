@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "bandeira")
-public class Bandeira {
+public class Bandeira extends EntidadeDominio{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ban_id")

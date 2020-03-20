@@ -5,10 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Resultado;
-import br.com.cascao.realmofcard.web.fachada.Fachada;
+import br.com.cascao.realmofcard.negocio.fachada.Fachada;
 
 @RestController
 @CrossOrigin
