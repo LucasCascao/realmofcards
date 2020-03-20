@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StringValidador implements IValidator{
     @Override
-    public String validar(Object o, String s) {
-        return o == null || o.toString().trim().equals("")? "O campo " + s + " é obrigatório(a)." : "";
+    public String validar(Object objeto, String campo) {
+        return objeto == null || objeto.toString().trim().equals("")? "O campo " + campo + " é obrigatório(a)." : "";
     }
 }

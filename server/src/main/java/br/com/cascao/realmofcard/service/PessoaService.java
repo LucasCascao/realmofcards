@@ -2,6 +2,7 @@ package br.com.cascao.realmofcard.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import br.com.cascao.realmofcard.domain.Usuario;
 import br.com.cascao.realmofcard.repository.UsuarioRepository;
@@ -36,13 +37,13 @@ public class PessoaService implements IService{
 		List<EntidadeDominio> pessoas = new ArrayList<>();
 		Pessoa pessoa = (Pessoa) entidade;
 		if(pessoa.getId() != null){
-			pessoaRepository.findById(pessoa.getId()).map(p -> pessoas.add(p));
-			pessoa = (Pessoa) pessoas.get(0);
+			pessoa = pessoaRepository.findPessoaByUsuario_Id(pessoa.getId());
 			pessoa.getUsuario().setPassword(null);
+			pessoas.add(pessoa);
 			return pessoas;
 		}
 
-		pessoaRepository.findAll().stream().forEach(p -> {
+		pessoaRepository.findAll().forEach(p -> {
 			p.getUsuario().setPassword(null);
 			pessoas.add(p);
 		});

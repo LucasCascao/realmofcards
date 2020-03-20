@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -35,9 +36,9 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 	private String sobrenome;
 
 	@JsonFormat(pattern="yyyy-MM-dd")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "pes_data_nascimento")
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 
 	@Column(name = "pes_sexo")
 	private String sexo;

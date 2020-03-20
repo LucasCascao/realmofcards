@@ -10,21 +10,22 @@ import {Person} from '../../../model/domain/person.model';
 })
 export class UserDeleteComponent implements OnInit {
 
-  id;
+  client: Person = new Person();
 
   constructor(private router: Router, private clienteService: ClienteService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.client.id = this.route.snapshot.params.id;
+    this.getCliente();
+  }
+
+  async getCliente() {
+    await this.clienteService.getClientes(this.client).subscribe( dado => this.client = dado.entidades[0]);
   }
 
   excluirConta() {
 
-    const client = new Person();
-
-    // tslint:disable-next-line:radix
-    client.id = this.route.snapshot.params.id;
-
-    this.clienteService.deleteCliente(client).subscribe(
+    this.clienteService.deleteCliente(this.client).subscribe(
       resultado => {
         console.log('Produto excluído com sucesso.');
       },
