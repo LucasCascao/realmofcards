@@ -9,9 +9,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,18 +38,24 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 	private String sobrenome;
 
 	@JsonFormat(pattern="yyyy-MM-dd")
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "pes_data_nascimento")
 	private LocalDate dataNascimento;
 
+	@Size(max = 1)
 	@Column(name = "pes_sexo")
 	private String sexo;
 
+	@Size(max = 11)
 	@Column(name = "pes_cpf")
 	private String cpf;
 
 	@JoinColumn(name = "pes_usuario_id")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "pes_telefone_id")
+	private List<Telefone> telefones;
 
 }

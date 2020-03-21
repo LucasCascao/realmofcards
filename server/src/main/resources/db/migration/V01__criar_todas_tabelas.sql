@@ -27,9 +27,16 @@ CREATE TABLE categoria_carta (
 );
 
 CREATE TABLE cidade (
-    cid_id      SERIAL NOT NULL,
-    cid_nome    VARCHAR(60) NOT NULL,
+    cid_id         SERIAL NOT NULL,
+    cid_nome       VARCHAR(60) NOT NULL,
     cid_estado_id  INT NOT NULL
+);
+
+CREATE TABLE cupom (
+    cup_id          SERIAL NOT NULL,
+    cup_codigo      VARCHAR(60) NOT NULL,
+    cup_valor       DECIMAL(4, 2) NOT NULL,
+    cup_status      BOOLEAN NOT NULL
 );
 
 CREATE TABLE endereco (
@@ -38,9 +45,21 @@ CREATE TABLE endereco (
     end_numero      VARCHAR(6) NOT NULL,
     end_bairro      VARCHAR(70) NOT NULL,
     end_cep         VARCHAR(8) NOT NULL,
-    end_comentario  VARCHAR(200) NOT NULL,
-    end_cidade_id      INT NOT NULL,
-    end_usuario_id      INT NOT NULL
+    end_complemento  VARCHAR(200) NOT NULL,
+    end_cidade_id   INT NOT NULL,
+    end_usuario_id  INT NOT NULL
+);
+
+CREATE TABLE telefone (
+    tel_id                  SERIAL NOT NULL,
+    tel_ddd                 VARCHAR(3),
+    tel_numero              VARCHAR(9),
+    tel_tipo_telefone_id    INT NOT NULL
+);
+
+CREATE TABLE tipo_telefone (
+    ttl_id       SERIAL NOT NULL,
+    ttl_tipo     VARCHAR(3)
 );
 
 CREATE TABLE estado (
@@ -93,6 +112,7 @@ CREATE TABLE pessoa (
     pes_sexo             VARCHAR(1) NOT NULL,
     pes_data_nascimento  DATE NOT NULL,
     pes_cpf              VARCHAR(11) NOT null UNIQUE,
+    pes_telefone_id      INT NOT NULL,
     pes_usuario_id       INT NOT NULL
 );
 
@@ -153,6 +173,10 @@ ALTER TABLE usuario ADD CONSTRAINT usuario_pk PRIMARY KEY ( usu_id );
 
 ALTER TABLE user_type ADD CONSTRAINT user_type_pk PRIMARY KEY ( tus_id );
 
+ALTER TABLE telefone ADD CONSTRAINT telefone_pk PRIMARY KEY ( tel_id );
+
+ALTER TABLE tipo_telefone ADD CONSTRAINT tipo_telefone_pk PRIMARY KEY ( ttl_id );
+
 ALTER TABLE carta
     ADD CONSTRAINT carta_status_fk FOREIGN KEY ( car_status_id )
         REFERENCES status ( sts_id );
@@ -180,6 +204,10 @@ ALTER TABLE cidade
 ALTER TABLE pessoa
     ADD CONSTRAINT pessoa_usuario_fk FOREIGN KEY ( pes_usuario_id )
         REFERENCES usuario ( usu_id );
+
+ALTER TABLE pessoa
+    ADD CONSTRAINT pessoa_telefone_fk FOREIGN KEY ( pes_telefone_id )
+        REFERENCES telefone ( tel_id );
 
 ALTER TABLE usuario
     ADD CONSTRAINT usuario_type_fk FOREIGN KEY ( usu_type_user_id )
@@ -228,3 +256,7 @@ ALTER TABLE pedido
 ALTER TABLE pedido
     ADD CONSTRAINT pedido_status_pedido_fk FOREIGN KEY ( ped_status_pedido_id )
         REFERENCES status_pedido ( spd_id );
+
+ALTER TABLE telefone
+    ADD CONSTRAINT telefone_tipo_telefone_fk FOREIGN KEY ( tel_tipo_telefone_id )
+        REFERENCES tipo_telefone ( ttl_id );
