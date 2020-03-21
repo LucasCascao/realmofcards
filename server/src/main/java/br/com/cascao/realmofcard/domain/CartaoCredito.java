@@ -32,7 +32,7 @@ public class CartaoCredito extends EntidadeDominio{
     @JoinColumn(name = "crt_bandeira_id")
     private Bandeira bandeira;
 
-    @OneToOne()
-    @JoinColumn(name = "crt_usuario_id")
-    private Usuario usuario;
+    @ManyToOne()
+    @JoinColumn(name = "crt_pessoa_id")
+    private Pessoa pessoa;
 }

@@ -42,6 +42,6 @@ public class Endereco extends EntidadeDominio {
     private Cidade cidade;
 
     @ManyToOne()
-    @JoinColumn(name = "end_usuario_id")
-    private Usuario usuario;
+    @JoinColumn(name = "end_pessoa_id")
+    private Pessoa pessoa;
 }

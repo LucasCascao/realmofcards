@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Component
 @AllArgsConstructor
@@ -15,6 +14,16 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @Entity
-@Table(name = "status_pedido")
+@Table(name = "tipo_telefone")
 public class TipoTelefone extends EntidadeDominio{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ttl_id")
+    private Integer id;
+
+
+    @Column(name = "ttl_tipo")
+    private String tipo;
+
 }

@@ -33,6 +33,6 @@ public class Telefone extends EntidadeDominio{
     private TipoTelefone tipoTelefone;
 
     @ManyToOne
-    @JoinColumn(name = "tel_usuario_id")
-    private Usuario usuario;
+    @JoinColumn(name = "tel_pessoa_id")
+    private Pessoa pessoa;
 }

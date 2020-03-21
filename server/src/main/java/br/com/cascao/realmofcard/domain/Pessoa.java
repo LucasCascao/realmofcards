@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,8 +55,13 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pes_telefone_id")
-	private List<Telefone> telefones;
+	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+	private List<Telefone> telefones = new ArrayList<>();
+
+	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+	private List<Endereco> enderecos = new ArrayList<>();
+
+	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+	private List<CartaoCredito> cartoesCredito = new ArrayList<>();
 
 }

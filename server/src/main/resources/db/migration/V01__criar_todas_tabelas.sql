@@ -18,7 +18,7 @@ CREATE TABLE cartao (
     crt_numero            VARCHAR(16) NOT NULL UNIQUE,
     crt_codigo_seguranca  VARCHAR(3) NOT NULL,
     crt_bandeira_id       INT NOT NULL,
-    crt_usuario_id        INT NOT NULL
+    crt_pessoa_id         INT NOT NULL
 );
 
 CREATE TABLE categoria_carta (
@@ -40,14 +40,14 @@ CREATE TABLE cupom (
 );
 
 CREATE TABLE endereco (
-    end_id          SERIAL NOT NULL,
-    end_logradouro  VARCHAR(80) NOT NULL,
-    end_numero      VARCHAR(6) NOT NULL,
-    end_bairro      VARCHAR(70) NOT NULL,
-    end_cep         VARCHAR(8) NOT NULL,
-    end_complemento  VARCHAR(200) NOT NULL,
-    end_cidade_id   INT NOT NULL,
-    end_usuario_id  INT NOT NULL
+    end_id              SERIAL NOT NULL,
+    end_logradouro      VARCHAR(80) NOT NULL,
+    end_numero          VARCHAR(6) NOT NULL,
+    end_bairro          VARCHAR(70) NOT NULL,
+    end_cep             VARCHAR(8) NOT NULL,
+    end_complemento     VARCHAR(200) NOT NULL,
+    end_cidade_id       INT NOT NULL,
+    end_pessoa_id       INT NOT NULL
 );
 
 CREATE TABLE telefone (
@@ -112,7 +112,6 @@ CREATE TABLE pessoa (
     pes_sexo             VARCHAR(1) NOT NULL,
     pes_data_nascimento  DATE NOT NULL,
     pes_cpf              VARCHAR(11) NOT null UNIQUE,
-    pes_telefone_id      INT NOT NULL,
     pes_usuario_id       INT NOT NULL
 );
 
@@ -194,8 +193,8 @@ ALTER TABLE cartao
         REFERENCES bandeira ( ban_id );
 
 ALTER TABLE cartao
-    ADD CONSTRAINT cartao_usuario_fk FOREIGN KEY ( crt_usuario_id )
-        REFERENCES usuario ( usu_id );
+    ADD CONSTRAINT cartao_pessoa_fk FOREIGN KEY ( crt_pessoa_id )
+        REFERENCES pessoa ( pes_id );
 
 ALTER TABLE cidade
     ADD CONSTRAINT cidade_estado_fk FOREIGN KEY ( cid_estado_id )
@@ -204,10 +203,6 @@ ALTER TABLE cidade
 ALTER TABLE pessoa
     ADD CONSTRAINT pessoa_usuario_fk FOREIGN KEY ( pes_usuario_id )
         REFERENCES usuario ( usu_id );
-
-ALTER TABLE pessoa
-    ADD CONSTRAINT pessoa_telefone_fk FOREIGN KEY ( pes_telefone_id )
-        REFERENCES telefone ( tel_id );
 
 ALTER TABLE usuario
     ADD CONSTRAINT usuario_type_fk FOREIGN KEY ( usu_type_user_id )
@@ -222,8 +217,8 @@ ALTER TABLE endereco
         REFERENCES cidade ( cid_id );
 
 ALTER TABLE endereco
-    ADD CONSTRAINT endereco_usuario_fk FOREIGN KEY ( end_usuario_id )
-        REFERENCES usuario ( usu_id );
+    ADD CONSTRAINT endereco_pessoa_fk FOREIGN KEY ( end_pessoa_id )
+        REFERENCES pessoa ( pes_id );
 
 ALTER TABLE estoque
     ADD CONSTRAINT estoque_carta_fk FOREIGN KEY ( est_carta_id )
