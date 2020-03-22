@@ -1,9 +1,9 @@
 
-insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('lucas@gmail.com','48299871', 1, 1);
-insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('leonardo@gmail.com','48299871', 1, 2);
-insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('natani@gmail.com','48299871', 1, 2);
-insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('joao@gmail.com','48299871', 1, 2);
-insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('josueli@gmail.com','48299871', 1, 2);
+insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('lucas@gmail.com','CFF1A29A5F758BD2D52448F236EFB640', 1, 1);
+insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('leonardo@gmail.com','CFF1A29A5F758BD2D52448F236EFB640', 1, 2);
+insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('natani@gmail.com','CFF1A29A5F758BD2D52448F236EFB640', 1, 2);
+insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('joao@gmail.com','CFF1A29A5F758BD2D52448F236EFB640', 1, 2);
+insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('josueli@gmail.com','CFF1A29A5F758BD2D52448F236EFB640', 1, 2);
 
 insert into pessoa (pes_nome , pes_sobrenome , pes_sexo , pes_data_nascimento , pes_cpf , pes_usuario_id )
 values ('Lucas','De Almeida Rama Cascão', 'M' , '16/09/1995', '43383625885', 1);

@@ -1,4 +1,4 @@
-package br.com.cascao.realmofcard.util.validator;
+package br.com.cascao.realmofcard.util;
 
 import java.util.Properties;
 

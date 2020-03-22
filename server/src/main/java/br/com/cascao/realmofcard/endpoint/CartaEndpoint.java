@@ -1,7 +1,7 @@
 package br.com.cascao.realmofcard.endpoint;
 
+import br.com.cascao.realmofcard.domain.Carta;
 import br.com.cascao.realmofcard.domain.Endereco;
-import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Resultado;
 import br.com.cascao.realmofcard.negocio.fachada.Fachada;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,32 +11,32 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/enderecos")
-public class EnderecoEndpoint {
+@RequestMapping("/cartas")
+public class CartaEndpoint {
     
     @Autowired
     private Fachada fachada;
 
     @PostMapping()
-    public ResponseEntity<Resultado> consultar(@RequestBody Endereco endereco){
-        return ResponseEntity.ok().body(fachada.consultar(endereco));
+    public ResponseEntity<Resultado> consultar(@RequestBody Carta carta){
+        return ResponseEntity.ok().body(fachada.consultar(carta));
     }
 
     @PostMapping(path = "/cria")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> salvar(@RequestBody Endereco endereco){
-        return ResponseEntity.ok().body(fachada.salvar(endereco));
+    public ResponseEntity<?> salvar(@RequestBody Carta carta){
+        return ResponseEntity.ok().body(fachada.salvar(carta));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id){
-        Endereco endereco = new Endereco();
-        endereco.setId(id);
-        return ResponseEntity.ok().body(fachada.excluir(endereco));
+        Carta carta = new Carta();
+        carta.setId(id);
+        return ResponseEntity.ok().body(fachada.excluir(carta));
     }
 
     @PutMapping()
-    public ResponseEntity<?> alterar(@RequestBody Endereco endereco){
-        return ResponseEntity.ok().body(fachada.alterar(endereco));
+    public ResponseEntity<?> alterar(@RequestBody Carta carta){
+        return ResponseEntity.ok().body(fachada.alterar(carta));
     }
 }

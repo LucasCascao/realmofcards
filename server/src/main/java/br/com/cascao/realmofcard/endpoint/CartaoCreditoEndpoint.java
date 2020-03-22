@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/carcaocredito")
+@RequestMapping("/cartaocredito")
 public class CartaoCreditoEndpoint {
     
     @Autowired

@@ -1,4 +1,4 @@
-package br.com.cascao.realmofcard.util.validator;
+package br.com.cascao.realmofcard.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,7 +15,7 @@ public class Criptografia {
         }
     }
   
-  private static char[] hexCodes(byte[] text) {
+    private static char[] hexCodes(byte[] text) {
         char[] hexOutput = new char[text.length * 2];
         String hexString;
   
@@ -27,10 +27,14 @@ public class Criptografia {
         return hexOutput;
     }
   
-public static String criptografar(String pwd) {
+    public static String criptografar(String pwd) {
         if (md != null) {
             return new String(hexCodes(md.digest(pwd.getBytes())));
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Criptografia.criptografar("48299871"));
     }
 }

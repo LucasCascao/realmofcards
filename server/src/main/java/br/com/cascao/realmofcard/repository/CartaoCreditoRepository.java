@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface CartaoCreditoRepository extends CrudRepository<CartaoCredito, Integer> {
+    List<CartaoCredito> findByPessoa_Id(Integer id);
 }

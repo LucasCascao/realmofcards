@@ -40,10 +40,8 @@ public class CartaoCreditoPersistence implements IPersistence {
         if(entidade instanceof CartaoCredito){
             List<EntidadeDominio> cartoesCredito = new ArrayList<>();
             CartaoCredito cartaoCredito = (CartaoCredito) entidade;
-//            if (cartaoCredito.getId() != null){
-//                cartaoCreditoRepository.findByUsuario_Id(cartaoCredito.getPessoa().getUsuario().getId()).stream()
-//                        .map( resultadoCartaoCredito -> cartoesCredito.add(resultadoCartaoCredito ));
-//            }
+            cartaoCreditoRepository.findByPessoa_Id(cartaoCredito.getPessoa().getId())
+                    .forEach(resultado -> cartoesCredito.add(resultado));
             return cartoesCredito;
         } else return null;
     }

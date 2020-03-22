@@ -6,8 +6,11 @@ CREATE TABLE bandeira (
 CREATE TABLE carta (
     car_id            SERIAL NOT NULL,
     car_nome          VARCHAR(50) NOT NULL UNIQUE,
-    car_descricao     VARCHAR(250) NOT NULL,
-    car_valor         DECIMAL(4, 2) NOT NULL,
+    car_descricao     VARCHAR(500) NOT NULL,
+    car_valor_compra  DECIMAL(4, 2) NOT NULL,
+    car_precificacao  DECIMAL(4, 2) NOT NULL,
+    car_valor_venda   DECIMAL(4, 2) NOT NULL,
+    car_imagem_path   VARCHAR(250) NOT NULL,
     car_jogo_id       INT NOT NULL,
     car_categoria_id  INT NOT NULL,
     car_status_id     INT NOT NULL
@@ -133,7 +136,7 @@ CREATE TABLE user_type (
 CREATE TABLE usuario (
     usu_id				 SERIAL NOT NULL,
     usu_email            VARCHAR(80) NOT NULL UNIQUE,
-    usu_senha            VARCHAR(30) NOT NULL,
+    usu_senha            VARCHAR(60) NOT NULL,
     usu_type_user_id     INT NOT NULL,
     usu_status_id        INT NOT NULL
 );

@@ -41,10 +41,8 @@ public class EnderecoPersistence implements IPersistence {
         if (entidade instanceof Endereco){
             List<EntidadeDominio> enderecos = new ArrayList<>();
             Endereco endereco = (Endereco) entidade;
-//            if(endereco.getId() != null){
-//                enderecoRepository.findByUsuario_Id(endereco.getId()).stream().
-//                        map( resultadoEndereco -> enderecos.add(resultadoEndereco));
-//            }
+            enderecoRepository.findByPessoa_Id(endereco.getPessoa().getId())
+                    .forEach( resultadoEndereco -> enderecos.add(resultadoEndereco));
             return enderecos;
         } return null;
     }

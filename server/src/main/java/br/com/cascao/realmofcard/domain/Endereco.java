@@ -1,5 +1,6 @@
 package br.com.cascao.realmofcard.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,8 +35,8 @@ public class Endereco extends EntidadeDominio {
     @Column(name = "end_cep")
     private String cep;
 
-    @Column(name = "end_comentario")
-    private String comentario;
+    @Column(name = "end_complemento")
+    private String complemento;
 
     @ManyToOne()
     @JoinColumn(name = "end_cidade_id")

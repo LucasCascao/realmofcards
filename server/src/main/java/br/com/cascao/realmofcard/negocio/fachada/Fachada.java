@@ -106,7 +106,6 @@ public class Fachada extends AbstractFachada implements IFachada {
 			resultado.setMsg(sb.toString());
 		}
 
-
 		return resultado;
 	}
 

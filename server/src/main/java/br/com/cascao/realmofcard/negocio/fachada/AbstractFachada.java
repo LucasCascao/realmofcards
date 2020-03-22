@@ -2,12 +2,15 @@ package br.com.cascao.realmofcard.negocio.fachada;
 
 import br.com.cascao.realmofcard.domain.*;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
+import br.com.cascao.realmofcard.negocio.strategy.carta.CalcularPrecoVenda;
+import br.com.cascao.realmofcard.negocio.strategy.carta.MoveImagem;
 import br.com.cascao.realmofcard.negocio.strategy.carta.ValidaDadosCarta;
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaDadosCartaoCredito;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaDadosEndereco;
 import br.com.cascao.realmofcard.negocio.strategy.pedido.ValidaDadosPedido;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaDadosPessoa;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaExistenciaPessoa;
+import br.com.cascao.realmofcard.negocio.strategy.usuario.CriptografarSenha;
 import br.com.cascao.realmofcard.negocio.strategy.usuario.ValidaDadosUsuario;
 import br.com.cascao.realmofcard.negocio.strategy.usuario.ValidaExistenciaUsuario;
 import br.com.cascao.realmofcard.negocio.strategy.usuario.ValidaSenhaUsuario;
@@ -67,10 +70,19 @@ public class AbstractFachada {
     protected ValidaExistenciaUsuario validaExistenciaUsuario;
 
     @Autowired
+    protected CriptografarSenha criptografarSenha;
+
+    @Autowired
     protected ValidaSenhaUsuario validaSenhaUsuario;
 
     @Autowired
     protected ValidaDadosCarta validaDadosCarta;
+
+    @Autowired
+    protected CalcularPrecoVenda calcularPrecoVenda;
+
+    @Autowired
+    private MoveImagem moveImagem;
 
     @Autowired
     protected ValidaDadosEndereco validaDadosEndereco;
@@ -100,6 +112,7 @@ public class AbstractFachada {
         rnsPessoaSalvar.add(validaExistenciaPessoa);
         rnsPessoaSalvar.add(validaDadosUsuario);
         rnsPessoaSalvar.add(validaExistenciaUsuario);
+        rnsPessoaSalvar.add(criptografarSenha);
 
         List<IStrategy> rnsPessoaAlterar = new ArrayList<>();
 
@@ -132,10 +145,13 @@ public class AbstractFachada {
         List<IStrategy> rnsCartaSalvar = new ArrayList<>();
 
         rnsCartaSalvar.add(validaDadosCarta);
+        rnsCartaSalvar.add(moveImagem);
+        rnsCartaSalvar.add(calcularPrecoVenda);
 
         List<IStrategy> rnsCartaAlterar = new ArrayList<>();
 
         rnsCartaAlterar.add(validaDadosCarta);
+        rnsCartaAlterar.add(moveImagem);
 
         Map<String, List<IStrategy>> mapaCarta = new HashMap<>();
 

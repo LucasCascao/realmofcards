@@ -1,6 +1,7 @@
 package br.com.cascao.realmofcard.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -54,14 +55,15 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 	@JoinColumn(name = "pes_usuario_id")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
+//
+//	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+//	private List<Telefone> telefones = new ArrayList<>();
 
-	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
-	private List<Telefone> telefones = new ArrayList<>();
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
-
-	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
-	private List<CartaoCredito> cartoesCredito = new ArrayList<>();
+//
+//	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+//	private List<CartaoCredito> cartoesCredito = new ArrayList<>();
 
 }
