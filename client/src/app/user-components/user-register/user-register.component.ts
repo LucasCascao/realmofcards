@@ -37,7 +37,7 @@ export class UserRegisterComponent implements OnInit {
     this.person.usuario = this.user;
     this.person.usuario.tipoUsuario = new TipoUsuario();
     this.person.usuario.tipoUsuario.id = 2;
-    this.person.usuario.ativo = true;
+    this.person.usuario.status.id = 1;
     console.log(this.person);
     await this.cadastrarPessoa();
   }
