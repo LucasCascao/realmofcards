@@ -22,6 +22,6 @@ public class MovedorImagem {
         // Move o arquivo para o novo diretorio
         arquivo.renameTo(new File(diretorioDestino, arquivo.getName()));
 
-        return diretorioDestino.getAbsolutePath()+arquivo.getName();
+        return "/assets/images/cartas/" + arquivo.getName();
     }
 }
