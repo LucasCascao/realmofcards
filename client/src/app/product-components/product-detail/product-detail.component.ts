@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MockCards} from "../../../mock/mock-card.model";
+import { ActivatedRoute } from '@angular/router';
+import { Carta } from 'src/model/domain/carta.model';
+import { UtilService } from 'src/services/util.service';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-product-detail',
@@ -8,11 +12,19 @@ import {MockCards} from "../../../mock/mock-card.model";
 })
 export class ProductDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private service: UtilService) { }
 
-  carta = new MockCards().cards[0];
+  carta: Carta = new Carta;
 
   ngOnInit(): void {
+    this.carta.id = this.route.snapshot.params['id'];
+    this.getCarta();
   }
 
+  async getCarta(){
+    await this.service.get(this.carta, 'cartas').subscribe(resultado => {
+      this.carta = resultado?.entidades[0];
+      console.log(resultado);
+    });
+  }
 }

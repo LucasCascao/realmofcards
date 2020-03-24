@@ -28,8 +28,17 @@ public class Carta extends EntidadeDominio{
     @Column(name = "car_descricao")
     private String descricao;
 
-    @Column(name = "car_valor")
-    private Double valor;
+    @Column(name = "car_valor_compra")
+    private Double valorCompra;
+
+    @Column(name = "car_precificacao")
+    private Double precificacao;
+
+    @Column(name = "car_valor_venda")
+    private Double valorVenda;
+
+    @Column(name = "car_imagem_path")
+    private String imagemPath;
 
     @ManyToOne()
     @JoinColumn(name = "car_jogo_id")

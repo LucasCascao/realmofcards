@@ -16,16 +16,18 @@ public class ValidaDadosUsuario implements IStrategy {
     @Override
     public String processar(EntidadeDominio entidade) {
 
-        Pessoa pessoa = (Pessoa) entidade;
-
         StringBuilder msg = new StringBuilder();
 
-        msg.append(stringValidador.validar(pessoa.getUsuario().getEmail(), "email"));
+        if(entidade instanceof Pessoa) {
 
-        if(pessoa.getId() == null){
-            msg.append(stringValidador.validar(pessoa.getUsuario().getPassword(), "senha"));
+            Pessoa pessoa = (Pessoa) entidade;
+
+            msg.append(stringValidador.validar(pessoa.getUsuario().getEmail(), "email"));
+
+            if (pessoa.getId() == null) {
+                msg.append(stringValidador.validar(pessoa.getUsuario().getPassword(), "senha"));
+            }
         }
-
         return msg.toString();
     }
 }

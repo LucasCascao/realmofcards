@@ -2,16 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Person} from '../model/domain/person.model';
-import {catchError, tap} from 'rxjs/operators';
 import {ResultClient} from '../model/results/result-person.model';
 
-import {API_URL} from '../app/shared/app.api';
-
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
-
-const apiUrl = 'http://localhost:8080/pessoas';
+import {API_URL, HTTP_OPTIONS} from '../app/shared/app.api';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +15,7 @@ export class ClienteService {
   constructor(private http: HttpClient) { }
 
   getClientes(person: Person): Observable<ResultClient> {
-    return this.http.post<ResultClient>(`${API_URL}/pessoas`, person, httpOptions);
+    return this.http.post<ResultClient>(`${API_URL}/pessoas`, person, HTTP_OPTIONS);
   }
 
   addCliente(person: Person): Observable<ResultClient> {

@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -22,9 +23,11 @@ public class CartaoCredito extends EntidadeDominio{
     @Column(name = "crt_id")
     private Integer id;
 
-    @Column(name = "crt_numero")
+    @Size(max = 16)
+    @Column(name = "crt_numero", unique = true)
     private String numero;
 
+    @Size(max = 3)
     @Column(name = "crt_codigo_seguranca")
     private String codigoSeguranca;
 
@@ -32,7 +35,7 @@ public class CartaoCredito extends EntidadeDominio{
     @JoinColumn(name = "crt_bandeira_id")
     private Bandeira bandeira;
 
-    @OneToOne()
-    @JoinColumn(name = "crt_usuario_id")
-    private Usuario usuario;
+    @ManyToOne()
+    @JoinColumn(name = "crt_pessoa_id")
+    private Pessoa pessoa;
 }

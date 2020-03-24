@@ -1,6 +1,7 @@
 package br.com.cascao.realmofcard.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,9 +10,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,18 +40,30 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 	private String sobrenome;
 
 	@JsonFormat(pattern="yyyy-MM-dd")
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "pes_data_nascimento")
 	private LocalDate dataNascimento;
 
+	@Size(max = 1)
 	@Column(name = "pes_sexo")
 	private String sexo;
 
+	@Size(max = 11)
 	@Column(name = "pes_cpf")
 	private String cpf;
 
 	@JoinColumn(name = "pes_usuario_id")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
+//
+//	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+//	private List<Telefone> telefones = new ArrayList<>();
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+	private List<Endereco> enderecos = new ArrayList<>();
+//
+//	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+//	private List<CartaoCredito> cartoesCredito = new ArrayList<>();
 
 }

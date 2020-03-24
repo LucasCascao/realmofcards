@@ -6,8 +6,11 @@ CREATE TABLE bandeira (
 CREATE TABLE carta (
     car_id            SERIAL NOT NULL,
     car_nome          VARCHAR(50) NOT NULL UNIQUE,
-    car_descricao     VARCHAR(250) NOT NULL,
-    car_valor         DECIMAL(4, 2) NOT NULL,
+    car_descricao     VARCHAR(500) NOT NULL,
+    car_valor_compra  DECIMAL(4, 2) NOT NULL,
+    car_precificacao  DECIMAL(4, 2) NOT NULL,
+    car_valor_venda   DECIMAL(4, 2) NOT NULL,
+    car_imagem_path   VARCHAR(250) NOT NULL,
     car_jogo_id       INT NOT NULL,
     car_categoria_id  INT NOT NULL,
     car_status_id     INT NOT NULL
@@ -18,7 +21,7 @@ CREATE TABLE cartao (
     crt_numero            VARCHAR(16) NOT NULL UNIQUE,
     crt_codigo_seguranca  VARCHAR(3) NOT NULL,
     crt_bandeira_id       INT NOT NULL,
-    crt_usuario_id        INT NOT NULL
+    crt_pessoa_id         INT NOT NULL
 );
 
 CREATE TABLE categoria_carta (
@@ -27,20 +30,39 @@ CREATE TABLE categoria_carta (
 );
 
 CREATE TABLE cidade (
-    cid_id      SERIAL NOT NULL,
-    cid_nome    VARCHAR(60) NOT NULL,
+    cid_id         SERIAL NOT NULL,
+    cid_nome       VARCHAR(60) NOT NULL,
     cid_estado_id  INT NOT NULL
 );
 
+CREATE TABLE cupom (
+    cup_id          SERIAL NOT NULL,
+    cup_codigo      VARCHAR(60) NOT NULL,
+    cup_valor       DECIMAL(4, 2) NOT NULL,
+    cup_status      BOOLEAN NOT NULL
+);
+
 CREATE TABLE endereco (
-    end_id          SERIAL NOT NULL,
-    end_logradouro  VARCHAR(80) NOT NULL,
-    end_numero      VARCHAR(6) NOT NULL,
-    end_bairro      VARCHAR(70) NOT NULL,
-    end_cep         VARCHAR(8) NOT NULL,
-    end_comentario  VARCHAR(200) NOT NULL,
-    end_cidade_id      INT NOT NULL,
-    end_usuario_id      INT NOT NULL
+    end_id              SERIAL NOT NULL,
+    end_logradouro      VARCHAR(80) NOT NULL,
+    end_numero          VARCHAR(6) NOT NULL,
+    end_bairro          VARCHAR(70) NOT NULL,
+    end_cep             VARCHAR(8) NOT NULL,
+    end_complemento     VARCHAR(200) NOT NULL,
+    end_cidade_id       INT NOT NULL,
+    end_pessoa_id       INT NOT NULL
+);
+
+CREATE TABLE telefone (
+    tel_id                  SERIAL NOT NULL,
+    tel_ddd                 VARCHAR(3),
+    tel_numero              VARCHAR(9),
+    tel_tipo_telefone_id    INT NOT NULL
+);
+
+CREATE TABLE tipo_telefone (
+    ttl_id       SERIAL NOT NULL,
+    ttl_tipo     VARCHAR(3)
 );
 
 CREATE TABLE estado (
@@ -114,7 +136,7 @@ CREATE TABLE user_type (
 CREATE TABLE usuario (
     usu_id				 SERIAL NOT NULL,
     usu_email            VARCHAR(80) NOT NULL UNIQUE,
-    usu_senha            VARCHAR(30) NOT NULL,
+    usu_senha            VARCHAR(60) NOT NULL,
     usu_type_user_id     INT NOT NULL,
     usu_status_id        INT NOT NULL
 );
@@ -153,6 +175,10 @@ ALTER TABLE usuario ADD CONSTRAINT usuario_pk PRIMARY KEY ( usu_id );
 
 ALTER TABLE user_type ADD CONSTRAINT user_type_pk PRIMARY KEY ( tus_id );
 
+ALTER TABLE telefone ADD CONSTRAINT telefone_pk PRIMARY KEY ( tel_id );
+
+ALTER TABLE tipo_telefone ADD CONSTRAINT tipo_telefone_pk PRIMARY KEY ( ttl_id );
+
 ALTER TABLE carta
     ADD CONSTRAINT carta_status_fk FOREIGN KEY ( car_status_id )
         REFERENCES status ( sts_id );
@@ -170,8 +196,8 @@ ALTER TABLE cartao
         REFERENCES bandeira ( ban_id );
 
 ALTER TABLE cartao
-    ADD CONSTRAINT cartao_usuario_fk FOREIGN KEY ( crt_usuario_id )
-        REFERENCES usuario ( usu_id );
+    ADD CONSTRAINT cartao_pessoa_fk FOREIGN KEY ( crt_pessoa_id )
+        REFERENCES pessoa ( pes_id );
 
 ALTER TABLE cidade
     ADD CONSTRAINT cidade_estado_fk FOREIGN KEY ( cid_estado_id )
@@ -194,8 +220,8 @@ ALTER TABLE endereco
         REFERENCES cidade ( cid_id );
 
 ALTER TABLE endereco
-    ADD CONSTRAINT endereco_usuario_fk FOREIGN KEY ( end_usuario_id )
-        REFERENCES usuario ( usu_id );
+    ADD CONSTRAINT endereco_pessoa_fk FOREIGN KEY ( end_pessoa_id )
+        REFERENCES pessoa ( pes_id );
 
 ALTER TABLE estoque
     ADD CONSTRAINT estoque_carta_fk FOREIGN KEY ( est_carta_id )
@@ -228,3 +254,7 @@ ALTER TABLE pedido
 ALTER TABLE pedido
     ADD CONSTRAINT pedido_status_pedido_fk FOREIGN KEY ( ped_status_pedido_id )
         REFERENCES status_pedido ( spd_id );
+
+ALTER TABLE telefone
+    ADD CONSTRAINT telefone_tipo_telefone_fk FOREIGN KEY ( tel_tipo_telefone_id )
+        REFERENCES tipo_telefone ( ttl_id );

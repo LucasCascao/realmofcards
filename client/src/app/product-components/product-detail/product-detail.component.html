@@ -1,15 +1,15 @@
 <div class="container">
-  <h1 class="mt-4 mb-3">{{carta.nome}}</h1>
+  <h3 class="mt-4 mb-3"><strong>{{carta.nome}}</strong></h3>
   <div class="row">
     <div class="col-lg-6">
-      <img class="img-fluid rounded mb-4" [src]="carta.imageUrl" alt="">
+      <img class="img-fluid rounded mb-4" [src]="carta?.imagemPath" alt="">
     </div>
     <div class="col-lg-6">
-      <p class="card-text">Categoria de jogo: {{carta.catJogo}}.</p>
-      <p class="card-text">Categoria de carta: {{carta.catCarta}}.</p>
-      <p class="card-text">Valor: R$ {{carta.value}}.</p>
-      <p class="card-text">Quantidade disponivel: {{carta.estoque}}.</p>
-      <p class="card-text">Descrição: {{carta.descricao}}.</p>
+      <p class="card-text"><strong>Descrição:</strong> {{carta.descricao}}</p>
+      <p class="card-text"><strong>Valor:</strong> R$ {{carta?.valorVenda}}.</p>
+      <p class="card-text"><strong>Categoria de jogo:</strong> {{carta?.jogo?.nome}}.</p>
+      <p class="card-text"><strong>Categoria de carta:</strong> {{carta?.categoriaCarta?.nome}}.</p>
+      <!-- <p class="card-text">Quantidade disponivel: {{carta.estoque}}.</p> -->
       <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../cart']">Adicionar ao carrinho</a>
     </div>
   </div>
