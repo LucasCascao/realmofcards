@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MockCards} from "../../../mock/mock-card.model";
 import {Person} from "../../../model/domain/person.model";
+import { UtilService } from 'src/services/util.service';
+import {Carta} from '../../../model/domain/carta.model';
 
 @Component({
   selector: 'app-product-market-page',
@@ -9,15 +11,25 @@ import {Person} from "../../../model/domain/person.model";
 })
 export class ProductMarketPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: UtilService) { }
 
   client: Person;
 
-  cartas = new MockCards().cards;
+
+  cartas: Carta[];
 
   ngOnInit(): void {
     this.client = JSON.parse(localStorage.getItem('userAutenticado'));
     console.log(this.client);
+    this.getCartas();
+  }
+
+  async getCartas(){
+    await this.service.get(new Carta, 'cartas')
+    .subscribe( resultado => {
+      this.cartas = resultado?.entidades;
+      console.log(resultado);
+    });
   }
 
   filtrar(cartas: any) {

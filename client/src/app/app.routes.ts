@@ -62,7 +62,7 @@ export const ROUTES: Routes = [
   {path: 'app-logado/:client', component: AppLogadoComponent, children: [
       {path: '', redirectTo: 'product-market-page', pathMatch: 'full'},
       {path: 'product-market-page', component: ProductMarketPageComponent},
-      {path: 'product-detail', component: ProductDetailComponent},
+      {path: 'product-detail/:id', component: ProductDetailComponent},
       {path: 'user-details/:id', component: UserDetailsComponent},
       {path: 'user-alter/:id', component: UserAlterComponent},
       {path: 'user-delete/:id', component: UserDeleteComponent},

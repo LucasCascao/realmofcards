@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
 
   async getUser() {
     await this.clienteService.getClientes(this.client).subscribe(resultado => {
-      this.client = resultado.entidades[0];
+      this.client = resultado?.entidades[0];
     });
   }
 
