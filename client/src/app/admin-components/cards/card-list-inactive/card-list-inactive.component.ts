@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MockCards} from '../../../../mock/mock-card.model';
+import { Carta } from 'src/model/domain/carta.model';
+import { UtilService } from 'src/services/util.service';
+import { Status } from 'src/model/domain/status.model';
 
 @Component({
   selector: 'app-card-list-inactive',
@@ -8,11 +11,23 @@ import {MockCards} from '../../../../mock/mock-card.model';
 })
 export class CardListInactiveComponent implements OnInit {
 
-  cartas = new MockCards().cards;
+  cartas: Carta[];
 
-  constructor() { }
+  constructor(private service: UtilService) { }
 
   ngOnInit(): void {
+    this.getCartasAtivas();
+  }
+
+  async getCartasAtivas(){
+    let carta: Carta = new Carta();
+    carta.status = new Status();
+    carta.status.id = 2;
+
+    await this.service.get(carta, 'cartas').subscribe(resultado => {
+      this.cartas = resultado?.entidades;
+      console.log(resultado)
+    });
   }
 
   filtrar(cartas: any) {

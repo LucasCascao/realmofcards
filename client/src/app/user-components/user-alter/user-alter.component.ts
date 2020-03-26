@@ -4,6 +4,7 @@ import {ClienteService} from '../../../services/cliente.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Util} from "../../shared/app.util";
 import {User} from "../../../model/domain/user.model";
+import { GLOBAL } from 'src/app/shared/global.util';
 
 @Component({
   selector: 'app-user-alter',
@@ -18,7 +19,7 @@ export class UserAlterComponent implements OnInit {
   constructor(private clientService: ClienteService, private router: Router, private route: ActivatedRoute, private util: Util) { }
 
   ngOnInit(): void {
-    this.client.id = this.route.snapshot.params.id;;
+    this.client.id = GLOBAL.pessoa.usuario.id;
     this.getCliente();
   }
 
@@ -32,7 +33,7 @@ export class UserAlterComponent implements OnInit {
         if (resultado.msg == null) {
           console.log('Produto alterado com sucesso.');
           this.client = resultado.entidades[0];
-          this.router.navigate(['/app-logado', resultado.entidades[0].id]);
+          this.router.navigate(['/app-logado/user-details']);
         }else{
           alert(this.util.getMensagensSeparadas(resultado.msg));
         }

@@ -65,7 +65,7 @@
           <p class="card-text">Categoria de jogo: {{carta?.jogo.nome}}</p>
           <p class="card-text">Categoria de carta: {{carta?.categoriaCarta.nome}}</p>
           <p class="card-text">Valor: R$ {{carta?.valorVenda}}</p>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../product-detail', carta?.id]">Visualizar</a>
+          <a class="btn btn-lg btn-secondary btn-block" (click)="visualizar(carta?.id)" [routerLink]="['../product-detail']">Visualizar</a>
           <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../cart']">Comprar</a>
         </div>
       </div>

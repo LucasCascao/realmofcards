@@ -17,12 +17,12 @@
       <div class="card h-100">
         <div class="card-body">
           <div class="col-md-3 float-left">
-            <img class="img-fluid rounded mb-3 mb-md-0" [src]="carta.imageUrl" alt="">
+            <img class="img-fluid rounded mb-3 mb-md-0" [src]="carta?.imagemPath" alt="">
           </div>
           <div class="col-md-6 float-left">
-            <p class="card-text"><strong>Produto:</strong> {{carta.nome}}</p>
-            <p class="card-text"><strong>Valor total:</strong> R$ {{carta.value}}</p>
-            <p class="card-text"><strong>Quantidade disponível:</strong> {{carta.estoque}}.</p>
+            <p class="card-text"><strong>Produto:</strong> {{carta?.nome}}</p>
+            <p class="card-text"><strong>Valor total:</strong> R$ {{carta?.valorVenda}}</p>
+            <!-- <p class="card-text"><strong>Quantidade disponível:</strong> {{carta?.estoque}}.</p> -->
           </div>
           <div class="col-md-3 float-left">
             <a class="btn btn-secondary mb-md-3" [routerLink]="['../admin-product-alter']">Alterar</a>

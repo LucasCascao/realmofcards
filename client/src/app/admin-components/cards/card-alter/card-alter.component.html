@@ -9,7 +9,7 @@
         <div class="form-group">
           <label class="col-lg-6 control-label">Nome da carta:</label>
           <div class="col-lg-8">
-            <input class="form-control" type="text" value="{{carta.nome}}">
+            <input class="form-control" type="text" value="{{carta?.nome}}">
           </div>
         </div>
         <div class="form-group">
@@ -17,7 +17,7 @@
           <div class="col-lg-4">
             <div class="ui-select">
               <select id="user_time_zone" class="form-control">
-                <option *ngFor="let categoria of categorias" value="AC">{{categoria.categoryName}}</option>
+                <option *ngFor="let categoria of categorias" value="AC">{{categoria?.nome}}</option>
               </select>
             </div>
           </div>
@@ -25,7 +25,7 @@
         <div class="form-group">
           <label class="col-lg-6 control-label">Imagem de exposição:</label>
           <div class="col-lg-2">
-            <input type="file">
+            <input type="file" value="" required>
           </div>
         </div>
 <!--        <div class="form-group">-->
@@ -37,13 +37,13 @@
         <div class="form-group">
           <label class="col-lg-6 control-label">Valor de venda:</label>
           <div class="col-lg-2">
-            <input class="form-control" type="text" min="1" value="{{carta.value}}">
+            <input class="form-control" type="text" min="1" value="{{carta?.valorVenda}}">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-6 control-label">Porcentagem de precificação: </label>
           <div class="col-lg-2">
-            <input class="form-control" type="text" min="1" value="{{carta.pricing}}">
+            <input class="form-control" type="text" min="1" value="{{carta?.precificacao}}">
           </div>
         </div>
         <div class="form-group">

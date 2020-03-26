@@ -53,6 +53,9 @@ public class AbstractFachada {
     @Autowired
     protected PedidoPersistence pedidoPersistence;
 
+    @Autowired
+    protected CartegoriaCartaPersistence cartegoriaCartaPersistence;
+
     /*
         Todas Strategy
      */
@@ -103,6 +106,8 @@ public class AbstractFachada {
         daos.put(Carta.class.getName(), cartaPersistence);
         daos.put(Endereco.class.getName(), enderecoPersistence);
         daos.put(CartaoCredito.class.getName(), cartaoCreditoPersistence);
+        daos.put(Pedido.class.getName(), pedidoPersistence);
+        daos.put(CategoriaCarta.class.getName(), cartegoriaCartaPersistence);
 
         //------------------------ Hash Pessoa ----------------------------//
 
@@ -210,5 +215,12 @@ public class AbstractFachada {
         mapaPedido.put("ALTERAR",rnsPedidoAlterar);
 
         this.regrasNegocio.put(Pedido.class.getName(), mapaPedido);
+
+        //------------------------ Hash Categoria --------------------------//
+
+        Map<String, List<IStrategy>> mapaCategoria = new HashMap<>();
+
+        regrasNegocio.put(CategoriaCarta.class.getName(), mapaCategoria);
+
     }
 }

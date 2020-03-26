@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Carta } from 'src/model/domain/carta.model';
 import { UtilService } from 'src/services/util.service';
 import { async } from '@angular/core/testing';
+import { GLOBAL } from 'src/app/shared/global.util';
 
 @Component({
   selector: 'app-product-detail',
@@ -17,7 +18,7 @@ export class ProductDetailComponent implements OnInit {
   carta: Carta = new Carta;
 
   ngOnInit(): void {
-    this.carta.id = this.route.snapshot.params['id'];
+    this.carta.id = GLOBAL.carta.id;
     this.getCarta();
   }
 
