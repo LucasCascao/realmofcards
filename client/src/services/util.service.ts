@@ -22,7 +22,7 @@ export class UtilService {
     return this.http.put<any>(`${API_URL}/${servico}`, objeto, HTTP_OPTIONS);
   }
 
-  delete(objeto: any, servico: string, id: number): Observable<any> {
-    return this.http.delete<any>(`${API_URL}/${servico}/${id}`, objeto);
+  delete(id: number, servico: string): Observable<any> {
+    return this.http.delete<any>(`${API_URL}/${servico}/${id}`, HTTP_OPTIONS);
   }
 }

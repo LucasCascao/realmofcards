@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Person} from '../../../model/domain/person.model';
 import {ClienteService} from '../../../services/cliente.service';
 import {ActivatedRoute} from '@angular/router';
+import { GLOBAL } from 'src/app/shared/global.util';
 
 @Component({
   selector: 'app-user-details',
@@ -15,7 +16,7 @@ export class UserDetailsComponent implements OnInit {
   constructor(private clientService: ClienteService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.client.id = this.route.snapshot.params.id;
+    this.client.id = GLOBAL.pessoa.usuario.id
     this.getCliente();
     // this.client = JSON.parse(localStorage.getItem('userAutenticado'))[0];
     // console.log(this.client);

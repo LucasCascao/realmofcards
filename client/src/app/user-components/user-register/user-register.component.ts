@@ -9,7 +9,7 @@ import {UsuarioService} from '../../../services/usuario.service';
 import {ResultUser} from '../../../model/results/result-user.model';
 import {User} from '../../../model/domain/user.model';
 import {Observable} from 'rxjs';
-import {TipoUsuario} from "../../../model/domain/tipo-usuario";
+import {TipoUsuario} from '../../../model/domain/tipo-usuario';
 
 @Component({
   selector: 'app-user-register',

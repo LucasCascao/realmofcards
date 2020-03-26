@@ -59,13 +59,13 @@ import {AppLogadoComponent} from './app-logado/app-logado.component';
 
 export const ROUTES: Routes = [
   {path: '', component: LoginComponent},
-  {path: 'app-logado/:client', component: AppLogadoComponent, children: [
+  {path: 'app-logado', component: AppLogadoComponent, children: [
       {path: '', redirectTo: 'product-market-page', pathMatch: 'full'},
       {path: 'product-market-page', component: ProductMarketPageComponent},
-      {path: 'product-detail/:id', component: ProductDetailComponent},
-      {path: 'user-details/:id', component: UserDetailsComponent},
-      {path: 'user-alter/:id', component: UserAlterComponent},
-      {path: 'user-delete/:id', component: UserDeleteComponent},
+      {path: 'product-detail', component: ProductDetailComponent},
+      {path: 'user-details', component: UserDetailsComponent},
+      {path: 'user-alter', component: UserAlterComponent},
+      {path: 'user-delete', component: UserDeleteComponent},
       {path: 'user-orders', component: UserOrdersComponent},
       {path: 'user-password-alter', component: UserPasswordAlterComponent},
       {path: 'user-product-trade', component: ProductTradeComponent},

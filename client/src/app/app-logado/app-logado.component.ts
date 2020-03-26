@@ -8,12 +8,9 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AppLogadoComponent implements OnInit {
 
-  id;
-
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params.client;
   }
 
 }

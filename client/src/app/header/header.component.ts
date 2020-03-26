@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Person} from '../../model/domain/person.model';
 import {ClienteService} from '../../services/cliente.service';
+import { GLOBAL } from '../shared/global.util';
 
 @Component({
   selector: 'app-header',
@@ -12,19 +13,16 @@ export class HeaderComponent implements OnInit {
 
   client: Person = new Person();
 
-  @Input()
-  id?;
-
   constructor(private route: ActivatedRoute, private clienteService: ClienteService) { }
 
   ngOnInit() {
-    this.client.id = this.id;
+    this.client.id = GLOBAL.pessoa.usuario.id;
     this.getUser();
   }
 
   async getUser() {
     await this.clienteService.getClientes(this.client).subscribe(resultado => {
-      this.client = resultado?.entidades[0];
+      this.client = GLOBAL.pessoa = resultado?.entidades[0];
     });
   }
 
