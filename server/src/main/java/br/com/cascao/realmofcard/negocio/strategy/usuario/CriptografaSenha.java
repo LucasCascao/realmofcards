@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CriptografarSenha implements IStrategy {
+public class CriptografaSenha implements IStrategy {
 
     @Autowired
     StringValidador stringValidador;
@@ -19,7 +19,8 @@ public class CriptografarSenha implements IStrategy {
 
         if(entidade instanceof Pessoa) {
             Pessoa pessoa = (Pessoa) entidade;
-            pessoa.getUsuario().setPassword(Criptografia.criptografar(pessoa.getUsuario().getPassword()));
+            if(stringValidador.validar(pessoa.getUsuario().getPassword(), "senha") == "")
+                pessoa.getUsuario().setPassword(Criptografia.criptografar(pessoa.getUsuario().getPassword()));
         }
 
         return null;

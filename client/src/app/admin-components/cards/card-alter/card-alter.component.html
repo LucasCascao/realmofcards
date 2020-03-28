@@ -9,7 +9,14 @@
         <div class="form-group">
           <label class="col-lg-6 control-label">Nome da carta:</label>
           <div class="col-lg-8">
-            <input class="form-control" type="text" value="{{carta?.nome}}">
+            <input [(ngModel)]="carta.nome" name="alt_carta_nome" class="form-control" type="text" value="{{carta?.nome}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-6 control-label">Descrição:</label>
+          <div class="col-lg-8">
+            <textarea name="cad_carta_descricao" [(ngModel)]="carta.descricao"
+                      id="alt_carta_nome" name="alt_carta_nome" rows="5" cols="55">{{carta?.descricao}}</textarea>
           </div>
         </div>
         <div class="form-group">
@@ -17,7 +24,8 @@
           <div class="col-lg-4">
             <div class="ui-select">
               <select id="user_time_zone" class="form-control">
-                <option *ngFor="let categoria of categorias" value="AC">{{categoria?.nome}}</option>
+                <option name="alt_carta_categoria" [(ngModel)]="carta.categoriaCarta.id"
+                        *ngFor="let categoria of categorias" value="{{categoria.id}}">{{categoria?.nome}}</option>
               </select>
             </div>
           </div>
@@ -28,22 +36,22 @@
             <input type="file" value="" required>
           </div>
         </div>
-<!--        <div class="form-group">-->
-<!--          <label class="col-lg-6 control-label">Quantidade inicial no estoque:</label>-->
-<!--          <div class="col-lg-2">-->
-<!--            <input class="form-control" type="number" min="1" value="{{carta.estoque}}">-->
-<!--          </div>-->
-<!--        </div>-->
+        <div class="form-group">
+          <label class="col-lg-6 control-label">Quantidade inicial no estoque:</label>
+          <div class="col-lg-2">
+            <input class="form-control" [(ngModel)]="carta.quantidade" name="alt_carta_quantidade" type="number" min="1" value="{{carta?.quantidade}}">
+          </div>
+        </div>
         <div class="form-group">
           <label class="col-lg-6 control-label">Valor de venda:</label>
           <div class="col-lg-2">
-            <input class="form-control" type="text" min="1" value="{{carta?.valorVenda}}">
+            <input class="form-control" name="alt_carta_valor_compra" [(ngModel)]="carta.valorCompra" type="text" min="1" value="{{carta?.valorVenda}}">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-6 control-label">Porcentagem de precificação: </label>
           <div class="col-lg-2">
-            <input class="form-control" type="text" min="1" value="{{carta?.precificacao}}">
+            <input class="form-control" name="alt_carta_precificacao" [(ngModel)]="carta.precificacao" type="text" min="1" value="{{carta?.precificacao}}">
           </div>
         </div>
         <div class="form-group">

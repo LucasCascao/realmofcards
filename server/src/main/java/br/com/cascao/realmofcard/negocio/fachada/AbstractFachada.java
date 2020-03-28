@@ -10,7 +10,7 @@ import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaDadosEndereco;
 import br.com.cascao.realmofcard.negocio.strategy.pedido.ValidaDadosPedido;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaDadosPessoa;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaExistenciaPessoa;
-import br.com.cascao.realmofcard.negocio.strategy.usuario.CriptografarSenha;
+import br.com.cascao.realmofcard.negocio.strategy.usuario.CriptografaSenha;
 import br.com.cascao.realmofcard.negocio.strategy.usuario.ValidaDadosUsuario;
 import br.com.cascao.realmofcard.negocio.strategy.usuario.ValidaExistenciaUsuario;
 import br.com.cascao.realmofcard.negocio.strategy.usuario.ValidaSenhaUsuario;
@@ -18,7 +18,6 @@ import br.com.cascao.realmofcard.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,7 +72,7 @@ public class AbstractFachada {
     protected ValidaExistenciaUsuario validaExistenciaUsuario;
 
     @Autowired
-    protected CriptografarSenha criptografarSenha;
+    protected CriptografaSenha criptografarSenha;
 
     @Autowired
     protected ValidaSenhaUsuario validaSenhaUsuario;
@@ -137,6 +136,7 @@ public class AbstractFachada {
 
         List<IStrategy> rnsUsuarioConsultar = new ArrayList<>();
 
+        rnsUsuarioConsultar.add(validaDadosUsuario);
         rnsUsuarioConsultar.add(validaSenhaUsuario);
 
         Map<String, List<IStrategy>> mapaUsuario = new HashMap<>();

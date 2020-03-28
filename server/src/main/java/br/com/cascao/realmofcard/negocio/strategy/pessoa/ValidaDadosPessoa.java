@@ -14,9 +14,6 @@ public class ValidaDadosPessoa implements IStrategy{
 	@Autowired
 	StringValidador stringValidador;
 
-	@Autowired
-	ValidaDadosUsuario validaDadosUsuario;
-
 	@Override
 	public String processar(final EntidadeDominio entidade) {
 

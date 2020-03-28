@@ -9,6 +9,7 @@ export class Carta {
   valorCompra: number;
   precificacao: number;
   valorVenda: number;
+  quantidade: number;
   imagemPath: string;
   jogo: Jogo;
   categoriaCarta: Category;

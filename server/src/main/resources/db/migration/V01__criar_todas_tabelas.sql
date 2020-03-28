@@ -10,6 +10,7 @@ CREATE TABLE carta (
     car_valor_compra  DECIMAL(4, 2) NOT NULL,
     car_precificacao  DECIMAL(4, 2) NOT NULL,
     car_valor_venda   DECIMAL(4, 2) NOT NULL,
+    car_quantidade    INT NOT NULL,
     car_imagem_path   VARCHAR(250) NOT NULL,
     car_jogo_id       INT NOT NULL,
     car_categoria_id  INT NOT NULL,
@@ -69,12 +70,6 @@ CREATE TABLE estado (
     est_id     SERIAL NOT NULL,
     est_sigla  VARCHAR(2),
     est_nome   VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE estoque (
-    est_id          SERIAL NOT NULL,
-    est_quantidade  INT NOT NULL,
-    est_carta_id    INT NOT NULL
 );
 
 CREATE TABLE item_pedido (
@@ -155,8 +150,6 @@ ALTER TABLE endereco ADD CONSTRAINT endereco_pk PRIMARY KEY ( end_id );
 
 ALTER TABLE estado ADD CONSTRAINT estado_pk PRIMARY KEY ( est_id );
 
-ALTER TABLE estoque ADD CONSTRAINT estoque_pk PRIMARY KEY ( est_id );
-
 ALTER TABLE item_pedido ADD CONSTRAINT item_pedido_pk PRIMARY KEY ( ipd_id );
 
 ALTER TABLE jogo ADD CONSTRAINT jogo_pk PRIMARY KEY ( jog_id );
@@ -222,10 +215,6 @@ ALTER TABLE endereco
 ALTER TABLE endereco
     ADD CONSTRAINT endereco_pessoa_fk FOREIGN KEY ( end_pessoa_id )
         REFERENCES pessoa ( pes_id );
-
-ALTER TABLE estoque
-    ADD CONSTRAINT estoque_carta_fk FOREIGN KEY ( est_carta_id )
-        REFERENCES carta ( car_id );
 
 ALTER TABLE item_pedido
     ADD CONSTRAINT item_pedido_carta_fk FOREIGN KEY ( ipd_carta_id )

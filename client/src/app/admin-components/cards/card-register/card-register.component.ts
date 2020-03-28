@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Category} from '../../../../model/domain/category.model';
 import {MockCategory} from '../../../../mock/mock-categories.model';
+import { UtilService } from 'src/services/util.service';
 
 @Component({
   selector: 'app-card-register',
@@ -9,11 +10,24 @@ import {MockCategory} from '../../../../mock/mock-categories.model';
 })
 export class CardRegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: UtilService) { }
 
-  categorias: Category[] = new MockCategory().categories;
+  categorias: Category[];
+
+  
 
   ngOnInit(): void {
+    this.getCategorias();
   }
+
+  async getCategorias(){
+    await this.service.get(new Category, 'categorias').subscribe(resultado => {
+      this.categorias = resultado?.entidades;
+    })
+  }
+
+  // cadastra(){
+  //   this.
+  // }
 
 }
