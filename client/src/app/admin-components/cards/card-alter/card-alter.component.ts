@@ -4,7 +4,7 @@ import { UtilService } from 'src/services/util.service';
 import { Carta } from 'src/model/domain/carta.model';
 import { Category } from 'src/model/domain/category.model';
 import {GLOBAL} from '../../../shared/global.util';
-import {Util} from "../../../shared/app.util";
+import {Util} from '../../../shared/app.util';
 
 @Component({
   selector: 'app-card-alter',
@@ -36,7 +36,7 @@ export class CardAlterComponent implements OnInit {
 
   async alterarCarta() {
     await this.service.update(this.carta, 'cartas').subscribe(resultado => {
-      if(resultado == null){
+      if(resultado.msg == null) {
         this.carta = resultado?.entidades[0];
         this.router.navigate(['/app-logado/admin-product-list']);
       } else {

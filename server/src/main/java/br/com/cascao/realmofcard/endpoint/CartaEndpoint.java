@@ -3,6 +3,7 @@ package br.com.cascao.realmofcard.endpoint;
 import br.com.cascao.realmofcard.domain.Carta;
 import br.com.cascao.realmofcard.domain.Endereco;
 import br.com.cascao.realmofcard.domain.Resultado;
+import br.com.cascao.realmofcard.dto.CartaDTO;
 import br.com.cascao.realmofcard.negocio.fachada.Fachada;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,8 @@ public class CartaEndpoint {
 
     @PostMapping(path = "/cria")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> salvar(@RequestBody Carta carta){
+    public ResponseEntity<?> salvar(@RequestBody CartaDTO cartaDTO){
+        Carta carta = cartaDTO.tranfereParaCarta(cartaDTO);
         return ResponseEntity.ok().body(fachada.salvar(carta));
     }
 

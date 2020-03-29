@@ -42,7 +42,7 @@ public class CartaDTO {
     @Value("${imagem-path}")
     private String caminhoDaImagem;
 
-    CartaDTO transfereParaDTO(Carta carta) {
+    public CartaDTO transfereParaDTO(Carta carta) {
 
         CartaDTO cartaDTO = new CartaDTO();
 
@@ -61,7 +61,7 @@ public class CartaDTO {
         return cartaDTO;
     }
 
-    Carta tranfereParaCarta(CartaDTO cartaDTO) {
+    public Carta tranfereParaCarta(CartaDTO cartaDTO) {
 
         Carta carta = new Carta();
 
@@ -75,11 +75,9 @@ public class CartaDTO {
         carta.setStatus(cartaDTO.status);
         carta.setQuantidade(cartaDTO.quantidade);
         carta.setCategoriaCarta(cartaDTO.categoriaCarta);
-        carta.setImagemPath(cartaDTO.imagemPath.);
+        carta.setImagemPath(caminhoDaImagem + cartaDTO.imagemArquivo.getOriginalFilename());
 
+        return carta;
     }
-
-    void getCaminhoImangem
-
 }
 

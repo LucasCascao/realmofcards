@@ -22,8 +22,8 @@
           <label class="col-lg-6 control-label">Categoria:</label>
           <div class="col-lg-4">
             <div class="ui-select">
-              <select  id="user_time_zone" class="form-control">
-                <option name="cad_carta_categoria" [(ngModel)]="carta.categoriaCarta.id" value="{{categoria.id}}" *ngFor="let categoria of categorias">{{categoria?.nome}}</option>
+              <select  id="user_time_zone" class="form-control" name="cad_carta_categoria" [(ngModel)]="carta.categoriaCarta" >
+                <option  [ngValue]="categoria" *ngFor="let categoria of categorias">{{categoria?.nome}}</option>
               </select>
             </div>
           </div>
@@ -31,7 +31,7 @@
         <div class="form-group">
           <label class="col-lg-6 control-label">Imagem de exposição:</label>
           <div class="col-lg-2">
-            <input name="cad_carta_imagem" type="file" [(ngModel)]="carta.imagemPath">
+            <input name="cad_carta_imagem" type="file" (change)="inputFileChange($event)">
           </div>
         </div>
         <div class="form-group">

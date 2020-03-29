@@ -11,6 +11,7 @@ export class Carta {
   valorVenda: number;
   quantidade: number;
   imagemPath: string;
+  imagemArquivo: FormData;
   jogo: Jogo;
   categoriaCarta: Category;
   status: Status;

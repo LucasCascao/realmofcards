@@ -19,13 +19,12 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.client.id = GLOBAL.pessoa.usuario.id;
     this.getCliente();
-    // this.client = JSON.parse(localStorage.getItem('userAutenticado'))[0];
-    // console.log(this.client);
   }
 
   async getCliente() {
     await this.clientService.getClientes(this.client).subscribe( dado => {
       this.client = dado.entidades[0];
+      GLOBAL.pessoa = dado.entidades[0];
     });
   }
 
