@@ -7,6 +7,7 @@ import br.com.cascao.realmofcard.negocio.strategy.carta.MoveImagem;
 import br.com.cascao.realmofcard.negocio.strategy.carta.ValidaDadosCarta;
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaDadosCartaoCredito;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaDadosEndereco;
+import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaExistenciaCidade;
 import br.com.cascao.realmofcard.negocio.strategy.pedido.ValidaDadosPedido;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaDadosPessoa;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaExistenciaPessoa;
@@ -55,6 +56,14 @@ public class AbstractFachada {
     @Autowired
     protected CartegoriaCartaPersistence cartegoriaCartaPersistence;
 
+    @Autowired
+    protected EstadoPersistence estadoPersistence;
+
+    @Autowired
+    protected CidadePersistence cidadePersistence;
+
+
+
     /*
         Todas Strategy
      */
@@ -90,6 +99,9 @@ public class AbstractFachada {
     protected ValidaDadosEndereco validaDadosEndereco;
 
     @Autowired
+    protected ValidaExistenciaCidade validaExistenciaCidade;
+
+    @Autowired
     protected ValidaDadosCartaoCredito validaDadosCartaoCredito;
 
     @Autowired
@@ -107,6 +119,8 @@ public class AbstractFachada {
         daos.put(CartaoCredito.class.getName(), cartaoCreditoPersistence);
         daos.put(Pedido.class.getName(), pedidoPersistence);
         daos.put(CategoriaCarta.class.getName(), cartegoriaCartaPersistence);
+        daos.put(Estado.class.getName(), estadoPersistence);
+        daos.put(Cidade.class.getName(), cidadePersistence);
 
         //------------------------ Hash Pessoa ----------------------------//
 
@@ -170,6 +184,7 @@ public class AbstractFachada {
         List<IStrategy> rnsEnderecoSalvar = new ArrayList<>();
 
         rnsEnderecoSalvar.add(validaDadosEndereco);
+        rnsEnderecoSalvar.add(validaExistenciaCidade);
 
         List<IStrategy> rnsEnderecoAlterar = new ArrayList<>();
 

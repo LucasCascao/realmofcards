@@ -14,35 +14,14 @@ export class AddressListComponent implements OnInit {
 
   constructor(private service: UtilService, private route: ActivatedRoute) { }
 
-  // enderecos = [
-  //   {
-  //     logradouro : 'Rua Passos',
-  //     numero : '876',
-  //     bairro : 'Cidade Edson',
-  //     cidade : 'Suzano',
-  //     estado : 'SP',
-  //     cep : '08665-410',
-  //     complemento : 'Casa do muro laranja com o portão branco'
-  //   },
-  //   {
-  //     logradouro : 'Rua João Pereira dos Santos',
-  //     numero : '70',
-  //     bairro : 'Jd. Nova Poá',
-  //     cidade : 'Poá',
-  //     estado : 'SP',
-  //     cep : '08568-020',
-  //     complemento : 'Condominio Village 1'
-  //   }
-  // ];
-
   enderecos: Endereco[];
 
-  endereco: Endereco;
+  endereco: Endereco = new Endereco();
 
   ngOnInit(): void {
-    this.endereco = new Endereco();
     this.endereco.pessoa = new Person();
     this.endereco.pessoa.id = GLOBAL.pessoa.id;
+    console.log(GLOBAL.pessoa.id);
     this.getEnderecos();
   }
 

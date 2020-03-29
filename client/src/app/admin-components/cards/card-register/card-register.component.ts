@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Category} from '../../../../model/domain/category.model';
-import {MockCategory} from '../../../../mock/mock-categories.model';
+import { Category } from '../../../../model/domain/category.model';
 import { UtilService } from 'src/services/util.service';
+import { Carta } from '../../../../model/domain/carta.model';
 
 @Component({
   selector: 'app-card-register',
@@ -14,20 +14,20 @@ export class CardRegisterComponent implements OnInit {
 
   categorias: Category[];
 
-  
+  carta: Carta;
 
   ngOnInit(): void {
     this.getCategorias();
   }
 
-  async getCategorias(){
-    await this.service.get(new Category, 'categorias').subscribe(resultado => {
+  async getCategorias() {
+    await this.service.get(new Category(), 'categorias').subscribe(resultado => {
       this.categorias = resultado?.entidades;
-    })
+    });
   }
 
-  // cadastra(){
-  //   this.
-  // }
+  cadastraCarta() {
+
+  }
 
 }

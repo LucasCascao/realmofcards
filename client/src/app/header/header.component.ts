@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Person} from '../../model/domain/person.model';
 import {ClienteService} from '../../services/cliente.service';
 import { GLOBAL } from '../shared/global.util';
+import { UtilService } from 'src/services/util.service';
 
 @Component({
   selector: 'app-header',
@@ -13,17 +14,18 @@ export class HeaderComponent implements OnInit {
 
   client: Person = new Person();
 
-  constructor(private route: ActivatedRoute, private clienteService: ClienteService) { }
+  constructor(private route: ActivatedRoute, private clienteService: ClienteService, private service: UtilService) { }
 
   ngOnInit() {
-    this.client.id = GLOBAL.pessoa.usuario.id;
-    this.getUser();
+    // this.client.id = GLOBAL.pessoa.usuario.id;
+    // this.getUser();
+    console.log(GLOBAL);
   }
 
-  async getUser() {
-    await this.clienteService.getClientes(this.client).subscribe(resultado => {
-      this.client = GLOBAL.pessoa = resultado?.entidades[0];
-    });
-  }
+  // async getUser() {
+  //   await this.service.get(this.client, 'pessoas').subscribe(resultado => {
+  //     this.client =resultado?.entidades[0];
+  //   });
+  // }
 
 }
