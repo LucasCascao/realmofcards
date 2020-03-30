@@ -32,7 +32,7 @@ export class AuthService {
       if (resuldado.msg !== null) {
         alert(this.util.getMensagensSeparadas(resuldado.msg))
       } else {
-        localStorage.setItem('usuarioLogado', JSON.stringify(this.clients.usuario));
+        sessionStorage.setItem('usuarioLogado', JSON.stringify(this.clients.usuario));
         // GLOBAL.pessoa = new Person();
         // GLOBAL.pessoa.usuario = this.clients?.usuario;
         this.router.navigate(['/app-logado']);

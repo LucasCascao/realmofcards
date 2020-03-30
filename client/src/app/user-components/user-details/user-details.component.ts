@@ -17,7 +17,9 @@ export class UserDetailsComponent implements OnInit {
   constructor(private clientService: ClienteService, private route: ActivatedRoute, private service: UtilService) { }
 
   ngOnInit(): void {
-    this.client.id = GLOBAL.pessoa.usuario.id;
+    this.client.usuario = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+    // this.client.id = GLOBAL.pessoa.usuario.id;
+    this.client.id = this.client.usuario.id;
     this.getCliente();
   }
 

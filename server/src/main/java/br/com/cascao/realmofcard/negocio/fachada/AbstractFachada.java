@@ -2,6 +2,7 @@ package br.com.cascao.realmofcard.negocio.fachada;
 
 import br.com.cascao.realmofcard.domain.*;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
+import br.com.cascao.realmofcard.negocio.strategy.carrinho.ValidaDadosCarrinho;
 import br.com.cascao.realmofcard.negocio.strategy.carta.CalcularPrecoVenda;
 import br.com.cascao.realmofcard.negocio.strategy.carta.MoveImagem;
 import br.com.cascao.realmofcard.negocio.strategy.carta.ValidaDadosCarta;
@@ -62,6 +63,8 @@ public class AbstractFachada {
     @Autowired
     protected CidadePersistence cidadePersistence;
 
+    @Autowired
+    protected CarrinhoPersistence carrinhoPersistence;
 
 
     /*
@@ -107,6 +110,9 @@ public class AbstractFachada {
     @Autowired
     protected ValidaDadosPedido validaDadosPedido;
 
+    @Autowired
+    protected ValidaDadosCarrinho validaDadosCarrinho;
+
     public AbstractFachada(){
     }
 
@@ -121,6 +127,7 @@ public class AbstractFachada {
         daos.put(CategoriaCarta.class.getName(), cartegoriaCartaPersistence);
         daos.put(Estado.class.getName(), estadoPersistence);
         daos.put(Cidade.class.getName(), cidadePersistence);
+        daos.put(Carrinho.class.getName(), carrinhoPersistence);
 
         //------------------------ Hash Pessoa ----------------------------//
 
@@ -236,6 +243,23 @@ public class AbstractFachada {
         Map<String, List<IStrategy>> mapaCategoria = new HashMap<>();
 
         regrasNegocio.put(CategoriaCarta.class.getName(), mapaCategoria);
+
+        //------------------------ Hash Categoria --------------------------//
+
+        List<IStrategy> rnsCarrinhoSalvar = new ArrayList<>();
+
+        rnsCarrinhoSalvar.add(validaDadosCarrinho);
+
+        List<IStrategy> rnsCarrinhoAlterar = new ArrayList<>();
+
+        rnsCarrinhoAlterar.add(validaDadosCarrinho);
+
+        Map<String, List<IStrategy>> mapaCarrinho = new HashMap<>();
+
+        mapaCarrinho.put("SALVAR", rnsCarrinhoSalvar);
+        mapaCarrinho.put("ALTERAR", rnsCarrinhoAlterar);
+
+        this.regrasNegocio.put(Carrinho.class.getName(), mapaCarrinho);
 
     }
 }

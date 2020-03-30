@@ -24,6 +24,7 @@ export class ProductMarketPageComponent implements OnInit {
   carta: Carta;
 
   ngOnInit(): void {
+    console.log(JSON.parse(sessionStorage.getItem('pessoaLogada')));
     this.carta = new Carta();
     this.carta.status = new Status();
     this.carta.status.id = 1;
@@ -34,7 +35,6 @@ export class ProductMarketPageComponent implements OnInit {
     await this.service.get(this.carta, 'cartas')
     .subscribe( resultado => {
       this.cartas = resultado?.entidades;
-      console.log(resultado);
     });
   }
 

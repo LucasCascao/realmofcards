@@ -18,7 +18,7 @@ export class AppLogadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.pessoa = new Person();
-    this.pessoa.usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
+    this.pessoa.usuario = JSON.parse(sessionStorage.getItem('usuarioLogado'));
     // this.pessoa.id = GLOBAL.pessoa.usuario.id;
     this.pessoa.id = this.pessoa.usuario.id;
     this.getPessoaLogada();
@@ -26,7 +26,8 @@ export class AppLogadoComponent implements OnInit {
 
   async getPessoaLogada() {
     await this.service.get(this.pessoa, 'pessoas').subscribe( resultado => {
-      GLOBAL.pessoa = resultado?.entidades[0];
+      // GLOBAL.pessoa = resultado?.entidades[0];
+      sessionStorage.setItem('pessoaLogada', JSON.stringify(resultado?.entidades[0]));
     });
   }
 }

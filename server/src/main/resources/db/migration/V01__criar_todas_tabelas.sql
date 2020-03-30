@@ -78,6 +78,17 @@ CREATE TABLE item (
     itm_carta_id    INT NOT NULL
 );
 
+CREATE TABLE carrinho (
+  crr_id            SERIAL NOT NULL,
+  crr_pessoa_id     INT NOT NULL
+);
+
+CREATE TABLE carrinho_item (
+  cri_id            SERIAL NOT NULL,
+  cri_carrinho_id   INT NOT NULL,
+  cri_item_id       INT NOT NULL
+);
+
 CREATE TABLE jogo (
     jog_id    SERIAL NOT NULL,
     jog_nome  VARCHAR(50) NOT NULL UNIQUE
@@ -166,6 +177,10 @@ ALTER TABLE item ADD CONSTRAINT item_pk PRIMARY KEY ( itm_id );
 
 ALTER TABLE item_pedido ADD CONSTRAINT item_pedido_pk PRIMARY KEY ( itp_id );
 
+ALTER TABLE carrinho ADD CONSTRAINT carrinho_pk PRIMARY KEY (crr_id);
+
+ALTER TABLE carrinho_item ADD CONSTRAINT carrinho_item_pk PRIMARY KEY (cri_id);
+
 ALTER TABLE jogo ADD CONSTRAINT jogo_pk PRIMARY KEY ( jog_id );
 
 ALTER TABLE log ADD CONSTRAINT log_pk PRIMARY KEY ( log_id );
@@ -241,6 +256,18 @@ ALTER TABLE item_pedido
 ALTER TABLE item_pedido
     ADD CONSTRAINT item_pedido_pedido_fk FOREIGN KEY ( itp_pedido_id )
         REFERENCES pedido ( ped_id );
+
+ALTER TABLE carrinho
+    ADD CONSTRAINT carrinho_pessoa_fk FOREIGN KEY ( crr_pessoa_id )
+        REFERENCES pessoa ( pes_id );
+
+ALTER TABLE carrinho_item
+    ADD CONSTRAINT carrinho_item_carrinho_fk FOREIGN KEY ( cri_carrinho_id )
+        REFERENCES carrinho ( crr_id );
+
+ALTER TABLE carrinho_item
+    ADD CONSTRAINT carrinho_item_item_fk FOREIGN KEY ( cri_item_id )
+        REFERENCES item ( itm_id );
 
 ALTER TABLE jogo_categoria_carta
     ADD CONSTRAINT jogo_categoria_carta_fk FOREIGN KEY ( jct_carta_id )

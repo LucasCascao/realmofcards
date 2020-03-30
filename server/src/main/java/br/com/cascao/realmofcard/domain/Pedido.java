@@ -43,6 +43,10 @@ public class Pedido extends EntidadeDominio{
     @JoinColumn(name = "ped_endereco_id")
     private Endereco endereco;
 
-    @ManyToMany(mappedBy = "pedidos", cascade = CascadeType.ALL)
-    private List<Item> items;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "item_pedido",
+            joinColumns = {@JoinColumn(name = "itp_pedido_id")},
+            inverseJoinColumns = {@JoinColumn(name = "itp_item_id")})
+    private List<Item> itens;
 }

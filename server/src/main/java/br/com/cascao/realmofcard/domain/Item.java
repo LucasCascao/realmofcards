@@ -1,5 +1,6 @@
 package br.com.cascao.realmofcard.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,10 +32,12 @@ public class Item extends EntidadeDominio {
     @JoinColumn(name = "itm_carta_id")
     private Carta carta;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "item_pedido",
-                joinColumns = {@JoinColumn(name = "itp_item_id")},
-                inverseJoinColumns = {@JoinColumn(name = "itp_pedido_id")})
+    @JsonIgnore
+    @ManyToMany(mappedBy = "itens", cascade = CascadeType.ALL)
     private List<Pedido> pedidos;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "itens", cascade = CascadeType.ALL)
+    private List<Carrinho> carrinhos;
 
 }

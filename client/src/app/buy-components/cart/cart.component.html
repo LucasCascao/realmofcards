@@ -5,21 +5,21 @@
   <h1 class="mt-4 mb-3">Carrinho</h1>
 
   <hr>
-  <div class="row">
+  <div class="row" *ngFor="let item of carrinho.itens">
     <div class="col-lg-12 mb-4">
       <div class="card h-100">
         <div class="card-body">
-          <div class="col-md-3 float-left">
+          <div class="col-md-2 float-left">
             <a [routerLink]="['/app-logado/product-detail']">
-              <img class="img-fluid rounded mb-3 mb-md-0" [src]="carta.imageUrl" alt="">
+              <img class="img-fluid rounded mb-3 mb-md-0" [src]="item.carta.imagemPath" alt="">
             </a>
           </div>
           <div class="col-md-7 float-left">
-            <p class="card-text"><strong>Produto:</strong> {{carta.nome}}</p>
-            <p class="card-text"><strong>Valor total:</strong> {{carta.value}}</p>
-            <p class="card-text"><strong>Quantidade disponível:</strong> {{carta.estoque}}.</p>
+            <p class="card-text"><strong>Produto:</strong> {{item.carta.nome}}</p>
+            <p class="card-text"><strong>Valor total:</strong> {{item.carta.valorVenda}}</p>
+            <p class="card-text"><strong>Quantidade disponível:</strong> {{item.carta.quantidade}}.</p>
             <p class="card-text"><strong>Quantidade:</strong>
-              <input class="form-control w-25" type="number" name="quantidade" value="number" [max]="carta.estoque" min="1" value="1">
+              <input class="form-control w-25" type="number" name="quantidade" value="number" [max]="item.carta.quantidade" min="1" value="1">
             </p>
           </div>
           <div class="col-md-2 float-left">

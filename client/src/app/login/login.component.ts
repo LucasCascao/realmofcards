@@ -19,19 +19,19 @@ export class LoginComponent implements OnInit {
   constructor(private usuarioService: AuthService, private router: Router, private appUtil: Util) { }
 
   ngOnInit(): void {
+    this.estaLogado();
+  }
+
+  estaLogado(){
+    let pessoa = JSON.parse(sessionStorage.get('pessoaLogada'));
+    console.log(pessoa);
+    if(pessoa){
+      this.router.navigate(['/app-logado']);
+    }
   }
 
   async signIn() {
     await this.usuarioService.signIn(this.usuario);
-    //   .subscribe(resultado => {
-    //   this.usuario = resultado.entidades[0];
-    //   console.log(resultado);
-    //   if (resultado?.msg !== null) {
-    //     alert(this.appUtil.getMensagensSeparadas(resultado.msg));
-    //   } else {
-    //     this.router.navigate([ '/product-market-page']);
-    //   }
-    // });
   }
 
 }
