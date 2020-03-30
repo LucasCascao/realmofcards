@@ -11,7 +11,8 @@
     <!-- Project One -->
     <div class="row">
       <div class="col-md-5">
-        <p class="card-text"><strong>Cartão final:</strong> {{cartao}}</p>
+        <p class="card-text"><strong>Ultimos 4 digitos:</strong> {{cartao?.numero}}</p>
+        <p class="card-text"><strong>Bandeira:</strong> {{cartao?.bandeira?.nome}}</p>
         <a class="btn btn-secondary" [routerLink]="['/app-logado/payment-page']">Selecionar esse cartão</a>
         <a class="btn btn-danger float-right" [routerLink]="['/app-logado/creditcard-delete']">Excluir</a>
       </div>

@@ -18,8 +18,9 @@ export class AppLogadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.pessoa = new Person();
-    this.pessoa.usuario = new User();
-    this.pessoa.id = GLOBAL.pessoa.usuario.id;
+    this.pessoa.usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
+    // this.pessoa.id = GLOBAL.pessoa.usuario.id;
+    this.pessoa.id = this.pessoa.usuario.id;
     this.getPessoaLogada();
   }
 

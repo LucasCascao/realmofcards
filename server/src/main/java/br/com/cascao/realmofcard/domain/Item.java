@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Component
@@ -14,23 +16,25 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "item_pedido")
-public class ItemPedido extends EntidadeDominio {
+@Table(name = "item")
+public class Item extends EntidadeDominio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ipd_id")
+    @Column(name = "itm_id")
     private Integer id;
 
-    @Column(name = "ipd_quantidade")
+    @Column(name = "itm_quantidade")
     private Integer quantidade;
 
     @ManyToOne()
-    @JoinColumn(name = "ipd_carta_id")
+    @JoinColumn(name = "itm_carta_id")
     private Carta carta;
 
-    @OneToOne()
-    @JoinColumn(name = "ipd_pedido_id")
-    private Pedido pedido;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "item_pedido",
+                joinColumns = {@JoinColumn(name = "itp_item_id")},
+                inverseJoinColumns = {@JoinColumn(name = "itp_pedido_id")})
+    private List<Pedido> pedidos;
 
 }

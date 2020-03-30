@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -37,4 +38,11 @@ public class Pedido extends EntidadeDominio{
     @OneToOne()
     @JoinColumn(name = "ped_status_pedido_id")
     private StatusPedido statusPedido;
+
+    @OneToOne()
+    @JoinColumn(name = "ped_endereco_id")
+    private Endereco endereco;
+
+    @ManyToMany(mappedBy = "pedidos", cascade = CascadeType.ALL)
+    private List<Item> items;
 }

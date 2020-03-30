@@ -32,11 +32,9 @@ export class AuthService {
       if (resuldado.msg !== null) {
         alert(this.util.getMensagensSeparadas(resuldado.msg))
       } else {
-        sessionStorage.setItem('userId', String(this.clients.id));
-        GLOBAL.pessoa = new Person();
-        GLOBAL.pessoa.usuario = this.clients?.usuario;
-        this.usuarioAutenticado = true;
-        this.mostrarMenuEmitter.emit(true);
+        localStorage.setItem('usuarioLogado', JSON.stringify(this.clients.usuario));
+        // GLOBAL.pessoa = new Person();
+        // GLOBAL.pessoa.usuario = this.clients?.usuario;
         this.router.navigate(['/app-logado']);
       }
     });

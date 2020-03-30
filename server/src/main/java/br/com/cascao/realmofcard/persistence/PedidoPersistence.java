@@ -36,10 +36,11 @@ public class PedidoPersistence implements IPersistence {
         if(entidade instanceof Pedido){
             Pedido pedido = (Pedido) entidade;
             if(pedido.getId() != null){
-                pedidoRepository.findById(pedido.getId()).map(resultadoPedido -> pedidos.add(resultadoPedido));
+                pedidos.add(pedidoRepository.findById(pedido.getId()).get());
                 return pedidos;
             }
-            pedidoRepository.findAll().forEach( resultadoPedido -> pedidos.add(resultadoPedido));
+            pedidoRepository.findByCliente_Id(pedido.getCliente().getId())
+                    .forEach( resultadoPedido -> pedidos.add(resultadoPedido));
             return pedidos;
         } else return null;
     }

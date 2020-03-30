@@ -1,8 +1,10 @@
 package br.com.cascao.realmofcard.endpoint;
 
 import br.com.cascao.realmofcard.domain.CartaoCredito;
+import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Resultado;
+import br.com.cascao.realmofcard.dto.CartaoCreditoDTO;
 import br.com.cascao.realmofcard.negocio.fachada.Fachada;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +19,19 @@ public class CartaoCreditoEndpoint {
     @Autowired
     private Fachada fachada;
 
+    @Autowired
+    private CartaoCreditoDTO cartaoCreditoDTO;
+
+    @Autowired
+    private Resultado resultado;
+
     @PostMapping()
     public ResponseEntity<Resultado> consultar(@RequestBody CartaoCredito cartaoCredito){
-        return ResponseEntity.ok().body(fachada.consultar(cartaoCredito));
+        resultado = fachada.consultar(cartaoCredito);
+        resultado.getEntidades().replaceAll(
+                cartaoConsultado -> cartaoCreditoDTO.transfereParaCartaoCreditoDTO((CartaoCredito) cartaoConsultado)
+        );
+        return ResponseEntity.ok().body(resultado);
     }
 
     @PostMapping(path = "/cria")
