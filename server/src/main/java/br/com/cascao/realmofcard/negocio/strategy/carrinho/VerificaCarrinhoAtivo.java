@@ -7,6 +7,8 @@ import br.com.cascao.realmofcard.repository.CarrinhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class VerificaCarrinhoAtivo implements IStrategy {
 
@@ -20,9 +22,10 @@ public class VerificaCarrinhoAtivo implements IStrategy {
 
         if(entidade instanceof Carrinho){
             Carrinho carrinho = (Carrinho) entidade;
+            List<Carrinho> carrinhos = null;
             if(carrinho.getPessoa() != null
             && carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId()) != null){
-                carrinho = carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId()).get(0);
+                carrinhos = carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId());
             }
         }
 
