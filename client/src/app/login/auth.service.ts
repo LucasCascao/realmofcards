@@ -25,9 +25,9 @@ export class AuthService {
 
   constructor(private router: Router, private service: UtilService, private util: Util) { }
 
-  async signIn(user: User) {
+  signIn(user: User) {
 
-    await this.service.get(user, 'usuarios').subscribe( resuldado => {
+    this.service.get(user, 'usuarios').subscribe( resuldado => {
       this.clients.usuario = resuldado?.entidades[0];
       if (resuldado.msg !== null) {
         alert(this.util.getMensagensSeparadas(resuldado.msg))

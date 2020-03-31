@@ -26,7 +26,7 @@ public class CartaEndpoint {
     @PostMapping(path = "/cria")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> salvar(@RequestBody CartaDTO cartaDTO){
-        Carta carta = cartaDTO.tranfereParaCarta(cartaDTO);
+        Carta carta = (Carta) cartaDTO.getEntidade(cartaDTO);
         return ResponseEntity.ok().body(fachada.salvar(carta));
     }
 

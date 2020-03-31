@@ -31,8 +31,8 @@ export class ProductMarketPageComponent implements OnInit {
     this.getCartas();
   }
 
-  async getCartas(){
-    await this.service.get(this.carta, 'cartas')
+  getCartas(){
+    this.service.get(this.carta, 'cartas')
     .subscribe( resultado => {
       this.cartas = resultado?.entidades;
     });

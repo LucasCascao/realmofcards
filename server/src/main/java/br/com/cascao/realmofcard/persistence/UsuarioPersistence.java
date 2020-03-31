@@ -39,7 +39,7 @@ public class UsuarioPersistence implements IPersistence {
 		}
 
 		if(usuario.getEmail() != null) {
-			usuario.setId(usuarioRepository.findByEmail(usuario.getEmail()).getId());
+			usuario = usuarioRepository.findByEmail(usuario.getEmail());
 			usuarios.add(usuario);
 			return usuarios;
 		}

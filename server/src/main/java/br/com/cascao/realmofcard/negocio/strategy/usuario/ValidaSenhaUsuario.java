@@ -30,7 +30,6 @@ public class ValidaSenhaUsuario implements IStrategy{
 				if(!usuarioRepository.existsByEmailAndPassword(usuario.getEmail(), usuario.getPassword())){
 					msg.append("Login ou senha incorreto");
 				}
-				usuario.setPassword(null);
 			}
 		}
 		

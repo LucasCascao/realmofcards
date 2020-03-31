@@ -6,6 +6,7 @@ import br.com.cascao.realmofcard.domain.Resultado;
 import br.com.cascao.realmofcard.dto.CarrinhoDTO;
 import br.com.cascao.realmofcard.dto.CartaDTO;
 import br.com.cascao.realmofcard.negocio.fachada.Fachada;
+import br.com.cascao.realmofcard.util.DTOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,33 +21,28 @@ public class CarrinhoEndpoint {
     private Fachada fachada;
 
     @Autowired
-    Resultado resultado;
-
-    @Autowired
-    CarrinhoDTO carrinhoDTO;
+    private CarrinhoDTO carrinhoDTO;
 
     @PostMapping()
     public ResponseEntity<Resultado> consultar(@RequestBody Carrinho carrinho){
-        resultado = fachada.consultar(carrinho);
-        resultado.getEntidades().replaceAll( resultado -> carrinhoDTO.tranfereParaCarrinhoDTO((Carrinho) resultado));
-        return ResponseEntity.ok().body(resultado);
+        return ResponseEntity.ok().body(DTOUtil.tranfereParaDTO(fachada.consultar(carrinho),carrinhoDTO));
     }
 
     @PostMapping(path = "/cria")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> salvar(@RequestBody Carrinho carrinho){
-        return ResponseEntity.ok().body(fachada.salvar(carrinho));
+        return ResponseEntity.ok().body(DTOUtil.tranfereParaDTO(fachada.salvar(carrinho), carrinhoDTO));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id){
         Carrinho carrinho = new Carrinho();
         carrinho.setId(id);
-        return ResponseEntity.ok().body(fachada.excluir(carrinho));
+        return ResponseEntity.ok().body(DTOUtil.tranfereParaDTO(fachada.excluir(carrinho), carrinhoDTO));
     }
 
     @PutMapping()
     public ResponseEntity<?> alterar(@RequestBody Carrinho carrinho){
-        return ResponseEntity.ok().body(fachada.alterar(carrinho));
+        return ResponseEntity.ok().body(DTOUtil.tranfereParaDTO(fachada.alterar(carrinho), carrinhoDTO));
     }
 }

@@ -3,6 +3,8 @@ package br.com.cascao.realmofcard.negocio.fachada;
 import br.com.cascao.realmofcard.domain.*;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
 import br.com.cascao.realmofcard.negocio.strategy.carrinho.ValidaDadosCarrinho;
+import br.com.cascao.realmofcard.negocio.strategy.carrinho.VerificaCarrinhoAtivo;
+import br.com.cascao.realmofcard.negocio.strategy.carrinho.VerificaProdutoInativoNoCarrinho;
 import br.com.cascao.realmofcard.negocio.strategy.carta.CalcularPrecoVenda;
 import br.com.cascao.realmofcard.negocio.strategy.carta.MoveImagem;
 import br.com.cascao.realmofcard.negocio.strategy.carta.ValidaDadosCarta;
@@ -112,6 +114,12 @@ public class AbstractFachada {
 
     @Autowired
     protected ValidaDadosCarrinho validaDadosCarrinho;
+
+    @Autowired
+    private VerificaCarrinhoAtivo verificaCarrinhoAtivo;
+
+    @Autowired
+    private VerificaProdutoInativoNoCarrinho verificaProdutoInativoNoCarrinho;
 
     public AbstractFachada(){
     }
@@ -249,15 +257,22 @@ public class AbstractFachada {
         List<IStrategy> rnsCarrinhoSalvar = new ArrayList<>();
 
         rnsCarrinhoSalvar.add(validaDadosCarrinho);
+        rnsCarrinhoSalvar.add(verificaCarrinhoAtivo);
 
         List<IStrategy> rnsCarrinhoAlterar = new ArrayList<>();
 
         rnsCarrinhoAlterar.add(validaDadosCarrinho);
+        rnsCarrinhoAlterar.add(verificaCarrinhoAtivo);
+
+        List<IStrategy> rnsCarrinhoConsultar = new ArrayList<>();
+
+        rnsCarrinhoConsultar.add(verificaProdutoInativoNoCarrinho);
 
         Map<String, List<IStrategy>> mapaCarrinho = new HashMap<>();
 
         mapaCarrinho.put("SALVAR", rnsCarrinhoSalvar);
         mapaCarrinho.put("ALTERAR", rnsCarrinhoAlterar);
+        mapaCarrinho.put("CONSULTAR", rnsCarrinhoConsultar);
 
         this.regrasNegocio.put(Carrinho.class.getName(), mapaCarrinho);
 

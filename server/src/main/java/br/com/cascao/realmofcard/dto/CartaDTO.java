@@ -1,9 +1,6 @@
 package br.com.cascao.realmofcard.dto;
 
-import br.com.cascao.realmofcard.domain.Carta;
-import br.com.cascao.realmofcard.domain.CategoriaCarta;
-import br.com.cascao.realmofcard.domain.Jogo;
-import br.com.cascao.realmofcard.domain.Status;
+import br.com.cascao.realmofcard.domain.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @Getter
 @Component
-public class CartaDTO {
+public class CartaDTO extends EntidadeDominio implements IDTO {
 
     private Integer id;
 
@@ -42,42 +39,50 @@ public class CartaDTO {
     @Value("${imagem-path}")
     private String caminhoDaImagem;
 
-    public CartaDTO transfereParaDTO(Carta carta) {
+    @Override
+    public EntidadeDominio getDTO(EntidadeDominio dominio) {
 
-        CartaDTO cartaDTO = new CartaDTO();
+        if(dominio instanceof Carta){
 
-        cartaDTO.id = carta.getId();
-        cartaDTO.nome = carta.getNome();
-        cartaDTO.descricao = carta.getDescricao();
-        cartaDTO.valorCompra = carta.getValorCompra();
-        cartaDTO.precificacao = carta.getPrecificacao();
-        cartaDTO.valorVenda = carta.getValorVenda();
-        cartaDTO.jogo = carta.getJogo();
-        cartaDTO.status = carta.getStatus();
-        cartaDTO.quantidade = carta.getQuantidade();
-        cartaDTO.categoriaCarta = carta.getCategoriaCarta();
+            Carta carta = (Carta) dominio;
+            CartaDTO cartaDTO = new CartaDTO();
 
+            cartaDTO.id = carta.getId();
+            cartaDTO.nome = carta.getNome();
+            cartaDTO.descricao = carta.getDescricao();
+            cartaDTO.valorVenda = carta.getValorVenda();
+            cartaDTO.jogo = carta.getJogo();
+            cartaDTO.quantidade = carta.getQuantidade();
+            cartaDTO.categoriaCarta = carta.getCategoriaCarta();
 
-        return cartaDTO;
+            return cartaDTO;
+        }
+        return null;
     }
 
-    public Carta tranfereParaCarta(CartaDTO cartaDTO) {
+    @Override
+    public EntidadeDominio getEntidade(IDTO dto) {
 
-        Carta carta = new Carta();
+        if(dto instanceof CartaDTO){
 
-        carta.setId(cartaDTO.id);
-        carta.setNome(cartaDTO.nome);
-        carta.setDescricao(cartaDTO.descricao);
-        carta.setValorCompra(cartaDTO.valorCompra);
-        carta.setPrecificacao(cartaDTO.precificacao);
-        carta.setValorVenda(cartaDTO.valorVenda);
-        carta.setJogo(cartaDTO.jogo);
-        carta.setStatus(cartaDTO.status);
-        carta.setQuantidade(cartaDTO.quantidade);
-        carta.setCategoriaCarta(cartaDTO.categoriaCarta);
-        carta.setImagemPath(caminhoDaImagem + cartaDTO.imagemArquivo.getOriginalFilename());
+            CartaDTO cartaDTO = (CartaDTO) dto;
+            Carta carta = new Carta();
 
-        return carta;
+            carta.setId(cartaDTO.id);
+            carta.setNome(cartaDTO.nome);
+            carta.setDescricao(cartaDTO.descricao);
+            carta.setValorCompra(cartaDTO.valorCompra);
+            carta.setPrecificacao(cartaDTO.precificacao);
+            carta.setValorVenda(cartaDTO.valorVenda);
+            carta.setJogo(cartaDTO.jogo);
+            carta.setStatus(cartaDTO.status);
+            carta.setQuantidade(cartaDTO.quantidade);
+            carta.setCategoriaCarta(cartaDTO.categoriaCarta);
+            carta.setImagemPath(caminhoDaImagem + cartaDTO.imagemArquivo.getOriginalFilename());
+
+            return carta;
+        }
+        return null;
     }
 }
 

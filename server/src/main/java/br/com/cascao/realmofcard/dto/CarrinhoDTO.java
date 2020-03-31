@@ -15,19 +15,30 @@ import java.util.List;
 @Setter
 @Getter
 @Component
-public class CarrinhoDTO extends EntidadeDominio {
+public class CarrinhoDTO extends EntidadeDominio implements IDTO{
 
     private Integer id;
 
     private List<Item> itens;
 
-    public CarrinhoDTO tranfereParaCarrinhoDTO(Carrinho carrinho){
+    @Override
+    public EntidadeDominio getDTO(EntidadeDominio dominio) {
 
-        CarrinhoDTO carrinhoDTO = new CarrinhoDTO();
+        if(dominio instanceof Carrinho){
 
-        carrinhoDTO.setId(carrinho.getId());
-        carrinhoDTO.setItens(carrinho.getItens());
+            CarrinhoDTO carrinhoDTO = new CarrinhoDTO();
+            Carrinho carrinho = (Carrinho) dominio;
 
-        return carrinhoDTO;
+            carrinhoDTO.setId(carrinho.getId());
+            carrinhoDTO.setItens(carrinho.getItens());
+
+            return carrinhoDTO;
+        }
+        return null;
+    }
+
+    @Override
+    public EntidadeDominio getEntidade(IDTO dto) {
+        return null;
     }
 }

@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 @Setter
 @Getter
 @Component
-public class CartaoCreditoDTO extends EntidadeDominio {
+public class CartaoCreditoDTO extends EntidadeDominio implements IDTO{
 
     private Integer id;
 
@@ -22,18 +22,26 @@ public class CartaoCreditoDTO extends EntidadeDominio {
 
     private Bandeira bandeira;
 
-    public CartaoCreditoDTO transfereParaCartaoCreditoDTO(CartaoCredito cartaoCredito){
+    @Override
+    public EntidadeDominio getDTO(EntidadeDominio dominio) {
 
-        CartaoCreditoDTO cartaoCreditoDTO = new CartaoCreditoDTO();
+        if(dominio instanceof CartaoCredito){
 
-        cartaoCreditoDTO.setId(cartaoCredito.getId());
+            CartaoCredito cartaoCredito = (CartaoCredito) dominio;
+            CartaoCreditoDTO cartaoCreditoDTO = new CartaoCreditoDTO();
 
-        cartaoCreditoDTO.setNumero(cartaoCredito.getNumero()
-                .substring(cartaoCredito.getNumero().length()-4));
+            cartaoCreditoDTO.setId(cartaoCredito.getId());
+            cartaoCreditoDTO.setNumero(cartaoCredito.getNumero()
+                    .substring(cartaoCredito.getNumero().length()-4));
+            cartaoCreditoDTO.setBandeira(cartaoCredito.getBandeira());
 
+            return cartaoCreditoDTO;
+        }
+        return null;
+    }
 
-        cartaoCreditoDTO.setBandeira(cartaoCredito.getBandeira());
-
-        return cartaoCreditoDTO;
+    @Override
+    public EntidadeDominio getEntidade(IDTO dto) {
+        return null;
     }
 }
