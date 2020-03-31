@@ -24,8 +24,15 @@ public class ValidaDadosEndereco implements IStrategy {
             msg.append(stringValidador.validar(endereco.getNumero(), "numero"));
             msg.append(stringValidador.validar(endereco.getBairro(), "bairro"));
             msg.append(stringValidador.validar(endereco.getCep(), "cep"));
-            msg.append(stringValidador.validar(endereco.getCidade().getEstado().getNome(), "estado"));
-            msg.append(stringValidador.validar(endereco.getCidade().getNome(), "cidade"));
+            if(endereco.getCidade() != null) {
+                msg.append(stringValidador.validar(endereco.getCidade().getNome(), "cidade"));
+                if(endereco.getCidade().getEstado() != null){
+                    msg.append(stringValidador.validar(endereco.getCidade().getEstado().getNome(), "estado"));
+                } else msg.append(stringValidador.validar("", "estado"));
+            } else {
+                msg.append(stringValidador.validar("", "cidade"));
+                msg.append(stringValidador.validar("", "estado"));
+            }
         }
 
         return msg.toString();

@@ -92,11 +92,14 @@ public class Fachada extends AbstractFachada implements IFachada {
 		sb.setLength(0);
         String nmClasse = entidade.getClass().getName();
 		Map<String, List<IStrategy>> mapaEntidade = regrasNegocio.get(nmClasse);
-		List<IStrategy> rnsEntidade = mapaEntidade.get("CONSULTAR");
 
-        if(rnsEntidade != null){
-			executarRegras(entidade, rnsEntidade);
+		if(mapaEntidade != null){
+			List<IStrategy> rnsEntidade = mapaEntidade.get("CONSULTAR");
+			if(rnsEntidade != null){
+				executarRegras(entidade, rnsEntidade);
+			}
 		}
+
 
 		if (sb.length() == 0) {
 			IPersistence dao = daos.get(nmClasse);

@@ -9,9 +9,9 @@
               <h3 class="mb-0">Deletar Endereço</h3>
             </div>
             <div class="card-body">
-              <p>É necessário confirmação para que seja excluido o endereço de entrega cujo CEP é <strong>08665-410</strong>, pertencente ao usuário <strong>Lucas de Almeida Rama Cascão</strong>.</p>
-              <input type="reset" class="btn btn-default float-lg-left" [routerLink]="['../address-list']">
-              <input type="button" class="btn btn-danger float-lg-right" [routerLink]="['../address-list']">
+              <p>É necessário confirmação para que seja excluido o endereço de entrega cujo CEP é <strong>{{endereco?.cep}}</strong>, pertencente ao usuário <strong>{{endereco?.pessoa?.nome}} {{endereco?.pessoa?.sobrenome}}</strong>.</p>
+              <input type="reset" class="btn btn-default float-lg-left" [routerLink]="['/app-logado/address-list']" value="Cancelar">
+              <input type="button" class="btn btn-danger float-lg-right" (click)="deleteEndereco()" value="Excluir">
             </div>
             <!--/card-block-->
           </div>

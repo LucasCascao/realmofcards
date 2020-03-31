@@ -1,3 +1,9 @@
+
+imagem-path: /media/lucas_cascao/ubuntu/Develop/Git/realmofcards/client/src/assets/images/cartas
+
+
+
+
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver

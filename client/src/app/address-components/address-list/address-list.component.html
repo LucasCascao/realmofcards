@@ -18,8 +18,8 @@
       <p class="card-text"><strong>Cidade: </strong>{{endereco?.cidade?.nome}}</p>
       <p class="card-text"><strong>estado: </strong>{{endereco?.cidade?.estado?.nome}}</p>
       <a class="btn btn-secondary" [routerLink]="['../../payment-page']">Selecionar esse endereço</a>
-      <a class="btn btn-danger float-right" (click)="seleciona(endereco?.id)" [routerLink]="['/app-logado/address-delete']">Excluir</a>
-      <a class="btn btn-warning float-right" (click)="seleciona(endereco?.id)" [routerLink]="['/app-logado/address-alter']">Editar</a>
+      <a class="btn btn-danger float-right" (click)="seleciona(endereco?.id)" [routerLink]="['/app-logado/address-delete', endereco?.id]">Excluir</a>
+      <a class="btn btn-warning float-right" (click)="seleciona(endereco?.id)" [routerLink]="['/app-logado/address-alter', endereco?.id]">Editar</a>
       <hr>
     </div>
   </div>

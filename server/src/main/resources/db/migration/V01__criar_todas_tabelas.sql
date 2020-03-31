@@ -10,6 +10,7 @@ CREATE TABLE carta (
     car_valor_compra  DECIMAL(4, 2) NOT NULL,
     car_precificacao  DECIMAL(4, 2) NOT NULL,
     car_valor_venda   DECIMAL(4, 2) NOT NULL,
+    car_quantidade    INT NOT NULL,
     car_imagem_path   VARCHAR(250) NOT NULL,
     car_jogo_id       INT NOT NULL,
     car_categoria_id  INT NOT NULL,
@@ -71,17 +72,21 @@ CREATE TABLE estado (
     est_nome   VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE estoque (
-    est_id          SERIAL NOT NULL,
-    est_quantidade  INT NOT NULL,
-    est_carta_id    INT NOT NULL
+CREATE TABLE item (
+    itm_id          SERIAL NOT NULL,
+    itm_quantidade  INT NOT NULL,
+    itm_carta_id    INT NOT NULL
 );
 
-CREATE TABLE item_pedido (
-    ipd_id          SERIAL NOT NULL,
-    ipd_quantidade  INT NOT NULL,
-    ipd_carta_id    INT NOT NULL,
-    ipd_pedido_id   INT NOT NULL
+CREATE TABLE carrinho (
+  crr_id            SERIAL NOT NULL,
+  crr_pessoa_id     INT NOT NULL
+);
+
+CREATE TABLE carrinho_item (
+  cri_id            SERIAL NOT NULL,
+  cri_carrinho_id   INT NOT NULL,
+  cri_item_id       INT NOT NULL
 );
 
 CREATE TABLE jogo (
@@ -105,7 +110,8 @@ CREATE TABLE pedido (
     ped_administrador_id  INT,
     ped_cliente_id        INT NOT NULL,
     ped_status_pedido_id  INT NOT NULL,
-    ped_data_compra       DATE NOT NULL
+    ped_data_compra       DATE NOT NULL,
+    ped_endereco_id       INT NOT NULL
 );
 
 CREATE TABLE pessoa (
@@ -133,6 +139,18 @@ CREATE TABLE user_type (
     tus_nome_tipo  VARCHAR(30) NOT NULL
 );
 
+CREATE TABLE forma_pagamento (
+  fpa_id            SERIAL NOT NULL,
+  fpa_cartao_id     INT NOT NULL,
+  fpa_pedido_id     INT NOT NULL
+);
+
+CREATE TABLE item_pedido (
+  itp_id            SERIAL NOT NULL,
+  itp_item_id     INT NOT NULL,
+  itp_pedido_id     INT NOT NULL
+);
+
 CREATE TABLE usuario (
     usu_id				 SERIAL NOT NULL,
     usu_email            VARCHAR(80) NOT NULL UNIQUE,
@@ -155,9 +173,13 @@ ALTER TABLE endereco ADD CONSTRAINT endereco_pk PRIMARY KEY ( end_id );
 
 ALTER TABLE estado ADD CONSTRAINT estado_pk PRIMARY KEY ( est_id );
 
-ALTER TABLE estoque ADD CONSTRAINT estoque_pk PRIMARY KEY ( est_id );
+ALTER TABLE item ADD CONSTRAINT item_pk PRIMARY KEY ( itm_id );
 
-ALTER TABLE item_pedido ADD CONSTRAINT item_pedido_pk PRIMARY KEY ( ipd_id );
+ALTER TABLE item_pedido ADD CONSTRAINT item_pedido_pk PRIMARY KEY ( itp_id );
+
+ALTER TABLE carrinho ADD CONSTRAINT carrinho_pk PRIMARY KEY (crr_id);
+
+ALTER TABLE carrinho_item ADD CONSTRAINT carrinho_item_pk PRIMARY KEY (cri_id);
 
 ALTER TABLE jogo ADD CONSTRAINT jogo_pk PRIMARY KEY ( jog_id );
 
@@ -223,17 +245,29 @@ ALTER TABLE endereco
     ADD CONSTRAINT endereco_pessoa_fk FOREIGN KEY ( end_pessoa_id )
         REFERENCES pessoa ( pes_id );
 
-ALTER TABLE estoque
-    ADD CONSTRAINT estoque_carta_fk FOREIGN KEY ( est_carta_id )
+ALTER TABLE item
+    ADD CONSTRAINT item_carta_fk FOREIGN KEY ( itm_carta_id )
         REFERENCES carta ( car_id );
 
 ALTER TABLE item_pedido
-    ADD CONSTRAINT item_pedido_carta_fk FOREIGN KEY ( ipd_carta_id )
-        REFERENCES carta ( car_id );
+    ADD CONSTRAINT item_pedido_item_fk FOREIGN KEY ( itp_item_id )
+        REFERENCES item ( itm_id );
 
 ALTER TABLE item_pedido
-    ADD CONSTRAINT item_pedido_pedido_fk FOREIGN KEY ( ipd_pedido_id )
+    ADD CONSTRAINT item_pedido_pedido_fk FOREIGN KEY ( itp_pedido_id )
         REFERENCES pedido ( ped_id );
+
+ALTER TABLE carrinho
+    ADD CONSTRAINT carrinho_pessoa_fk FOREIGN KEY ( crr_pessoa_id )
+        REFERENCES pessoa ( pes_id );
+
+ALTER TABLE carrinho_item
+    ADD CONSTRAINT carrinho_item_carrinho_fk FOREIGN KEY ( cri_carrinho_id )
+        REFERENCES carrinho ( crr_id );
+
+ALTER TABLE carrinho_item
+    ADD CONSTRAINT carrinho_item_item_fk FOREIGN KEY ( cri_item_id )
+        REFERENCES item ( itm_id );
 
 ALTER TABLE jogo_categoria_carta
     ADD CONSTRAINT jogo_categoria_carta_fk FOREIGN KEY ( jct_carta_id )
@@ -254,6 +288,10 @@ ALTER TABLE pedido
 ALTER TABLE pedido
     ADD CONSTRAINT pedido_status_pedido_fk FOREIGN KEY ( ped_status_pedido_id )
         REFERENCES status_pedido ( spd_id );
+
+ALTER TABLE pedido
+    ADD CONSTRAINT pedido_endereco_fk FOREIGN KEY ( ped_endereco_id )
+        REFERENCES endereco ( end_id );
 
 ALTER TABLE telefone
     ADD CONSTRAINT telefone_tipo_telefone_fk FOREIGN KEY ( tel_tipo_telefone_id )

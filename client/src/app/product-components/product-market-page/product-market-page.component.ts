@@ -21,25 +21,25 @@ export class ProductMarketPageComponent implements OnInit {
 
   cartas: Carta[];
 
+  carta: Carta;
+
   ngOnInit(): void {
-    console.log(GLOBAL)
-    this.client = JSON.parse(localStorage.getItem('userAutenticado'));
+    console.log(JSON.parse(sessionStorage.getItem('pessoaLogada')));
+    this.carta = new Carta();
+    this.carta.status = new Status();
+    this.carta.status.id = 1;
     this.getCartas();
   }
 
-  async getCartas(){
-    let carta: Carta = new Carta();
-    carta.status = new Status();
-    carta.status.id = 1;
-    await this.service.get(carta, 'cartas')
+  getCartas(){
+    this.service.get(this.carta, 'cartas')
     .subscribe( resultado => {
       this.cartas = resultado?.entidades;
-      console.log(resultado);
     });
   }
 
   visualizar(id: number){
-    GLOBAL.carta = new Carta;
+    GLOBAL.carta = new Carta();
     GLOBAL.carta.id = id;
   }
 

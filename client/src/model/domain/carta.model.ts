@@ -9,7 +9,9 @@ export class Carta {
   valorCompra: number;
   precificacao: number;
   valorVenda: number;
+  quantidade: number;
   imagemPath: string;
+  imagemArquivo: FormData;
   jogo: Jogo;
   categoriaCarta: Category;
   status: Status;

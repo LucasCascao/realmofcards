@@ -10,6 +10,8 @@ import {ResultUser} from '../../../model/results/result-user.model';
 import {User} from '../../../model/domain/user.model';
 import {Observable} from 'rxjs';
 import {TipoUsuario} from '../../../model/domain/tipo-usuario';
+import { UtilService } from 'src/services/util.service';
+import { Status } from 'src/model/domain/status.model';
 
 @Component({
   selector: 'app-user-register',
@@ -28,7 +30,7 @@ export class UserRegisterComponent implements OnInit {
 
   confirmarSenha: string;
 
-  constructor( private clienteService: ClienteService, private router: Router, private util: Util) { }
+  constructor( private service: UtilService, private router: Router, private util: Util) { }
 
   ngOnInit(): void {
   }
@@ -37,14 +39,15 @@ export class UserRegisterComponent implements OnInit {
     this.person.usuario = this.user;
     this.person.usuario.tipoUsuario = new TipoUsuario();
     this.person.usuario.tipoUsuario.id = 2;
+    this.person.usuario.status = new Status();
     this.person.usuario.status.id = 1;
     console.log(this.person);
-    await this.cadastrarPessoa();
+    this.cadastrarPessoa();
   }
 
   async cadastrarPessoa() {
-    await this.clienteService.addCliente(this.person).subscribe(value => {
-      this.resultClient = value;
+    await this.service.add(this.person, 'pessoas').subscribe(value => {
+      this.person = value?.entidades[0];
       if (value.msg != null) {
         this.msg = this.msg + value.msg;
       } else {
