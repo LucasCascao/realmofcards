@@ -4,6 +4,7 @@ import { UtilService } from 'src/services/util.service';
 import { Person } from 'src/model/domain/person.model';
 import { GLOBAL } from '../shared/global.util';
 import { User } from 'src/model/domain/user.model';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-app-logado',
@@ -19,15 +20,12 @@ export class AppLogadoComponent implements OnInit {
   ngOnInit(): void {
     this.pessoa = new Person();
     this.pessoa.usuario = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-    // this.pessoa.id = GLOBAL.pessoa.usuario.id;
-    this.pessoa.id = this.pessoa.usuario.id;
     this.getPessoaLogada();
   }
 
-  async getPessoaLogada() {
-    await this.service.get(this.pessoa, 'pessoas').subscribe( resultado => {
-      // GLOBAL.pessoa = resultado?.entidades[0];
-      sessionStorage.setItem('pessoaLogada', JSON.stringify(resultado?.entidades[0]));
+    getPessoaLogada() {
+      this.service.get(this.pessoa, 'pessoas').subscribe( resultado => {
+      sessionStorage.setItem('pessoaLogada', JSON.stringify( resultado.entidades[0]));
     });
   }
 }

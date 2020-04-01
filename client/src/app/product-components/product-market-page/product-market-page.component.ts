@@ -24,7 +24,6 @@ export class ProductMarketPageComponent implements OnInit {
   carta: Carta;
 
   ngOnInit(): void {
-    console.log(JSON.parse(sessionStorage.getItem('pessoaLogada')));
     this.carta = new Carta();
     this.carta.status = new Status();
     this.carta.status.id = 1;
@@ -39,8 +38,7 @@ export class ProductMarketPageComponent implements OnInit {
   }
 
   visualizar(id: number){
-    GLOBAL.carta = new Carta();
-    GLOBAL.carta.id = id;
+    sessionStorage.setItem('idCartaSelecionada', id?.toString());
   }
 
   filtrar(cartas: any) {

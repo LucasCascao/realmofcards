@@ -62,8 +62,8 @@
         <a (click)="visualizar(carta?.id)" [routerLink]="['/app-logado/product-detail']"><img class="card-img-top" [src]="carta?.imagemPath" alt=""></a>
         <div class="card-body">
           <h6 class="card-title"><strong>{{carta?.nome}}</strong></h6>
-          <p class="card-text">Categoria de jogo: {{carta?.jogo.nome}}</p>
-          <p class="card-text">Categoria de carta: {{carta?.categoriaCarta.nome}}</p>
+          <p class="card-text">Categoria de jogo: {{carta?.jogo?.nome}}</p>
+          <p class="card-text">Categoria de carta: {{carta?.categoriaCarta?.nome}}</p>
           <p class="card-text">Valor: R$ {{carta?.valorVenda}}</p>
           <a class="btn btn-lg btn-secondary btn-block" (click)="visualizar(carta?.id)" [routerLink]="['../product-detail']">Visualizar</a>
           <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/app-logado/cart']">Comprar</a>

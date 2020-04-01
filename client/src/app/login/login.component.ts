@@ -23,10 +23,13 @@ export class LoginComponent implements OnInit {
   }
 
   estaLogado(){
-    let pessoa = JSON.parse(sessionStorage.get('pessoaLogada'));
-    console.log(pessoa);
-    if(pessoa){
-      this.router.navigate(['/app-logado']);
+    let pessoa = sessionStorage.get('pessoaLogada');
+    if(pessoa !== null && pessoa !== undefined ){
+      pessoa = JSON?.parse(sessionStorage.get('pessoaLogada'));
+      console.log(pessoa);
+      if(pessoa){
+        this.router.navigate(['/app-logado']);
+      }
     }
   }
 

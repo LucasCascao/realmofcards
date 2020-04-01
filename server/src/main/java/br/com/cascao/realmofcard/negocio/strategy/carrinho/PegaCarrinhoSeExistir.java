@@ -4,20 +4,16 @@ import br.com.cascao.realmofcard.domain.Carrinho;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
 import br.com.cascao.realmofcard.repository.CarrinhoRepository;
-import br.com.cascao.realmofcard.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class VerificaProdutoInativoNoCarrinho implements IStrategy {
+public class PegaCarrinhoSeExistir implements IStrategy {
 
     @Autowired
     CarrinhoRepository carrinhoRepository;
-
-    @Autowired
-    ItemRepository itemRepository;
 
     @Override
     public String processar(EntidadeDominio entidade) {
@@ -28,11 +24,16 @@ public class VerificaProdutoInativoNoCarrinho implements IStrategy {
 
             Carrinho carrinho = (Carrinho) entidade;
 
-            if(carrinho.getPessoa().getId() != null){
-                List<Carrinho> carrinhos  = carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId());
-                carrinhos.forEach(carrinhoAchado -> {
-                    carrinhoAchado.getItens().removeIf( item -> item.getCarta().getStatus().getId() == 2);
-                    carrinhoRepository.save(carrinhoAchado);
+            if(carrinho.getPessoa() != null
+                    && carrinho.getPessoa().getId() != null){
+
+                List<Carrinho> carrinhosResultado = carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId());
+                carrinhosResultado.forEach( carrinhoElemento -> {
+                    if(carrinhoElemento.getId() != null){
+                        carrinho.setId(carrinhoElemento.getId());
+                        carrinhoElemento.getItens().addAll(carrinho.getItens());
+                        carrinho.setItens(carrinhoElemento.getItens());
+                    }
                 });
             }
         }

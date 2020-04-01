@@ -20,9 +20,6 @@ public class PessoaEndpoint {
     private Fachada fachada;
 
     @Autowired
-    private Resultado resultado;
-
-    @Autowired
     private PessoaDTO pessoaDTO;
 
     @PostMapping()

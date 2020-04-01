@@ -15,11 +15,13 @@ export class CartComponent implements OnInit {
 
   carrinho: Carrinho;
 
+  pessoa: Person;
+
   constructor(private service: UtilService) { }
 
   ngOnInit(): void {
     this.carrinho = new Carrinho();
-    this.carrinho.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
+    this.carrinho.pessoa = JSON.parse(sessionStorage?.getItem('pessoaLogada'));
     this.getCarrinho();
   }
 

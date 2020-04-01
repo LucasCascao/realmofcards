@@ -25,16 +25,13 @@ export class AuthService {
 
   constructor(private router: Router, private service: UtilService, private util: Util) { }
 
-  signIn(user: User) {
+  async signIn(user: User) {
 
-    this.service.get(user, 'usuarios').subscribe( resuldado => {
-      this.clients.usuario = resuldado?.entidades[0];
+    await this.service.get(user, 'usuarios').subscribe( async resuldado => {
       if (resuldado.msg !== null) {
-        alert(this.util.getMensagensSeparadas(resuldado.msg))
+        alert(this.util?.getMensagensSeparadas(resuldado?.msg))
       } else {
-        sessionStorage.setItem('usuarioLogado', JSON.stringify(this.clients.usuario));
-        // GLOBAL.pessoa = new Person();
-        // GLOBAL.pessoa.usuario = this.clients?.usuario;
+        sessionStorage?.setItem('usuarioLogado', JSON.stringify(await resuldado?.entidades[0]));
         this.router.navigate(['/app-logado']);
       }
     });

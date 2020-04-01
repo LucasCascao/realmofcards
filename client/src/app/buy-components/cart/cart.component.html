@@ -15,11 +15,11 @@
             </a>
           </div>
           <div class="col-md-7 float-left">
-            <p class="card-text"><strong>Produto:</strong> {{item.carta.nome}}</p>
-            <p class="card-text"><strong>Valor total:</strong> {{item.carta.valorVenda}}</p>
-            <p class="card-text"><strong>Quantidade disponível:</strong> {{item.carta.quantidade}}.</p>
+            <p class="card-text"><strong>Produto:</strong> {{item?.carta.nome}}</p>
+            <p class="card-text"><strong>Valor total:</strong> {{item?.carta?.valorVenda}}</p>
+            <p class="card-text"><strong>Quantidade disponível:</strong> {{item?.carta?.quantidade}}.</p>
             <p class="card-text"><strong>Quantidade:</strong>
-              <input class="form-control w-25" type="number" name="quantidade" value="number" [max]="item.carta.quantidade" min="1" value="1">
+              <input class="form-control w-25" type="number" name="quantidade" [value]="item?.quantidade" [max]="item?.carta?.quantidade" min="1" value="1">
             </p>
           </div>
           <div class="col-md-2 float-left">
