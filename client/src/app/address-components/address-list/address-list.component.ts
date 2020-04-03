@@ -19,9 +19,7 @@ export class AddressListComponent implements OnInit {
   endereco: Endereco = new Endereco();
 
   ngOnInit(): void {
-    this.endereco.pessoa = new Person();
-    this.endereco.pessoa.id = GLOBAL.pessoa.id;
-    console.log(GLOBAL.pessoa.id);
+    this.endereco.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     this.getEnderecos();
   }
 

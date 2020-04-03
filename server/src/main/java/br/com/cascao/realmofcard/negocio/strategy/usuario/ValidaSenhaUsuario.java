@@ -5,7 +5,7 @@ import br.com.cascao.realmofcard.domain.Usuario;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
 import br.com.cascao.realmofcard.repository.UsuarioRepository;
 import br.com.cascao.realmofcard.util.Criptografia;
-import br.com.cascao.realmofcard.util.validator.StringValidador;
+import br.com.cascao.realmofcard.util.validador.ValidadorString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class ValidaSenhaUsuario implements IStrategy{
 
 	@Autowired
-	StringValidador stringValidador;
+	ValidadorString validadorString;
 
 	@Autowired
 	UsuarioRepository usuarioRepository;
@@ -25,7 +25,7 @@ public class ValidaSenhaUsuario implements IStrategy{
 
 		if(entidade instanceof Usuario){
 			Usuario usuario = (Usuario) entidade;
-			if(stringValidador.validar(usuario.getPassword(), "senha").equals("")){
+			if(validadorString.validar(usuario.getPassword(), "senha").equals("")){
 				usuario.setPassword(Criptografia.criptografar(usuario.getPassword()));
 				if(!usuarioRepository.existsByEmailAndPassword(usuario.getEmail(), usuario.getPassword())){
 					msg.append("Login ou senha incorreto");

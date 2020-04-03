@@ -13,19 +13,9 @@ import { async } from '@angular/core/testing';
 })
 export class AppLogadoComponent implements OnInit {
 
-  pessoa: Person;
+  // pessoa: Person;
 
   constructor(private service: UtilService) { }
 
-  ngOnInit(): void {
-    this.pessoa = new Person();
-    this.pessoa.usuario = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-    this.getPessoaLogada();
-  }
-
-    getPessoaLogada() {
-      this.service.get(this.pessoa, 'pessoas').subscribe( resultado => {
-      sessionStorage.setItem('pessoaLogada', JSON.stringify( resultado.entidades[0]));
-    });
-  }
+  ngOnInit(): void {}
 }

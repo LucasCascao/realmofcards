@@ -1,11 +1,11 @@
 <div class="container">
   <h1 class="my-4">Endereço de entrega</h1>
-  <div class="row"><!-- Inicio Row -->
+  <div class="row" *ngIf="util.isNotNull(endereco)"><!-- Inicio Row -->
     <div class="col-lg-8 mb-4">
       <div class="card h-100">
         <h4 class="card-header">Endereço</h4>
         <div class="card-body">
-          <p class="card-text">Rua Passos, n° 876, Cidade Edson, Suzano-SP.</p>
+          <p class="card-text">{{endereco?.logradouro}}, n° {{endereco?.numero}}, {{endereco?.bairro}}, {{endereco?.cidade?.nome}} - {{endereco?.cidade?.estado?.sigla}}.</p>
           <p class="card-text"><strong>Valor de frete para esse endereço: </strong>R$ 12,65</p>
           <a class="btn btn-secondary" [routerLink]="['/app-logado/address-list']">Trocar</a>
         </div>
@@ -13,8 +13,19 @@
     </div>
   </div>
   <hr>
+  <div class="row" *ngIf="util.isNull(endereco)"><!-- Inicio Row -->
+    <div class="col-lg-8 mb-4">
+      <div class="card h-100">
+        <h4 class="card-header">Endereço</h4>
+        <div class="card-body">
+          <a class="btn btn-secondary" [routerLink]="['/app-logado/address-register']">Cadastrar um endereço</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
   <h1 class="my-4">Cupom</h1>
-  <div class="row">
+  <div class="row" >
     <div class="col-lg-8 mb-4">
       <div class="card h-100">
         <h4 class="card-header">Cupom</h4>
@@ -34,27 +45,12 @@
   <!-- Forma de pagamento -->
   <h1 class="my-4">Forma de Pagamento</h1>
   <div class="row"><!-- Inicio Row -->
-<!--    &lt;!&ndash; Boleto &ndash;&gt;-->
-<!--    <div class="col-lg-4 mb-4">-->
-<!--      <div class="card h-100">-->
-<!--        <h4 class="card-header">Boleto bancario</h4>-->
-<!--        <div class="card-body">-->
-<!--          <p class="card-text">Boleto bancario.</p>-->
-<!--        </div>-->
-<!--        <div class="card-footer">-->
-<!--          <div class="custom-control custom-radio">-->
-<!--            <input type="radio" class="custom-control-input" id="radioBoleto" name="defaultExample2" checked>-->
-<!--            <label class="custom-control-label" for="radioBoleto">Escolha</label>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
     <!-- 1 Cartão de Credito -->
     <div class="col-lg-8 mb-4">
       <div class="card h-100">
         <h4 class="card-header">1 Cartão de crédito</h4>
         <div class="card-body">
-          <p class="card-text">Cartão selecionado com o final: 8595</p>
+          <p class="card-text">Cartão selecionado com o final: {{cartao1?.numero}}</p>
           <a class="btn btn-secondary" [routerLink]="['/app-logado/creditcard-list']">Trocar</a>
           <hr>
           <select class="form-control">
@@ -79,7 +75,7 @@
         <h4 class="card-header">2 Cartões de crédito</h4>
         <div class="card-body">
           <div class="col-lg-6 float-left">
-            <p class="card-text">Cartão selecionado com o final: 8595</p>
+            <p class="card-text">Cartão selecionado com o final: {{cartao1?.numero}}</p>
             <a class="btn btn-secondary mb-md-3" [routerLink]="['/app-logado/creditcard-list']">Trocar</a>
             <div class="row">
               <div class="col-lg-2 mb-md-3">
@@ -91,7 +87,7 @@
             </div>
           </div>
           <div class="col-lg-6 float-left">
-            <p class="card-text">Cartão selecionado com o final: 9999</p>
+            <p class="card-text">Cartão selecionado com o final: {{cartao2?.numero}}</p>
             <a class="btn btn-secondary mb-md-3" [routerLink]="['/app-logado/creditcard-list']">Trocar</a>
             <div class="row">
               <div class="col-lg-2 mb-md-3">

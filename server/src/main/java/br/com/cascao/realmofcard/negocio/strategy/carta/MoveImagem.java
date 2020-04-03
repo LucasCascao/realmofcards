@@ -5,8 +5,7 @@ import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
 import br.com.cascao.realmofcard.repository.CartaRepository;
 import br.com.cascao.realmofcard.util.MovedorImagem;
-import br.com.cascao.realmofcard.util.validator.DoubleValidador;
-import br.com.cascao.realmofcard.util.validator.StringValidador;
+import br.com.cascao.realmofcard.util.validador.ValidadorString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,7 @@ import java.io.IOException;
 public class MoveImagem implements IStrategy {
 
     @Autowired
-    StringValidador stringValidador;
+    ValidadorString validadorString;
 
     @Autowired
     CartaRepository cartaRepository;

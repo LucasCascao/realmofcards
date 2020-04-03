@@ -5,6 +5,7 @@ export class CartaoCredito {
     id: number;
     numero: string;
     codigoSeguranca: string;
+    preferido: boolean;
     bandeira: Bandeira;
     pessoa: Person;
 }

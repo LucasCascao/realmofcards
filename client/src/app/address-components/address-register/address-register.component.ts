@@ -25,20 +25,20 @@ export class AddressRegisterComponent implements OnInit {
     this.endereco = new Endereco();
     this.endereco.cidade = new Cidade();
     this.endereco.cidade.estado = new Estado();
-    this.endereco.pessoa = GLOBAL.pessoa;
+    this.endereco.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
+    this.endereco.preferido = false;
     this.estados = [];
-    console.log(GLOBAL.pessoa);
     this.getEstados();
   }
 
-  async getEstados() {
-    await this.service.get(new Estado(), 'estados').subscribe( resultado => {
+  getEstados() {
+    this.service.get(new Estado(), 'estados').subscribe( resultado => {
       this.estados = resultado?.entidades;
     });
   }
 
-  async cadastra() {
-    await this.service.add(this.endereco, 'enderecos').subscribe(resultado => {
+  cadastra() {
+    this.service.add(this.endereco, 'enderecos').subscribe(resultado => {
       if (resultado.msg == null) {
         this.router.navigate(['/app-logado/address-list']);
       } else {

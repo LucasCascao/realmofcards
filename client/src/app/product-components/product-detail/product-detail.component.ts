@@ -17,11 +17,12 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private service: UtilService, private router: Router) { }
 
-  carta: Carta = new Carta;
+  carta: Carta = new Carta();
 
   quantidade: number;
 
   ngOnInit(): void {
+    this.quantidade = 1;
     this.carta.id = Number.parseInt(sessionStorage.getItem('idCartaSelecionada'));
     this.getCarta();
   }
@@ -32,7 +33,7 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  adicionaItemNoCarrinho(id: number, quantidade: number){
+  public adicionaItemNoCarrinho(id: number) {
 
     const carrinho: Carrinho = new Carrinho();
 
@@ -40,7 +41,7 @@ export class ProductDetailComponent implements OnInit {
 
     const item: Item = new Item();
 
-    item.quantidade = quantidade;
+    item.quantidade = this.quantidade;
 
     item.carta = new Carta();
 

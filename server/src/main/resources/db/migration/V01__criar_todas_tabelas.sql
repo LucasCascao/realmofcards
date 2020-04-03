@@ -21,6 +21,7 @@ CREATE TABLE cartao (
     crt_id                SERIAL NOT NULL,
     crt_numero            VARCHAR(16) NOT NULL UNIQUE,
     crt_codigo_seguranca  VARCHAR(3) NOT NULL,
+    crt_preferido         BOOLEAN NOT NULL,
     crt_bandeira_id       INT NOT NULL,
     crt_pessoa_id         INT NOT NULL
 );
@@ -49,6 +50,7 @@ CREATE TABLE endereco (
     end_numero          VARCHAR(6) NOT NULL,
     end_bairro          VARCHAR(70) NOT NULL,
     end_cep             VARCHAR(8) NOT NULL,
+    end_preferido       BOOLEAN NOT NULL,
     end_complemento     VARCHAR(200) NOT NULL,
     end_cidade_id       INT NOT NULL,
     end_pessoa_id       INT NOT NULL

@@ -4,7 +4,7 @@ import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Usuario;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
-import br.com.cascao.realmofcard.util.validator.StringValidador;
+import br.com.cascao.realmofcard.util.validador.ValidadorString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class ValidaDadosUsuario implements IStrategy {
 
     @Autowired
-    StringValidador stringValidador;
+    ValidadorString validadorString;
 
     @Override
     public String processar(EntidadeDominio entidade) {
@@ -30,10 +30,10 @@ public class ValidaDadosUsuario implements IStrategy {
                 usuario = (Usuario) entidade;
             }
 
-            msg.append(stringValidador.validar(usuario.getEmail(), "email"));
+            msg.append(validadorString.validar(usuario.getEmail(), "email"));
 
             if (usuario.getId() == null) {
-                msg.append(stringValidador.validar(usuario.getPassword(), "senha"));
+                msg.append(validadorString.validar(usuario.getPassword(), "senha"));
             }
         }
 

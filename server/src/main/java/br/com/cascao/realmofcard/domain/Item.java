@@ -32,12 +32,4 @@ public class Item extends EntidadeDominio {
     @JoinColumn(name = "itm_carta_id")
     private Carta carta;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "itens", cascade = CascadeType.ALL)
-    private List<Pedido> pedidos;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "itens", cascade = CascadeType.ALL)
-    private List<Carrinho> carrinhos;
-
 }

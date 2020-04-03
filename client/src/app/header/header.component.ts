@@ -12,20 +12,14 @@ import { UtilService } from 'src/services/util.service';
 })
 export class HeaderComponent implements OnInit {
 
-  client: Person = new Person();
-
   constructor(private route: ActivatedRoute, private clienteService: ClienteService, private service: UtilService) { }
 
   ngOnInit() {
-    // this.client.id = GLOBAL.pessoa.usuario.id;
-    // this.getUser();
-    console.log(GLOBAL);
   }
 
-  // async getUser() {
-  //   await this.service.get(this.client, 'pessoas').subscribe(resultado => {
-  //     this.client =resultado?.entidades[0];
-  //   });
-  // }
+  logout() {
+    sessionStorage.removeItem('usuarioLogado');
+    sessionStorage.removeItem('pessoaLogada');
+  }
 
 }

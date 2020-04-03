@@ -31,7 +31,7 @@ export class AuthService {
       if (resuldado.msg !== null) {
         alert(this.util?.getMensagensSeparadas(resuldado?.msg))
       } else {
-        sessionStorage?.setItem('usuarioLogado', JSON.stringify(await resuldado?.entidades[0]));
+        sessionStorage?.setItem('pessoaLogada', JSON.stringify(await resuldado?.entidades[0]));
         this.router.navigate(['/app-logado']);
       }
     });

@@ -4,6 +4,7 @@ import br.com.cascao.realmofcard.domain.Carrinho;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
 import br.com.cascao.realmofcard.repository.CarrinhoRepository;
+import br.com.cascao.realmofcard.util.validador.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,15 +28,16 @@ public class PegaCarrinhoSeExistir implements IStrategy {
             if(carrinho.getPessoa() != null
                     && carrinho.getPessoa().getId() != null){
 
-                List<Carrinho> carrinhosResultado = carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId());
-                carrinhosResultado.forEach( carrinhoElemento -> {
-                    if(carrinhoElemento.getId() != null){
-                        carrinho.setId(carrinhoElemento.getId());
-                        carrinhoElemento.getItens().addAll(carrinho.getItens());
-                        carrinho.setItens(carrinhoElemento.getItens());
-                    }
-                });
+                Carrinho carrinhoResultado = carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId());
+
+                if(Util.isNotNull(carrinhoResultado)){
+
+                    carrinho.setId(carrinhoResultado.getId());
+                    carrinho.getItens().addAll(carrinhoResultado.getItens());
+                }
+
             }
+
         }
 
         return msg.toString();

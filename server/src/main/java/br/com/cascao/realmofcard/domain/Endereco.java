@@ -38,6 +38,9 @@ public class Endereco extends EntidadeDominio {
     @Column(name = "end_complemento")
     private String complemento;
 
+    @Column(name = "end_preferido")
+    private Boolean preferido;
+
     @ManyToOne()
     @JoinColumn(name = "end_cidade_id")
     private Cidade cidade;

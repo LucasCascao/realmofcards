@@ -31,6 +31,9 @@ public class CartaoCredito extends EntidadeDominio{
     @Column(name = "crt_codigo_seguranca")
     private String codigoSeguranca;
 
+    @Column(name = "crt_preferido")
+    private Boolean preferido;
+
     @ManyToOne()
     @JoinColumn(name = "crt_bandeira_id")
     private Bandeira bandeira;

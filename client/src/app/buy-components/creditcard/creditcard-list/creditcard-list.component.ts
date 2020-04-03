@@ -15,23 +15,15 @@ export class CreditcardListComponent implements OnInit {
 
   cartoes: CartaoCredito[];
 
-  pessoa: Person;
-
-  cartaoCredito: CartaoCredito;
-
   ngOnInit(): void {
-    
-    this.pessoa = new Person();
-    this.cartaoCredito = new CartaoCredito();
-
-    this.pessoa.id = GLOBAL.pessoa.id;
-    this.cartaoCredito.pessoa = this.pessoa;
-
-    this.getCartoes();
+    let cartaoCredito = new CartaoCredito();
+    let pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'))
+    cartaoCredito.pessoa = pessoa;
+    this.getCartoes(cartaoCredito);
   }
 
-  async getCartoes(){
-    await this.service.get(this.cartaoCredito, 'cartaocredito').subscribe( resultado => {
+  getCartoes(cartaoCredito: CartaoCredito){
+    this.service.get(cartaoCredito, 'cartaocredito').subscribe( resultado => {
       this.cartoes = resultado?.entidades;
     });
   }

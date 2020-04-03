@@ -43,8 +43,7 @@ public class CarrinhoPersistence implements IPersistence {
         List<EntidadeDominio> carrinhos = new ArrayList<>();
         if(entidade instanceof Carrinho){
             Carrinho carrinho = (Carrinho) entidade;
-
-            carrinhos.addAll(carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId()));
+            carrinhos.add(carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId()));
             return carrinhos;
         } else return null;
     }

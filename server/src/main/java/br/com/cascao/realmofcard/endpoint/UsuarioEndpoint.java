@@ -2,6 +2,7 @@ package br.com.cascao.realmofcard.endpoint;
 
 import br.com.cascao.realmofcard.domain.Resultado;
 import br.com.cascao.realmofcard.domain.Usuario;
+import br.com.cascao.realmofcard.dto.PessoaDTO;
 import br.com.cascao.realmofcard.dto.UsuarioDTO;
 import br.com.cascao.realmofcard.negocio.fachada.Fachada;
 import br.com.cascao.realmofcard.util.DTOUtil;
@@ -18,18 +19,15 @@ public class UsuarioEndpoint {
     private Fachada fachada;
 
     @Autowired
-    private Resultado resultado;
-
-    @Autowired
-    private UsuarioDTO usuarioDTO;
+    private PessoaDTO pessoaDTO;
 
     @PostMapping()
     public ResponseEntity<Resultado> consultar(@RequestBody Usuario usuario){
-        return ResponseEntity.ok().body(DTOUtil.tranfereParaDTO(fachada.consultar(usuario), usuarioDTO));
+        return ResponseEntity.ok().body(DTOUtil.tranfereParaDTO(fachada.consultar(usuario), pessoaDTO));
     }
 
     @PutMapping()
     public ResponseEntity<?> alterar(@RequestBody Usuario usuario){
-        return ResponseEntity.ok().body(DTOUtil.tranfereParaDTO(fachada.alterar(usuario), usuarioDTO));
+        return ResponseEntity.ok().body(DTOUtil.tranfereParaDTO(fachada.alterar(usuario), pessoaDTO));
     }
 }

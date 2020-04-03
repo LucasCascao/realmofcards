@@ -3,8 +3,7 @@ package br.com.cascao.realmofcard.negocio.strategy.pessoa;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
-import br.com.cascao.realmofcard.negocio.strategy.usuario.ValidaDadosUsuario;
-import br.com.cascao.realmofcard.util.validator.StringValidador;
+import br.com.cascao.realmofcard.util.validador.ValidadorString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class ValidaDadosPessoa implements IStrategy{
 
 	@Autowired
-	StringValidador stringValidador;
+	ValidadorString validadorString;
 
 	@Override
 	public String processar(final EntidadeDominio entidade) {
@@ -20,8 +19,8 @@ public class ValidaDadosPessoa implements IStrategy{
 		Pessoa pessoa = (Pessoa) entidade;
 		StringBuilder msg = new StringBuilder();
 
-		msg.append(stringValidador.validar(pessoa.getNome(), "nome"));
-		msg.append(stringValidador.validar(pessoa.getSobrenome(), "sobrenome"));
+		msg.append(validadorString.validar(pessoa.getNome(), "nome"));
+		msg.append(validadorString.validar(pessoa.getSobrenome(), "sobrenome"));
 		if(pessoa.getId() == null){
 			if(pessoa.getCpf() == null || pessoa.getCpf().trim().equals("")){
 				msg.append("O campo CPF é obrigatório.");
@@ -29,8 +28,8 @@ public class ValidaDadosPessoa implements IStrategy{
 				msg.append("CPF invalido.");
 			}
 		}
-		msg.append(stringValidador.validar(pessoa.getDataNascimento(), "data de nascimento"));
-		msg.append(stringValidador.validar(pessoa.getSexo(), "sexo"));
+		msg.append(validadorString.validar(pessoa.getDataNascimento(), "data de nascimento"));
+		msg.append(validadorString.validar(pessoa.getSexo(), "sexo"));
 		
 		return msg.toString();
 	}

@@ -1,7 +1,7 @@
 <div class="container">
   <h3 class="mt-4 mb-3"><strong>{{carta.nome}}</strong></h3>
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-4">
       <img class="img-fluid rounded mb-4" [src]="carta?.imagemPath" alt="">
     </div>
     <div class="col-lg-6">
@@ -10,10 +10,12 @@
       <p class="card-text"><strong>Categoria de carta:</strong> {{carta?.categoriaCarta?.nome}}.</p>
       <p class="card-text"><strong>Valor:</strong> R$ {{carta?.valorVenda}}.</p>
       <p class="card-text"><strong>Quantidade disponivel:</strong> {{carta?.quantidade}}.</p>
-      <p class="card-text col-lg-12"><strong>Quantidade:</strong>
-        <input class="form-control w-25 float-right" type="number" name="quantidade" [(ngModel)]="quantidade" [max]="carta?.quantidade" min="1" value="1">
+      <p class="card-text"><strong>Quantidade:</strong>
+        <input class="form-control w-25 " type="number" name="quantidade" [value]="quantidade" [max]="carta?.quantidade" min="1" >
       </p>
-      <a class="btn btn-lg btn-secondary btn-block" (click)="adicionaItemNoCarrinho(carta?.id, quantidade)">Adicionar ao carrinho</a>
+    </div>
+    <div class="col-lg-2">
+      <button class="btn btn-lg btn-secondary btn-block" (click)="adicionaItemNoCarrinho(carta?.id)">Adicionar ao carrinho</button>
     </div>
   </div>
   <hr>
