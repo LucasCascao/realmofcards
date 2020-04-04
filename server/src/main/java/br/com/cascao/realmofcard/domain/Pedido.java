@@ -43,6 +43,9 @@ public class Pedido extends EntidadeDominio{
     @JoinColumn(name = "ped_endereco_id")
     private Endereco endereco;
 
+    @OneToOne()
+    @JoinColumn(name = "ped_forma_pagamento_id")
+    private FormaPagamento formaPagamento;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "item_pedido",

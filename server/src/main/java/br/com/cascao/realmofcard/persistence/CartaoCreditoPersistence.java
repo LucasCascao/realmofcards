@@ -48,8 +48,9 @@ public class CartaoCreditoPersistence implements IPersistence {
             }
 
             if(Util.isNotNull(cartaoCredito.getPreferido())){
-                List<CartaoCredito> cartaoCreditos = cartaoCreditoRepository
-                        .findByPessoa_IdAndPreferido(cartaoCredito.getPessoa().getId(), cartaoCredito.getPreferido());
+                cartaoCreditoRepository
+                        .findByPessoa_IdAndPreferido(cartaoCredito.getPessoa().getId(), cartaoCredito.getPreferido())
+                        .forEach(cartaoCreditoResultado -> cartoesCredito.add(cartaoCreditoResultado));
                 return cartoesCredito;
             }
 

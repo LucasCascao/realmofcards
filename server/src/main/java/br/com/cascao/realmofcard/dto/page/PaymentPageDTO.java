@@ -1,6 +1,9 @@
 package br.com.cascao.realmofcard.dto.page;
 
 import br.com.cascao.realmofcard.domain.*;
+import br.com.cascao.realmofcard.dto.CarrinhoDTO;
+import br.com.cascao.realmofcard.dto.CartaoCreditoDTO;
+import br.com.cascao.realmofcard.dto.EnderecoDTO;
 import br.com.cascao.realmofcard.dto.IDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,22 +18,16 @@ import java.util.List;
 @Component
 public class PaymentPageDTO extends EntidadeDominio implements IDTO {
 
-    Endereco endereco;
+    private EnderecoDTO endereco;
 
-    CartaoCredito cartaoCredito1;
+    private List<CartaoCreditoDTO> cartaoCreditoList;
 
-    CartaoCredito cartaoCredito2;
+    private CarrinhoDTO carrinho;
+
+    private Pessoa pessoa;
 
     @Override
     public EntidadeDominio getDTO(EntidadeDominio dominio) {
-
-        if(dominio instanceof PaymentPageDTO){
-            PaymentPageDTO paymentPageDTO = new PaymentPageDTO();
-
-
-
-            return paymentPageDTO;
-        }
         return null;
     }
 
