@@ -29,7 +29,7 @@ public class PaymentPageDTO extends EntidadeDominio implements IDTO {
 
 
 
-            return PaymentPageDTO;
+            return paymentPageDTO;
         }
         return null;
     }
