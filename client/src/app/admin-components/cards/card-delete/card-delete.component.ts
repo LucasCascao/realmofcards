@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {UtilService} from '../../../../services/util.service';
 import {Carta} from '../../../../model/domain/carta.model';
 import {ActivatedRoute, Route, Router} from '@angular/router';
-import {GLOBAL} from "../../../shared/global.util";
 
 @Component({
   selector: 'app-card-delete',
@@ -16,8 +15,7 @@ export class CardDeleteComponent implements OnInit {
   carta: Carta;
 
   ngOnInit(): void {
-    this.carta = new Carta();
-    this.carta.id = GLOBAL.carta.id;
+    this.carta = JSON.parse(sessionStorage.getItem('cartaSelecionada'));
     this.getCarta();
   }
 

@@ -104,9 +104,9 @@
               <p class="card-text">Parcelas: </p>
             </div>
             <div class="col-lg-6">
-              <p *ngFor="let valor in valores">{{valores?.indexOf(valor)}}x R$ {{valor?.toFixed(2)}} - Sem juros</p>
+              <p *ngFor="let valor in valores">{{valores?.indexOf(valor) + 1}}x R$ {{valor}} - Sem juros</p>
               <select class="form-control">
-                <option *ngFor="let valor in valores">{{valores.indexOf(valor)}}x R$ {{valor.toFixed(2)}} - Sem juros</option>
+                <option *ngFor="let valor in valores">{{valores.indexOf(valor)}}x R$ {{valor}} - Sem juros</option>
               </select>
             </div>
           </div>

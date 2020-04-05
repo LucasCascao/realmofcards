@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MockCards} from "../../../mock/mock-card.model";
-import {Person} from "../../../model/domain/person.model";
+import {Person} from '../../../model/domain/person.model';
 import { UtilService } from 'src/services/util.service';
 import {Carta} from '../../../model/domain/carta.model';
 import { Status } from 'src/model/domain/status.model';
-import { GLOBAL } from 'src/app/shared/global.util';
 import { ActivatedRoute, Routes, Router } from '@angular/router';
 
 @Component({
@@ -30,15 +28,17 @@ export class ProductMarketPageComponent implements OnInit {
     this.getCartas();
   }
 
-  getCartas(){
+  getCartas() {
     this.service.get(this.carta, 'cartas')
     .subscribe( resultado => {
       this.cartas = resultado?.entidades;
     });
   }
 
-  visualizar(id: number){
-    sessionStorage.setItem('idCartaSelecionada', id?.toString());
+  visualizar(id: number) {
+    const carta: Carta = new Carta();
+    carta.id = id;
+    sessionStorage.setItem('cartaSelecionada', JSON.stringify(carta));
   }
 
   filtrar(cartas: any) {

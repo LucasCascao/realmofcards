@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ClienteService} from '../../../services/cliente.service';
 import {Person} from '../../../model/domain/person.model';
-import { GLOBAL } from 'src/app/shared/global.util';
 
 @Component({
   selector: 'app-user-delete',
@@ -16,7 +15,7 @@ export class UserDeleteComponent implements OnInit {
   constructor(private router: Router, private clienteService: ClienteService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.client.id = GLOBAL.pessoa.usuario.id;
+    this.client = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     this.getCliente();
   }
 

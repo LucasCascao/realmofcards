@@ -5,7 +5,6 @@ import {MockCards} from '../../../../mock/mock-card.model';
 import { UtilService } from 'src/services/util.service';
 import { Carta } from 'src/model/domain/carta.model';
 import { Status } from 'src/model/domain/status.model';
-import {GLOBAL} from "../../../shared/global.util";
 
 @Component({
   selector: 'app-card-list',
@@ -33,8 +32,9 @@ export class CardListComponent implements OnInit {
   }
 
   seleciona(id: number) {
-    GLOBAL.carta = new Carta();
-    GLOBAL.carta.id = id;
+    const carta: Carta = new Carta();
+    carta.id = id;
+    sessionStorage.setItem('cartaSelecionada', JSON.stringify(carta));
   }
 
   filtrar(cartas: any) {

@@ -21,7 +21,7 @@ public class Carrinho extends EntidadeDominio{
     @Column(name = "crr_id")
     private Integer id;
 
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "crr_pessoa_id")
     private Pessoa pessoa;
 

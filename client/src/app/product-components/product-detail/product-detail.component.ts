@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MockCards} from "../../../mock/mock-card.model";
+import {MockCards} from '../../../mock/mock-card.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Carta } from 'src/model/domain/carta.model';
 import { UtilService } from 'src/services/util.service';
 import { async } from '@angular/core/testing';
-import { GLOBAL } from 'src/app/shared/global.util';
 import { Carrinho } from 'src/model/domain/carrinho.model';
 import { Item } from 'src/model/domain/item.model';
 
@@ -23,7 +22,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.quantidade = 1;
-    this.carta.id = Number.parseInt(sessionStorage.getItem('idCartaSelecionada'));
+    this.carta = JSON.parse(sessionStorage.getItem('cartaSelecionada'));
     this.getCarta();
   }
 

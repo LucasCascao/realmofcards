@@ -59,8 +59,13 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
-//
-//	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
-//	private List<CartaoCredito> cartoesCredito = new ArrayList<>();
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+	private List<CartaoCredito> cartoesCredito = new ArrayList<>();
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+	private List<Carrinho> carrinhos = new ArrayList<>();
 
 }

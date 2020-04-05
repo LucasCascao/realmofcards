@@ -3,7 +3,6 @@ import {UtilService} from '../../../services/util.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Endereco} from '../../../model/domain/endereco.model';
 import {Person} from '../../../model/domain/person.model';
-import {GLOBAL} from '../../shared/global.util';
 import {Util} from '../../shared/app.util';
 
 @Component({
@@ -18,16 +17,14 @@ export class AddressAlterComponent implements OnInit {
   endereco: Endereco = new Endereco();
 
   ngOnInit(): void {
-    this.endereco.pessoa = new Person();
-    this.endereco.pessoa.id = GLOBAL.pessoa.id;
-    console.log(GLOBAL.pessoa.id);
+    this.endereco = JSON.parse(sessionStorage.getItem('enderecoSelecionado'));
+    this.endereco.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     this.getEnderecos();
   }
 
   async getEnderecos() {
     await this.service.get( this.endereco, 'enderecos').subscribe( resultado => {
       this.endereco = resultado?.entidades[0];
-      console.log()
     });
   }
 

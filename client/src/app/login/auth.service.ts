@@ -6,7 +6,6 @@ import {ResultClient} from '../../model/results/result-person.model';
 import {User} from '../../model/domain/user.model';
 import {ResultUser} from '../../model/results/result-user.model';
 import {UsuarioService} from '../../services/usuario.service';
-import { GLOBAL } from '../shared/global.util';
 import { UtilService } from 'src/services/util.service';
 import { Util } from '../shared/app.util';
 

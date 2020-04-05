@@ -3,7 +3,6 @@ import { UtilService } from 'src/services/util.service';
 import { Endereco } from 'src/model/domain/endereco.model';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from 'src/model/domain/person.model';
-import { GLOBAL } from 'src/app/shared/global.util';
 
 @Component({
   selector: 'app-address-list',
@@ -30,9 +29,9 @@ export class AddressListComponent implements OnInit {
   }
 
   seleciona(id: number){
-    console.log(id)
-    GLOBAL.endereco = new Endereco();
-    GLOBAL.endereco.id = id;
+    const endereco = new Endereco();
+    endereco.id = id;
+    sessionStorage.setItem('enderecoSelecionado', JSON.stringify(endereco));
   }
 
 }

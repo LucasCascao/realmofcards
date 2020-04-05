@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UtilService} from '../../../services/util.service';
 import {Router} from '@angular/router';
-import {Endereco} from "../../../model/domain/endereco.model";
-import {GLOBAL} from "../../shared/global.util";
-import {Util} from "../../shared/app.util";
+import {Endereco} from '../../../model/domain/endereco.model';
+import {Util} from '../../shared/app.util';
 import { Estado } from 'src/model/domain/estado.model';
 import { Cidade } from 'src/model/domain/cidade.model';
 import { Observable } from 'rxjs';

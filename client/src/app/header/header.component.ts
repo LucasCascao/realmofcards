@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Person} from '../../model/domain/person.model';
 import {ClienteService} from '../../services/cliente.service';
-import { GLOBAL } from '../shared/global.util';
 import { UtilService } from 'src/services/util.service';
 
 @Component({
