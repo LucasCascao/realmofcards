@@ -22,7 +22,7 @@ export class PaymentPageComponent implements OnInit {
 
   cartaoOpcao2: CartaoCredito;
 
-  valores;
+  valores: [];
 
   valorTotal: number;
 
@@ -36,7 +36,7 @@ export class PaymentPageComponent implements OnInit {
 
   private getPaymentPage(){
     this.service.get(this.paymentPageData, 'paymentpage').subscribe( resultado => {
-      this.paymentPageData = resultado?.entidades[0];
+      this.paymentPageData = resultado?.entidades[resultado?.entidades.length - 1];
       this.getCartoes();
       this.calculaValorTotal();
     });
@@ -52,12 +52,15 @@ export class PaymentPageComponent implements OnInit {
     this.valorTotal = 0;
 
     this.paymentPageData.carrinho.itens.forEach( item => {
-      this.valorTotal += item.carta.valorVenda;
+      this.valorTotal += item?.carta?.valorVenda;
     });
 
     this.valores = [];
+    // @ts-ignore
     this.valores.push(this.valorTotal.toFixed(2));
+    // @ts-ignore
     this.valores.push((this.valorTotal / 2).toFixed(2));
+    // @ts-ignore
     this.valores.push((this.valorTotal / 3).toFixed(2));
 
   }

@@ -27,7 +27,7 @@ export class CartComponent implements OnInit {
 
   getCarrinho() {
     this.service.get(this.carrinho, 'carrinhos').subscribe(resultado => {
-      this.carrinho = resultado?.entidades[0];
+      this.carrinho = resultado?.entidades[resultado?.entidades.length - 1];
     });
   }
 

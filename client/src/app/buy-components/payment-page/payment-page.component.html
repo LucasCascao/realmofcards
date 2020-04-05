@@ -55,9 +55,7 @@
           <a class="btn btn-secondary" [routerLink]="['/app-logado/creditcard-list']">Trocar</a>
           <hr>
           <select class="form-control">
-            <option>1x R$ 45,00</option>
-            <option>2x R$ 22,50 - Sem juros</option>
-            <option>3x R$ 15,00 - Sem juros</option>
+            <option *ngFor="let valor of valores">{{valor | currency: 'BRL': true}} - Sem juros</option>
           </select>
         </div>
         <div class="card-footer">
@@ -104,9 +102,8 @@
               <p class="card-text">Parcelas: </p>
             </div>
             <div class="col-lg-6">
-              <p *ngFor="let valor in valores">{{valores?.indexOf(valor) + 1}}x R$ {{valor}} - Sem juros</p>
               <select class="form-control">
-                <option *ngFor="let valor in valores">{{valores.indexOf(valor)}}x R$ {{valor}} - Sem juros</option>
+                <option *ngFor="let valor of valores">{{valor | currency: 'BRL': true}} - Sem juros</option>
               </select>
             </div>
           </div>
