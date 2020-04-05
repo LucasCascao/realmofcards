@@ -6,6 +6,9 @@ import { UtilService } from 'src/services/util.service';
 import { async } from '@angular/core/testing';
 import { Carrinho } from 'src/model/domain/carrinho.model';
 import { Item } from 'src/model/domain/item.model';
+import {switchMap} from "rxjs/operators";
+import {timer} from "rxjs";
+import {Util} from "../../shared/app.util";
 
 @Component({
   selector: 'app-product-detail',
@@ -14,7 +17,10 @@ import { Item } from 'src/model/domain/item.model';
 })
 export class ProductDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private service: UtilService, private router: Router) { }
+  constructor(private route: ActivatedRoute,
+              private service: UtilService,
+              private router: Router,
+              private util: Util) { }
 
   carta: Carta = new Carta();
 
@@ -53,11 +59,15 @@ export class ProductDetailComponent implements OnInit {
     carrinho.itens = itens;
 
     this.enviarCarrinho(carrinho);
-
-    this.router.navigate(['/app-logado/cart']);
   }
 
-  enviarCarrinho( carrinho: Carrinho){
-    this.service.add(carrinho, 'carrinhos').subscribe();
+  async enviarCarrinho( carrinho: Carrinho) {
+    await this.service.add(carrinho, 'carrinhos').subscribe(resultado => {
+      if (resultado.msg == null ) {
+        this.router.navigate(['/app-logado/cart']);
+      } else {
+        alert(this.util.getMensagensSeparadas(resultado?.msg));
+      }
+    });
   }
 }

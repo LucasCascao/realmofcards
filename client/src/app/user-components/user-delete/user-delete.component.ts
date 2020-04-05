@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ClienteService} from '../../../services/cliente.service';
 import {Person} from '../../../model/domain/person.model';
+import {UtilService} from "../../../services/util.service";
 
 @Component({
   selector: 'app-user-delete',
@@ -12,7 +13,7 @@ export class UserDeleteComponent implements OnInit {
 
   client: Person = new Person();
 
-  constructor(private router: Router, private clienteService: ClienteService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private service: UtilService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.client = JSON.parse(sessionStorage.getItem('pessoaLogada'));
@@ -20,22 +21,21 @@ export class UserDeleteComponent implements OnInit {
   }
 
   async getCliente() {
-    await this.clienteService.getClientes(this.client).subscribe( dado => this.client = dado.entidades[0]);
+    await this.service.get(this.client, 'pessoas').subscribe( dado => this.client = dado.entidades[0]);
   }
 
   excluirConta() {
 
-    this.clienteService.deleteCliente(this.client).subscribe(
+    this.service.delete(this.client.id, 'pessoas').subscribe(
       resultado => {
-        console.log('Produto excluído com sucesso.');
+        sessionStorage.removeItem('pessoaLogada');
+        this.router.navigate(['/']);
       },
       erro => {
         if ( erro.status === 404) {
           console.log('Produto não localizado.');
         }
       });
-
-    this.router.navigate(['/']);
   }
 
 }
