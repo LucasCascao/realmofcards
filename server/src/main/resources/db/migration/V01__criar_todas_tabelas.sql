@@ -144,7 +144,10 @@ CREATE TABLE user_type (
 );
 
 CREATE TABLE forma_pagamento (
-    fpa_id            SERIAL NOT NULL
+    fpa_id                      SERIAL NOT NULL,
+    fpa_valor_total             DECIMAL(4,2) NOT NULL,
+    fpa_quantidade_parcelas     INT NOT NULL,
+    fpa_valor_parcelado         DECIMAL(4,2) NOT NULL
 );
 
 CREATE TABLE forma_pagamento_cartao (

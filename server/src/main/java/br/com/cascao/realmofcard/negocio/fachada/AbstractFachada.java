@@ -2,10 +2,7 @@ package br.com.cascao.realmofcard.negocio.fachada;
 
 import br.com.cascao.realmofcard.domain.*;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
-import br.com.cascao.realmofcard.negocio.strategy.carrinho.PegaCarrinhoSeExistir;
-import br.com.cascao.realmofcard.negocio.strategy.carrinho.ValidaDadosCarrinho;
-import br.com.cascao.realmofcard.negocio.strategy.carrinho.VerificaCarrinhoAtivo;
-import br.com.cascao.realmofcard.negocio.strategy.carrinho.VerificaProdutoInativoNoCarrinho;
+import br.com.cascao.realmofcard.negocio.strategy.carrinho.*;
 import br.com.cascao.realmofcard.negocio.strategy.carta.CalcularPrecoVenda;
 import br.com.cascao.realmofcard.negocio.strategy.carta.MoveImagem;
 import br.com.cascao.realmofcard.negocio.strategy.carta.ValidaDadosCarta;
@@ -124,6 +121,13 @@ public class AbstractFachada {
 
     @Autowired
     private PegaCarrinhoSeExistir pegaCarrinhoSeExistir;
+
+    @Autowired
+    private ValidaItemJaEstaNoCarrinho validaItemJaEstaNoCarrinho;
+
+    @Autowired
+    private ValidaQuantidadeItemEstoque validaQuantidadeItemEstoque;
+
 
     public AbstractFachada(){
     }
@@ -262,12 +266,16 @@ public class AbstractFachada {
         List<IStrategy> rnsCarrinhoSalvar = new ArrayList<>();
 
         rnsCarrinhoSalvar.add(validaDadosCarrinho);
+        rnsCarrinhoSalvar.add(validaQuantidadeItemEstoque);
+        rnsCarrinhoSalvar.add(validaItemJaEstaNoCarrinho);
         rnsCarrinhoSalvar.add(verificaCarrinhoAtivo);
         rnsCarrinhoSalvar.add(pegaCarrinhoSeExistir);
 
         List<IStrategy> rnsCarrinhoAlterar = new ArrayList<>();
 
         rnsCarrinhoAlterar.add(validaDadosCarrinho);
+        rnsCarrinhoAlterar.add(validaQuantidadeItemEstoque);
+        rnsCarrinhoAlterar.add(validaItemJaEstaNoCarrinho);
         rnsCarrinhoAlterar.add(verificaCarrinhoAtivo);
 
         List<IStrategy> rnsCarrinhoConsultar = new ArrayList<>();
