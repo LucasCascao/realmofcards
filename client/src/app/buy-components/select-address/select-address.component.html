@@ -1,0 +1,38 @@
+<!-- Page Content -->
+<div class="container">
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">Selecione o endereço de entrega</h1>
+  <hr>
+
+  <!-- Project One -->
+  <div class="row" *ngFor="let endereco of enderecos">
+    <div class="col-md-1">
+      <input type="radio" name="enderecoSelecionado" (click)="seleciona(endereco?.id)">
+    </div>
+    <div class="col-md-11">
+      <div class="row">
+        <div class="col-md-10">
+          <p class="card-text">{{endereco?.logradouro}}, nº {{endereco?.numero}}, {{endereco?.bairro}}, {{endereco?.cidade?.nome}} / {{endereco?.cidade?.estado?.nome}} - {{endereco?.cep}}</p>
+        </div>
+        <div class="col-md-2">
+          <a class="btn btn-danger float-right"  [routerLink]="['/app-logado/address-delete', endereco?.id]">Excluir</a>
+          <a class="btn btn-warning float-right" (click)="seleciona(endereco?.id)" [routerLink]="['/app-logado/address-alter', endereco?.id]">Editar</a>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <a class="btn btn-secondary float-left" [routerLink]="['/app-logado/address-register']">Adicionar novo endereco
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+      <a class="btn btn-success float-right" [routerLink]="['/app-logado/select-creditcard']">Continuar
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+  </div>
+  <hr>
+  <!-- /.row -->
+</div>
+<!-- /.container -->

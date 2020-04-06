@@ -6,6 +6,7 @@ import { CartaoCredito } from 'src/model/domain/cartao-credito.model';
 import { Carta } from 'src/model/domain/carta.model';
 import { async } from '@angular/core/testing';
 import { PaymentPage } from 'src/model/page-data/payment-page';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-payment-page',
@@ -14,7 +15,9 @@ import { PaymentPage } from 'src/model/page-data/payment-page';
 })
 export class PaymentPageComponent implements OnInit {
 
-  constructor(private service: UtilService, private serviceCartao: UtilService, public util: Util) { }
+  constructor(private service: UtilService,
+              public util: Util,
+              private router: Router) { }
 
   paymentPageData: PaymentPage;
 
@@ -34,7 +37,7 @@ export class PaymentPageComponent implements OnInit {
     this.getPaymentPage();
   }
 
-  private getPaymentPage(){
+  private getPaymentPage() {
     this.service.get(this.paymentPageData, 'paymentpage').subscribe( resultado => {
       this.paymentPageData = resultado?.entidades[resultado?.entidades.length - 1];
       this.getCartoes();
@@ -43,8 +46,8 @@ export class PaymentPageComponent implements OnInit {
   }
 
   private getCartoes() {
-    this.cartaoOpcao1 = this.paymentPageData?.cartaoCreditoList?.pop();
-    this.cartaoOpcao2 = this.paymentPageData?.cartaoCreditoList?.pop();
+    this.cartaoOpcao1 = this.paymentPageData?.cartaoCreditoList[0];
+    this.cartaoOpcao2 = this.paymentPageData?.cartaoCreditoList[1];
   }
 
   private calculaValorTotal() {
@@ -63,5 +66,15 @@ export class PaymentPageComponent implements OnInit {
     // @ts-ignore
     this.valores.push((this.valorTotal / 3).toFixed(2));
 
+  }
+
+  selecionaCartao(id: number) {
+    sessionStorage.setItem('idCartaoSelecionado', id.toString());
+    this.router.navigate(['/app-logado/creditcard-list']);
+  }
+
+  selecionaEndereco(id: number) {
+    sessionStorage.setItem('idEnderecoSelecionado', id.toString())
+    this.router.navigate(['/app-logado/address-list']);
   }
 }

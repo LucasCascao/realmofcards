@@ -8,7 +8,7 @@
           <p class="card-text">{{paymentPageData?.endereco?.logradouro}}, n° {{paymentPageData?.endereco?.numero}}, {{paymentPageData?.endereco?.bairro}},
             {{paymentPageData?.endereco?.cidade?.nome}} - {{paymentPageData?.endereco?.cidade?.estado?.sigla}}.</p>
           <p class="card-text"><strong>Valor de frete para esse endereço: </strong>R$ 12,65</p>
-          <a class="btn btn-secondary" [routerLink]="['/app-logado/address-list']">Trocar</a>
+          <button class="btn btn-secondary" (click)="selecionaEndereco(paymentPageData?.endereco?.id)">Trocar</button>
         </div>
       </div>
     </div>
@@ -51,12 +51,25 @@
       <div class="card h-100">
         <h4 class="card-header">1 Cartão de crédito</h4>
         <div class="card-body">
-          <p class="card-text">Cartão selecionado com o final: {{cartaoOpcao1?.numero}}</p>
-          <a class="btn btn-secondary" [routerLink]="['/app-logado/creditcard-list']">Trocar</a>
-          <hr>
-          <select class="form-control">
-            <option *ngFor="let valor of valores">{{valor | currency: 'BRL': true}} - Sem juros</option>
-          </select>
+<!--          <p class="card-text">Cartão selecionado com o final: {{cartaoOpcao1?.numero}}</p>-->
+<!--          <a class="btn btn-secondary" [routerLink]="['/app-logado/creditcard-list']">Trocar</a>-->
+<!--          <hr>-->
+<!--          <select class="form-control">-->
+<!--            <option *ngFor="let valor of valores">{{valores.indexOf(valor) + 1}}x {{valor | currency: 'BRL': true}} - Sem juros</option>-->
+<!--          </select>-->
+          <div *ngFor="let cartao of paymentPageData.cartaoCreditoList">
+            <hr>
+            <!-- Project One -->
+            <div class="row">
+              <div class="col-md-5">
+                <input type="checkbox">
+                <p class="card-text"><strong>Ultimos 4 digitos:</strong> {{cartao?.numero}}</p>
+                <p class="card-text"><strong>Bandeira:</strong> {{cartao?.bandeira?.nome}}</p>
+              </div>
+              <hr>
+            </div>
+            <!-- /.row -->
+          </div>
         </div>
         <div class="card-footer">
           <div class="custom-control custom-radio">
@@ -75,37 +88,11 @@
         <div class="card-body">
           <div class="col-lg-6 float-left">
             <p class="card-text">Cartão selecionado com o final: {{cartaoOpcao1?.numero}}</p>
-            <a class="btn btn-secondary mb-md-3" [routerLink]="['/app-logado/creditcard-list']">Trocar</a>
-            <div class="row">
-              <div class="col-lg-2 mb-md-3">
-                <label class="card-text" for="valorCard1">Valor: </label>
-              </div>
-              <div class="col-lg-5 mb-md-3">
-                <input type="text" id="valorCard1" class="form-control">
-              </div>
-            </div>
+            <button class="btn btn-secondary mb-md-3" (click)="selecionaCartao(cartaoOpcao1?.id)">Trocar</button>
           </div>
           <div class="col-lg-6 float-left">
             <p class="card-text">Cartão selecionado com o final: {{cartaoOpcao2?.numero}}</p>
-            <a class="btn btn-secondary mb-md-3" [routerLink]="['/app-logado/creditcard-list']">Trocar</a>
-            <div class="row">
-              <div class="col-lg-2 mb-md-3">
-                <label class="card-text" for="valorCard1">Valor: </label>
-              </div>
-              <div class="col-lg-5 mb-md-3">
-                <input type="text" id="valorCard2" class="form-control">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-2">
-              <p class="card-text">Parcelas: </p>
-            </div>
-            <div class="col-lg-6">
-              <select class="form-control">
-                <option *ngFor="let valor of valores">{{valor | currency: 'BRL': true}} - Sem juros</option>
-              </select>
-            </div>
+            <button class="btn btn-secondary mb-md-3" (click)="selecionaCartao(cartaoOpcao2?.id)">Trocar</button>
           </div>
         </div>
         <div class="card-footer">

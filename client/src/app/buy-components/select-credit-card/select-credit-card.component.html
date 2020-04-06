@@ -1,0 +1,41 @@
+<!-- Page Content -->
+<div class="container">
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">Selecione até 2 cartões</h1>
+  <div *ngFor="let cartao of cartoes">
+    <hr>
+    <!-- Project One -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-lg-1">
+            <input type="checkbox" [name]="cartao.id">
+          </div>
+          <div class="col-lg-9">
+            <p class="card-text"><strong>Ultimos 4 digitos:</strong> {{cartao?.numero}}</p>
+            <p class="card-text"><strong>Bandeira:</strong> {{cartao?.bandeira?.nome}}</p>
+          </div>
+          <div class="col-md-2">
+            <a class="btn btn-danger float-right" [routerLink]="['/app-logado/creditcard-delete']">Excluir</a>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+
+    <!-- /.row -->
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <a class="btn btn-secondary float-left" [routerLink]="['/app-logado/creditcard-register']">Adicionar novo cartão
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+      <a class="btn btn-success float-right" [routerLink]="['/app-logado/select-creditcard']">Continuar
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+  </div>
+  <hr>
+</div>
+<!-- /.container -->

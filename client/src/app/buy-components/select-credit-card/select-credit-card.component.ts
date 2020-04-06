@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilService } from 'src/services/util.service';
-import { CartaoCredito } from 'src/model/domain/cartao-credito.model';
-import { Person } from 'src/model/domain/person.model';
+import {UtilService} from "../../../services/util.service";
+import {CartaoCredito} from "../../../model/domain/cartao-credito.model";
 
 @Component({
-  selector: 'app-creditcard-list',
-  templateUrl: './creditcard-list.component.html',
-  styleUrls: ['./creditcard-list.component.css']
+  selector: 'app-select-credit-card',
+  templateUrl: './select-credit-card.component.html',
+  styleUrls: ['./select-credit-card.component.css']
 })
-export class CreditcardListComponent implements OnInit {
+export class SelectCreditCardComponent implements OnInit {
 
   constructor(private service: UtilService) { }
 
@@ -49,6 +48,5 @@ export class CreditcardListComponent implements OnInit {
   alterarPreferido(cartaoCredito: CartaoCredito) {
     this.service.update(cartaoCredito, 'cartaoCredito').subscribe();
   }
-
 
 }

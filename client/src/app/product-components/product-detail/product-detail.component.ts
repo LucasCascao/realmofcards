@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {MockCards} from '../../../mock/mock-card.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Carta } from 'src/model/domain/carta.model';
 import { UtilService } from 'src/services/util.service';
-import { async } from '@angular/core/testing';
 import { Carrinho } from 'src/model/domain/carrinho.model';
 import { Item } from 'src/model/domain/item.model';
-import {switchMap} from "rxjs/operators";
-import {timer} from "rxjs";
-import {Util} from "../../shared/app.util";
+import {Util} from '../../shared/app.util';
 
 @Component({
   selector: 'app-product-detail',
@@ -32,7 +28,7 @@ export class ProductDetailComponent implements OnInit {
     this.getCarta();
   }
 
-  getCarta(){
+  getCarta() {
     this.service.get(this.carta, 'cartas').subscribe(resultado => {
       this.carta = resultado?.entidades[0];
     });
