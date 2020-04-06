@@ -31,8 +31,8 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <a [routerLink]="['/app-logado/product-market-page']" class="btn btn-secondary float-left">Continuar comprando</a>
-      <a [routerLink]="['/app-logado/payment-page']" class="btn btn-success float-right">Finalizar compra</a>
+      <button [routerLink]="['/app-logado/product-market-page']" class="btn btn-secondary float-left">Continuar comprando</button>
+      <button *ngIf="carrinho?.itens.length > 0" [routerLink]="['/app-logado/select-address']" class="btn btn-success float-right">Finalizar compra</button>
     </div>
   </div>
 
