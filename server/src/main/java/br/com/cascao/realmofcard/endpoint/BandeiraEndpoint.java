@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/cartas")
+@RequestMapping("/bandeiras")
 public class BandeiraEndpoint {
     
     @Autowired

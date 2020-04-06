@@ -23,6 +23,11 @@ export class SelectCreditCardComponent implements OnInit {
     const cartaoCredito = new CartaoCredito();
     const pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'))
     cartaoCredito.pessoa = pessoa;
+
+    const cartoesSelecionados = new Array<CartaoCredito>();
+
+    sessionStorage.setItem('cartoesSelecionados', JSON.stringify(cartoesSelecionados));
+
     this.getCartoes(cartaoCredito);
   }
 
@@ -34,19 +39,12 @@ export class SelectCreditCardComponent implements OnInit {
 
   selecionaCartao(cartaoSelecionado: CartaoCredito) {
 
-    let cartaoParaTroca: CartaoCredito;
+    const cartoesSelecionados: Array<CartaoCredito> = JSON.parse(sessionStorage.get('cartoesSelecionados'));
 
-    this.cartoes.forEach( cartao => {
-      if (cartao.id === this.idCartaoSelecionado) {
-        cartaoParaTroca = cartao;
-      }
-    });
-
-    cartaoParaTroca.preferido = true;
-  }
-
-  alterarPreferido(cartaoCredito: CartaoCredito) {
-    this.service.update(cartaoCredito, 'cartaoCredito').subscribe();
+    if (cartoesSelecionados.length < 2){
+      cartoesSelecionados.push(cartaoSelecionado);
+      sessionStorage.setItem('cartoesSelecionados', JSON.stringify(cartoesSelecionados));
+    }
   }
 
 }

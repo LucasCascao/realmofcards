@@ -32,5 +32,4 @@ export class SelectAddressComponent implements OnInit {
     endereco.id = id;
     sessionStorage.setItem('enderecoSelecionado', JSON.stringify(endereco));
   }
-
 }
