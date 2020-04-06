@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 
 @Builder
 @Getter
@@ -28,6 +29,12 @@ public class CartaoCredito extends EntidadeDominio{
     @Size(max = 3)
     @Column(name = "crt_codigo_seguranca")
     private String codigoSeguranca;
+
+    @Column(name = "crt_data_vencimento")
+    private LocalDate dataVencimento;
+
+    @Column(name = "crt_titular_nome")
+    private String titularNome;
 
     @Column(name = "crt_preferido")
     private Boolean preferido;

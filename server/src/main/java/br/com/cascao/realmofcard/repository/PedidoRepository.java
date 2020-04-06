@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface PedidoRepository extends CrudRepository<Pedido, Integer> {
 
-   Pedido findByItens(Item item);
-
    List<Pedido> findByCliente_Id(Integer id);
 
 }

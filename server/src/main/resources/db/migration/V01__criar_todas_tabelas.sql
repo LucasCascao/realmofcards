@@ -21,6 +21,8 @@ CREATE TABLE cartao (
     crt_id                SERIAL NOT NULL,
     crt_numero            VARCHAR(16) NOT NULL UNIQUE,
     crt_codigo_seguranca  VARCHAR(3) NOT NULL,
+    crt_data_vencimento   DATE NOT NULL,
+    crt_titular_nome      VARCHAR(16) NOT NULL,
     crt_preferido         BOOLEAN NOT NULL,
     crt_bandeira_id       INT NOT NULL,
     crt_pessoa_id         INT NOT NULL
@@ -113,6 +115,7 @@ CREATE TABLE pedido (
     ped_administrador_id       INT,
     ped_cliente_id             INT NOT NULL,
     ped_status_pedido_id       INT NOT NULL,
+    ped_valor_total            DECIMAL(4,2) NOT NULL,
     ped_data_compra            DATE NOT NULL,
     ped_endereco_id            INT NOT NULL,
     ped_forma_pagamento_id     INT NOT NULL

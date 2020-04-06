@@ -27,6 +27,9 @@ public class Pedido extends EntidadeDominio{
     @Column(name = "ped_data_compra")
     private LocalDate dataCompra;
 
+    @Column(name = "ped_valor_total")
+    private Double valorTotal;
+
     @OneToOne()
     @JoinColumn(name = "ped_cliente_id")
     private Usuario cliente;
@@ -51,5 +54,5 @@ public class Pedido extends EntidadeDominio{
     @JoinTable(name = "item_pedido",
             joinColumns = {@JoinColumn(name = "itp_pedido_id")},
             inverseJoinColumns = {@JoinColumn(name = "itp_item_id")})
-    private List<Item> itens;
+    private List<Item> itemList;
 }
