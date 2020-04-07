@@ -63,6 +63,9 @@ public class AbstractFachada {
     @Autowired
     private CarrinhoPersistence carrinhoPersistence;
 
+    @Autowired
+    private ItemPersistence itemPersistence;
+
 
     /*
         Todas Strategy
@@ -144,6 +147,7 @@ public class AbstractFachada {
         daos.put(Estado.class.getName(), estadoPersistence);
         daos.put(Cidade.class.getName(), cidadePersistence);
         daos.put(Carrinho.class.getName(), carrinhoPersistence);
+        daos.put(Item.class.getName(), itemPersistence);
 
         //------------------------ Hash Pessoa ----------------------------//
 
@@ -275,8 +279,6 @@ public class AbstractFachada {
 
         rnsCarrinhoAlterar.add(validaDadosCarrinho);
         rnsCarrinhoAlterar.add(validaQuantidadeItemEstoque);
-        rnsCarrinhoAlterar.add(validaItemJaEstaNoCarrinho);
-        rnsCarrinhoAlterar.add(verificaCarrinhoAtivo);
 
         List<IStrategy> rnsCarrinhoConsultar = new ArrayList<>();
 

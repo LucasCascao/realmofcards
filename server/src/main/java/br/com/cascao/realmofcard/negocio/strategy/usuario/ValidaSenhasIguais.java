@@ -4,7 +4,7 @@ import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pessoa;
 import br.com.cascao.realmofcard.domain.Usuario;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
-import br.com.cascao.realmofcard.util.validador.Util;
+import br.com.cascao.realmofcard.util.Util;
 import org.springframework.stereotype.Component;
 
 @Component

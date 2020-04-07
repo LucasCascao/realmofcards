@@ -2,10 +2,9 @@ package br.com.cascao.realmofcard.persistence;
 
 import br.com.cascao.realmofcard.domain.Endereco;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
-import br.com.cascao.realmofcard.domain.Pedido;
 import br.com.cascao.realmofcard.repository.CidadeRepository;
 import br.com.cascao.realmofcard.repository.EnderecoRepository;
-import br.com.cascao.realmofcard.util.validador.Util;
+import br.com.cascao.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

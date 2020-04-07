@@ -33,7 +33,9 @@ public class CarrinhoPersistence implements IPersistence {
     }
 
     @Override
-    public void alterar(EntidadeDominio entidade) {}
+    public void alterar(EntidadeDominio entidade) {
+        if(entidade instanceof Carrinho) salvar(entidade);
+    }
 
     @Override
     public void excluir(EntidadeDominio entidade) {}

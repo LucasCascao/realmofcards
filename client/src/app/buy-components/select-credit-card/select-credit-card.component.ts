@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UtilService} from "../../../services/util.service";
-import {CartaoCredito} from "../../../model/domain/cartao-credito.model";
+import {UtilService} from '../../../services/util.service';
+import {CartaoCredito} from '../../../model/domain/cartao-credito.model';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-select-credit-card',
@@ -9,29 +10,25 @@ import {CartaoCredito} from "../../../model/domain/cartao-credito.model";
 })
 export class SelectCreditCardComponent implements OnInit {
 
-  constructor(private service: UtilService) { }
+  constructor(private service: UtilService,
+              private router: Router) { }
 
   cartoes: CartaoCredito[];
 
-  idCartaoSelecionado: number;
+  cartoesSelecionados: CartaoCredito[];
 
   ngOnInit(): void {
 
-    // tslint:disable-next-line:radix max-line-length
-    this.idCartaoSelecionado = sessionStorage.getItem('cartaoSelecionado') != null ? Number.parseInt(sessionStorage.getItem('idCartaoSelecionado')) : null;
+    this.cartoesSelecionados = [];
 
     const cartaoCredito = new CartaoCredito();
-    const pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'))
+    const pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     cartaoCredito.pessoa = pessoa;
-
-    const cartoesSelecionados = new Array<CartaoCredito>();
-
-    sessionStorage.setItem('cartoesSelecionados', JSON.stringify(cartoesSelecionados));
 
     this.getCartoes(cartaoCredito);
   }
 
-  getCartoes(cartaoCredito: CartaoCredito){
+  getCartoes(cartaoCredito: CartaoCredito) {
     this.service.get(cartaoCredito, 'cartaocredito').subscribe( resultado => {
       this.cartoes = resultado?.entidades;
     });
@@ -39,12 +36,16 @@ export class SelectCreditCardComponent implements OnInit {
 
   selecionaCartao(cartaoSelecionado: CartaoCredito) {
 
-    const cartoesSelecionados: Array<CartaoCredito> = JSON.parse(sessionStorage.get('cartoesSelecionados'));
+    if (this.cartoesSelecionados.length < 2) {
+      this.cartoesSelecionados.push(cartaoSelecionado);
+      sessionStorage.setItem('cartoesSelecionados', JSON.stringify(this.cartoesSelecionados));
+    } else { alert('Não é possivel selecionar mais que dois cartões.'); }
+  }
 
-    if (cartoesSelecionados.length < 2){
-      cartoesSelecionados.push(cartaoSelecionado);
-      sessionStorage.setItem('cartoesSelecionados', JSON.stringify(cartoesSelecionados));
-    }
+  continua() {
+    if (this.cartoesSelecionados.length > 0) {
+      this.router.navigate(['/app-logado/order-resume']);
+    } else { alert('É necessário escolher pelo menos um cartão.'); }
   }
 
 }

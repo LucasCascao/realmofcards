@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UtilService} from "../../../services/util.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Endereco} from "../../../model/domain/endereco.model";
 
 @Component({
@@ -10,7 +10,8 @@ import {Endereco} from "../../../model/domain/endereco.model";
 })
 export class SelectAddressComponent implements OnInit {
 
-  constructor(private service: UtilService, private route: ActivatedRoute) { }
+  constructor(private service: UtilService,
+              private router: Router) { }
 
   enderecos: Endereco[];
 
@@ -27,9 +28,30 @@ export class SelectAddressComponent implements OnInit {
     });
   }
 
-  seleciona(id: number){
-    const endereco = new Endereco();
-    endereco.id = id;
+  seleciona(endereco: Endereco) {
+    this.endereco = endereco;
     sessionStorage.setItem('enderecoSelecionado', JSON.stringify(endereco));
+  }
+
+  continua() {
+    if (this.endereco.logradouro != null) {
+      this.router.navigate(['/app-logado/select-creditcard']);
+    } else {
+      // tslint:disable-next-line:max-line-length
+      alert('É necessário selecionar um endereço, caso não tenha o endereço desejado, basta cadastra-lo clicando em "Cadastrar novo endereco"');
+    }
+  }
+
+  cancelaCompra() {
+
+    sessionStorage.removeItem('cartoesSelecionados');
+
+    sessionStorage.removeItem('valorTotal');
+
+    sessionStorage.removeItem('carrinho');
+
+    sessionStorage.removeItem('enderecoSelecionado');
+
+    this.router.navigate(['/app-logado/product-market-page']);
   }
 }

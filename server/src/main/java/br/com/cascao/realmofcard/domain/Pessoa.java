@@ -56,14 +56,17 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 //	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
 //	private List<Telefone> telefones = new ArrayList<>();
 
+	@Builder.Default
 	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
+	@Builder.Default
 	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
 	private List<CartaoCredito> cartoesCredito = new ArrayList<>();
 
+	@Builder.Default
 	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
 	private List<Carrinho> carrinhos = new ArrayList<>();

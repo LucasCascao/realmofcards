@@ -3,7 +3,7 @@ package br.com.cascao.realmofcard.persistence;
 import br.com.cascao.realmofcard.domain.CartaoCredito;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.repository.CartaoCreditoRepository;
-import br.com.cascao.realmofcard.util.validador.Util;
+import br.com.cascao.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

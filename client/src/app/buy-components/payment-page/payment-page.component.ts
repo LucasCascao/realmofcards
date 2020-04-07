@@ -55,7 +55,7 @@ export class PaymentPageComponent implements OnInit {
     this.valorTotal = 0;
 
     this.paymentPageData.carrinho.itens.forEach( item => {
-      this.valorTotal += item?.carta?.valorVenda;
+      this.valorTotal += (item?.carta?.valorVenda * item?.quantidade);
     });
 
     this.valores = [];
