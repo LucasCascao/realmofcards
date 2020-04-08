@@ -117,8 +117,10 @@ CREATE TABLE pedido (
     ped_status_pedido_id       INT NOT NULL,
     ped_valor_total            DECIMAL(4,2) NOT NULL,
     ped_data_compra            DATE NOT NULL,
+    ped_data_estimada          DATE NOT NULL,
     ped_endereco_id            INT NOT NULL,
-    ped_forma_pagamento_id     INT NOT NULL
+    ped_forma_pagamento_id     INT NOT NULL,
+    ped_codigo_pedido          varchar(50) not null
 );
 
 CREATE TABLE pessoa (
@@ -147,10 +149,7 @@ CREATE TABLE user_type (
 );
 
 CREATE TABLE forma_pagamento (
-    fpa_id                      SERIAL NOT NULL,
-    fpa_valor_total             DECIMAL(4,2) NOT NULL,
-    fpa_quantidade_parcelas     INT NOT NULL,
-    fpa_valor_parcelado         DECIMAL(4,2) NOT NULL
+    fpa_id                      SERIAL NOT NULL
 );
 
 CREATE TABLE forma_pagamento_cartao (
@@ -297,11 +296,11 @@ ALTER TABLE jogo_categoria_carta
 
 ALTER TABLE pedido
     ADD CONSTRAINT pedido_administrador_fk FOREIGN KEY ( ped_administrador_id )
-        REFERENCES usuario ( usu_id );
+        REFERENCES pessoa ( pes_id );
 
 ALTER TABLE pedido
     ADD CONSTRAINT pedido_cliente_fk FOREIGN KEY ( ped_cliente_id )
-        REFERENCES usuario ( usu_id );
+        REFERENCES pessoa ( pes_id );
 
 ALTER TABLE pedido
     ADD CONSTRAINT pedido_status_pedido_fk FOREIGN KEY ( ped_status_pedido_id )

@@ -14,4 +14,6 @@ export class Pedido {
     statusPedido: StatusPedido;
     itemList: Array<Item>;
     endereco: Endereco;
+    dataCompra: Date;
+    dataEstimada: Date;
 }

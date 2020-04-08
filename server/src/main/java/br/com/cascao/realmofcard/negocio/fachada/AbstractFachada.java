@@ -9,6 +9,9 @@ import br.com.cascao.realmofcard.negocio.strategy.carta.ValidaDadosCarta;
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaDadosCartaoCredito;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaDadosEndereco;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaExistenciaCidade;
+import br.com.cascao.realmofcard.negocio.strategy.pedido.CalculaValorPedido;
+import br.com.cascao.realmofcard.negocio.strategy.pedido.CalcularDataEntrega;
+import br.com.cascao.realmofcard.negocio.strategy.pedido.GeraCodigoPedido;
 import br.com.cascao.realmofcard.negocio.strategy.pedido.ValidaDadosPedido;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaDadosPessoa;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaExistenciaPessoa;
@@ -114,6 +117,9 @@ public class AbstractFachada {
     private ValidaDadosPedido validaDadosPedido;
 
     @Autowired
+    private CalculaValorPedido calculaValorPedido;
+
+    @Autowired
     private ValidaDadosCarrinho validaDadosCarrinho;
 
     @Autowired
@@ -130,6 +136,12 @@ public class AbstractFachada {
 
     @Autowired
     private ValidaQuantidadeItemEstoque validaQuantidadeItemEstoque;
+
+    @Autowired
+    private GeraCodigoPedido geraCodigoPedido;
+
+    @Autowired
+    private CalcularDataEntrega calcularDataEntrega;
 
 
     public AbstractFachada(){
@@ -247,10 +259,14 @@ public class AbstractFachada {
         List<IStrategy> rnsPedidoSalvar = new ArrayList<>();
 
         rnsPedidoSalvar.add(validaDadosPedido);
+        rnsPedidoSalvar.add(calculaValorPedido);
+        rnsPedidoSalvar.add(geraCodigoPedido);
+        rnsPedidoSalvar.add(calcularDataEntrega);
 
         List<IStrategy> rnsPedidoAlterar = new ArrayList<>();
 
         rnsPedidoAlterar.add(validaDadosPedido);
+        rnsPedidoAlterar.add(calculaValorPedido);
 
         Map<String, List<IStrategy>> mapaPedido = new HashMap<>();
 

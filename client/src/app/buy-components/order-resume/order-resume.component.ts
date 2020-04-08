@@ -41,6 +41,7 @@ export class OrderResumeComponent implements OnInit {
   confirmarCompra() {
 
     const formaPagamento: FormaPagamento = new FormaPagamento();
+    formaPagamento.cartaoCreditoList = new Array<CartaoCredito>();
 
     this.cartoes?.forEach(cartao => {
       formaPagamento.cartaoCreditoList.push(cartao);
@@ -55,7 +56,7 @@ export class OrderResumeComponent implements OnInit {
     pedido.itemList = this.carrinho?.itens;
     pedido.endereco = this.endereco;
     pedido.statusPedido = statusPedido;
-    pedido.valorTotal = this.valorTotal;
+    pedido.valorTotal = Number.parseFloat(this.valorTotal?.toFixed(2));
 
     this.cadastraPedido(pedido);
 

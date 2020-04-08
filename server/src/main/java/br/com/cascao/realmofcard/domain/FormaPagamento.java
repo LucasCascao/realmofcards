@@ -23,16 +23,7 @@ public class FormaPagamento extends EntidadeDominio {
     @Column(name = "fpa_id")
     private Integer id;
 
-    @Column(name = "fpa_valor_total")
-    private Double valorTotal;
-
-    @Column(name = "fpa_quantidade_parcelas")
-    private Integer quantidadeParcelas;
-
-    @Column(name = "fpa_valor_parcelado")
-    private Double valorParcelado;
-
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany()
     @JoinTable(name = "forma_pagamento_cartao",
             joinColumns = {@JoinColumn(name = "fpc_forma_pagamento_id")},
             inverseJoinColumns = {@JoinColumn(name = "fpc_cartao_credito_id")})
