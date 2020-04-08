@@ -2,6 +2,7 @@ package br.com.cascao.realmofcard.persistence;
 
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Usuario;
+import br.com.cascao.realmofcard.repository.PessoaRepository;
 import br.com.cascao.realmofcard.repository.TipoUsuarioRepository;
 import br.com.cascao.realmofcard.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class UsuarioPersistence implements IPersistence {
 	@Autowired
 	TipoUsuarioRepository tipoUsuarioRepository;
 
+	@Autowired
+	PessoaRepository pessoaRepository;
+
 	@Override
 	public EntidadeDominio salvar(EntidadeDominio entidade) {
 		Usuario usuario = (Usuario) entidade;
@@ -34,13 +38,13 @@ public class UsuarioPersistence implements IPersistence {
 		Usuario usuario = (Usuario) entidade;
 
 		if(usuario.getId() != null){
-			usuarioRepository.findById(usuario.getId()).map(p -> usuarios.add(p));
+			usuarios.add(pessoaRepository.findPessoaByUsuario_Id(usuario.getId()));
 			return usuarios;
 		}
 
 		if(usuario.getEmail() != null) {
 			usuario = usuarioRepository.findByEmail(usuario.getEmail());
-			usuarios.add(usuario);
+			usuarios.add(pessoaRepository.findPessoaByUsuario_Id(usuario.getId()));
 			return usuarios;
 		}
 

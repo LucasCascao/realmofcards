@@ -33,7 +33,9 @@ public class CarrinhoPersistence implements IPersistence {
     }
 
     @Override
-    public void alterar(EntidadeDominio entidade) {}
+    public void alterar(EntidadeDominio entidade) {
+        if(entidade instanceof Carrinho) salvar(entidade);
+    }
 
     @Override
     public void excluir(EntidadeDominio entidade) {}
@@ -43,8 +45,7 @@ public class CarrinhoPersistence implements IPersistence {
         List<EntidadeDominio> carrinhos = new ArrayList<>();
         if(entidade instanceof Carrinho){
             Carrinho carrinho = (Carrinho) entidade;
-
-            carrinhos.addAll(carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId()));
+            carrinhos.add(carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId()));
             return carrinhos;
         } else return null;
     }

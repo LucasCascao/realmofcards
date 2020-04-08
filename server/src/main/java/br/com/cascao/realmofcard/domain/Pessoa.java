@@ -2,10 +2,7 @@ package br.com.cascao.realmofcard.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -58,11 +56,19 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 //	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
 //	private List<Telefone> telefones = new ArrayList<>();
 
+	@Builder.Default
 	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
-//
-//	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
-//	private List<CartaoCredito> cartoesCredito = new ArrayList<>();
+
+	@Builder.Default
+	@JsonIgnore
+	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+	private List<CartaoCredito> cartoesCredito = new ArrayList<>();
+
+	@Builder.Default
+	@JsonIgnore
+	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+	private List<Carrinho> carrinhos = new ArrayList<>();
 
 }

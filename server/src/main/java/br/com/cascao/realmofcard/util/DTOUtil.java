@@ -6,7 +6,8 @@ import br.com.cascao.realmofcard.dto.IDTO;
 
 public class DTOUtil {
     public static Resultado tranfereParaDTO(Resultado resultado, IDTO dto){
-        resultado.getEntidades().replaceAll( entidade -> dto.getDTO(entidade));
+        if(Util.isNotNull(resultado.getEntidades()))
+            resultado.getEntidades().replaceAll( entidade -> dto.getDTO(entidade));
         return resultado;
     }
 }

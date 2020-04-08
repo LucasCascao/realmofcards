@@ -56,6 +56,8 @@ import {ProviderListComponent} from './admin-components/provider/provider-list/p
 import {TicketDevolutionListComponent} from './admin-components/tickets/ticket-devolution-list/ticket-devolution-list.component';
 import {TicketTradeListComponent} from './admin-components/tickets/ticket-trade-list/ticket-trade-list.component';
 import {AppLogadoComponent} from './app-logado/app-logado.component';
+import {SelectCreditCardComponent} from './buy-components/select-credit-card/select-credit-card.component';
+import {SelectAddressComponent} from './buy-components/select-address/select-address.component';
 
 export const ROUTES: Routes = [
   {path: '', component: LoginComponent},
@@ -80,6 +82,8 @@ export const ROUTES: Routes = [
       {path: 'creditcard-alter', component: CreditcardAlterComponent},
       {path: 'creditcard-delete', component: CreditcardDeleteComponent},
       {path: 'creditcard-list', component: CreditcardListComponent},
+      {path: 'select-creditcard', component: SelectCreditCardComponent},
+      {path: 'select-address', component: SelectAddressComponent},
       {path: 'cart', component: CartComponent},
       {path: 'payment-page', component: PaymentPageComponent},
       {path: 'order-resume', component: OrderResumeComponent},

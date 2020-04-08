@@ -8,6 +8,7 @@ export class Endereco {
     bairro: string;
     cep: string;
     complemento: string;
+    preferido: boolean;
     cidade: Cidade;
     pessoa: Person;
 }

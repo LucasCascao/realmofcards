@@ -1,14 +1,14 @@
 package br.com.cascao.realmofcard.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 import javax.persistence.*;
 
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
@@ -21,7 +21,7 @@ public class Carrinho extends EntidadeDominio{
     @Column(name = "crr_id")
     private Integer id;
 
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "crr_pessoa_id")
     private Pessoa pessoa;
 

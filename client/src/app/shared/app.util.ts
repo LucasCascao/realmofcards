@@ -7,4 +7,12 @@ export class Util {
     });
     return msgsSeparadas;
   }
+
+  isNull(objeto: any): boolean {
+    return objeto === null || objeto === undefined;
+  }
+
+  isNotNull(objeto: any): boolean {
+    return objeto != null || objeto != undefined;
+  }
 }

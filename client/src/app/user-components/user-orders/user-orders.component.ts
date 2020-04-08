@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilService } from 'src/services/util.service';
+import { Person } from 'src/model/domain/person.model';
+import { Pedido } from 'src/model/domain/pedido.model';
 
 @Component({
   selector: 'app-user-orders',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserOrdersComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: UtilService) { }
+
+  pedidos: Array<Pedido>;
 
   ngOnInit(): void {
+    this.getPedidos();
+  }
+
+  getPedidos(){
+    const pedido = new Pedido();
+    pedido.cliente = JSON.parse(sessionStorage.getItem('pessoaLogada'));
+    this.service.get(pedido, 'pedidos').subscribe(resultado => {
+      this.pedidos = resultado?.entidades;
+    });
+
   }
 
 }

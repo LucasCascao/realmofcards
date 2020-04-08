@@ -3,6 +3,7 @@ package br.com.cascao.realmofcard.persistence;
 import br.com.cascao.realmofcard.domain.CartaoCredito;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.repository.CartaoCreditoRepository;
+import br.com.cascao.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,19 @@ public class CartaoCreditoPersistence implements IPersistence {
         if(entidade instanceof CartaoCredito){
             List<EntidadeDominio> cartoesCredito = new ArrayList<>();
             CartaoCredito cartaoCredito = (CartaoCredito) entidade;
+
+            if(Util.isNotNull(cartaoCredito.getId())){
+                cartoesCredito.add(cartaoCreditoRepository.findById(cartaoCredito.getId()).get());
+                return cartoesCredito;
+            }
+
+            if(Util.isNotNull(cartaoCredito.getPreferido())){
+                cartaoCreditoRepository
+                        .findByPessoa_IdAndPreferido(cartaoCredito.getPessoa().getId(), cartaoCredito.getPreferido())
+                        .forEach(cartaoCreditoResultado -> cartoesCredito.add(cartaoCreditoResultado));
+                return cartoesCredito;
+            }
+
             cartaoCreditoRepository.findByPessoa_Id(cartaoCredito.getPessoa().getId())
                     .forEach(resultado -> cartoesCredito.add(resultado));
             return cartoesCredito;

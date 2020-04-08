@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { UtilService } from 'src/services/util.service';
 import { Carta } from 'src/model/domain/carta.model';
 import { Category } from 'src/model/domain/category.model';
-import {GLOBAL} from '../../../shared/global.util';
 import {Util} from '../../../shared/app.util';
 
 @Component({
@@ -13,13 +12,16 @@ import {Util} from '../../../shared/app.util';
 })
 export class CardAlterComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private service: UtilService, private serviceCategoria: UtilService, private util: Util, private router: Router) { }
+  constructor(private route: ActivatedRoute,
+              private service: UtilService,
+              private serviceCategoria: UtilService,
+              private util: Util, private router: Router) { }
 
   carta: Carta = new Carta();
   categorias: Category[];
 
   ngOnInit(): void {
-    this.carta.id = GLOBAL.carta.id;
+    this.carta = JSON.parse(sessionStorage.getItem('cartaSelecionada'));
     this.getCategorias();
   }
 

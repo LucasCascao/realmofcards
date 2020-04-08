@@ -6,7 +6,6 @@ import {ResultClient} from '../../model/results/result-person.model';
 import {User} from '../../model/domain/user.model';
 import {ResultUser} from '../../model/results/result-user.model';
 import {UsuarioService} from '../../services/usuario.service';
-import { GLOBAL } from '../shared/global.util';
 import { UtilService } from 'src/services/util.service';
 import { Util } from '../shared/app.util';
 
@@ -25,16 +24,13 @@ export class AuthService {
 
   constructor(private router: Router, private service: UtilService, private util: Util) { }
 
-  signIn(user: User) {
+  async signIn(user: User) {
 
-    this.service.get(user, 'usuarios').subscribe( resuldado => {
-      this.clients.usuario = resuldado?.entidades[0];
+    await this.service.get(user, 'usuarios').subscribe( async resuldado => {
       if (resuldado.msg !== null) {
-        alert(this.util.getMensagensSeparadas(resuldado.msg))
+        alert(this.util?.getMensagensSeparadas(resuldado?.msg))
       } else {
-        sessionStorage.setItem('usuarioLogado', JSON.stringify(this.clients.usuario));
-        // GLOBAL.pessoa = new Person();
-        // GLOBAL.pessoa.usuario = this.clients?.usuario;
+        sessionStorage?.setItem('pessoaLogada', JSON.stringify(await resuldado?.entidades[0]));
         this.router.navigate(['/app-logado']);
       }
     });

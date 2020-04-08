@@ -3,7 +3,6 @@ import { UtilService } from 'src/services/util.service';
 import { Endereco } from 'src/model/domain/endereco.model';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from 'src/model/domain/person.model';
-import { GLOBAL } from 'src/app/shared/global.util';
 
 @Component({
   selector: 'app-address-list',
@@ -19,9 +18,7 @@ export class AddressListComponent implements OnInit {
   endereco: Endereco = new Endereco();
 
   ngOnInit(): void {
-    this.endereco.pessoa = new Person();
-    this.endereco.pessoa.id = GLOBAL.pessoa.id;
-    console.log(GLOBAL.pessoa.id);
+    this.endereco.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     this.getEnderecos();
   }
 
@@ -32,9 +29,9 @@ export class AddressListComponent implements OnInit {
   }
 
   seleciona(id: number){
-    console.log(id)
-    GLOBAL.endereco = new Endereco();
-    GLOBAL.endereco.id = id;
+    const endereco = new Endereco();
+    endereco.id = id;
+    sessionStorage.setItem('enderecoSelecionado', JSON.stringify(endereco));
   }
 
 }

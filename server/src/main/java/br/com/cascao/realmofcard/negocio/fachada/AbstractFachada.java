@@ -2,22 +2,20 @@ package br.com.cascao.realmofcard.negocio.fachada;
 
 import br.com.cascao.realmofcard.domain.*;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
-import br.com.cascao.realmofcard.negocio.strategy.carrinho.ValidaDadosCarrinho;
-import br.com.cascao.realmofcard.negocio.strategy.carrinho.VerificaCarrinhoAtivo;
-import br.com.cascao.realmofcard.negocio.strategy.carrinho.VerificaProdutoInativoNoCarrinho;
+import br.com.cascao.realmofcard.negocio.strategy.carrinho.*;
 import br.com.cascao.realmofcard.negocio.strategy.carta.CalcularPrecoVenda;
 import br.com.cascao.realmofcard.negocio.strategy.carta.MoveImagem;
 import br.com.cascao.realmofcard.negocio.strategy.carta.ValidaDadosCarta;
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaDadosCartaoCredito;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaDadosEndereco;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaExistenciaCidade;
+import br.com.cascao.realmofcard.negocio.strategy.pedido.CalculaValorPedido;
+import br.com.cascao.realmofcard.negocio.strategy.pedido.CalcularDataEntrega;
+import br.com.cascao.realmofcard.negocio.strategy.pedido.GeraCodigoPedido;
 import br.com.cascao.realmofcard.negocio.strategy.pedido.ValidaDadosPedido;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaDadosPessoa;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaExistenciaPessoa;
-import br.com.cascao.realmofcard.negocio.strategy.usuario.CriptografaSenha;
-import br.com.cascao.realmofcard.negocio.strategy.usuario.ValidaDadosUsuario;
-import br.com.cascao.realmofcard.negocio.strategy.usuario.ValidaExistenciaUsuario;
-import br.com.cascao.realmofcard.negocio.strategy.usuario.ValidaSenhaUsuario;
+import br.com.cascao.realmofcard.negocio.strategy.usuario.*;
 import br.com.cascao.realmofcard.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,34 +37,37 @@ public class AbstractFachada {
      */
 
     @Autowired
-    protected PessoaPersistence pessoaPersistence;
+    private PessoaPersistence pessoaPersistence;
 
     @Autowired
-    protected UsuarioPersistence usuarioPersistence;
+    private UsuarioPersistence usuarioPersistence;
 
     @Autowired
-    protected CartaPersistence cartaPersistence;
+    private CartaPersistence cartaPersistence;
 
     @Autowired
-    protected EnderecoPersistence enderecoPersistence;
+    private EnderecoPersistence enderecoPersistence;
 
     @Autowired
-    protected CartaoCreditoPersistence cartaoCreditoPersistence;
+    private CartaoCreditoPersistence cartaoCreditoPersistence;
 
     @Autowired
-    protected PedidoPersistence pedidoPersistence;
+    private PedidoPersistence pedidoPersistence;
 
     @Autowired
-    protected CartegoriaCartaPersistence cartegoriaCartaPersistence;
+    private CartegoriaCartaPersistence cartegoriaCartaPersistence;
 
     @Autowired
-    protected EstadoPersistence estadoPersistence;
+    private EstadoPersistence estadoPersistence;
 
     @Autowired
-    protected CidadePersistence cidadePersistence;
+    private CidadePersistence cidadePersistence;
 
     @Autowired
-    protected CarrinhoPersistence carrinhoPersistence;
+    private CarrinhoPersistence carrinhoPersistence;
+
+    @Autowired
+    private ItemPersistence itemPersistence;
 
 
     /*
@@ -74,52 +75,74 @@ public class AbstractFachada {
      */
 
     @Autowired
-    protected ValidaDadosPessoa validaDadosPessoa;
+    private ValidaDadosPessoa validaDadosPessoa;
 
     @Autowired
-    protected ValidaExistenciaPessoa validaExistenciaPessoa;
+    private ValidaExistenciaPessoa validaExistenciaPessoa;
 
     @Autowired
-    protected ValidaDadosUsuario validaDadosUsuario;
+    private ValidaDadosUsuario validaDadosUsuario;
 
     @Autowired
-    protected ValidaExistenciaUsuario validaExistenciaUsuario;
+    private ValidaSenhasIguais validaSenhasIguais;
 
     @Autowired
-    protected CriptografaSenha criptografarSenha;
+    private ValidaExistenciaUsuario validaExistenciaUsuario;
 
     @Autowired
-    protected ValidaSenhaUsuario validaSenhaUsuario;
+    private CriptografaSenha criptografarSenha;
 
     @Autowired
-    protected ValidaDadosCarta validaDadosCarta;
+    private ValidaSenhaUsuario validaSenhaUsuario;
 
     @Autowired
-    protected CalcularPrecoVenda calcularPrecoVenda;
+    private ValidaDadosCarta validaDadosCarta;
+
+    @Autowired
+    private CalcularPrecoVenda calcularPrecoVenda;
 
     @Autowired
     private MoveImagem moveImagem;
 
     @Autowired
-    protected ValidaDadosEndereco validaDadosEndereco;
+    private ValidaDadosEndereco validaDadosEndereco;
 
     @Autowired
-    protected ValidaExistenciaCidade validaExistenciaCidade;
+    private ValidaExistenciaCidade validaExistenciaCidade;
 
     @Autowired
-    protected ValidaDadosCartaoCredito validaDadosCartaoCredito;
+    private ValidaDadosCartaoCredito validaDadosCartaoCredito;
 
     @Autowired
-    protected ValidaDadosPedido validaDadosPedido;
+    private ValidaDadosPedido validaDadosPedido;
 
     @Autowired
-    protected ValidaDadosCarrinho validaDadosCarrinho;
+    private CalculaValorPedido calculaValorPedido;
+
+    @Autowired
+    private ValidaDadosCarrinho validaDadosCarrinho;
 
     @Autowired
     private VerificaCarrinhoAtivo verificaCarrinhoAtivo;
 
     @Autowired
     private VerificaProdutoInativoNoCarrinho verificaProdutoInativoNoCarrinho;
+
+    @Autowired
+    private PegaCarrinhoSeExistir pegaCarrinhoSeExistir;
+
+    @Autowired
+    private ValidaItemJaEstaNoCarrinho validaItemJaEstaNoCarrinho;
+
+    @Autowired
+    private ValidaQuantidadeItemEstoque validaQuantidadeItemEstoque;
+
+    @Autowired
+    private GeraCodigoPedido geraCodigoPedido;
+
+    @Autowired
+    private CalcularDataEntrega calcularDataEntrega;
+
 
     public AbstractFachada(){
     }
@@ -136,6 +159,7 @@ public class AbstractFachada {
         daos.put(Estado.class.getName(), estadoPersistence);
         daos.put(Cidade.class.getName(), cidadePersistence);
         daos.put(Carrinho.class.getName(), carrinhoPersistence);
+        daos.put(Item.class.getName(), itemPersistence);
 
         //------------------------ Hash Pessoa ----------------------------//
 
@@ -144,6 +168,7 @@ public class AbstractFachada {
         rnsPessoaSalvar.add(validaDadosPessoa);
         rnsPessoaSalvar.add(validaExistenciaPessoa);
         rnsPessoaSalvar.add(validaDadosUsuario);
+        rnsPessoaSalvar.add(validaSenhasIguais);
         rnsPessoaSalvar.add(validaExistenciaUsuario);
         rnsPessoaSalvar.add(criptografarSenha);
 
@@ -234,10 +259,14 @@ public class AbstractFachada {
         List<IStrategy> rnsPedidoSalvar = new ArrayList<>();
 
         rnsPedidoSalvar.add(validaDadosPedido);
+        rnsPedidoSalvar.add(calculaValorPedido);
+        rnsPedidoSalvar.add(geraCodigoPedido);
+        rnsPedidoSalvar.add(calcularDataEntrega);
 
         List<IStrategy> rnsPedidoAlterar = new ArrayList<>();
 
         rnsPedidoAlterar.add(validaDadosPedido);
+        rnsPedidoAlterar.add(calculaValorPedido);
 
         Map<String, List<IStrategy>> mapaPedido = new HashMap<>();
 
@@ -257,12 +286,15 @@ public class AbstractFachada {
         List<IStrategy> rnsCarrinhoSalvar = new ArrayList<>();
 
         rnsCarrinhoSalvar.add(validaDadosCarrinho);
+        rnsCarrinhoSalvar.add(validaQuantidadeItemEstoque);
+        rnsCarrinhoSalvar.add(validaItemJaEstaNoCarrinho);
         rnsCarrinhoSalvar.add(verificaCarrinhoAtivo);
+        rnsCarrinhoSalvar.add(pegaCarrinhoSeExistir);
 
         List<IStrategy> rnsCarrinhoAlterar = new ArrayList<>();
 
         rnsCarrinhoAlterar.add(validaDadosCarrinho);
-        rnsCarrinhoAlterar.add(verificaCarrinhoAtivo);
+        rnsCarrinhoAlterar.add(validaQuantidadeItemEstoque);
 
         List<IStrategy> rnsCarrinhoConsultar = new ArrayList<>();
 

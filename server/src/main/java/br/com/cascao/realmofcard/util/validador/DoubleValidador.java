@@ -1,4 +1,4 @@
-package br.com.cascao.realmofcard.util.validator;
+package br.com.cascao.realmofcard.util.validador;
 
 import org.springframework.stereotype.Component;
 

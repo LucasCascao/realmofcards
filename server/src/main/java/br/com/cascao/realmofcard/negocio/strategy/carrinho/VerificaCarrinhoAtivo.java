@@ -20,14 +20,14 @@ public class VerificaCarrinhoAtivo implements IStrategy {
 
         StringBuilder msg = new StringBuilder();
 
-        if(entidade instanceof Carrinho){
-            Carrinho carrinho = (Carrinho) entidade;
-            List<Carrinho> carrinhos = null;
-            if(carrinho.getPessoa() != null
-            && carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId()) != null){
-                carrinhos = carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId());
-            }
-        }
+//        if(entidade instanceof Carrinho){
+//            Carrinho carrinho = (Carrinho) entidade;
+//            List<Carrinho> carrinhos = null;
+//            if(carrinho.getPessoa() != null
+//            && carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId()) != null){
+//                carrinhos = carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId());
+//            }
+//        }
 
         return msg.toString();
     }

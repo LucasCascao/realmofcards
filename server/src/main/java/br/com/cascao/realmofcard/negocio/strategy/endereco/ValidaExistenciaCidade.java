@@ -1,22 +1,18 @@
 package br.com.cascao.realmofcard.negocio.strategy.endereco;
 
-import br.com.cascao.realmofcard.domain.Cidade;
 import br.com.cascao.realmofcard.domain.Endereco;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
 import br.com.cascao.realmofcard.repository.CidadeRepository;
-import br.com.cascao.realmofcard.util.validator.StringValidador;
+import br.com.cascao.realmofcard.util.validador.ValidadorString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class ValidaExistenciaCidade implements IStrategy {
 
     @Autowired
-    StringValidador stringValidador;
+    ValidadorString validadorString;
 
     @Autowired
     CidadeRepository cidadeRepository;

@@ -1,14 +1,12 @@
 package br.com.cascao.realmofcard.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
@@ -37,6 +35,9 @@ public class Endereco extends EntidadeDominio {
 
     @Column(name = "end_complemento")
     private String complemento;
+
+    @Column(name = "end_preferido")
+    private Boolean preferido;
 
     @ManyToOne()
     @JoinColumn(name = "end_cidade_id")

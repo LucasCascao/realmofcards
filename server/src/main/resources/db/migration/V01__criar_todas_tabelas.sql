@@ -21,6 +21,9 @@ CREATE TABLE cartao (
     crt_id                SERIAL NOT NULL,
     crt_numero            VARCHAR(16) NOT NULL UNIQUE,
     crt_codigo_seguranca  VARCHAR(3) NOT NULL,
+    crt_data_vencimento   DATE NOT NULL,
+    crt_titular_nome      VARCHAR(16) NOT NULL,
+    crt_preferido         BOOLEAN NOT NULL,
     crt_bandeira_id       INT NOT NULL,
     crt_pessoa_id         INT NOT NULL
 );
@@ -49,6 +52,7 @@ CREATE TABLE endereco (
     end_numero          VARCHAR(6) NOT NULL,
     end_bairro          VARCHAR(70) NOT NULL,
     end_cep             VARCHAR(8) NOT NULL,
+    end_preferido       BOOLEAN NOT NULL,
     end_complemento     VARCHAR(200) NOT NULL,
     end_cidade_id       INT NOT NULL,
     end_pessoa_id       INT NOT NULL
@@ -79,14 +83,15 @@ CREATE TABLE item (
 );
 
 CREATE TABLE carrinho (
-  crr_id            SERIAL NOT NULL,
-  crr_pessoa_id     INT NOT NULL
+    crr_id            SERIAL NOT NULL,
+    crr_valorTotal    DECIMAL(4, 2),
+    crr_pessoa_id     INT NOT NULL
 );
 
 CREATE TABLE carrinho_item (
-  cri_id            SERIAL NOT NULL,
-  cri_carrinho_id   INT NOT NULL,
-  cri_item_id       INT NOT NULL
+    cri_id            SERIAL NOT NULL,
+    cri_carrinho_id   INT NOT NULL,
+    cri_item_id       INT NOT NULL
 );
 
 CREATE TABLE jogo (
@@ -106,12 +111,16 @@ CREATE TABLE log (
 );
 
 CREATE TABLE pedido (
-    ped_id                SERIAL NOT NULL,
-    ped_administrador_id  INT,
-    ped_cliente_id        INT NOT NULL,
-    ped_status_pedido_id  INT NOT NULL,
-    ped_data_compra       DATE NOT NULL,
-    ped_endereco_id       INT NOT NULL
+    ped_id                     SERIAL NOT NULL,
+    ped_administrador_id       INT,
+    ped_cliente_id             INT NOT NULL,
+    ped_status_pedido_id       INT NOT NULL,
+    ped_valor_total            DECIMAL(4,2) NOT NULL,
+    ped_data_compra            DATE NOT NULL,
+    ped_data_estimada          DATE NOT NULL,
+    ped_endereco_id            INT NOT NULL,
+    ped_forma_pagamento_id     INT NOT NULL,
+    ped_codigo_pedido          varchar(50) not null
 );
 
 CREATE TABLE pessoa (
@@ -140,15 +149,19 @@ CREATE TABLE user_type (
 );
 
 CREATE TABLE forma_pagamento (
-  fpa_id            SERIAL NOT NULL,
-  fpa_cartao_id     INT NOT NULL,
-  fpa_pedido_id     INT NOT NULL
+    fpa_id                      SERIAL NOT NULL
+);
+
+CREATE TABLE forma_pagamento_cartao (
+    fpc_id                  SERIAL NOT NULL,
+    fpc_forma_pagamento_id  INT NOT NULL,
+    fpc_cartao_credito_id   INT NOT NULL
 );
 
 CREATE TABLE item_pedido (
-  itp_id            SERIAL NOT NULL,
-  itp_item_id     INT NOT NULL,
-  itp_pedido_id     INT NOT NULL
+    itp_id            SERIAL NOT NULL,
+    itp_item_id     INT NOT NULL,
+    itp_pedido_id     INT NOT NULL
 );
 
 CREATE TABLE usuario (
@@ -200,6 +213,10 @@ ALTER TABLE user_type ADD CONSTRAINT user_type_pk PRIMARY KEY ( tus_id );
 ALTER TABLE telefone ADD CONSTRAINT telefone_pk PRIMARY KEY ( tel_id );
 
 ALTER TABLE tipo_telefone ADD CONSTRAINT tipo_telefone_pk PRIMARY KEY ( ttl_id );
+
+ALTER TABLE forma_pagamento ADD CONSTRAINT forma_pagamento_pk PRIMARY KEY ( fpa_id );
+
+ALTER TABLE forma_pagamento_cartao ADD CONSTRAINT forma_pagamento_cartao_pk PRIMARY KEY ( fpc_id );
 
 ALTER TABLE carta
     ADD CONSTRAINT carta_status_fk FOREIGN KEY ( car_status_id )
@@ -279,11 +296,11 @@ ALTER TABLE jogo_categoria_carta
 
 ALTER TABLE pedido
     ADD CONSTRAINT pedido_administrador_fk FOREIGN KEY ( ped_administrador_id )
-        REFERENCES usuario ( usu_id );
+        REFERENCES pessoa ( pes_id );
 
 ALTER TABLE pedido
     ADD CONSTRAINT pedido_cliente_fk FOREIGN KEY ( ped_cliente_id )
-        REFERENCES usuario ( usu_id );
+        REFERENCES pessoa ( pes_id );
 
 ALTER TABLE pedido
     ADD CONSTRAINT pedido_status_pedido_fk FOREIGN KEY ( ped_status_pedido_id )
@@ -293,6 +310,18 @@ ALTER TABLE pedido
     ADD CONSTRAINT pedido_endereco_fk FOREIGN KEY ( ped_endereco_id )
         REFERENCES endereco ( end_id );
 
+ALTER TABLE pedido
+    ADD CONSTRAINT pedido_forma_pagamento_fk FOREIGN KEY ( ped_forma_pagamento_id )
+        REFERENCES forma_pagamento ( fpa_id );
+
 ALTER TABLE telefone
     ADD CONSTRAINT telefone_tipo_telefone_fk FOREIGN KEY ( tel_tipo_telefone_id )
         REFERENCES tipo_telefone ( ttl_id );
+
+ALTER TABLE forma_pagamento_cartao
+    ADD CONSTRAINT forma_pagamento_cartao_cartao_fk FOREIGN KEY ( fpc_cartao_credito_id )
+        REFERENCES cartao ( crt_id );
+
+ALTER TABLE forma_pagamento_cartao
+    ADD CONSTRAINT forma_pagamento_cartao_forma_fk FOREIGN KEY ( fpc_forma_pagamento_id )
+        REFERENCES forma_pagamento ( fpa_id );

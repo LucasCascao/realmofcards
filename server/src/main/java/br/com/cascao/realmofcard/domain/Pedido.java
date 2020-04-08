@@ -27,13 +27,22 @@ public class Pedido extends EntidadeDominio{
     @Column(name = "ped_data_compra")
     private LocalDate dataCompra;
 
+    @Column(name = "ped_data_estimada")
+    private LocalDate dataEstimada;
+
+    @Column(name = "ped_valor_total")
+    private Double valorTotal;
+
+    @Column(name = "ped_codigo_pedido")
+    private String codigoPedido;
+
     @OneToOne()
     @JoinColumn(name = "ped_cliente_id")
-    private Usuario cliente;
+    private Pessoa cliente;
 
     @OneToOne()
     @JoinColumn(name = "ped_administrador_id")
-    private Usuario administrador;
+    private Pessoa administrador;
 
     @OneToOne()
     @JoinColumn(name = "ped_status_pedido_id")
@@ -43,10 +52,13 @@ public class Pedido extends EntidadeDominio{
     @JoinColumn(name = "ped_endereco_id")
     private Endereco endereco;
 
+    @OneToOne()
+    @JoinColumn(name = "ped_forma_pagamento_id")
+    private FormaPagamento formaPagamento;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "item_pedido",
             joinColumns = {@JoinColumn(name = "itp_pedido_id")},
             inverseJoinColumns = {@JoinColumn(name = "itp_item_id")})
-    private List<Item> itens;
+    private List<Item> itemList;
 }

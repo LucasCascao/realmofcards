@@ -72,6 +72,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {Util} from './shared/app.util';
 import {UsuarioService} from '../services/usuario.service';
 import { AppLogadoComponent } from './app-logado/app-logado.component';
+import { SelectCreditCardComponent } from './buy-components/select-credit-card/select-credit-card.component';
+import { SelectAddressComponent } from './buy-components/select-address/select-address.component';
 
 @NgModule({
   declarations: [
@@ -135,7 +137,9 @@ import { AppLogadoComponent } from './app-logado/app-logado.component';
     TicketListComponent,
     TicketDevolutionListComponent,
     TicketTradeListComponent,
-    AppLogadoComponent
+    AppLogadoComponent,
+    SelectCreditCardComponent,
+    SelectAddressComponent
   ],
   imports: [
     BrowserModule,

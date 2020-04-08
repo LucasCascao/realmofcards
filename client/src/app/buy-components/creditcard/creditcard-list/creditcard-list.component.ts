@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/services/util.service';
 import { CartaoCredito } from 'src/model/domain/cartao-credito.model';
 import { Person } from 'src/model/domain/person.model';
-import { GLOBAL } from 'src/app/shared/global.util';
 
 @Component({
   selector: 'app-creditcard-list',
@@ -15,24 +14,41 @@ export class CreditcardListComponent implements OnInit {
 
   cartoes: CartaoCredito[];
 
-  pessoa: Person;
-
-  cartaoCredito: CartaoCredito;
+  idCartaoSelecionado: number;
 
   ngOnInit(): void {
-    
-    this.pessoa = new Person();
-    this.cartaoCredito = new CartaoCredito();
 
-    this.pessoa.id = GLOBAL.pessoa.id;
-    this.cartaoCredito.pessoa = this.pessoa;
+    // tslint:disable-next-line:radix max-line-length
+    this.idCartaoSelecionado = sessionStorage.getItem('cartaoSelecionado') != null ? Number.parseInt(sessionStorage.getItem('idCartaoSelecionado')) : null;
 
-    this.getCartoes();
+    const cartaoCredito = new CartaoCredito();
+    const pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'))
+    cartaoCredito.pessoa = pessoa;
+    this.getCartoes(cartaoCredito);
   }
 
-  async getCartoes(){
-    await this.service.get(this.cartaoCredito, 'cartaocredito').subscribe( resultado => {
+  getCartoes(cartaoCredito: CartaoCredito){
+    this.service.get(cartaoCredito, 'cartaocredito').subscribe( resultado => {
       this.cartoes = resultado?.entidades;
     });
   }
+
+  selecionaCartao(cartaoSelecionado: CartaoCredito) {
+
+    let cartaoParaTroca: CartaoCredito;
+
+    this.cartoes.forEach( cartao => {
+      if (cartao.id === this.idCartaoSelecionado) {
+        cartaoParaTroca = cartao;
+      }
+    });
+
+    cartaoParaTroca.preferido = true;
+  }
+
+  alterarPreferido(cartaoCredito: CartaoCredito) {
+    this.service.update(cartaoCredito, 'cartaoCredito').subscribe();
+  }
+
+
 }

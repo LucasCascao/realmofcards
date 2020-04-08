@@ -34,12 +34,18 @@ public class PessoaPersistence implements IPersistence {
 	
 	@Override
 	public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
+
 		List<EntidadeDominio> pessoas = new ArrayList<>();
 		Pessoa pessoa = (Pessoa) entidade;
+
 		if(pessoa.getId() != null){
-			pessoa = pessoaRepository.findPessoaByUsuario_Id(pessoa.getId());
-			pessoa.getUsuario().setPassword(null);
-			pessoas.add(pessoa);
+			pessoas.add(pessoaRepository.findById(pessoa.getId()).get());
+			return pessoas;
+		}
+
+		if(pessoa.getUsuario() != null
+				&& pessoa.getUsuario().getId() != null){
+			pessoas.add(pessoaRepository.findPessoaByUsuario_Id(pessoa.getUsuario().getId()));
 			return pessoas;
 		}
 

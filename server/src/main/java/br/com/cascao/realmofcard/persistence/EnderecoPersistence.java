@@ -2,9 +2,9 @@ package br.com.cascao.realmofcard.persistence;
 
 import br.com.cascao.realmofcard.domain.Endereco;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
-import br.com.cascao.realmofcard.domain.Pedido;
 import br.com.cascao.realmofcard.repository.CidadeRepository;
 import br.com.cascao.realmofcard.repository.EnderecoRepository;
+import br.com.cascao.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,8 +50,14 @@ public class EnderecoPersistence implements IPersistence {
             List<EntidadeDominio> enderecos = new ArrayList<>();
             Endereco endereco = (Endereco) entidade;
 
-            if(endereco.getId() != null){
+            if(Util.isNotNull(endereco.getId())){
                 enderecos.add(enderecoRepository.findById(endereco.getId()).get());
+                return enderecos;
+            }
+
+            if(Util.isNotNull(endereco.getPreferido())){
+                Endereco enderecoResultado = enderecoRepository.findByPessoa_IdAndPreferido(endereco.getPessoa().getId(), endereco.getPreferido());
+                enderecos.add(enderecoResultado);
                 return enderecos;
             }
 
