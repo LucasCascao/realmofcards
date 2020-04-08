@@ -12,77 +12,50 @@
           <div class="form-group">
             <label class="col-lg-3 control-label">Logradouro:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="Rua Passos">
+              <input class="form-control" type="text" [(ngModel)]="endereco.logradouro" name="cad_endereco_logradouro" value="{{endereco?.logradouro}}">
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-lg-3 control-label">Numero:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="876">
+              <input class="form-control" type="text" [(ngModel)]="endereco.numero" name="cad_endereco_numero"  value="{{endereco?.numero}}">
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-lg-3 control-label">Complemento:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="Casa do muro laranja com o portão branco">
+              <input class="form-control" [(ngModel)]="endereco.complemento" name="cad_endereco_complemento" type="text" value="{{endereco?.complemento}}">
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-lg-3 control-label">Cep:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="08665-410">
+              <input class="form-control" [(ngModel)]="endereco.cep" name="cad_endereco_cep" type="text" value="{{endereco?.cep}}">
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-lg-3 control-label">Bairro:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="Cidade Edson">
+              <input class="form-control" type="text" [(ngModel)]="endereco.bairro" name="cad_endereco_bairro" value="{{endereco?.bairro}}">
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-lg-3 control-label">Cidade:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="Suzano">
+              <input class="form-control" type="text" [(ngModel)]="endereco.cidade.nome" name="cad_endereco_cidade" value="{{endereco?.cidade?.nome}}">
             </div>
           </div>
 
           <div class="form-group">
-            <label class="col-lg-3 control-label">Estado:</label>
+            <label class="col-lg-3 control-label">estado:</label>
             <div class="col-lg-8">
               <div class="ui-select">
                 <select id="user_time_zone" class="form-control">
-                  <option value="AC">AC</option>
-                  <option value="AL">AL</option>
-                  <option value="AP">AP</option>
-                  <option value="AM">AM</option>
-                  <option value="BA">BA</option>
-                  <option value="CE">CE</option>
-                  <option value="DF">DF</option>
-                  <option value="CE">CE</option>
-                  <option value="GO">GO</option>
-                  <option value="MA">MA</option>
-                  <option value="MT">MT</option>
-                  <option value="MS">MS</option>
-                  <option value="MG">MG</option>
-                  <option value="PA">PA</option>
-                  <option value="PB">PB</option>
-                  <option value="PR">PR</option>
-                  <option value="PE">PE</option>
-                  <option value="PI">PI</option>
-                  <option value="RJ">RJ</option>
-                  <option value="RN">RN</option>
-                  <option value="RS">RS</option>
-                  <option value="RO">RO</option>
-                  <option value="RR">RR</option>
-                  <option value="SC">SC</option>
-                  <option value="SP" selected>SP</option>
-                  <option value="SE">SE</option>
-                  <option value="TO">TO</option>
                 </select>
               </div>
             </div>
@@ -91,9 +64,9 @@
           <div class="form-group">
             <label class="col-md-3 control-label"></label>
             <div class="col-md-8">
-              <input type="button" class="btn btn-primary" [routerLink]="['../address-list']" value="Alterar">
+              <input type="button" class="btn btn-primary" (click)="alterarEndereco()" value="Alterar">
               <span></span>
-              <input type="reset" class="btn btn-default" [routerLink]="['../address-list']" value="Cancelar">
+              <input type="reset" class="btn btn-default" [routerLink]="['app-logado/address-list']" value="Cancelar">
             </div>
           </div>
         </form>

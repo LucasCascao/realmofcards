@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Person} from '../../model/domain/person.model';
 import {ClienteService} from '../../services/cliente.service';
+import { UtilService } from 'src/services/util.service';
 
 @Component({
   selector: 'app-header',
@@ -10,22 +11,14 @@ import {ClienteService} from '../../services/cliente.service';
 })
 export class HeaderComponent implements OnInit {
 
-  client: Person = new Person();
-
-  @Input()
-  id?;
-
-  constructor(private route: ActivatedRoute, private clienteService: ClienteService) { }
+  constructor(private route: ActivatedRoute, private clienteService: ClienteService, private service: UtilService) { }
 
   ngOnInit() {
-    this.client.id = this.id;
-    this.getUser();
   }
 
-  async getUser() {
-    await this.clienteService.getClientes(this.client).subscribe(resultado => {
-      this.client = resultado.entidades[0];
-    });
+  logout() {
+    sessionStorage.removeItem('usuarioLogado');
+    sessionStorage.removeItem('pessoaLogada');
   }
 
 }

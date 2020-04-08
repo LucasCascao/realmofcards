@@ -1,4 +1,4 @@
-import {Telefone} from './telefone.model.js.js';
+import {Telefone} from './telefone.model.js';
 import {User} from "./user.model";
 
 export class Person {

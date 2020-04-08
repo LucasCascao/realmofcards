@@ -56,16 +56,18 @@ import {ProviderListComponent} from './admin-components/provider/provider-list/p
 import {TicketDevolutionListComponent} from './admin-components/tickets/ticket-devolution-list/ticket-devolution-list.component';
 import {TicketTradeListComponent} from './admin-components/tickets/ticket-trade-list/ticket-trade-list.component';
 import {AppLogadoComponent} from './app-logado/app-logado.component';
+import {SelectCreditCardComponent} from './buy-components/select-credit-card/select-credit-card.component';
+import {SelectAddressComponent} from './buy-components/select-address/select-address.component';
 
 export const ROUTES: Routes = [
   {path: '', component: LoginComponent},
-  {path: 'app-logado/:client', component: AppLogadoComponent, children: [
+  {path: 'app-logado', component: AppLogadoComponent, children: [
       {path: '', redirectTo: 'product-market-page', pathMatch: 'full'},
       {path: 'product-market-page', component: ProductMarketPageComponent},
       {path: 'product-detail', component: ProductDetailComponent},
-      {path: 'user-details/:id', component: UserDetailsComponent},
-      {path: 'user-alter/:id', component: UserAlterComponent},
-      {path: 'user-delete/:id', component: UserDeleteComponent},
+      {path: 'user-details', component: UserDetailsComponent},
+      {path: 'user-alter', component: UserAlterComponent},
+      {path: 'user-delete', component: UserDeleteComponent},
       {path: 'user-orders', component: UserOrdersComponent},
       {path: 'user-password-alter', component: UserPasswordAlterComponent},
       {path: 'user-product-trade', component: ProductTradeComponent},
@@ -73,13 +75,15 @@ export const ROUTES: Routes = [
       {path: 'user-devolution', component: DevolutionComponent},
       {path: 'user-devolution-finalization', component: DevolutionFinalizationComponent},
       {path: 'address-register', component: AddressRegisterComponent},
-      {path: 'address-alter', component: AddressAlterComponent},
-      {path: 'address-delete', component: AddressDeleteComponent},
+      {path: 'address-alter/:id', component: AddressAlterComponent},
+      {path: 'address-delete/:id', component: AddressDeleteComponent},
       {path: 'address-list', component: AddressListComponent},
       {path: 'creditcard-register', component: CreditcardRegisterComponent},
       {path: 'creditcard-alter', component: CreditcardAlterComponent},
       {path: 'creditcard-delete', component: CreditcardDeleteComponent},
       {path: 'creditcard-list', component: CreditcardListComponent},
+      {path: 'select-creditcard', component: SelectCreditCardComponent},
+      {path: 'select-address', component: SelectAddressComponent},
       {path: 'cart', component: CartComponent},
       {path: 'payment-page', component: PaymentPageComponent},
       {path: 'order-resume', component: OrderResumeComponent},

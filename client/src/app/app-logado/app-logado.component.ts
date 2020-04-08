@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-
+import { UtilService } from 'src/services/util.service';
 @Component({
   selector: 'app-app-logado',
   templateUrl: './app-logado.component.html',
@@ -8,12 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AppLogadoComponent implements OnInit {
 
-  id;
+  constructor(private service: UtilService) { }
 
-  constructor(private route: ActivatedRoute) { }
-
-  ngOnInit(): void {
-    this.id = this.route.snapshot.params.client;
-  }
-
+  ngOnInit(): void {}
 }

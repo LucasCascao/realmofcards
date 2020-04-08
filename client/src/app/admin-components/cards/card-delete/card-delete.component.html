@@ -9,9 +9,9 @@
               <h3 class="mb-0">Inativar carta</h3>
             </div>
             <div class="card-body">
-              <p>Confirmação para que a carta <strong>{{carta.nome}}</strong> com em estoque de <strong>{{carta.estoque}}</strong> unidades seja inativada.</p>
-              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['../admin-product-list']" value="Cancelar">
-              <input type="button" class="btn btn-danger btn-lg float-right" [routerLink]="['../admin-product-list']" value="Inativar">
+              <p>Confirmação para que a carta <strong>{{carta.nome}}</strong>, o estoque desse produto será zerado.</p>
+              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['/app-logado/admin-product-list']" value="Cancelar">
+              <input type="button" class="btn btn-danger btn-lg float-right" (click)="deletaCarta()" value="Inativar">
             </div>
             <!--/card-block-->
           </div>

@@ -9,7 +9,9 @@ import {UsuarioService} from '../../../services/usuario.service';
 import {ResultUser} from '../../../model/results/result-user.model';
 import {User} from '../../../model/domain/user.model';
 import {Observable} from 'rxjs';
-import {TipoUsuario} from "../../../model/domain/tipo-usuario";
+import {TipoUsuario} from '../../../model/domain/tipo-usuario';
+import { UtilService } from 'src/services/util.service';
+import { Status } from 'src/model/domain/status.model';
 
 @Component({
   selector: 'app-user-register',
@@ -22,48 +24,29 @@ export class UserRegisterComponent implements OnInit {
 
   person: Person = new Person();
 
-  resultClient: ResultClient = new ResultClient();
-
   msg = null;
 
-  confirmarSenha: string;
-
-  constructor( private clienteService: ClienteService, private router: Router, private util: Util) { }
+  constructor( private service: UtilService, private router: Router, private util: Util) { }
 
   ngOnInit(): void {
   }
 
-  async cadastrar() {
+  cadastrar() {
     this.person.usuario = this.user;
     this.person.usuario.tipoUsuario = new TipoUsuario();
     this.person.usuario.tipoUsuario.id = 2;
-    this.person.usuario.ativo = true;
-    console.log(this.person);
-    await this.cadastrarPessoa();
+    this.person.usuario.status = new Status();
+    this.person.usuario.status.id = 1;
+    this.cadastrarPessoa();
   }
 
-  async cadastrarPessoa() {
-    await this.clienteService.addCliente(this.person).subscribe(value => {
-      this.resultClient = value;
-      if (value.msg != null) {
-        this.msg = this.msg + value.msg;
+  cadastrarPessoa() {
+    this.service.add(this.person, 'pessoas').subscribe(resultado => {
+      if (resultado.msg !== null) {
+        alert(this.util.getMensagensSeparadas(resultado?.msg));
       } else {
-        this.person = value?.entidades[0];
+        this.router.navigate(['/']);
       }
-      this.msg = value?.msg;
-      this.alertar();
     });
   }
-
-  alertar() {
-    if (this.msg !== null) {
-      alert(this.util.getMensagensSeparadas(this.msg));
-      console.log(this.msg);
-    } else {
-      this.router.navigate(['/']);
-    }
-  }
-
-
-
 }

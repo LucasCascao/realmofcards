@@ -1,5 +1,5 @@
 
-<!--<header>-->
+<!-- <header>-->
 <!--  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">-->
 <!--    <ol class="carousel-indicators">-->
 <!--      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>-->
@@ -38,7 +38,7 @@
 <!--      <span class="sr-only">Next</span>-->
 <!--    </a>-->
 <!--  </div>-->
-<!--</header>-->
+<!--</header> -->
 
 <!-- Page Content -->
 <div class="container">
@@ -57,17 +57,16 @@
   <!-- Portfolio Section -->
   <h2>Cartas a venda: </h2>
   <div class="row">
-    <div *ngFor="let carta of cartas"
-      class="col-lg-4 col-sm-6 portfolio-item">
+    <div *ngFor="let carta of cartas" class="col-lg-3 col-sm-6 portfolio-item">
       <div class="card h-100">
-        <a [routerLink]="['../product-detail']"><img class="card-img-top" [src]="carta.imageUrl" alt=""></a>
+        <a (click)="visualizar(carta?.id)" [routerLink]="['/app-logado/product-detail']"><img class="card-img-top" [src]="carta?.imagemPath" alt=""></a>
         <div class="card-body">
-          <h4 class="card-title">{{carta.nome}}</h4>
-          <p class="card-text">Categoria de jogo: {{carta.catJogo}}</p>
-          <p class="card-text">Categoria de carta: {{carta.catCarta}}</p>
-          <p class="card-text">Valor: R$ {{carta.value}}</p>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../product-detail']">Visualizar</a>
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../cart']">Comprar</a>
+          <h6 class="card-title"><strong>{{carta?.nome}}</strong></h6>
+          <p class="card-text">Categoria de jogo: {{carta?.jogo?.nome}}</p>
+          <p class="card-text">Categoria de carta: {{carta?.categoriaCarta?.nome}}</p>
+          <p class="card-text">Valor: {{carta?.valorVenda | currency: 'BRL': true}}</p>
+          <a class="btn btn-lg btn-secondary btn-block" (click)="visualizar(carta?.id)" [routerLink]="['../product-detail']">Visualizar</a>
+          <button class="btn btn-lg btn-secondary btn-block" (click)="adicionaItemNoCarrinho(carta?.id)">Comprar</button>
         </div>
       </div>
     </div>

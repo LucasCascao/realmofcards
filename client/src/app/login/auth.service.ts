@@ -6,6 +6,8 @@ import {ResultClient} from '../../model/results/result-person.model';
 import {User} from '../../model/domain/user.model';
 import {ResultUser} from '../../model/results/result-user.model';
 import {UsuarioService} from '../../services/usuario.service';
+import { UtilService } from 'src/services/util.service';
+import { Util } from '../shared/app.util';
 
 @Injectable({
   providedIn: 'root'
@@ -20,21 +22,16 @@ export class AuthService {
   usuarioAutenticado = false;
 
 
-  constructor(private router: Router, private usuarioService: UsuarioService) { }
+  constructor(private router: Router, private service: UtilService, private util: Util) { }
 
   async signIn(user: User) {
 
-    await this.usuarioService.getUsers(user).subscribe(dado => {
-      this.resultado = dado;
-      this.clients.usuario = dado.entidades[0];
-
-      if (dado.msg === null) {
-        sessionStorage.setItem('userId', String(this.clients.id));
-        this.usuarioAutenticado = true;
-        this.mostrarMenuEmitter.emit(true);
-        this.router.navigate(['/app-logado', this.clients.usuario.id]);
+    await this.service.get(user, 'usuarios').subscribe( async resuldado => {
+      if (resuldado.msg !== null) {
+        alert(this.util?.getMensagensSeparadas(resuldado?.msg))
       } else {
-        alert('Login ou senha invalida');
+        sessionStorage?.setItem('pessoaLogada', JSON.stringify(await resuldado?.entidades[0]));
+        this.router.navigate(['/app-logado']);
       }
     });
   }

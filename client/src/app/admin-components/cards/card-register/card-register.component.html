@@ -9,15 +9,21 @@
         <div class="form-group">
           <label class="col-lg-6 control-label">Nome da carta:</label>
           <div class="col-lg-8">
-            <input class="form-control" type="text" value="">
+            <input [(ngModel)]="carta.nome" name="cad_carta_nome" class="form-control" type="text" value="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-6 control-label">Descrição:</label>
+          <div class="col-lg-8">
+            <textarea name="cad_carta_descricao" [(ngModel)]="carta.descricao" id="story" name="story" rows="5" cols="55"></textarea>
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-6 control-label">Categoria:</label>
           <div class="col-lg-4">
             <div class="ui-select">
-              <select id="user_time_zone" class="form-control">
-                <option *ngFor="let categoria of categorias" value="AC">{{categoria.categoryName}}</option>
+              <select  id="user_time_zone" class="form-control" name="cad_carta_categoria" [(ngModel)]="carta.categoriaCarta" >
+                <option  [ngValue]="categoria" *ngFor="let categoria of categorias">{{categoria?.nome}}</option>
               </select>
             </div>
           </div>
@@ -25,33 +31,33 @@
         <div class="form-group">
           <label class="col-lg-6 control-label">Imagem de exposição:</label>
           <div class="col-lg-2">
-            <input type="file">
+            <input name="cad_carta_imagem" type="file" (change)="inputFileChange($event)">
           </div>
         </div>
-<!--        <div class="form-group">-->
-<!--          <label class="col-lg-6 control-label">Quantidade inicial no estoque:</label>-->
-<!--          <div class="col-lg-2">-->
-<!--            <input class="form-control" type="number" min="1">-->
-<!--          </div>-->
-<!--        </div>-->
+        <div class="form-group">
+          <label class="col-lg-6 control-label">Quantidade inicial no estoque:</label>
+          <div class="col-lg-2">
+            <input name="cad_carta_quantidade" [(ngModel)]="carta.quantidade" class="form-control" type="number" min="1">
+          </div>
+        </div>
         <div class="form-group">
           <label class="col-lg-6 control-label">Valor do custo do produto:</label>
           <div class="col-lg-2">
-            <input class="form-control" type="text" min="1">
+            <input name="cad_carta_valor_compra" [(ngModel)]="carta.valorCompra" class="form-control" type="text" min="1">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-6 control-label">Porcentagem de precificação: </label>
           <div class="col-lg-2">
-            <input class="form-control" type="text" min="1">
+            <input name="cad_carta_precificacao" [(ngModel)]="carta.precificacao" class="form-control" type="text" min="1">
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
-            <input type="button" class="btn btn-success btn-lg float-right" [routerLink]="['../admin-product-list']" value="Cadastrar">
+            <input type="button" class="btn btn-success btn-lg float-right" (click)="cadastraCarta()" value="Cadastrar">
             <span></span>
-            <input type="reset" class="btn btn-secondary btn-lg float-left" [routerLink]="['../admin-page']" value="Cancelar">
+            <input type="reset" class="btn btn-secondary btn-lg float-left" [routerLink]="['/app-logado/admin-page']" value="Cancelar">
           </div>
         </div>
       </form>

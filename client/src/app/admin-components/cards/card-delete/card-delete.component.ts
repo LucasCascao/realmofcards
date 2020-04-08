@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MockCards} from "../../../../mock/mock-card.model";
+import {UtilService} from '../../../../services/util.service';
+import {Carta} from '../../../../model/domain/carta.model';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 
 @Component({
   selector: 'app-card-delete',
@@ -8,11 +10,27 @@ import {MockCards} from "../../../../mock/mock-card.model";
 })
 export class CardDeleteComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: UtilService, private route: ActivatedRoute, private router: Router) { }
 
-  carta = new MockCards().cards[0];
+  carta: Carta;
 
   ngOnInit(): void {
+    this.carta = JSON.parse(sessionStorage.getItem('cartaSelecionada'));
+    this.getCarta();
+  }
+
+  async getCarta(){
+    await this.service.get(this.carta, 'cartas').subscribe( resultado => {
+      this.carta = resultado?.entidades[0];
+    });
+  }
+
+  async deletaCarta() {
+    await this.service.delete(this.carta?.id, 'cartas').subscribe(resultado => this.naveguePara());
+  }
+
+  naveguePara() {
+    this.router.navigate(['/app-logado/admin-page']);
   }
 
 }
