@@ -52,7 +52,7 @@ public class Pedido extends EntidadeDominio{
     @JoinColumn(name = "ped_endereco_id")
     private Endereco endereco;
 
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "ped_forma_pagamento_id")
     private FormaPagamento formaPagamento;
 

@@ -7,9 +7,9 @@ CREATE TABLE carta (
     car_id            SERIAL NOT NULL,
     car_nome          VARCHAR(50) NOT NULL UNIQUE,
     car_descricao     VARCHAR(500) NOT NULL,
-    car_valor_compra  DECIMAL(4, 2) NOT NULL,
-    car_precificacao  DECIMAL(4, 2) NOT NULL,
-    car_valor_venda   DECIMAL(4, 2) NOT NULL,
+    car_valor_compra  DECIMAL(8, 2) NOT NULL,
+    car_precificacao  DECIMAL(8, 2) NOT NULL,
+    car_valor_venda   DECIMAL(8, 2) NOT NULL,
     car_quantidade    INT NOT NULL,
     car_imagem_path   VARCHAR(250) NOT NULL,
     car_jogo_id       INT NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE cidade (
 CREATE TABLE cupom (
     cup_id          SERIAL NOT NULL,
     cup_codigo      VARCHAR(60) NOT NULL,
-    cup_valor       DECIMAL(4, 2) NOT NULL,
+    cup_valor       DECIMAL(8, 2) NOT NULL,
     cup_status      BOOLEAN NOT NULL
 );
 
@@ -84,7 +84,7 @@ CREATE TABLE item (
 
 CREATE TABLE carrinho (
     crr_id            SERIAL NOT NULL,
-    crr_valorTotal    DECIMAL(4, 2),
+    crr_valorTotal    DECIMAL(8, 2),
     crr_pessoa_id     INT NOT NULL
 );
 
@@ -115,7 +115,7 @@ CREATE TABLE pedido (
     ped_administrador_id       INT,
     ped_cliente_id             INT NOT NULL,
     ped_status_pedido_id       INT NOT NULL,
-    ped_valor_total            DECIMAL(4,2) NOT NULL,
+    ped_valor_total            DECIMAL(8,2) NOT NULL,
     ped_data_compra            DATE NOT NULL,
     ped_data_estimada          DATE NOT NULL,
     ped_endereco_id            INT NOT NULL,

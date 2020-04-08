@@ -12,4 +12,6 @@ public interface CarrinhoRepository extends CrudRepository<Carrinho, Integer> {
     Carrinho findByPessoa_Id(Integer id);
 
     Carrinho findByItensContaining(Item item);
+
+    void deleteByPessoa_Id(Integer id);
 }

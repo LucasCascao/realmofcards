@@ -1,8 +1,10 @@
 package br.com.cascao.realmofcard.persistence;
 
+import br.com.cascao.realmofcard.domain.Carrinho;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.FormaPagamento;
 import br.com.cascao.realmofcard.domain.Pedido;
+import br.com.cascao.realmofcard.repository.CarrinhoRepository;
 import br.com.cascao.realmofcard.repository.FormaPagamentoRepository;
 import br.com.cascao.realmofcard.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +23,20 @@ public class PedidoPersistence implements IPersistence {
     @Autowired
     FormaPagamentoRepository formaPagamentoRepository;
 
+    @Autowired
+    CarrinhoRepository carrinhoRepository;
+
     @Override
     public EntidadeDominio salvar(EntidadeDominio entidade) {
         if(entidade instanceof Pedido){
             Pedido pedido = (Pedido) entidade;
             pedido.setDataCompra(LocalDate.now());
             pedido.setFormaPagamento(formaPagamentoRepository.save(pedido.getFormaPagamento()));
-            return pedidoRepository.save((Pedido) entidade);
+            pedido = pedidoRepository.save((Pedido) entidade);
+            Carrinho carrinho = carrinhoRepository.findByPessoa_Id(pedido.getCliente().getId());
+            carrinho.setItens(new ArrayList<>());
+            carrinhoRepository.save(carrinho);
+            return pedido;
         }
         else return null;
     }
