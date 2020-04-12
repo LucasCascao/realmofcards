@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Person} from '../../../model/domain/person.model';
+import {Pessoa} from '../../../model/domain/person.model';
 import { UtilService } from 'src/services/util.service';
 import {Carta} from '../../../model/domain/carta.model';
 import { Status } from 'src/model/domain/status.model';
@@ -19,7 +19,7 @@ export class ProductMarketPageComponent implements OnInit {
               private router: Router,
               private util: Util) { }
 
-  client: Person;
+  client: Pessoa;
 
 
   cartas: Carta[];

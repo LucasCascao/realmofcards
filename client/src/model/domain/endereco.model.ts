@@ -1,5 +1,5 @@
 import { Cidade } from './cidade.model';
-import { Person } from './person.model';
+import { Pessoa } from './person.model';
 
 export class Endereco {
     id: number;
@@ -10,5 +10,5 @@ export class Endereco {
     complemento: string;
     preferido: boolean;
     cidade: Cidade;
-    pessoa: Person;
+    pessoa: Pessoa;
 }

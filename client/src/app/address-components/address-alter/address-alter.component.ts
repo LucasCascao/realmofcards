@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UtilService} from '../../../services/util.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Endereco} from '../../../model/domain/endereco.model';
-import {Person} from '../../../model/domain/person.model';
+import {Pessoa} from '../../../model/domain/person.model';
 import {Util} from '../../shared/app.util';
 
 @Component({

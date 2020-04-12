@@ -30,7 +30,7 @@ public class PessoaDTO extends EntidadeDominio implements IDTO{
     private UsuarioDTO usuario;
 
     @Override
-    public EntidadeDominio getDTO(EntidadeDominio dominio) {
+    public EntidadeDominio parseEntityToDTO(EntidadeDominio dominio) {
         if(dominio instanceof Pessoa){
             PessoaDTO pessoaDTO = new PessoaDTO();
             Pessoa pessoa = (Pessoa) dominio;
@@ -43,7 +43,7 @@ public class PessoaDTO extends EntidadeDominio implements IDTO{
             pessoaDTO.setDataNascimento(pessoa.getDataNascimento());
             if(pessoa.getUsuario() != null)
                 pessoaDTO.setUsuario((UsuarioDTO) new UsuarioDTO()
-                        .getDTO(pessoa.getUsuario()));
+                        .parseEntityToDTO(pessoa.getUsuario()));
 
             return pessoaDTO;
         }
@@ -51,7 +51,7 @@ public class PessoaDTO extends EntidadeDominio implements IDTO{
     }
 
     @Override
-    public EntidadeDominio getEntidade(IDTO dto) {
+    public EntidadeDominio parseDTOToEntity(IDTO dto) {
         return null;
     }
 }

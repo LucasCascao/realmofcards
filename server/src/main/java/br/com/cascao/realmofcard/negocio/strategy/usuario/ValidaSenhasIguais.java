@@ -15,9 +15,15 @@ public class ValidaSenhasIguais implements IStrategy {
 
         StringBuilder msg = new StringBuilder();
 
-        if (entidade instanceof Pessoa) {
-            Pessoa pessoa = (Pessoa) entidade;
-            Usuario usuario = pessoa.getUsuario();
+        if (entidade instanceof Pessoa
+            || entidade instanceof Usuario) {
+
+            Usuario usuario = null;
+
+            if(entidade instanceof Pessoa) usuario = ((Pessoa) entidade).getUsuario();
+
+            if(entidade instanceof Usuario) usuario = (Usuario) entidade;
+
             if(Util.isNotNull(usuario.getPassword()) && Util.isNotNull(usuario.getRePassword())) {
                 if(Util.isEquals(usuario.getPassword(), usuario.getRePassword())) {
                     msg.append("Senhas estão diferentes.");

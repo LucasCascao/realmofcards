@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/services/util.service';
 import { CartaoCredito } from 'src/model/domain/cartao-credito.model';
-import { Person } from 'src/model/domain/person.model';
+import { Pessoa } from 'src/model/domain/person.model';
 
 @Component({
   selector: 'app-creditcard-list',

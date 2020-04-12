@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from './auth.service';
-import {User} from '../../model/domain/user.model';
+import {Usuario} from '../../model/domain/user.model';
 import {Router} from '@angular/router';
 import {Util} from '../shared/app.util';
 
@@ -11,7 +11,7 @@ import {Util} from '../shared/app.util';
 })
 export class LoginComponent implements OnInit {
 
-  public usuario: User = new User();
+  public usuario: Usuario = new Usuario();
 
   constructor(private usuarioService: AuthService, private router: Router, private appUtil: Util) { }
 

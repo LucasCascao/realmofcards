@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {Person} from '../model/domain/person.model';
+import {Pessoa} from '../model/domain/person.model';
 import {ResultClient} from '../model/results/result-person.model';
 
 import {API_URL, HTTP_OPTIONS} from '../app/shared/app.api';
@@ -14,11 +14,11 @@ export class ClienteService {
 
   constructor(private http: HttpClient) { }
 
-  getClientes(person: Person): Observable<ResultClient> {
+  getClientes(person: Pessoa): Observable<ResultClient> {
     return this.http.post<ResultClient>(`${API_URL}/pessoas`, person, HTTP_OPTIONS);
   }
 
-  addCliente(person: Person): Observable<ResultClient> {
+  addCliente(person: Pessoa): Observable<ResultClient> {
     return  this.http.post<ResultClient>(`${API_URL}/pessoas/cria`, person);
   }
 
@@ -26,7 +26,7 @@ export class ClienteService {
     return this.http.put<ResultClient>(`${API_URL}/pessoas`, person);
   }
 
-  deleteCliente(person: Person): Observable<ResultClient> {
+  deleteCliente(person: Pessoa): Observable<ResultClient> {
     return this.http.delete<ResultClient>(`${API_URL}/pessoas/${person.id}`);
   }
 }

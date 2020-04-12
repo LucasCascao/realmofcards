@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/services/util.service';
-import { Person } from 'src/model/domain/person.model';
+import { Pessoa } from 'src/model/domain/person.model';
 import { Pedido } from 'src/model/domain/pedido.model';
 
 @Component({

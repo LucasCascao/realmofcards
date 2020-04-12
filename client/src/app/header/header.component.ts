@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Person} from '../../model/domain/person.model';
+import {Pessoa} from '../../model/domain/person.model';
 import {ClienteService} from '../../services/cliente.service';
 import { UtilService } from 'src/services/util.service';
 
@@ -11,9 +11,12 @@ import { UtilService } from 'src/services/util.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private clienteService: ClienteService, private service: UtilService) { }
+  isAdmin
+
+  constructor() { }
 
   ngOnInit() {
+    this.isAdmin = JSON.parse(sessionStorage.getItem('isAdmin'));
   }
 
   logout() {

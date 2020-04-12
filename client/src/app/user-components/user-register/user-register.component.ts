@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Person } from 'src/model/domain/person.model';
+import { Pessoa } from 'src/model/domain/person.model';
 import {ClienteService} from '../../../services/cliente.service';
 import {Router} from '@angular/router';
 import {ResultClient} from '../../../model/results/result-person.model';
@@ -7,7 +7,7 @@ import {async} from '@angular/core/testing';
 import {Util} from '../../shared/app.util';
 import {UsuarioService} from '../../../services/usuario.service';
 import {ResultUser} from '../../../model/results/result-user.model';
-import {User} from '../../../model/domain/user.model';
+import {Usuario} from '../../../model/domain/user.model';
 import {Observable} from 'rxjs';
 import {TipoUsuario} from '../../../model/domain/tipo-usuario';
 import { UtilService } from 'src/services/util.service';
@@ -20,9 +20,9 @@ import { Status } from 'src/model/domain/status.model';
 })
 export class UserRegisterComponent implements OnInit {
 
-  user: User = new User();
+  user: Usuario = new Usuario();
 
-  person: Person = new Person();
+  person: Pessoa = new Pessoa();
 
   msg = null;
 

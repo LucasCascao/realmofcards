@@ -1,5 +1,5 @@
 import { Bandeira } from './bandeira.model';
-import { Person } from './person.model';
+import { Pessoa } from './person.model';
 
 export class CartaoCredito {
     id: number;
@@ -7,5 +7,5 @@ export class CartaoCredito {
     codigoSeguranca: string;
     preferido: boolean;
     bandeira: Bandeira;
-    pessoa: Person;
+    pessoa: Pessoa;
 }

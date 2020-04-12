@@ -22,7 +22,7 @@ public class CarrinhoDTO extends EntidadeDominio implements IDTO{
     private List<Item> itens;
 
     @Override
-    public EntidadeDominio getDTO(EntidadeDominio dominio) {
+    public EntidadeDominio parseEntityToDTO(EntidadeDominio dominio) {
 
         if(dominio instanceof Carrinho){
 
@@ -38,7 +38,7 @@ public class CarrinhoDTO extends EntidadeDominio implements IDTO{
     }
 
     @Override
-    public EntidadeDominio getEntidade(IDTO dto) {
+    public EntidadeDominio parseDTOToEntity(IDTO dto) {
         return null;
     }
 }

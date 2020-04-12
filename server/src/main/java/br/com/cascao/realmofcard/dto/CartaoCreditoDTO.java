@@ -23,7 +23,7 @@ public class CartaoCreditoDTO extends EntidadeDominio implements IDTO{
     private Bandeira bandeira;
 
     @Override
-    public EntidadeDominio getDTO(EntidadeDominio dominio) {
+    public EntidadeDominio parseEntityToDTO(EntidadeDominio dominio) {
 
         if(dominio instanceof CartaoCredito){
 
@@ -41,7 +41,7 @@ public class CartaoCreditoDTO extends EntidadeDominio implements IDTO{
     }
 
     @Override
-    public EntidadeDominio getEntidade(IDTO dto) {
+    public EntidadeDominio parseDTOToEntity(IDTO dto) {
         return null;
     }
 }

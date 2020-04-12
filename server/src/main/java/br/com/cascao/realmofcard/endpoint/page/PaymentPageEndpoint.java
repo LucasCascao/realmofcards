@@ -43,17 +43,17 @@ public class PaymentPageEndpoint {
         List<CartaoCreditoDTO> cartaoCreditoList = new ArrayList<>();
 
         fachada.consultar(endereco).getEntidades().forEach( enderecoResultado ->
-            paymentPageDTO.setEndereco((EnderecoDTO) enderecoDTO.getDTO(enderecoResultado))
+            paymentPageDTO.setEndereco((EnderecoDTO) enderecoDTO.parseEntityToDTO(enderecoResultado))
         );
 
         fachada.consultar(cartaoCredito).getEntidades().forEach( cartaoCreditoResultado ->
-            cartaoCreditoList.add((CartaoCreditoDTO) cartaoCreditoDTO.getDTO(cartaoCreditoResultado))
+            cartaoCreditoList.add((CartaoCreditoDTO) cartaoCreditoDTO.parseEntityToDTO(cartaoCreditoResultado))
         );
 
         paymentPageDTO.setCartaoCreditoList(cartaoCreditoList);
 
         fachada.consultar(carrinho).getEntidades().forEach( carrinhoResultado -> {
-            paymentPageDTO.setCarrinho((CarrinhoDTO)carrinhoDTO.getDTO(carrinhoResultado));
+            paymentPageDTO.setCarrinho((CarrinhoDTO)carrinhoDTO.parseEntityToDTO(carrinhoResultado));
         });
 
         resultado.addEntidade(paymentPageDTO);

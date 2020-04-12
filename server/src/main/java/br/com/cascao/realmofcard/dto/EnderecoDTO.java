@@ -36,7 +36,7 @@ public class EnderecoDTO extends EntidadeDominio implements IDTO {
     private Cidade cidade;
 
     @Override
-    public EntidadeDominio getDTO(EntidadeDominio dominio) {
+    public EntidadeDominio parseEntityToDTO(EntidadeDominio dominio) {
 
         if(dominio instanceof Endereco){
 
@@ -59,7 +59,7 @@ public class EnderecoDTO extends EntidadeDominio implements IDTO {
     }
 
     @Override
-    public EntidadeDominio getEntidade(IDTO dto) {
+    public EntidadeDominio parseDTOToEntity(IDTO dto) {
         return null;
     }
 }

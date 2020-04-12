@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ClienteService} from '../../../services/cliente.service';
-import {Person} from '../../../model/domain/person.model';
+import {Pessoa} from '../../../model/domain/person.model';
 import {UtilService} from "../../../services/util.service";
 
 @Component({
@@ -11,7 +11,7 @@ import {UtilService} from "../../../services/util.service";
 })
 export class UserDeleteComponent implements OnInit {
 
-  client: Person = new Person();
+  client: Pessoa = new Pessoa();
 
   constructor(private router: Router, private service: UtilService, private route: ActivatedRoute) { }
 

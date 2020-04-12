@@ -193,6 +193,12 @@ public class AbstractFachada {
         rnsUsuarioConsultar.add(validaDadosUsuario);
         rnsUsuarioConsultar.add(validaSenhaUsuario);
 
+        List<IStrategy> rnsUsuarioAlterar = new ArrayList<>();
+
+        rnsUsuarioAlterar.add(validaDadosUsuario);
+        rnsUsuarioAlterar.add(validaSenhaUsuario);
+        rnsUsuarioAlterar.add(validaSenhasIguais);
+
         Map<String, List<IStrategy>> mapaUsuario = new HashMap<>();
 
         mapaUsuario.put("CONSULTAR",rnsUsuarioConsultar);
@@ -281,7 +287,7 @@ public class AbstractFachada {
 
         regrasNegocio.put(CategoriaCarta.class.getName(), mapaCategoria);
 
-        //------------------------ Hash Categoria --------------------------//
+        //------------------------ Hash Carrinho --------------------------//
 
         List<IStrategy> rnsCarrinhoSalvar = new ArrayList<>();
 

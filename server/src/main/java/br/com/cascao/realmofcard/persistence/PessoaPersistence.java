@@ -60,7 +60,10 @@ public class PessoaPersistence implements IPersistence {
 	@Override
 	public void alterar(EntidadeDominio entidade) {
 		Pessoa  pessoa = (Pessoa) entidade;
-		pessoa.getUsuario().setPassword(usuarioRepository.findUsuarioById(pessoa.getUsuario().getId()).getPassword());
+		Usuario usuario = usuarioRepository.findUsuarioById(pessoa.getUsuario().getId());
+		pessoa.getUsuario().setPassword(usuario.getPassword());
+		pessoa.getUsuario().setTipoUsuario(usuario.getTipoUsuario());
+		pessoa.getUsuario().setStatus(usuario.getStatus());
 		pessoa = pessoaRepository.save(pessoa);
 		pessoa.getUsuario().setPassword(null);
 	}

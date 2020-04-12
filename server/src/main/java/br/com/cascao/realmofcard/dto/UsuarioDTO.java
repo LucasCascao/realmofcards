@@ -19,8 +19,10 @@ public class UsuarioDTO extends EntidadeDominio implements IDTO{
 
     private String email;
 
+    private Boolean isAdmin;
+
     @Override
-    public EntidadeDominio getDTO(EntidadeDominio dominio) {
+    public EntidadeDominio parseEntityToDTO(EntidadeDominio dominio) {
 
         if(dominio instanceof Usuario){
 
@@ -30,13 +32,16 @@ public class UsuarioDTO extends EntidadeDominio implements IDTO{
             usuarioDTO.setId(usuario.getId());
             usuarioDTO.setEmail(usuario.getEmail());
 
+            if(usuario.getTipoUsuario().getTipo().trim().toLowerCase().equals("administrador")) usuarioDTO.setIsAdmin(true);
+            else usuarioDTO.setIsAdmin(false);
+
             return usuarioDTO;
         }
         return null;
     }
 
     @Override
-    public EntidadeDominio getEntidade(IDTO dto) {
+    public EntidadeDominio parseDTOToEntity(IDTO dto) {
         return null;
     }
 }

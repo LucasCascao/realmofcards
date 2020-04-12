@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/services/util.service';
 import { Endereco } from 'src/model/domain/endereco.model';
 import { ActivatedRoute } from '@angular/router';
-import { Person } from 'src/model/domain/person.model';
+import { Pessoa } from 'src/model/domain/person.model';
 
 @Component({
   selector: 'app-address-list',

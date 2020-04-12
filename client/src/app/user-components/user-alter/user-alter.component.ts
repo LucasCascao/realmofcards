@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Person} from '../../../model/domain/person.model';
+import {Pessoa} from '../../../model/domain/person.model';
 import {ClienteService} from '../../../services/cliente.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Util} from '../../shared/app.util';
-import {User} from '../../../model/domain/user.model';
+import {Usuario} from '../../../model/domain/user.model';
+import { UtilService } from 'src/services/util.service';
 
 @Component({
   selector: 'app-user-alter',
@@ -12,10 +13,10 @@ import {User} from '../../../model/domain/user.model';
 })
 export class UserAlterComponent implements OnInit {
 
-  client: Person = new Person();
-  user: User = new User();
+  client: Pessoa = new Pessoa();
+  user: Usuario = new Usuario();
 
-  constructor(private clientService: ClienteService, private router: Router, private route: ActivatedRoute, private util: Util) { }
+  constructor(private service: UtilService, private router: Router, private route: ActivatedRoute, private util: Util) { }
 
   ngOnInit(): void {
     this.client = JSON.parse(sessionStorage.getItem('pessoaLogada'));
@@ -23,28 +24,17 @@ export class UserAlterComponent implements OnInit {
   }
 
   async getCliente() {
-    await this.clientService.getClientes(this.client).subscribe( dado => this.client = dado.entidades[0]);
+    await this.service.get(this.client, 'pessoas').subscribe( dado => this.client = dado.entidades[0]);
   }
 
   alterarCliente() {
-    this.clientService.updateCliente(this.client).subscribe(
+    this.service.update(this.client, 'pessoas').subscribe(
       resultado => {
         if (resultado.msg == null) {
-          console.log('Produto alterado com sucesso.');
           this.client = resultado.entidades[0];
           this.router.navigate(['/app-logado/user-details']);
         } else {
           alert(this.util.getMensagensSeparadas(resultado.msg));
-        }
-      },
-      erro => {
-        switch (erro.status) {
-          case 400:
-            console.log(erro.error.mensagem);
-            break;
-          case 404:
-            console.log('Produto não localizado.');
-            break;
         }
       }
     );

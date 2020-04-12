@@ -27,12 +27,12 @@ public class PaymentPageDTO extends EntidadeDominio implements IDTO {
     private Pessoa pessoa;
 
     @Override
-    public EntidadeDominio getDTO(EntidadeDominio dominio) {
+    public EntidadeDominio parseEntityToDTO(EntidadeDominio dominio) {
         return null;
     }
 
     @Override
-    public EntidadeDominio getEntidade(IDTO dto) {
+    public EntidadeDominio parseDTOToEntity(IDTO dto) {
         return null;
     }
 }

@@ -1,6 +1,6 @@
-import {User} from '../domain/user.model';
+import {Usuario} from '../domain/user.model';
 
 export class ResultUser {
   msg: string;
-  entidades: Array<User>;
+  entidades: Array<Usuario>;
 }

@@ -1,7 +1,7 @@
-import {Person} from './person.model';
+import {Pessoa} from './person.model';
 import {TipoUsuario} from './tipo-usuario';
 import { Status } from './status.model';
-export class User {
+export class Usuario {
   id: number;
   password: string;
   rePassword: string;

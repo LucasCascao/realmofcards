@@ -34,18 +34,49 @@ export class SelectCreditCardComponent implements OnInit {
     });
   }
 
-  selecionaCartao(cartaoSelecionado: CartaoCredito) {
-
-    if (this.cartoesSelecionados.length < 2) {
-      this.cartoesSelecionados.push(cartaoSelecionado);
-      sessionStorage.setItem('cartoesSelecionados', JSON.stringify(this.cartoesSelecionados));
-    } else { alert('Não é possivel selecionar mais que dois cartões.'); }
+  selecionaCartao2(event, cartaoSelecionado: CartaoCredito) {
+    if (event.target.checked) {
+      if (this.cartoesSelecionados.length < 2) {
+        this.cartoesSelecionados.push(cartaoSelecionado);
+      } else {
+        alert('Não é possivel selecionar mais que dois cartões.');
+      }
+    } else {
+      const cartoesSemCartaoSelecionado: Array<CartaoCredito> = new Array<CartaoCredito>();
+      this.cartoesSelecionados.forEach( cartao => {
+        if (cartao.id !== cartaoSelecionado.id) {
+          cartoesSemCartaoSelecionado.push(cartao);
+        }
+      });
+      this.cartoesSelecionados = cartoesSemCartaoSelecionado;
+    }
   }
+
+  // selecionaCartao(cartaoSelecionado: CartaoCredito) {
+  //
+  //   if (this.cartoesSelecionados.length < 2) {
+  //     if (this.cartoesSelecionados.includes(cartaoSelecionado)) {
+  //       const cartoesSemCartaoSelecionado: Array<CartaoCredito> = new Array<CartaoCredito>();
+  //       this.cartoesSelecionados.forEach( cartao => {
+  //         if (cartao !== cartaoSelecionado) {
+  //           cartoesSemCartaoSelecionado.push(this.cartoesSelecionados.pop());
+  //         }
+  //       });
+  //       this.cartoesSelecionados = cartoesSemCartaoSelecionado;
+  //     } else {
+  //       this.cartoesSelecionados.push(cartaoSelecionado);
+  //       sessionStorage.setItem('cartoesSelecionados', JSON.stringify(this.cartoesSelecionados));
+  //     }
+  //   } else { alert('Não é possivel selecionar mais que dois cartões.'); }
+  // }
 
   continua() {
     if (this.cartoesSelecionados.length > 0) {
+      sessionStorage.setItem('cartoesSelecionados', JSON.stringify(this.cartoesSelecionados));
       this.router.navigate(['/app-logado/order-resume']);
-    } else { alert('É necessário escolher pelo menos um cartão.'); }
+    } else {
+      alert('É necessário escolher pelo menos um cartão.');
+    }
   }
 
 }

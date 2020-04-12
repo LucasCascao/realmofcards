@@ -1,8 +1,8 @@
 import { Item } from './item.model';
-import { Person } from './person.model';
+import { Pessoa } from './person.model';
 
 export class Carrinho {
     id: number;
-    pessoa: Person;
+    pessoa: Pessoa;
     itens: Array<Item>;
 }

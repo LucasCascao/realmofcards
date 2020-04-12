@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MockClient} from '../../../../mock/mock-cliente.model';
-import {Person} from '../../../../model/domain/person.model';
+import {Pessoa} from '../../../../model/domain/person.model';
 import {ClienteService} from '../../../../services/cliente.service';
 import {ResultClient} from '../../../../model/results/result-person.model';
 
@@ -13,7 +13,7 @@ export class ClientListComponent implements OnInit {
 
   resultClient: ResultClient;
 
-  clients: Array<Person>;
+  clients: Array<Pessoa>;
 
   constructor(private clienteService: ClienteService) { }
 
@@ -23,7 +23,7 @@ export class ClientListComponent implements OnInit {
 
   listar() {
     console.log(this.resultClient);
-    this.clienteService.getClientes(new Person()).subscribe(dados => {
+    this.clienteService.getClientes(new Pessoa()).subscribe(dados => {
       this.clients = dados.entidades;
     });
   }

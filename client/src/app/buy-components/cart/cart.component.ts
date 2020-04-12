@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MockCards} from '../../../mock/mock-card.model';
 import { UtilService } from 'src/services/util.service';
 import { Carrinho } from 'src/model/domain/carrinho.model';
-import { Person } from 'src/model/domain/person.model';
+import { Pessoa } from 'src/model/domain/person.model';
 import {Item} from "../../../model/domain/item.model";
 import {Router} from "@angular/router";
 
@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
 
   carrinho: Carrinho;
 
-  pessoa: Person;
+  pessoa: Pessoa;
 
   valorTotal: number;
 

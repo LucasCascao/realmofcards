@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Person} from '../../../model/domain/person.model';
+import {Pessoa} from '../../../model/domain/person.model';
 import {ClienteService} from '../../../services/cliente.service';
 import {ActivatedRoute} from '@angular/router';
 import {UtilService} from '../../../services/util.service';
@@ -11,7 +11,7 @@ import {UtilService} from '../../../services/util.service';
 })
 export class UserDetailsComponent implements OnInit {
 
-  client: Person = new Person();
+  client: Pessoa = new Pessoa();
 
   constructor(private clientService: ClienteService, private route: ActivatedRoute, private service: UtilService) { }
 
