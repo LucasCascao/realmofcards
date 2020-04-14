@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/services/util.service';
 import { CartaoCredito } from 'src/model/domain/cartao-credito.model';
 import { Pessoa } from 'src/model/domain/person.model';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-creditcard-list',
@@ -10,7 +11,8 @@ import { Pessoa } from 'src/model/domain/person.model';
 })
 export class CreditcardListComponent implements OnInit {
 
-  constructor(private service: UtilService) { }
+  constructor(private service: UtilService,
+              private router: Router) { }
 
   cartoes: CartaoCredito[];
 
@@ -33,21 +35,9 @@ export class CreditcardListComponent implements OnInit {
     });
   }
 
-  selecionaCartao(cartaoSelecionado: CartaoCredito) {
-
-    let cartaoParaTroca: CartaoCredito;
-
-    this.cartoes.forEach( cartao => {
-      if (cartao.id === this.idCartaoSelecionado) {
-        cartaoParaTroca = cartao;
-      }
-    });
-
-    cartaoParaTroca.preferido = true;
-  }
-
-  alterarPreferido(cartaoCredito: CartaoCredito) {
-    this.service.update(cartaoCredito, 'cartaoCredito').subscribe();
+  deletarCartao(cartaoSelecionado: CartaoCredito) {
+    sessionStorage.setItem('cartaoSelecionado', JSON.stringify(cartaoSelecionado));
+    this.router.navigate(['/app-logado/creditcard-delete']);
   }
 
 

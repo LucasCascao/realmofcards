@@ -21,8 +21,10 @@ CREATE TABLE cartao (
     crt_id                SERIAL NOT NULL,
     crt_numero            VARCHAR(16) NOT NULL UNIQUE,
     crt_codigo_seguranca  VARCHAR(3) NOT NULL,
-    crt_data_vencimento   DATE NOT NULL,
     crt_titular_nome      VARCHAR(16) NOT NULL,
+    crt_cpf_titular       VARCHAR(11) NOT NULL,
+    crt_vencimento_mes    VARCHAR(2) NOT NULL,
+    crt_vencimento_ano    VARCHAR(4) NOT NULL,
     crt_preferido         BOOLEAN NOT NULL,
     crt_bandeira_id       INT NOT NULL,
     crt_pessoa_id         INT NOT NULL

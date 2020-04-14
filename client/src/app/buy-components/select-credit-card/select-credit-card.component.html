@@ -11,11 +11,14 @@
           <div class="col-lg-1">
             <input type="checkbox" [id] = "cartao.id" [name]="cartao.id" (click)="selecionaCartao2($event, cartao)">
           </div>
+          <div class="col-lg-1">
+            <img class="img-fluid" src="/assets/icon/cartao-credito.png">
+          </div>
           <div class="col-lg-9">
             <p class="card-text"><strong>Ultimos 4 digitos:</strong> {{cartao?.numero}}</p>
             <p class="card-text"><strong>Bandeira:</strong> {{cartao?.bandeira?.nome}}</p>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-1">
             <a class="btn btn-danger float-right" [routerLink]="['/app-logado/creditcard-delete']">Excluir</a>
           </div>
         </div>

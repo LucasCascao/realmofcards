@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UtilService} from "../../../services/util.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Endereco} from "../../../model/domain/endereco.model";
+import {UtilService} from '../../../services/util.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Endereco} from '../../../model/domain/endereco.model';
 
 @Component({
   selector: 'app-select-address',
@@ -20,6 +20,7 @@ export class SelectAddressComponent implements OnInit {
   ngOnInit(): void {
     this.endereco.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     this.getEnderecos();
+    this.calcularFrete();
   }
 
   async getEnderecos() {
@@ -40,6 +41,37 @@ export class SelectAddressComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       alert('É necessário selecionar um endereço, caso não tenha o endereço desejado, basta cadastra-lo clicando em "Cadastrar novo endereco"');
     }
+  }
+
+  calcularFrete() {
+
+    const args = {
+      nCdServico: '40010',
+      sCepOrigem: '08568020',
+      sCepDestino: '08665410',
+      nVlPeso: '0.1',
+      nCdFormato: 1,
+      nVlComprimento: 16,
+      nVlAltura: 6,
+      nVlLargura: 16,
+      nVlDiametro: 0,
+      nCdEmpresa: '',
+      sDsSenha: '',
+      sCdMaoPropria: 'S',
+      nVlValorDeclarado: 150,
+      sCdAvisoRecebimento: 'N'
+    };
+
+
+    // const correios = new Correios();
+    //
+    // correios.calcPreco(args)
+    //   .then(result => {
+    //     console.log(result);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   }
 
   cancelaCompra() {

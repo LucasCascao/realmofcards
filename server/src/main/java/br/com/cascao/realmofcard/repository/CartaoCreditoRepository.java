@@ -10,4 +10,6 @@ public interface CartaoCreditoRepository extends CrudRepository<CartaoCredito, I
     List<CartaoCredito> findByPessoa_Id(Integer id);
 
     List<CartaoCredito> findByPessoa_IdAndPreferido(Integer id, Boolean preferido);
+
+    Boolean existsByNumero(String numero);
 }

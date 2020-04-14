@@ -10,11 +10,12 @@
     <hr>
     <!-- Project One -->
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-lg-5">
         <p class="card-text"><strong>Ultimos 4 digitos:</strong> {{cartao?.numero}}</p>
         <p class="card-text"><strong>Bandeira:</strong> {{cartao?.bandeira?.nome}}</p>
-        <a class="btn btn-secondary" *ngIf="idCartaoSelecionado" [routerLink]="['/app-logado/payment-page']" c>Selecionar esse cartão</a>
-        <a class="btn btn-danger float-right" [routerLink]="['/app-logado/creditcard-delete']">Excluir</a>
+      </div>
+      <div class="col-lg-5">
+        <button class="btn btn-danger float-right" (click)="deletarCartao(cartao)">Excluir</button>
       </div>
       <hr>
     </div>

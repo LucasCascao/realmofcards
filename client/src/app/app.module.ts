@@ -74,6 +74,7 @@ import {UsuarioService} from '../services/usuario.service';
 import { AppLogadoComponent } from './app-logado/app-logado.component';
 import { SelectCreditCardComponent } from './buy-components/select-credit-card/select-credit-card.component';
 import { SelectAddressComponent } from './buy-components/select-address/select-address.component';
+import {Correios} from 'node-correios';
 
 @NgModule({
   declarations: [

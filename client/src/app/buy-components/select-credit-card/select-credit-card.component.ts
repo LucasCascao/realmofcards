@@ -40,6 +40,7 @@ export class SelectCreditCardComponent implements OnInit {
         this.cartoesSelecionados.push(cartaoSelecionado);
       } else {
         alert('Não é possivel selecionar mais que dois cartões.');
+        event.target.checked = false;
       }
     } else {
       const cartoesSemCartaoSelecionado: Array<CartaoCredito> = new Array<CartaoCredito>();

@@ -7,6 +7,8 @@ import br.com.cascao.realmofcard.negocio.strategy.carta.CalcularPrecoVenda;
 import br.com.cascao.realmofcard.negocio.strategy.carta.MoveImagem;
 import br.com.cascao.realmofcard.negocio.strategy.carta.ValidaDadosCarta;
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaDadosCartaoCredito;
+import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaNumeroJaExiste;
+import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaValidadeCartao;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaDadosEndereco;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaExistenciaCidade;
 import br.com.cascao.realmofcard.negocio.strategy.pedido.CalculaValorPedido;
@@ -50,6 +52,9 @@ public class AbstractFachada {
 
     @Autowired
     private CartaoCreditoPersistence cartaoCreditoPersistence;
+
+    @Autowired
+    private BandeiraPersistence bandeiraPersistence;
 
     @Autowired
     private PedidoPersistence pedidoPersistence;
@@ -114,6 +119,12 @@ public class AbstractFachada {
     private ValidaDadosCartaoCredito validaDadosCartaoCredito;
 
     @Autowired
+    private ValidaValidadeCartao validaValidadeCartao;
+
+    @Autowired
+    private ValidaNumeroJaExiste validaNumeroJaExiste;
+
+    @Autowired
     private ValidaDadosPedido validaDadosPedido;
 
     @Autowired
@@ -160,6 +171,7 @@ public class AbstractFachada {
         daos.put(Cidade.class.getName(), cidadePersistence);
         daos.put(Carrinho.class.getName(), carrinhoPersistence);
         daos.put(Item.class.getName(), itemPersistence);
+        daos.put(Bandeira.class.getName(), bandeiraPersistence);
 
         //------------------------ Hash Pessoa ----------------------------//
 
@@ -248,15 +260,12 @@ public class AbstractFachada {
         List<IStrategy> rnsCartaoCreditoSalvar = new ArrayList<>();
 
         rnsCartaoCreditoSalvar.add(validaDadosCartaoCredito);
-
-        List<IStrategy> rnsCartaoCreditoAlterar = new ArrayList<>();
-
-        rnsCartaoCreditoAlterar.add(validaDadosCartaoCredito);
+        rnsCartaoCreditoSalvar.add(validaValidadeCartao);
+        rnsCartaoCreditoSalvar.add(validaNumeroJaExiste);
 
         Map<String, List<IStrategy>> mapaCartaoCredito = new HashMap<>();
 
         mapaCartaoCredito.put("SALVAR",rnsCartaoCreditoSalvar);
-        mapaCartaoCredito.put("ALTERAR",rnsCartaoCreditoAlterar);
 
         this.regrasNegocio.put(CartaoCredito.class.getName(), mapaCartaoCredito);
 

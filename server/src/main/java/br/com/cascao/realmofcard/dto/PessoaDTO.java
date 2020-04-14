@@ -41,7 +41,8 @@ public class PessoaDTO extends EntidadeDominio implements IDTO{
             pessoaDTO.setCpf(pessoa.getCpf());
             pessoaDTO.setSexo(pessoa.getSexo());
             pessoaDTO.setDataNascimento(pessoa.getDataNascimento());
-            if(pessoa.getUsuario() != null)
+            if(pessoa.getUsuario() != null
+                && pessoa.getUsuario().getId() != null)
                 pessoaDTO.setUsuario((UsuarioDTO) new UsuarioDTO()
                         .parseEntityToDTO(pessoa.getUsuario()));
 

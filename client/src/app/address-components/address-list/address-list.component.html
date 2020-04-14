@@ -9,20 +9,31 @@
   <hr>
   <!-- Project One -->
   <div class="row" *ngFor="let endereco of enderecos">
-    <div class="col-md-5">
-      <p class="card-text"><strong>Logradouro: </strong>{{endereco?.logradouro}}</p>
-      <p class="card-text"><strong>Numero: </strong>{{endereco?.numero}}</p>
-      <p class="card-text"><strong>Complemento: </strong>{{endereco?.complemento}}</p>
-      <p class="card-text"><strong>CEP: </strong>{{endereco?.cep}}</p>
-      <p class="card-text"><strong>Bairro: </strong>{{endereco?.bairro}}</p>
-      <p class="card-text"><strong>Cidade: </strong>{{endereco?.cidade?.nome}}</p>
-      <p class="card-text"><strong>estado: </strong>{{endereco?.cidade?.estado?.nome}}</p>
-      <a class="btn btn-secondary" [routerLink]="['../../payment-page']">Selecionar esse endereço</a>
-      <a class="btn btn-danger float-right" (click)="seleciona(endereco?.id)" [routerLink]="['/app-logado/address-delete', endereco?.id]">Excluir</a>
-      <a class="btn btn-warning float-right" (click)="seleciona(endereco?.id)" [routerLink]="['/app-logado/address-alter', endereco?.id]">Editar</a>
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-1">
+          <img class="img-fluid" src="/assets/icon/transporte.png">
+        </div>
+        <div class="col-lg-8">
+          <p class="card-text">
+            {{endereco?.logradouro}},
+            {{endereco?.numero}},
+            {{endereco?.complemento}},
+            {{endereco?.cep}},
+            {{endereco?.bairro}},
+            {{endereco?.cidade?.nome}} - {{endereco?.cidade?.estado?.sigla}}
+          </p>
+        </div>
+        <div class="col-lg-2">
+          <a class="btn btn-danger float-left" (click)="seleciona(endereco?.id)" [routerLink]="['/app-logado/address-delete', endereco?.id]">Excluir</a>
+          <a class="btn btn-warning float-right" (click)="seleciona(endereco?.id)" [routerLink]="['/app-logado/address-alter', endereco?.id]">Editar</a>
+        </div>
+      </div>
       <hr>
     </div>
   </div>
+
+
   <!-- /.row -->
 </div>
 <!-- /.container -->

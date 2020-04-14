@@ -112,15 +112,4 @@ public class Fachada extends AbstractFachada implements IFachada {
 		return resultado;
 	}
 
-	@Override
-	public Resultado visualizar(EntidadeDominio entidade) {
-		super.inicializeMaps();
-		resultado = new Resultado();
-        String nmClasse = entidade.getClass().getName();
-
-        IPersistence dao = daos.get(nmClasse);
-        resultado.setEntidades(dao.consultar(entidade));
-        return resultado;
-	}
-
 }

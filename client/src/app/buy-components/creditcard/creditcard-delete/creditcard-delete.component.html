@@ -9,9 +9,10 @@
               <h3 class="mb-0">Deletar Cartão</h3>
             </div>
             <div class="card-body">
-              <p>É necessário confirmação para que seja excluido o cartão de crédito o final <strong>5868</strong>, pertencente ao usuário <strong>Lucas de Almeida Rama Cascão</strong>.</p>
+              <p>É necessário confirmação para que seja excluido o cartão de crédito o final <strong>{{cartaoSelecionado.numero}}</strong>,
+                pertencente ao usuário <strong>{{pessoa.nome}} {{pessoa.sobrenome}}</strong>.</p>
               <input type="reset" class="btn btn-default float-lg-left" [routerLink]="['/app-logado/creditcard-list']" value="Cancelar">
-              <input type="button" class="btn btn-danger float-lg-right" [routerLink]="['/app-logado/creditcard-list']" value="Excluir">
+              <button class="btn btn-danger float-lg-right" (click)="deletaCartao()">Excluir</button>
             </div>
             <!--/card-block-->
           </div>

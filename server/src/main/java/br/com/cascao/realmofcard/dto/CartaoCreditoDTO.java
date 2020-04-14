@@ -30,12 +30,14 @@ public class CartaoCreditoDTO extends EntidadeDominio implements IDTO{
             CartaoCredito cartaoCredito = (CartaoCredito) dominio;
             CartaoCreditoDTO cartaoCreditoDTO = new CartaoCreditoDTO();
 
-            cartaoCreditoDTO.setId(cartaoCredito.getId());
-            cartaoCreditoDTO.setNumero(cartaoCredito.getNumero()
-                    .substring(cartaoCredito.getNumero().length()-4));
-            cartaoCreditoDTO.setBandeira(cartaoCredito.getBandeira());
+            if(cartaoCredito.getId() != null){
+                cartaoCreditoDTO.setId(cartaoCredito.getId());
+                cartaoCreditoDTO.setNumero(cartaoCredito.getNumero()
+                        .substring(cartaoCredito.getNumero().length()-4));
+                cartaoCreditoDTO.setBandeira(cartaoCredito.getBandeira());
 
-            return cartaoCreditoDTO;
+                return cartaoCreditoDTO;
+            }
         }
         return null;
     }

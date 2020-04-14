@@ -6,22 +6,26 @@
 
   <!-- Project One -->
   <div class="row" *ngFor="let endereco of enderecos">
-    <div class="col-md-1">
-      <input type="radio" name="enderecoSelecionado" (click)="seleciona(endereco)">
-    </div>
-    <div class="col-md-11">
+    <div class="col-md-12">
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-lg-1">
+          <input type="radio" name="enderecoSelecionado" (click)="seleciona(endereco)">
+        </div>
+        <div class="col-lg-1">
+          <img class="img-fluid" src="/assets/icon/transporte.png">
+        </div>
+        <div class="col-md-8">
           <p class="card-text">{{endereco?.logradouro}}, nº {{endereco?.numero}}, {{endereco?.bairro}}, {{endereco?.cidade?.nome}} / {{endereco?.cidade?.estado?.nome}} - {{endereco?.cep}}</p>
         </div>
-        <div class="col-md-2">
+        <div class="col-lg-2">
           <a class="btn btn-danger float-right"  [routerLink]="['/app-logado/address-delete', endereco?.id]">Excluir</a>
-          <a class="btn btn-warning float-right" (click)="seleciona(endereco)" [routerLink]="['/app-logado/address-alter', endereco?.id]">Editar</a>
+          <a class="btn btn-warning float-left" (click)="seleciona(endereco)" [routerLink]="['/app-logado/address-alter', endereco?.id]">Editar</a>
         </div>
       </div>
       <hr>
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-12">
       <a class="btn btn-secondary float-left" [routerLink]="['/app-logado/address-register']">Adicionar novo endereco

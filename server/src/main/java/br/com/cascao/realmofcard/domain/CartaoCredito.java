@@ -30,11 +30,17 @@ public class CartaoCredito extends EntidadeDominio{
     @Column(name = "crt_codigo_seguranca")
     private String codigoSeguranca;
 
-    @Column(name = "crt_data_vencimento")
-    private LocalDate dataVencimento;
+    @Column(name = "crt_vencimento_ano")
+    private String vencimentoAno;
+
+    @Column(name = "crt_vencimento_mes")
+    private String vencimentoMes;
 
     @Column(name = "crt_titular_nome")
     private String titularNome;
+
+    @Column(name = "crt_cpf_titular")
+    private String cpfTitular;
 
     @Column(name = "crt_preferido")
     private Boolean preferido;
