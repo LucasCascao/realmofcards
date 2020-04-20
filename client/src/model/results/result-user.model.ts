@@ -1,4 +1,4 @@
-import {Usuario} from '../domain/user.model';
+import {Usuario} from '../domain/usuario.model';
 
 export class ResultUser {
   msg: string;

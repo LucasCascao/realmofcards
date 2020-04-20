@@ -4,43 +4,38 @@
   <div class="row">
     <!-- edit form column -->
     <div class="col-md-9 personal-info">
-
       <form class="form-horizontal" role="form" method="post">
         <div class="form-group">
-          <label class="col-lg-3 control-label" >Numero do cartão:</label>
+          <label class="col-lg-3 control-label" >Número do cartão:</label>
           <div class="col-lg-8">
-            <input class="form-control" name="cartao_numero" [(ngModel)]="cartaoCredito.numero" maxlength="16">
+            <input class="form-control" name="cartao_numero" [(ngModel)]="cartaoCredito.numero" mask="0000 0000 0000 0000">
           </div>
         </div>
-
         <div class="form-group">
           <label class="col-lg-3 control-label">Nome e sobrenome:</label>
           <div class="col-lg-8">
             <input class="form-control" type="text" name="cartao_titular_nome" [(ngModel)]="cartaoCredito.titularNome">
           </div>
         </div>
-
         <div class="form-group">
           <label class="col-lg-3 control-label">Mês de vencimento:</label>
           <div class="col-lg-2">
             <select class="form-control" name="cartao_data_vencimento_mes" [(ngModel)]="cartaoCredito.vencimentoMes">
               <option [ngValue]="1">01</option>
-              <option [ngValue]="1">02</option>
-              <option [ngValue]="1">03</option>
-              <option [ngValue]="1">04</option>
-              <option [ngValue]="1">05</option>
-              <option [ngValue]="1">05</option>
-              <option [ngValue]="1">06</option>
-              <option [ngValue]="1">07</option>
-              <option [ngValue]="1">08</option>
-              <option [ngValue]="1">09</option>
-              <option [ngValue]="1">10</option>
-              <option [ngValue]="1">11</option>
-              <option [ngValue]="1">12</option>
+              <option [ngValue]="2">02</option>
+              <option [ngValue]="3">03</option>
+              <option [ngValue]="4">04</option>
+              <option [ngValue]="5">05</option>
+              <option [ngValue]="6">06</option>
+              <option [ngValue]="7">07</option>
+              <option [ngValue]="8">08</option>
+              <option [ngValue]="9">09</option>
+              <option [ngValue]="10">10</option>
+              <option [ngValue]="11">11</option>
+              <option [ngValue]="12">12</option>
             </select>
           </div>
         </div>
-
         <div class="form-group">
           <label class="col-lg-3 control-label">Ano de vencimento:</label>
           <div class="col-lg-2">
@@ -54,21 +49,18 @@
             </select>
           </div>
         </div>
-
         <div class="form-group">
           <label class="col-lg-3 control-label">Código de segurança:</label>
           <div class="col-lg-8">
             <input class="form-control" type="text" name="cartao_codigo_seguranca" minlength="3" maxlength="3" [(ngModel)]="cartaoCredito.codigoSeguranca">
           </div>
         </div>
-
         <div class="form-group">
-          <label class="col-lg-3 control-label">CPF do titular do cartão:</label>
+          <label class="col-lg-3 control-label" >CPF do titular do cartão:</label>
           <div class="col-lg-8">
-            <input class="form-control" type="text" name="cartao_cpf_titular" [(ngModel)]="cartaoCredito.cpfTitular">
+            <input class="form-control" type="text" name="cartao_cpf_titular" mask="000.000.000-00" [(ngModel)]="cartaoCredito.cpfTitular">
           </div>
         </div>
-
         <div class="form-group">
           <label class="col-lg-3 control-label">Bandeira: </label>
           <div class="col-lg-8">
@@ -77,7 +69,6 @@
             </select>
           </div>
         </div>
-
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
@@ -91,5 +82,7 @@
   </div>
 </div>
 <hr>
-
+<script>
+  $(':input').inputmask();
+</script>
 

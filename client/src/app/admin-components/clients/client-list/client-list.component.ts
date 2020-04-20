@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MockClient} from '../../../../mock/mock-cliente.model';
-import {Pessoa} from '../../../../model/domain/person.model';
+import {Pessoa} from '../../../../model/domain/pessoa.model';
 import {ClienteService} from '../../../../services/cliente.service';
 import {ResultClient} from '../../../../model/results/result-person.model';
 

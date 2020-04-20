@@ -21,7 +21,6 @@ import { AddressAlterComponent } from './address-components/address-alter/addres
 import { AddressDeleteComponent } from './address-components/address-delete/address-delete.component';
 import { AddressListComponent } from './address-components/address-list/address-list.component';
 import { CreditcardRegisterComponent } from './buy-components/creditcard/creditcard-register/creditcard-register.component';
-import { CreditcardAlterComponent } from './buy-components/creditcard/creditcard-alter/creditcard-alter.component';
 import { CreditcardDeleteComponent } from './buy-components/creditcard/creditcard-delete/creditcard-delete.component';
 import { CreditcardListComponent } from './buy-components/creditcard/creditcard-list/creditcard-list.component';
 import { UserPasswordAlterComponent } from './user-components/user-password-alter/user-password-alter.component';
@@ -74,7 +73,9 @@ import {UsuarioService} from '../services/usuario.service';
 import { AppLogadoComponent } from './app-logado/app-logado.component';
 import { SelectCreditCardComponent } from './buy-components/select-credit-card/select-credit-card.component';
 import { SelectAddressComponent } from './buy-components/select-address/select-address.component';
-import {Correios} from 'node-correios';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
 @NgModule({
   declarations: [
@@ -94,7 +95,6 @@ import {Correios} from 'node-correios';
     AddressDeleteComponent,
     AddressListComponent,
     CreditcardRegisterComponent,
-    CreditcardAlterComponent,
     CreditcardDeleteComponent,
     CreditcardListComponent,
     UserPasswordAlterComponent,
@@ -147,6 +147,7 @@ import {Correios} from 'node-correios';
     AppRoutingModule,
     RouterModule.forRoot(ROUTES),
     FormsModule,
+    NgxMaskModule.forRoot(options),
     HttpClientModule
   ],
   providers: [AuthService, ClienteService, Util, UsuarioService],

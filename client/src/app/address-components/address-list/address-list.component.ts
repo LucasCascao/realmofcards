@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/services/util.service';
 import { Endereco } from 'src/model/domain/endereco.model';
 import { ActivatedRoute } from '@angular/router';
-import { Pessoa } from 'src/model/domain/person.model';
+import { Pessoa } from 'src/model/domain/pessoa.model';
 
 @Component({
   selector: 'app-address-list',
@@ -28,10 +28,8 @@ export class AddressListComponent implements OnInit {
     });
   }
 
-  seleciona(id: number){
-    const endereco = new Endereco();
-    endereco.id = id;
-    sessionStorage.setItem('enderecoSelecionado', JSON.stringify(endereco));
+  seleciona(enderecoSelecionado: Endereco) {
+    sessionStorage.setItem('enderecoSelecionado', JSON.stringify(enderecoSelecionado));
   }
 
 }

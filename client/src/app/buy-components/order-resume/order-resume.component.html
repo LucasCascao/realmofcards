@@ -1,63 +1,90 @@
 <div class="container">
   <h1 class="mt-4 mb-3">Resumo da compra</h1>
   <hr>
-  <div class="row">
-    <div class="col-lg-3">
-      <h3 class="mt-4 mb-3"><strong>Produto solicitado</strong></h3>
-    </div>
-    <hr>
-  </div>
+
     <!-- Project One -->
-  <div class="row" *ngFor="let item of carrinho?.itens">
-    <div class="col-lg-12">
-      <div class="row">
-        <div class="col-lg-1">
-          <a href="#">
-            <img class="img-fluid rounded  mb-md-0" src="{{item?.carta?.imagemPath}}" alt="">
-          </a>
-        </div>
-        <div class="col-lg-5">
-          <p class="card-text"><strong>Produto:</strong> {{item?.carta?.nome}}</p>
-          <p class="card-text"><strong>Valor da unidade:</strong> {{item?.carta?.valorVenda | currency: 'BRL': true}}</p>
-          <p class="card-text"><strong>Quantidade:</strong> {{item?.quantidade}}</p>
+  <div class="row">
+    <div class="col-lg-12 col-md-8 mx-auto">
+      <div class="card rounded">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <h3 class="mt-4 mb-3"><strong>Produto solicitado</strong></h3>
+            </div>
+            <hr>
+          </div>
+          <div class="row" *ngFor="let item of carrinho?.itemList">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-1">
+                  <a href="#">
+                    <img class="img-fluid rounded  mb-md-0" src="{{item?.carta?.imagemPath}}" alt="">
+                  </a>
+                </div>
+                <div class="col-lg-5">
+                  <p class="card-text"><strong>Produto:</strong> {{item?.carta?.nome}}</p>
+                  <p class="card-text"><strong>Valor da unidade:</strong> {{item?.carta?.valorVenda | currency: 'BRL': true}}</p>
+                  <p class="card-text"><strong>Quantidade:</strong> {{item?.quantidade}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <hr>
     </div>
   </div>
+
+
+  <hr>
   <div class="row">
-    <div class="col-lg-5">
-      <h3 class="mt-4 mb-3"><strong>Forma de pagamento solicitada</strong></h3>
-    </div>
-    <div class="col-lg-1">
-      <img class="img-fluid" src="/assets/icon/cartao-credito.png">
-    </div>
-  </div>
-  <div class="row" *ngFor="let cartao of cartoes">
-    <div class="col-md-12">
-      <p class="card-text"><strong>Forma de pagamento: </strong>Cartão de crédito: {{cartao?.numero}}.</p>
+    <div class="col-lg-12 col-md-8 mx-auto">
+      <div class="card rounded">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-1">
+              <img class="img-fluid" src="/assets/icon/cartao-credito.png">
+            </div>
+            <div class="col-lg-5">
+              <h3 class="mt-4 mb-3"><strong>Forma de pagamento solicitada</strong></h3>
+            </div>
+          </div>
+          <div class="row" *ngFor="let cartao of cartoes">
+            <div class="col-md-12">
+              <p class="card-text"><strong>Forma de pagamento: </strong>Cartão de crédito: {{cartao?.numero}}.</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="card-text"><strong>Cupom: </strong> Nenhum cupom inserido.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <hr>
   <div class="row">
-    <div class="col-md-12">
-      <p class="card-text"><strong>Cupom: </strong> Nenhum cupom inserido.</p>
-    </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-lg-4">
-      <h3 class="mt-4 mb-3"><strong>Endereço solicitado</strong></h3>
-    </div>
-    <div class="col-lg-1">
-      <img class="img-fluid" src="/assets/icon/transporte.png">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <p class="card-text"><strong>Endereço: </strong> {{endereco?.logradouro}}, n° {{endereco?.numero}}, {{endereco?.bairro}},
-        {{endereco?.cidade?.nome}} - {{endereco?.cidade?.estado?.sigla}} {{endereco?.cep}}.
-      </p>
+    <div class="col-lg-12 col-md-8 mx-auto">
+      <div class="card rounded">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-1">
+              <img class="img-fluid" src="/assets/icon/transporte.png">
+            </div>
+            <div class="col-lg-4">
+              <h3 class="mt-4 mb-3"><strong>Endereço solicitado</strong></h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <p class="card-text"><strong>Endereço: </strong> {{endereco?.logradouro}}, n° {{endereco?.numero}}, {{endereco?.bairro}},
+                {{endereco?.cidade?.nome}} - {{endereco?.cidade?.estado?.sigla}} {{endereco?.cep}}.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <hr>

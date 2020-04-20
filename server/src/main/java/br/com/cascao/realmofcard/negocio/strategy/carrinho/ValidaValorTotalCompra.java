@@ -22,8 +22,8 @@ public class ValidaValorTotalCompra implements IStrategy {
 
             Carrinho carrinho = (Carrinho) entidade;
 
-            if(!carrinho.getItens().isEmpty()){
-                carrinho.getItens().forEach( item -> {
+            if(!carrinho.getItemList().isEmpty()){
+                carrinho.getItemList().forEach( item -> {
                     if (cartaRepository.findById(item.getCarta().getId()).get()
                             .getStatus().getId() == 2) {
                          msg.append("Produto " + item.getCarta().getNome() + " está inativo no momento.");

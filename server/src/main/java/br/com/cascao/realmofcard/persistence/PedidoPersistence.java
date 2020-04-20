@@ -34,7 +34,7 @@ public class PedidoPersistence implements IPersistence {
             pedido.setFormaPagamento(formaPagamentoRepository.save(pedido.getFormaPagamento()));
             pedido = pedidoRepository.save((Pedido) entidade);
             Carrinho carrinho = carrinhoRepository.findByPessoa_Id(pedido.getCliente().getId());
-            carrinho.setItens(new ArrayList<>());
+            carrinho.setItemList(new ArrayList<>());
             carrinhoRepository.save(carrinho);
             return pedido;
         }

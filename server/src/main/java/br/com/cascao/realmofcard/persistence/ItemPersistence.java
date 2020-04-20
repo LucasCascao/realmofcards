@@ -30,8 +30,8 @@ public class ItemPersistence implements IPersistence {
     public void excluir(EntidadeDominio entidade) {
         if(entidade instanceof Item) {
             Item item = (Item) entidade;
-            Carrinho carrinho = carrinhoRepository.findByItensContaining(item);
-            carrinho.getItens().removeIf( itemResultado -> itemResultado.getId() == item.getId());
+            Carrinho carrinho = carrinhoRepository.findByItemListContaining(item);
+            carrinho.getItemList().removeIf( itemResultado -> itemResultado.getId() == item.getId());
             carrinhoRepository.save(carrinho);
         }
     }

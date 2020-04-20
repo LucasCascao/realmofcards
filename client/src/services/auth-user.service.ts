@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Usuario} from '../model/domain/user.model';
+import {Usuario} from '../model/domain/usuario.model';
 import {Observable} from 'rxjs';
 import {API_URL} from '../app/shared/app.api';
 import {ResultUser} from '../model/results/result-user.model';

@@ -31,7 +31,7 @@ public class PegaCarrinhoSeExistir implements IStrategy {
                 if(Util.isNotNull(carrinhoResultado)){
 
                     carrinho.setId(carrinhoResultado.getId());
-                    carrinho.getItens().addAll(carrinhoResultado.getItens());
+                    carrinho.getItemList().addAll(carrinhoResultado.getItemList());
                 }
 
             }

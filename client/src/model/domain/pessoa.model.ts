@@ -1,5 +1,5 @@
 import {Telefone} from './telefone.model.js';
-import {Usuario} from "./user.model";
+import {Usuario} from "./usuario.model";
 
 export class Pessoa {
   id: number;

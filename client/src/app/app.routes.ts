@@ -13,7 +13,6 @@ import {AddressAlterComponent} from './address-components/address-alter/address-
 import {AddressDeleteComponent} from './address-components/address-delete/address-delete.component';
 import {AddressListComponent} from './address-components/address-list/address-list.component';
 import {CreditcardRegisterComponent} from './buy-components/creditcard/creditcard-register/creditcard-register.component';
-import {CreditcardAlterComponent} from './buy-components/creditcard/creditcard-alter/creditcard-alter.component';
 import {CreditcardDeleteComponent} from './buy-components/creditcard/creditcard-delete/creditcard-delete.component';
 import {CreditcardListComponent} from './buy-components/creditcard/creditcard-list/creditcard-list.component';
 import {UserPasswordAlterComponent} from './user-components/user-password-alter/user-password-alter.component';
@@ -79,7 +78,6 @@ export const ROUTES: Routes = [
       {path: 'address-delete/:id', component: AddressDeleteComponent},
       {path: 'address-list', component: AddressListComponent},
       {path: 'creditcard-register', component: CreditcardRegisterComponent},
-      {path: 'creditcard-alter', component: CreditcardAlterComponent},
       {path: 'creditcard-delete', component: CreditcardDeleteComponent},
       {path: 'creditcard-list', component: CreditcardListComponent},
       {path: 'select-creditcard', component: SelectCreditCardComponent},

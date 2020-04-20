@@ -1,4 +1,4 @@
-import { Usuario } from './user.model';
+import { Usuario } from './usuario.model';
 import { StatusPedido } from './status-pedido.model';
 import { Item } from './item.model';
 import {FormaPagamento} from './forma-pagamento.model';

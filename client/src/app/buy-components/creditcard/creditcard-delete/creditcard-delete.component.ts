@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UtilService} from '../../../../services/util.service';
 import {Router} from '@angular/router';
 import {CartaoCredito} from '../../../../model/domain/cartao-credito.model';
-import {Pessoa} from "../../../../model/domain/person.model";
+import {Pessoa} from '../../../../model/domain/pessoa.model';
 
 @Component({
   selector: 'app-creditcard-delete',
@@ -24,7 +24,7 @@ export class CreditcardDeleteComponent implements OnInit {
   }
 
   deletaCartao() {
-    this.service.delete(this.cartaoSelecionado.id, 'cartaocredito').subscribe(() => {
+    this.service.delete(this.cartaoSelecionado.id, 'cartaocredito').subscribe(resultado => {
       this.router.navigate(['/app-logado/creditcard-list']);
     });
   }

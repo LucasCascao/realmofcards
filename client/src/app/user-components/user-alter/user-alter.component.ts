@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Pessoa} from '../../../model/domain/person.model';
+import {Pessoa} from '../../../model/domain/pessoa.model';
 import {ClienteService} from '../../../services/cliente.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Util} from '../../shared/app.util';
-import {Usuario} from '../../../model/domain/user.model';
+import {Usuario} from '../../../model/domain/usuario.model';
 import { UtilService } from 'src/services/util.service';
 
 @Component({

@@ -25,9 +25,9 @@ public class Carrinho extends EntidadeDominio{
     @JoinColumn(name = "crr_pessoa_id")
     private Pessoa pessoa;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany()
     @JoinTable(name = "carrinho_item",
             joinColumns = {@JoinColumn(name = "cri_carrinho_id")},
             inverseJoinColumns = {@JoinColumn(name = "cri_item_id")})
-    private List<Item> itens;
+    private List<Item> itemList;
 }

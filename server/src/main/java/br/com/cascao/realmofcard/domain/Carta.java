@@ -39,8 +39,11 @@ public class Carta extends EntidadeDominio{
     @Column(name = "car_valor_venda")
     private Double valorVenda;
 
-    @Column(name = "car_quantidade")
-    private Integer quantidade;
+    @Column(name = "car_quantidade_disponivel")
+    private Integer quantidadeDisponivel;
+
+    @Column(name = "car_quantidade_estoque")
+    private Integer quantidadeEstoque;
 
     @Column(name = "car_imagem_path")
     private String imagemPath;

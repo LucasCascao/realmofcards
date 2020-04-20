@@ -33,7 +33,7 @@ public class VerificaProdutoInativoNoCarrinho implements IStrategy {
                 Carrinho carrinhoEncontrado  = carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId());
 
                 if(Util.isNotNull(carrinhoEncontrado)){
-                    carrinhoEncontrado.getItens().removeIf( item -> item.getCarta().getStatus().getId() == 2);
+                    carrinhoEncontrado.getItemList().removeIf( item -> item.getCarta().getStatus().getId() == 2);
                     carrinhoRepository.save(carrinhoEncontrado);
                 }
             }

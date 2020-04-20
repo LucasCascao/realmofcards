@@ -1,9 +1,9 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Pessoa} from '../../model/domain/person.model';
+import {Pessoa} from '../../model/domain/pessoa.model';
 import {Router} from '@angular/router';
 import {ClienteService} from '../../services/cliente.service';
 import {ResultClient} from '../../model/results/result-person.model';
-import {Usuario} from '../../model/domain/user.model';
+import {Usuario} from '../../model/domain/usuario.model';
 import {ResultUser} from '../../model/results/result-user.model';
 import {UsuarioService} from '../../services/usuario.service';
 import { UtilService } from 'src/services/util.service';

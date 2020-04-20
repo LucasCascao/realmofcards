@@ -34,7 +34,7 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  public adicionaItemNoCarrinho(id: number) {
+  public adicionaItemNoCarrinho(cartaSelecionada: Carta) {
 
     const carrinho: Carrinho = new Carrinho();
 
@@ -46,13 +46,13 @@ export class ProductDetailComponent implements OnInit {
 
     item.carta = new Carta();
 
-    item.carta.id = id;
+    item.carta = cartaSelecionada;
 
     const itens: Item[] = [];
 
     itens.push(item);
 
-    carrinho.itens = itens;
+    carrinho.itemList = itens;
 
     this.enviarCarrinho(carrinho);
   }

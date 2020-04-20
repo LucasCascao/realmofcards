@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Pessoa } from 'src/model/domain/person.model';
+import { Pessoa } from 'src/model/domain/pessoa.model';
 import {ClienteService} from '../../../services/cliente.service';
 import {Router} from '@angular/router';
 import {ResultClient} from '../../../model/results/result-person.model';
@@ -7,7 +7,7 @@ import {async} from '@angular/core/testing';
 import {Util} from '../../shared/app.util';
 import {UsuarioService} from '../../../services/usuario.service';
 import {ResultUser} from '../../../model/results/result-user.model';
-import {Usuario} from '../../../model/domain/user.model';
+import {Usuario} from '../../../model/domain/usuario.model';
 import {Observable} from 'rxjs';
 import {TipoUsuario} from '../../../model/domain/tipo-usuario';
 import { UtilService } from 'src/services/util.service';

@@ -1,5 +1,5 @@
 import { Cidade } from './cidade.model';
-import { Pessoa } from './person.model';
+import { Pessoa } from './pessoa.model';
 
 export class Endereco {
     id: number;

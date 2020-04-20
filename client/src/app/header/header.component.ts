@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Pessoa} from '../../model/domain/person.model';
+import {Pessoa} from '../../model/domain/pessoa.model';
 import {ClienteService} from '../../services/cliente.service';
 import { UtilService } from 'src/services/util.service';
 

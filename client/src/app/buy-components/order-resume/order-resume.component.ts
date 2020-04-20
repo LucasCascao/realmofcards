@@ -53,7 +53,7 @@ export class OrderResumeComponent implements OnInit {
     const pedido: Pedido = new Pedido();
     pedido.cliente = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     pedido.formaPagamento = formaPagamento;
-    pedido.itemList = this.carrinho?.itens;
+    pedido.itemList = this.carrinho?.itemList;
     pedido.endereco = this.endereco;
     pedido.statusPedido = statusPedido;
     pedido.valorTotal = Number.parseFloat(this.valorTotal?.toFixed(2));

@@ -6,8 +6,6 @@ import {Util} from '../../../shared/app.util';
 import {Router} from '@angular/router';
 import * as Inputmask from 'inputmask';
 
-
-
 @Component({
   selector: 'app-creditcard-register',
   templateUrl: './creditcard-register.component.html',
@@ -24,6 +22,7 @@ export class CreditcardRegisterComponent implements OnInit {
   cartaoCredito: CartaoCredito;
 
   ngOnInit(): void {
+
     Inputmask().mask(document.querySelectorAll('input'));
     this.bandeiras = new Array<Bandeira>();
     this.cartaoCredito = new CartaoCredito();

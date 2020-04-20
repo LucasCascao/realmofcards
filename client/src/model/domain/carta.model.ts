@@ -9,7 +9,8 @@ export class Carta {
   valorCompra: number;
   precificacao: number;
   valorVenda: number;
-  quantidade: number;
+  quantidadeDisponivel: number;
+  quantidadeEstoque: number;
   imagemPath: string;
   imagemArquivo: FormData;
   jogo: Jogo;

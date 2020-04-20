@@ -5,9 +5,7 @@
     <div class="row">
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
-
         <h3>Dados do endereço</h3>
-
         <form class="form-horizontal" role="form">
           <div class="form-group">
             <label class="col-lg-3 control-label">Logradouro:</label>
@@ -15,52 +13,46 @@
               <input class="form-control" type="text" [(ngModel)]="endereco.logradouro" name="cad_endereco_logradouro" value="{{endereco?.logradouro}}">
             </div>
           </div>
-
           <div class="form-group">
             <label class="col-lg-3 control-label">Numero:</label>
             <div class="col-lg-8">
               <input class="form-control" type="text" [(ngModel)]="endereco.numero" name="cad_endereco_numero"  value="{{endereco?.numero}}">
             </div>
           </div>
-
           <div class="form-group">
             <label class="col-lg-3 control-label">Complemento:</label>
             <div class="col-lg-8">
               <input class="form-control" [(ngModel)]="endereco.complemento" name="cad_endereco_complemento" type="text" value="{{endereco?.complemento}}">
             </div>
           </div>
-
           <div class="form-group">
             <label class="col-lg-3 control-label">Cep:</label>
             <div class="col-lg-8">
               <input class="form-control" [(ngModel)]="endereco.cep" name="cad_endereco_cep" type="text" value="{{endereco?.cep}}">
             </div>
           </div>
-
           <div class="form-group">
             <label class="col-lg-3 control-label">Bairro:</label>
             <div class="col-lg-8">
               <input class="form-control" type="text" [(ngModel)]="endereco.bairro" name="cad_endereco_bairro" value="{{endereco?.bairro}}">
             </div>
           </div>
-
           <div class="form-group">
             <label class="col-lg-3 control-label">Cidade:</label>
             <div class="col-lg-8">
               <input class="form-control" type="text" [(ngModel)]="endereco.cidade.nome" name="cad_endereco_cidade" value="{{endereco?.cidade?.nome}}">
             </div>
           </div>
-
           <div class="form-group">
             <label class="col-lg-3 control-label">estado:</label>
             <div class="col-lg-8">
               <div class="ui-select">
-                <select id="user_time_zone" class="form-control">
+                <select class="form-control" name="cad_endereco_estado" [(ngModel)]="endereco.cidade.estado">
+                  <option *ngFor="let estado of estados" [ngValue]="estado">{{estado?.nome}}</option>
                 </select>
               </div>
             </div>
           </div>
-
           <div class="form-group">
             <label class="col-md-3 control-label"></label>
             <div class="col-md-8">

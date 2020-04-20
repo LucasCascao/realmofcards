@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {Pessoa} from '../model/domain/person.model';
+import {Pessoa} from '../model/domain/pessoa.model';
 import {ResultClient} from '../model/results/result-person.model';
 
 import {API_URL, HTTP_OPTIONS} from '../app/shared/app.api';

@@ -32,6 +32,7 @@
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "jquery-mask-plugin": "^1.14.16",
+    "ngx-mask": "^9.0.1",
     "node-correios": "^3.0.2",
     "rxjs": "~6.5.4",
     "sweetalert2": "^9.10.0",

@@ -3,12 +3,14 @@ package br.com.cascao.realmofcard.dto;
 import br.com.cascao.realmofcard.domain.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Component
 public class CartaDTO extends EntidadeDominio implements IDTO {
 
@@ -24,7 +26,9 @@ public class CartaDTO extends EntidadeDominio implements IDTO {
 
     private Double valorVenda;
 
-    private Integer quantidade;
+    private Integer quantidadeDisponivel;
+
+    private Integer quantidadeEstoque;
 
     private String imagemPath;
 
@@ -47,13 +51,14 @@ public class CartaDTO extends EntidadeDominio implements IDTO {
             Carta carta = (Carta) dominio;
             CartaDTO cartaDTO = new CartaDTO();
 
-            cartaDTO.id = carta.getId();
-            cartaDTO.nome = carta.getNome();
-            cartaDTO.descricao = carta.getDescricao();
-            cartaDTO.valorVenda = carta.getValorVenda();
-            cartaDTO.jogo = carta.getJogo();
-            cartaDTO.quantidade = carta.getQuantidade();
-            cartaDTO.categoriaCarta = carta.getCategoriaCarta();
+            cartaDTO.setId(carta.getId());
+            cartaDTO.setNome(carta.getNome());
+            cartaDTO.setDescricao(carta.getDescricao());
+            cartaDTO.setValorVenda(carta.getValorVenda());
+            cartaDTO.setJogo(carta.getJogo());
+            cartaDTO.setQuantidadeDisponivel(carta.getQuantidadeDisponivel());
+            cartaDTO.setQuantidadeEstoque(carta.getQuantidadeEstoque());
+            cartaDTO.setCategoriaCarta(carta.getCategoriaCarta());
 
             return cartaDTO;
         }
@@ -76,7 +81,7 @@ public class CartaDTO extends EntidadeDominio implements IDTO {
             carta.setValorVenda(cartaDTO.valorVenda);
             carta.setJogo(cartaDTO.jogo);
             carta.setStatus(cartaDTO.status);
-            carta.setQuantidade(cartaDTO.quantidade);
+            carta.setQuantidadeDisponivel(cartaDTO.quantidadeDisponivel);
             carta.setCategoriaCarta(cartaDTO.categoriaCarta);
             carta.setImagemPath(caminhoDaImagem + cartaDTO.imagemArquivo.getOriginalFilename());
 

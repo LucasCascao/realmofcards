@@ -4,6 +4,8 @@ import br.com.cascao.realmofcard.domain.Carta;
 import br.com.cascao.realmofcard.domain.Resultado;
 import br.com.cascao.realmofcard.dto.CartaDTO;
 import br.com.cascao.realmofcard.negocio.fachada.Fachada;
+import br.com.cascao.realmofcard.util.DTOUtil;
+import br.com.cascao.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,9 @@ public class CartaEndpoint {
     @Autowired
     private Fachada fachada;
 
+    @Autowired
+    private CartaDTO cartaDTO;
+
     @PostMapping()
     public ResponseEntity<Resultado> consultar(@RequestBody Carta carta){
         return ResponseEntity.ok().body(fachada.consultar(carta));
@@ -24,9 +29,8 @@ public class CartaEndpoint {
 
     @PostMapping(path = "/cria")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> salvar(@RequestBody CartaDTO cartaDTO){
-        Carta carta = (Carta) cartaDTO.parseDTOToEntity(cartaDTO);
-        return ResponseEntity.ok().body(fachada.salvar(carta));
+    public ResponseEntity<?> salvar(@RequestBody Carta carta){
+        return ResponseEntity.ok().body(DTOUtil.tranfereParaDTO(fachada.salvar(carta), cartaDTO));
     }
 
     @DeleteMapping("/{id}")

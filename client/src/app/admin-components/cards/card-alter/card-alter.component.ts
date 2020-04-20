@@ -37,8 +37,10 @@ export class CardAlterComponent implements OnInit {
   }
 
   async alterarCarta() {
+    const nomeArquivo: string[] = this.carta.imagemPath.split('\\');
+    this.carta.imagemPath = nomeArquivo[nomeArquivo.length - 1];
     await this.service.update(this.carta, 'cartas').subscribe(resultado => {
-      if(resultado.msg == null) {
+      if (resultado.msg == null) {
         this.carta = resultado?.entidades[0];
         this.router.navigate(['/app-logado/admin-product-list']);
       } else {

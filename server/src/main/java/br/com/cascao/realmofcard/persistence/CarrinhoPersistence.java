@@ -4,6 +4,7 @@ import br.com.cascao.realmofcard.domain.Carrinho;
 import br.com.cascao.realmofcard.domain.Item;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.repository.CarrinhoRepository;
+import br.com.cascao.realmofcard.repository.CartaRepository;
 import br.com.cascao.realmofcard.repository.CategoriaCartaRepository;
 import br.com.cascao.realmofcard.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,23 @@ import java.util.List;
 public class CarrinhoPersistence implements IPersistence {
 
     @Autowired
-    CarrinhoRepository carrinhoRepository;
+    private CarrinhoRepository carrinhoRepository;
 
     @Autowired
-    ItemRepository itemRepository;
+    private ItemRepository itemRepository;
+
+    @Autowired
+    private CartaRepository cartaRepository;
 
     @Override
     public EntidadeDominio salvar(EntidadeDominio entidade) {
         if(entidade instanceof Carrinho){
             Carrinho carrinho = (Carrinho) entidade;
+            carrinho.getItemList().forEach(item -> {
+                cartaRepository.save(item.getCarta());
+                itemRepository.save(item);
+            });
             carrinhoRepository.save(carrinho);
-            carrinho.getItens().replaceAll(item -> itemRepository.save(item));
             return null;
         }
         return null;
@@ -34,7 +41,7 @@ public class CarrinhoPersistence implements IPersistence {
 
     @Override
     public void alterar(EntidadeDominio entidade) {
-        if(entidade instanceof Carrinho) salvar(entidade);
+        if(entidade instanceof Carrinho) this.salvar(entidade);
     }
 
     @Override

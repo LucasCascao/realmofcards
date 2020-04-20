@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Pessoa} from '../../../model/domain/person.model';
+import {Pessoa} from '../../../model/domain/pessoa.model';
 import { UtilService } from 'src/services/util.service';
 import {Carta} from '../../../model/domain/carta.model';
 import { Status } from 'src/model/domain/status.model';
@@ -46,7 +46,7 @@ export class ProductMarketPageComponent implements OnInit {
     sessionStorage.setItem('cartaSelecionada', JSON.stringify(carta));
   }
 
-  public adicionaItemNoCarrinho(id: number) {
+  public adicionaItemNoCarrinho(cartaSelecionada: Carta) {
 
     const carrinho: Carrinho = new Carrinho();
 
@@ -58,13 +58,13 @@ export class ProductMarketPageComponent implements OnInit {
 
     item.carta = new Carta();
 
-    item.carta.id = id;
+    item.carta = cartaSelecionada;
 
     const itens: Item[] = [];
 
     itens.push(item);
 
-    carrinho.itens = itens;
+    carrinho.itemList = itens;
 
     this.enviarCarrinho(carrinho);
   }

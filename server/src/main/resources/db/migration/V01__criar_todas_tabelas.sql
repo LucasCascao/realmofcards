@@ -4,17 +4,18 @@ CREATE TABLE bandeira (
 );
 
 CREATE TABLE carta (
-    car_id            SERIAL NOT NULL,
-    car_nome          VARCHAR(50) NOT NULL UNIQUE,
-    car_descricao     VARCHAR(500) NOT NULL,
-    car_valor_compra  DECIMAL(4, 2) NOT NULL,
-    car_precificacao  DECIMAL(4, 2) NOT NULL,
-    car_valor_venda   DECIMAL(4, 2) NOT NULL,
-    car_quantidade    INT NOT NULL,
-    car_imagem_path   VARCHAR(250) NOT NULL,
-    car_jogo_id       INT NOT NULL,
-    car_categoria_id  INT NOT NULL,
-    car_status_id     INT NOT NULL
+    car_id                       SERIAL NOT NULL,
+    car_nome                     VARCHAR(50) NOT NULL UNIQUE,
+    car_descricao                VARCHAR(500) NOT NULL,
+    car_valor_compra             DECIMAL(4, 2) NOT NULL,
+    car_precificacao             DECIMAL(4, 2) NOT NULL,
+    car_valor_venda              DECIMAL(4, 2) NOT NULL,
+    car_quantidade_disponivel    INT NOT NULL,
+    car_quantidade_estoque       INT NOT NULL,
+    car_imagem_path              VARCHAR(250) NOT NULL,
+    car_jogo_id                  INT NOT NULL,
+    car_categoria_id             INT NOT NULL,
+    car_status_id                INT NOT NULL
 );
 
 CREATE TABLE cartao (

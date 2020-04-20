@@ -1,4 +1,4 @@
-import {Pessoa} from './person.model';
+import {Pessoa} from './pessoa.model';
 import {TipoUsuario} from './tipo-usuario';
 import { Status } from './status.model';
 export class Usuario {

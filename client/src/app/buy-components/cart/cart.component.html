@@ -4,9 +4,9 @@
   <!-- Page Heading/Breadcrumbs -->
   <h1 class="mt-4 mb-3">Carrinho</h1>
 
-  <div class="row" *ngIf="carrinho?.itens?.length > 0;else SemItemNoCarrinho">
+  <div class="row" *ngIf="carrinho?.itemList?.length > 0;else SemItemNoCarrinho">
     <div class="col-lg-12 mb-4">
-      <div class="row" *ngFor="let item of carrinho?.itens">
+      <div class="row" *ngFor="let item of carrinho?.itemList">
         <div class="col-lg-12 mb-4">
           <div class="card h-100">
             <div class="card-body">
@@ -18,7 +18,7 @@
               <div class="col-lg-7 float-left">
                 <p class="card-text"><strong>Produto:</strong> {{item?.carta?.nome}}</p>
                 <p class="card-text"><strong>Valor total:</strong> {{item?.carta?.valorVenda | currency: 'BRL': true}}</p>
-                <p class="card-text"><strong>Quantidade disponível:</strong> {{item?.carta?.quantidade}}.</p>
+                <p class="card-text"><strong>Quantidade disponível:</strong> {{item?.carta?.quantidadeDisponivel}}.</p>
                 <p class="card-text"><strong>Quantidade:</strong> {{item?.quantidade}}</p>
                 <div class="row">
                   <div class="col-lg-1 col-md-2 btn">

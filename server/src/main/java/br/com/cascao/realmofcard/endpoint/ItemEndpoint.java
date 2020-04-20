@@ -21,4 +21,9 @@ public class ItemEndpoint {
         item.setId(id);
         return ResponseEntity.ok().body(fachada.excluir(item));
     }
+
+    @PutMapping()
+    public ResponseEntity<Resultado> update(@RequestBody Item item){
+        return ResponseEntity.ok().body(fachada.alterar(item));
+    }
 }

@@ -5,7 +5,7 @@ import { Carta } from '../../../../model/domain/carta.model';
 import {Jogo} from '../../../../model/domain/jogo.model';
 import {Status} from '../../../../model/domain/status.model';
 import {Util} from '../../../shared/app.util';
-import {Router, ChildActivationStart} from "@angular/router";
+import {Router, ChildActivationStart} from '@angular/router';
 
 @Component({
   selector: 'app-card-register',
@@ -41,23 +41,25 @@ export class CardRegisterComponent implements OnInit {
   }
 
   async cadastraCarta() {
-    await this.service.add(this.carta, 'cartas').subscribe(resultado =>{
+    const nomeArquivo: string[] = this.carta.imagemPath.split('\\');
+    this.carta.imagemPath = nomeArquivo[nomeArquivo.length - 1];
+    await this.service.add(this.carta, 'cartas').subscribe(resultado => {
       if (resultado.msg != null) {
         alert(this.util.getMensagensSeparadas(resultado?.msg));
-      } else{
+      } else {
         this.carta = resultado?.entidades[0];
         this.router.navigate(['/app-logado/admin-page']);
       }
     });
   }
 
-  inputFileChange(event) {
-    if (event.target.files && event.target.files) {
-      this.imagemSelecionada = event.target.files[0];
-      const foto: File = event.target.files[0];
-      this.carta.imagemArquivo.append('foto', foto, foto.name);
-      console.log(this.carta.imagemArquivo);
-    }
-  }
+  // inputFileChange(event) {
+  //   if (event.target.files && event.target.files) {
+  //     this.imagemSelecionada = event.target.files[0];
+  //     const foto: File = event.target.files[0];
+  //     this.carta.imagemArquivo.append('foto', foto, foto.name);
+  //     console.log(this.carta.imagemArquivo);
+  //   }
+  // }
 
 }

@@ -1,4 +1,4 @@
-import {Pessoa} from '../domain/person.model';
+import {Pessoa} from '../domain/pessoa.model';
 
 export class ResultClient {
   msg: string;

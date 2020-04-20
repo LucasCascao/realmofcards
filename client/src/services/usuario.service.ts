@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Pessoa} from '../model/domain/person.model';
+import {Pessoa} from '../model/domain/pessoa.model';
 import {Observable} from 'rxjs';
 import {ResultClient} from '../model/results/result-person.model';
 import {API_URL, HTTP_OPTIONS} from '../app/shared/app.api';
 import {ResultUser} from '../model/results/result-user.model';
-import {Usuario} from '../model/domain/user.model';
+import {Usuario} from '../model/domain/usuario.model';
 
 @Injectable({
   providedIn: 'root'

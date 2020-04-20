@@ -31,13 +31,13 @@
         <div class="form-group">
           <label class="col-lg-6 control-label">Imagem de exposição:</label>
           <div class="col-lg-2">
-            <input name="cad_carta_imagem" type="file" (change)="inputFileChange($event)">
+            <input name="cad_carta_imagem" type="file" [(ngModel)]="carta.imagemPath">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-6 control-label">Quantidade inicial no estoque:</label>
           <div class="col-lg-2">
-            <input name="cad_carta_quantidade" [(ngModel)]="carta.quantidade" class="form-control" type="number" min="1">
+            <input name="cad_carta_quantidade" [(ngModel)]="carta.quantidadeDisponivel" class="form-control" type="number" min="1">
           </div>
         </div>
         <div class="form-group">

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {MockCards} from '../../../mock/mock-card.model';
 import { UtilService } from 'src/services/util.service';
 import { Carrinho } from 'src/model/domain/carrinho.model';
-import { Pessoa } from 'src/model/domain/person.model';
-import {Item} from "../../../model/domain/item.model";
-import {Router} from "@angular/router";
+import { Pessoa } from 'src/model/domain/pessoa.model';
+import {Item} from '../../../model/domain/item.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -39,14 +39,15 @@ export class CartComponent implements OnInit {
 
   calculaValorTotal() {
     this.valorTotal = 0;
-    this.carrinho?.itens?.forEach( item => {
+    this.carrinho?.itemList?.forEach(item => {
       this.valorTotal += (item?.carta?.valorVenda * item?.quantidade);
     });
   }
 
   incrementaValor(item: Item) {
-    if (item?.quantidade < item?.carta?.quantidade){
+    if (item?.quantidade < item?.carta?.quantidadeEstoque) {
       item.quantidade ++;
+      item.carta.quantidadeDisponivel --;
       this.valorTotal += item?.carta?.valorVenda;
     }
   }
@@ -54,6 +55,7 @@ export class CartComponent implements OnInit {
   decrementaValor(item: Item) {
     if (item?.quantidade > 1 ) {
       item.quantidade --;
+      item.carta.quantidadeDisponivel ++;
       this.valorTotal -= item?.carta?.valorVenda;
     }
   }
@@ -77,7 +79,7 @@ export class CartComponent implements OnInit {
     }
   }
 
-  deletaCartaDoCarrinho(item: Item){
+  deletaCartaDoCarrinho(item: Item) {
     this.service.delete(item.id, 'itens').subscribe(() => {
       document.location.reload();
     });

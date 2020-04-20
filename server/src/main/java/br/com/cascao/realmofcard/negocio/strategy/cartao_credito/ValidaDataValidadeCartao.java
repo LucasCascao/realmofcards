@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
 @Component
-public class ValidaValidadeCartao implements IStrategy {
+public class ValidaDataValidadeCartao implements IStrategy {
 
     @Autowired
     ValidadorString validadorString;
@@ -24,6 +24,7 @@ public class ValidaValidadeCartao implements IStrategy {
         if(entidade instanceof CartaoCredito){
 
             CartaoCredito cartaoCredito = (CartaoCredito) entidade;
+
             if(Util.isNotNull(cartaoCredito.getVencimentoAno())
                 && Util.isNotNull(cartaoCredito.getVencimentoMes())){
 
@@ -33,7 +34,7 @@ public class ValidaValidadeCartao implements IStrategy {
                 Integer anoAtual = LocalDate.now().getYear();
                 Integer mesAtual = LocalDate.now().getMonth().getValue();
 
-                if(anoVencimento < anoAtual || (anoVencimento.equals(anoAtual) && mesVencimento < mesAtual) ){
+                if(anoVencimento < anoAtual || (anoVencimento.equals(anoAtual) && mesVencimento < mesAtual)){
                     msg.append("Cartão está vencido.");
                 }
             }

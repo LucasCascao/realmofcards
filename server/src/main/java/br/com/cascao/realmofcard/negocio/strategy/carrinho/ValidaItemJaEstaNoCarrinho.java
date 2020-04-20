@@ -26,9 +26,9 @@ public class ValidaItemJaEstaNoCarrinho implements IStrategy {
             Carrinho carrinhoResultado = carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId());
 
             if(Util.isNotNull(carrinhoResultado)) {
-                carrinhoResultado.getItens().forEach( item -> {
+                carrinhoResultado.getItemList().forEach( item -> {
                     if(Util.isEquals(item.getCarta().getId(),
-                            carrinho.getItens().get(0).getCarta().getId()))
+                            carrinho.getItemList().get(0).getCarta().getId()))
                         msg.append("Carta já está no carrinho");
                 });
             }

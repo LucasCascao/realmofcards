@@ -9,6 +9,7 @@ import br.com.cascao.realmofcard.util.validador.ValidadorString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 
 @Component
@@ -25,15 +26,8 @@ public class MoveImagem implements IStrategy {
         StringBuilder msg = new StringBuilder();
         if (entidade instanceof Carta){
             Carta carta = (Carta) entidade;
-            if(carta.getImagemPath()!= null
-                    && cartaRepository.existsByImagemPath(carta.getImagemPath())
-                    && MovedorImagem.existeImagem(carta.getImagemPath())){
-                try{
-                    carta.setImagemPath(MovedorImagem.mover(carta.getImagemPath()));
-                }catch (IOException e){
-                    msg.append("Erro ao salvar imagem.");
-                    e.printStackTrace();
-                }
+            if(carta.getImagemPath() != null){
+                carta.setImagemPath("/assets/images/cartas/" + carta.getImagemPath());
             }
         }
         return msg.toString();

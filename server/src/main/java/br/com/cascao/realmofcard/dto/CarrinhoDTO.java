@@ -19,7 +19,7 @@ public class CarrinhoDTO extends EntidadeDominio implements IDTO{
 
     private Integer id;
 
-    private List<Item> itens;
+    private List<Item> itemList;
 
     @Override
     public EntidadeDominio parseEntityToDTO(EntidadeDominio dominio) {
@@ -30,7 +30,7 @@ public class CarrinhoDTO extends EntidadeDominio implements IDTO{
             Carrinho carrinho = (Carrinho) dominio;
 
             carrinhoDTO.setId(carrinho.getId());
-            carrinhoDTO.setItens(carrinho.getItens());
+            carrinhoDTO.setItemList(carrinho.getItemList());
 
             return carrinhoDTO;
         }
