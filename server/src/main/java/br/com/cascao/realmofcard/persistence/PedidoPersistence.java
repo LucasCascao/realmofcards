@@ -5,6 +5,7 @@ import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.FormaPagamento;
 import br.com.cascao.realmofcard.domain.Pedido;
 import br.com.cascao.realmofcard.repository.CarrinhoRepository;
+import br.com.cascao.realmofcard.repository.CartaRepository;
 import br.com.cascao.realmofcard.repository.FormaPagamentoRepository;
 import br.com.cascao.realmofcard.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +19,22 @@ import java.util.List;
 public class PedidoPersistence implements IPersistence {
 
     @Autowired
-    PedidoRepository pedidoRepository;
+    private PedidoRepository pedidoRepository;
 
     @Autowired
-    FormaPagamentoRepository formaPagamentoRepository;
+    private FormaPagamentoRepository formaPagamentoRepository;
 
     @Autowired
-    CarrinhoRepository carrinhoRepository;
+    private CarrinhoRepository carrinhoRepository;
+
+    @Autowired
+    private CartaRepository cartaRepository;
 
     @Override
     public EntidadeDominio salvar(EntidadeDominio entidade) {
         if(entidade instanceof Pedido){
             Pedido pedido = (Pedido) entidade;
+            pedido.getItemList().forEach( item -> cartaRepository.save(item.getCarta()));
             pedido.setDataCompra(LocalDate.now());
             pedido.setFormaPagamento(formaPagamentoRepository.save(pedido.getFormaPagamento()));
             pedido = pedidoRepository.save((Pedido) entidade);

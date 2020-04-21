@@ -45,7 +45,7 @@ export class CartComponent implements OnInit {
   }
 
   incrementaValor(item: Item) {
-    if (item?.quantidade < item?.carta?.quantidadeEstoque) {
+    if (item?.carta?.quantidadeDisponivel > 0) {
       item.quantidade ++;
       item.carta.quantidadeDisponivel --;
       this.valorTotal += item?.carta?.valorVenda;

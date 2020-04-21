@@ -20,21 +20,21 @@ public class ValidaDadosCarrinho implements IStrategy {
 
         StringBuilder msg = new StringBuilder();
 
-        if(entidade instanceof Carrinho){
-
-            Carrinho carrinho = (Carrinho) entidade;
-
-            if(!carrinho.getItemList().isEmpty()){
-                carrinho.getItemList().forEach( item -> {
-                    if (cartaRepository.findById(item.getCarta().getId()).get()
-                            .getStatus().getId() == 2) {
-                         msg.append("Produto " + item.getCarta().getNome() + " está inativo no momento.");
-                    }
-                });
-            }else{
-                msg.append("Carrinho está vazio");
-            }
-        }
+//        if(entidade instanceof Carrinho){
+//
+//            Carrinho carrinho = (Carrinho) entidade;
+//
+//            if(!carrinho.getItemList().isEmpty()){
+//                carrinho.getItemList().forEach( item -> {
+//                    if (cartaRepository.findById(item.getCarta().getId()).get()
+//                            .getStatus().getId() == 2) {
+//                         msg.append("Produto " + item.getCarta().getNome() + " está inativo no momento.");
+//                    }
+//                });
+//            }else{
+//                msg.append("Carrinho está vazio");
+//            }
+//        }
 
         return msg.toString();
     }

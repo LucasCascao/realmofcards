@@ -118,7 +118,7 @@ CREATE TABLE pedido (
     ped_administrador_id       INT,
     ped_cliente_id             INT NOT NULL,
     ped_status_pedido_id       INT NOT NULL,
-    ped_valor_total            DECIMAL(4,2) NOT NULL,
+    ped_valor_total            DECIMAL(8,2) NOT NULL,
     ped_data_compra            DATE NOT NULL,
     ped_data_estimada          DATE NOT NULL,
     ped_endereco_id            INT NOT NULL,

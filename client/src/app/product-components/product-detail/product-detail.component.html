@@ -11,7 +11,7 @@
       <p class="card-text"><strong>Valor:</strong> R$ {{carta?.valorVenda}}.</p>
       <p class="card-text"><strong>Quantidade disponivel:</strong> {{carta?.quantidadeDisponivel}}.</p>
       <p class="card-text"><strong>Quantidade:</strong>
-        <input class="form-control w-25 " type="number" name="quantidade" [(ngModel)]="quantidade" [max]="carta?.quantidadeEstoque" min="1" >
+        <input class="form-control w-25 " type="number" name="quantidade" [(ngModel)]="quantidade" [max]="carta?.quantidadeDisponivel" min="1" >
       </p>
     </div>
     <div class="col-lg-2">

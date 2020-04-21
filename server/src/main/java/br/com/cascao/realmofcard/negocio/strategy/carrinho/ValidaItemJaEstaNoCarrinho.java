@@ -29,7 +29,7 @@ public class ValidaItemJaEstaNoCarrinho implements IStrategy {
                 carrinhoResultado.getItemList().forEach( item -> {
                     if(Util.isEquals(item.getCarta().getId(),
                             carrinho.getItemList().get(0).getCarta().getId()))
-                        msg.append("Carta já está no carrinho");
+                        msg.append("Carta já está no carrinho.");
                 });
             }
         }

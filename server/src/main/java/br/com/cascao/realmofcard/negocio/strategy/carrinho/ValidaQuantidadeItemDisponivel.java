@@ -41,6 +41,9 @@ public class ValidaQuantidadeItemDisponivel implements IStrategy {
                         if(item.getQuantidade() > carta.getQuantidadeEstoque())
                             msg.append("Quantidade pedido não está disponível no estoque.");
 
+                        if(item.getQuantidade() < 1)
+                            msg.append("Quantidade pedido não é válida para incluir no carrinho.");
+
                     });
                 }
             }

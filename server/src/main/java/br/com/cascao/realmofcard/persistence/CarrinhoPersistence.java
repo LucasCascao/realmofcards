@@ -29,10 +29,10 @@ public class CarrinhoPersistence implements IPersistence {
     public EntidadeDominio salvar(EntidadeDominio entidade) {
         if(entidade instanceof Carrinho){
             Carrinho carrinho = (Carrinho) entidade;
-            carrinho.getItemList().forEach(item -> {
+            for(Item item : carrinho.getItemList()) {
                 cartaRepository.save(item.getCarta());
                 itemRepository.save(item);
-            });
+            };
             carrinhoRepository.save(carrinho);
             return null;
         }

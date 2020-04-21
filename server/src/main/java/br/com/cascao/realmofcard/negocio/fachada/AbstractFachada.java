@@ -11,10 +11,7 @@ import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaNumeroJaE
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaDataValidadeCartao;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaDadosEndereco;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaExistenciaCidade;
-import br.com.cascao.realmofcard.negocio.strategy.pedido.CalculaValorPedido;
-import br.com.cascao.realmofcard.negocio.strategy.pedido.CalcularDataEntrega;
-import br.com.cascao.realmofcard.negocio.strategy.pedido.GeraCodigoPedido;
-import br.com.cascao.realmofcard.negocio.strategy.pedido.ValidaDadosPedido;
+import br.com.cascao.realmofcard.negocio.strategy.pedido.*;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaDadosPessoa;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaExistenciaPessoa;
 import br.com.cascao.realmofcard.negocio.strategy.usuario.*;
@@ -134,9 +131,6 @@ public class AbstractFachada {
     private ValidaDadosCarrinho validaDadosCarrinho;
 
     @Autowired
-    private VerificaCarrinhoAtivo verificaCarrinhoAtivo;
-
-    @Autowired
     private VerificaProdutoInativoNoCarrinho verificaProdutoInativoNoCarrinho;
 
     @Autowired
@@ -149,16 +143,19 @@ public class AbstractFachada {
     private ValidaQuantidadeItemDisponivel validaQuantidadeItemDisponivel;
 
     @Autowired
-    private RetiraItemEstoque retiraItemEstoque;
+    private RetiraItemDisponivel retiraItemDisponivel;
 
     @Autowired
-    private RetornaItemEstoque retornaItemEstoque;
+    private RetornaItemDisponivel retornaItemDisponivel;
 
     @Autowired
     private GeraCodigoPedido geraCodigoPedido;
 
     @Autowired
     private CalcularDataEntrega calcularDataEntrega;
+
+    @Autowired
+    private RetiraItemEstoque retiraItemEstoque;
 
 
     public AbstractFachada(){
@@ -283,6 +280,7 @@ public class AbstractFachada {
         rnsPedidoSalvar.add(calculaValorPedido);
         rnsPedidoSalvar.add(geraCodigoPedido);
         rnsPedidoSalvar.add(calcularDataEntrega);
+        rnsPedidoSalvar.add(retiraItemEstoque);
 
         List<IStrategy> rnsPedidoAlterar = new ArrayList<>();
 
@@ -307,17 +305,16 @@ public class AbstractFachada {
         List<IStrategy> rnsCarrinhoSalvar = new ArrayList<>();
 
         rnsCarrinhoSalvar.add(validaDadosCarrinho);
-        rnsCarrinhoSalvar.add(validaQuantidadeItemDisponivel);
-        rnsCarrinhoSalvar.add(retiraItemEstoque);
         rnsCarrinhoSalvar.add(validaItemJaEstaNoCarrinho);
-        rnsCarrinhoSalvar.add(verificaCarrinhoAtivo);
         rnsCarrinhoSalvar.add(pegaCarrinhoSeExistir);
+        rnsCarrinhoSalvar.add(validaQuantidadeItemDisponivel);
+        rnsCarrinhoSalvar.add(retiraItemDisponivel);
 
         List<IStrategy> rnsCarrinhoAlterar = new ArrayList<>();
 
         rnsCarrinhoAlterar.add(validaDadosCarrinho);
         rnsCarrinhoAlterar.add(validaQuantidadeItemDisponivel);
-        rnsCarrinhoAlterar.add(retiraItemEstoque);
+        rnsCarrinhoAlterar.add(retiraItemDisponivel);
 
         List<IStrategy> rnsCarrinhoConsultar = new ArrayList<>();
 
@@ -336,11 +333,11 @@ public class AbstractFachada {
         List<IStrategy> rnsItemAlterar = new ArrayList<>();
 
         rnsItemAlterar.add(validaQuantidadeItemDisponivel);
-        rnsItemAlterar.add(retiraItemEstoque);
+        rnsItemAlterar.add(retiraItemDisponivel);
 
         List<IStrategy> rnsItemExcluir = new ArrayList<>();
 
-        rnsItemExcluir.add(retornaItemEstoque);
+        rnsItemExcluir.add(retornaItemDisponivel);
 
         Map<String, List<IStrategy>> mapaItem = new HashMap<>();
 
