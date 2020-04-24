@@ -19,7 +19,7 @@
             {{endereco?.logradouro}},
             {{endereco?.numero}},
             {{endereco?.complemento}},
-            {{endereco?.cep}},
+            {{endereco?.cep | mask: '00000-000'}},
             {{endereco?.bairro}},
             {{endereco?.cidade?.nome}} - {{endereco?.cidade?.estado?.sigla}}
           </p>

@@ -23,9 +23,6 @@ public class FormaPagamento extends EntidadeDominio {
     @Column(name = "fpa_id")
     private Integer id;
 
-    @ManyToMany()
-    @JoinTable(name = "forma_pagamento_cartao",
-            joinColumns = {@JoinColumn(name = "fpc_forma_pagamento_id")},
-            inverseJoinColumns = {@JoinColumn(name = "fpc_cartao_credito_id")})
-    private List<CartaoCredito> cartaoCreditoList;
+    @Column(name = "fpa_registro_cartao")
+    private String registroCartao;
 }

@@ -48,13 +48,17 @@ public class Pedido extends EntidadeDominio{
     @JoinColumn(name = "ped_status_pedido_id")
     private StatusPedido statusPedido;
 
-    @OneToOne()
-    @JoinColumn(name = "ped_endereco_id")
+    @Column(name = "ped_endereco")
+    private String enderecoEscolhido;
+
+    @Transient
     private Endereco endereco;
 
-    @OneToOne()
-    @JoinColumn(name = "ped_forma_pagamento_id")
-    private FormaPagamento formaPagamento;
+    @ManyToMany( cascade = CascadeType.ALL)
+    @JoinTable(name = "forma_pagamento_pedido",
+            joinColumns = {@JoinColumn(name = "fpp_pedido_id")},
+            inverseJoinColumns = {@JoinColumn(name = "fpp_forma_pagamento_id")})
+    private List<FormaPagamento> formaPagamentoList;
 
     @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "item_pedido",

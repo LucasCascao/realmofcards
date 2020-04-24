@@ -9,11 +9,12 @@ export class Pedido {
     codigoPedido: string;
     cliente: Usuario;
     valorTotal: number;
-    formaPagamento: FormaPagamento;
+    formaPagamentoList: Array<FormaPagamento>;
     administrador: Usuario;
     statusPedido: StatusPedido;
     itemList: Array<Item>;
     endereco: Endereco;
+    enderecoEscolhido: string;
     dataCompra: Date;
     dataEstimada: Date;
 }

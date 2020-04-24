@@ -34,9 +34,9 @@ public class PedidoPersistence implements IPersistence {
     public EntidadeDominio salvar(EntidadeDominio entidade) {
         if(entidade instanceof Pedido){
             Pedido pedido = (Pedido) entidade;
-            pedido.getItemList().forEach( item -> cartaRepository.save(item.getCarta()));
+            pedido.getItemList().forEach(item -> cartaRepository.save(item.getCarta()));
             pedido.setDataCompra(LocalDate.now());
-            pedido.setFormaPagamento(formaPagamentoRepository.save(pedido.getFormaPagamento()));
+            pedido.getFormaPagamentoList().replaceAll(formaPagamento -> formaPagamentoRepository.save(formaPagamento));
             pedido = pedidoRepository.save((Pedido) entidade);
             Carrinho carrinho = carrinhoRepository.findByPessoa_Id(pedido.getCliente().getId());
             carrinho.setItemList(new ArrayList<>());

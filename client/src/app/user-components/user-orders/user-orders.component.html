@@ -32,12 +32,14 @@
             <div class="col-lg-12 col-md-10 float-left">
               <hr>
               <h4 class="mb-md-3"><strong>Dados do pedido: </strong></h4>
-              <p class="card-text"><strong>Endereço de Entrega:</strong> {{pedido?.endereco?.logradouro}}, nº {{pedido?.endereco?.numero}},
-                {{pedido?.endereco?.complemento}}, {{pedido?.endereco?.bairro}}, {{pedido?.endereco?.cidade?.nome}} - {{pedido?.endereco?.cidade?.estado?.sigla}}</p>
+              <p class="card-text"><strong>Endereço de Entrega:</strong> {{pedido?.enderecoEscolhido}}</p>
               <p class="card-text"><strong>Data da compra:</strong> {{pedido?.dataCompra | date: 'dd/MM/yyyy'}}</p>
               <p class="card-text"><strong>Data estimada para entrega:</strong> {{pedido?.dataEstimada | date: 'dd/MM/yyyy'}}</p>
+              <div *ngFor="let formaPagamento of pedido?.formaPagamentoList">
+                <p class="card-text"><strong>Cartão com final:</strong> {{formaPagamento?.registroCartao}}</p>
+              </div>
               <div class="row">
-                <div class="col-lg-1">
+                <div class="col-lg-1 col-md-10">
                   <p class="card-text"><strong>Status:</strong></p>
                 </div>
                 <div class="col-lg-2">

@@ -157,6 +157,9 @@ public class AbstractFachada {
     @Autowired
     private RetiraItemEstoque retiraItemEstoque;
 
+    @Autowired
+    private InsereEnderecoEscolhido insereEnderecoEscolhido;
+
 
     public AbstractFachada(){
     }
@@ -281,6 +284,7 @@ public class AbstractFachada {
         rnsPedidoSalvar.add(geraCodigoPedido);
         rnsPedidoSalvar.add(calcularDataEntrega);
         rnsPedidoSalvar.add(retiraItemEstoque);
+        rnsPedidoSalvar.add(insereEnderecoEscolhido);
 
         List<IStrategy> rnsPedidoAlterar = new ArrayList<>();
 

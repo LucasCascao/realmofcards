@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,7 +18,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "carta")
-public class Carta extends EntidadeDominio{
+public class Carta extends EntidadeDominio implements Comparable<Carta>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,4 +60,10 @@ public class Carta extends EntidadeDominio{
     @ManyToOne
     @JoinColumn(name = "car_status_id")
     private Status status;
+
+    @Override
+    public int compareTo(@NotNull Carta o) {
+        Carta outraCarta = (Carta) o;
+        return this.getId().compareTo(outraCarta.getId());
+    }
 }

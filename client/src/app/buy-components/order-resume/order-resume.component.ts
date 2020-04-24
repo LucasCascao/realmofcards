@@ -40,26 +40,23 @@ export class OrderResumeComponent implements OnInit {
 
   confirmarCompra() {
 
-    const formaPagamento: FormaPagamento = new FormaPagamento();
-    formaPagamento.cartaoCreditoList = new Array<CartaoCredito>();
-
-    this.cartoes?.forEach(cartao => {
-      formaPagamento.cartaoCreditoList.push(cartao);
-    });
-
     const statusPedido: StatusPedido = new StatusPedido();
     statusPedido.id = 1;
 
     const pedido: Pedido = new Pedido();
     pedido.cliente = JSON.parse(sessionStorage.getItem('pessoaLogada'));
-    pedido.formaPagamento = formaPagamento;
     pedido.itemList = this.carrinho?.itemList;
     pedido.endereco = this.endereco;
     pedido.statusPedido = statusPedido;
     pedido.valorTotal = Number.parseFloat(this.valorTotal?.toFixed(2));
+    pedido.formaPagamentoList = [];
+    this.cartoes?.forEach(cartao => {
+      const formaPagamento: FormaPagamento = new FormaPagamento();
+      formaPagamento.registroCartao = cartao.numero;
+      pedido.formaPagamentoList.push(formaPagamento);
+    });
 
     this.cadastraPedido(pedido);
-
   }
 
   cadastraPedido(pedido: Pedido) {

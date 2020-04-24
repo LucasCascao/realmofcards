@@ -1,6 +1,7 @@
 package br.com.cascao.realmofcard.endpoint;
 
 import br.com.cascao.realmofcard.domain.Carta;
+import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Resultado;
 import br.com.cascao.realmofcard.dto.CartaDTO;
 import br.com.cascao.realmofcard.negocio.fachada.Fachada;
@@ -10,6 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -22,9 +28,20 @@ public class CartaEndpoint {
     @Autowired
     private CartaDTO cartaDTO;
 
+    @Autowired
+    private Resultado resultado;
+
     @PostMapping()
     public ResponseEntity<Resultado> consultar(@RequestBody Carta carta){
-        return ResponseEntity.ok().body(fachada.consultar(carta));
+        resultado = fachada.consultar(carta);
+        if(!resultado.getEntidades().isEmpty()){
+            List<Carta> cartas = new ArrayList<>();
+            resultado.getEntidades().forEach(entidadeDominio -> cartas.add((Carta) entidadeDominio));
+            Collections.sort(cartas);
+            resultado.setEntidades(new ArrayList<>());
+            cartas.forEach( cartaOrdenada -> resultado.addEntidade(cartaOrdenada));
+        }
+        return ResponseEntity.ok().body(resultado);
     }
 
     @PostMapping(path = "/cria")
