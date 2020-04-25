@@ -8,6 +8,7 @@ import br.com.cascao.realmofcard.repository.CarrinhoRepository;
 import br.com.cascao.realmofcard.repository.CartaRepository;
 import br.com.cascao.realmofcard.repository.FormaPagamentoRepository;
 import br.com.cascao.realmofcard.repository.PedidoRepository;
+import br.com.cascao.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,16 +58,33 @@ public class PedidoPersistence implements IPersistence {
 
     @Override
     public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
+
         List<EntidadeDominio> pedidos = new ArrayList<>();
+
         if(entidade instanceof Pedido){
+
             Pedido pedido = (Pedido) entidade;
+
             if(pedido.getId() != null){
                 pedidos.add(pedidoRepository.findById(pedido.getId()).get());
                 return pedidos;
             }
-            pedidoRepository.findByCliente_Id(pedido.getCliente().getId())
-                    .forEach( resultadoPedido -> pedidos.add(resultadoPedido));
+
+            if(Util.isNotNull(pedido.getStatusPedido())){
+                pedidos.addAll(pedidoRepository.findByStatusPedido_Id(pedido.getStatusPedido().getId()));
+                return pedidos;
+            }
+
+            if(Util.isNotNull(pedido.getCliente())
+                && Util.isNotNull(pedido.getCliente().getId())){
+                pedidos.addAll(pedidoRepository.findByCliente_Id(pedido.getCliente().getId()));
+                return pedidos;
+            }
+
+            pedidoRepository.findAll().forEach(pedidoResultado -> pedidos.add(pedidoResultado));
+
             return pedidos;
+
         } else return null;
     }
 }

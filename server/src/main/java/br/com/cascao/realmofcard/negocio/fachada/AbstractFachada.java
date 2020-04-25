@@ -4,6 +4,7 @@ import br.com.cascao.realmofcard.domain.*;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
 import br.com.cascao.realmofcard.negocio.strategy.carrinho.*;
 import br.com.cascao.realmofcard.negocio.strategy.carta.CalcularPrecoVenda;
+import br.com.cascao.realmofcard.negocio.strategy.carta.InseriItemDisponivelParaEstoque;
 import br.com.cascao.realmofcard.negocio.strategy.carta.MoveImagem;
 import br.com.cascao.realmofcard.negocio.strategy.carta.ValidaDadosCarta;
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaDadosCartaoCredito;
@@ -107,6 +108,9 @@ public class AbstractFachada {
     private MoveImagem moveImagem;
 
     @Autowired
+    private InseriItemDisponivelParaEstoque inseriItemDisponivelParaEstoque;
+
+    @Autowired
     private ValidaDadosEndereco validaDadosEndereco;
 
     @Autowired
@@ -159,6 +163,9 @@ public class AbstractFachada {
 
     @Autowired
     private InsereEnderecoEscolhido insereEnderecoEscolhido;
+
+    @Autowired
+    private AtualizaItensPedidos atualizaItensPedidos;
 
 
     public AbstractFachada(){
@@ -230,6 +237,7 @@ public class AbstractFachada {
         rnsCartaSalvar.add(validaDadosCarta);
         rnsCartaSalvar.add(moveImagem);
         rnsCartaSalvar.add(calcularPrecoVenda);
+        rnsCartaSalvar.add(inseriItemDisponivelParaEstoque);
 
         List<IStrategy> rnsCartaAlterar = new ArrayList<>();
 
@@ -275,34 +283,28 @@ public class AbstractFachada {
 
         this.regrasNegocio.put(CartaoCredito.class.getName(), mapaCartaoCredito);
 
-        //------------------------ Hash Pedido --------------------------//
-
-        List<IStrategy> rnsPedidoSalvar = new ArrayList<>();
-
-        rnsPedidoSalvar.add(validaDadosPedido);
-        rnsPedidoSalvar.add(calculaValorPedido);
-        rnsPedidoSalvar.add(geraCodigoPedido);
-        rnsPedidoSalvar.add(calcularDataEntrega);
-        rnsPedidoSalvar.add(retiraItemEstoque);
-        rnsPedidoSalvar.add(insereEnderecoEscolhido);
-
-        List<IStrategy> rnsPedidoAlterar = new ArrayList<>();
-
-        rnsPedidoAlterar.add(validaDadosPedido);
-        rnsPedidoAlterar.add(calculaValorPedido);
-
-        Map<String, List<IStrategy>> mapaPedido = new HashMap<>();
-
-        mapaPedido.put("SALVAR",rnsPedidoSalvar);
-        mapaPedido.put("ALTERAR",rnsPedidoAlterar);
-
-        this.regrasNegocio.put(Pedido.class.getName(), mapaPedido);
-
         //------------------------ Hash Categoria --------------------------//
 
         Map<String, List<IStrategy>> mapaCategoria = new HashMap<>();
 
         regrasNegocio.put(CategoriaCarta.class.getName(), mapaCategoria);
+
+        //------------------------ Hash Item --------------------------//
+
+        List<IStrategy> rnsItemAlterar = new ArrayList<>();
+
+        rnsItemAlterar.add(validaQuantidadeItemDisponivel);
+        rnsItemAlterar.add(retiraItemDisponivel);
+
+        List<IStrategy> rnsItemExcluir = new ArrayList<>();
+
+        rnsItemExcluir.add(retornaItemDisponivel);
+
+        Map<String, List<IStrategy>> mapaItem = new HashMap<>();
+
+        mapaItem.put("EXCLUIR", rnsItemExcluir);
+
+        this.regrasNegocio.put(Item.class.getName(), mapaItem);
 
         //------------------------ Hash Carrinho --------------------------//
 
@@ -332,22 +334,28 @@ public class AbstractFachada {
 
         this.regrasNegocio.put(Carrinho.class.getName(), mapaCarrinho);
 
-        //------------------------ Hash Item --------------------------//
+        //------------------------ Hash Pedido --------------------------//
 
-        List<IStrategy> rnsItemAlterar = new ArrayList<>();
+        List<IStrategy> rnsPedidoSalvar = new ArrayList<>();
 
-        rnsItemAlterar.add(validaQuantidadeItemDisponivel);
-        rnsItemAlterar.add(retiraItemDisponivel);
+        rnsPedidoSalvar.add(validaDadosPedido);
+        rnsPedidoSalvar.add(atualizaItensPedidos);
+        rnsPedidoSalvar.add(calculaValorPedido);
+        rnsPedidoSalvar.add(geraCodigoPedido);
+        rnsPedidoSalvar.add(calcularDataEntrega);
+        rnsPedidoSalvar.add(retiraItemEstoque);
+        rnsPedidoSalvar.add(insereEnderecoEscolhido);
 
-        List<IStrategy> rnsItemExcluir = new ArrayList<>();
+        List<IStrategy> rnsPedidoAlterar = new ArrayList<>();
 
-        rnsItemExcluir.add(retornaItemDisponivel);
+        rnsPedidoAlterar.add(validaDadosPedido);
+        rnsPedidoAlterar.add(calculaValorPedido);
 
-        Map<String, List<IStrategy>> mapaItem = new HashMap<>();
+        Map<String, List<IStrategy>> mapaPedido = new HashMap<>();
 
-        mapaItem.put("EXCLUIR", rnsItemExcluir);
+        mapaPedido.put("SALVAR",rnsPedidoSalvar);
+        mapaPedido.put("ALTERAR",rnsPedidoAlterar);
 
-        this.regrasNegocio.put(Item.class.getName(), mapaItem);
-
+        this.regrasNegocio.put(Pedido.class.getName(), mapaPedido);
     }
 }

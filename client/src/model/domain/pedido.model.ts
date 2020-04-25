@@ -3,14 +3,15 @@ import { StatusPedido } from './status-pedido.model';
 import { Item } from './item.model';
 import {FormaPagamento} from './forma-pagamento.model';
 import {Endereco} from "./endereco.model";
+import {Pessoa} from "./pessoa.model";
 
 export class Pedido {
     id: number;
     codigoPedido: string;
-    cliente: Usuario;
+    cliente: Pessoa;
     valorTotal: number;
     formaPagamentoList: Array<FormaPagamento>;
-    administrador: Usuario;
+    administrador: Pessoa;
     statusPedido: StatusPedido;
     itemList: Array<Item>;
     endereco: Endereco;

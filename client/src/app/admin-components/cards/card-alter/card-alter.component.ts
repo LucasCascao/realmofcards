@@ -31,7 +31,6 @@ export class CardAlterComponent implements OnInit {
       this.categorias = resultado?.entidades;
       await this.service.get(this.carta, 'cartas').subscribe(resultado2 => {
         this.carta = resultado2?.entidades[0];
-        console.log(resultado2);
       });
     });
   }
@@ -39,6 +38,7 @@ export class CardAlterComponent implements OnInit {
   async alterarCarta() {
     const nomeArquivo: string[] = this.carta.imagemPath.split('\\');
     this.carta.imagemPath = nomeArquivo[nomeArquivo.length - 1];
+    this.carta.quantidadeEstoque = this.carta.quantidadeDisponivel;
     await this.service.update(this.carta, 'cartas').subscribe(resultado => {
       if (resultado.msg == null) {
         this.carta = resultado?.entidades[0];

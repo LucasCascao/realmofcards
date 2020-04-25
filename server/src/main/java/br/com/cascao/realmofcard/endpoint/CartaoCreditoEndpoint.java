@@ -38,7 +38,7 @@ public class CartaoCreditoEndpoint {
     public ResponseEntity<?> delete(@PathVariable Integer id){
         CartaoCredito cartaoCredito = new CartaoCredito();
         cartaoCredito.setId(id);
-        return ResponseEntity.ok().body(DTOUtil.tranfereParaDTO(fachada.excluir(cartaoCredito), cartaoCreditoDTO));
+        return ResponseEntity.ok().body(fachada.excluir(cartaoCredito));
     }
 
     @PutMapping()

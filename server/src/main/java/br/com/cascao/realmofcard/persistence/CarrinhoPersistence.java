@@ -33,7 +33,7 @@ public class CarrinhoPersistence implements IPersistence {
                 cartaRepository.save(item.getCarta());
                 itemRepository.save(item);
             };
-            carrinhoRepository.save(carrinho);
+            carrinho = carrinhoRepository.save(carrinho);
             return null;
         }
         return null;

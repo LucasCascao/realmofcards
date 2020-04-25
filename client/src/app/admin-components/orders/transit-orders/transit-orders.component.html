@@ -7,36 +7,47 @@
         <input type="text" class="form-control" placeholder="Pesquisar pedido">
       </div>
       <div class="col-lg-2 float-right">
-        <input type="button" (click)="filtrar(clients)" class="btn btn-secondary" value="Pesquisar">
+        <input type="button" (click)="filtrar(null)" class="btn btn-secondary" value="Pesquisar">
       </div>
     </div>
   </div>
   <hr>
-  <div class="row">
-    <div *ngFor="let client of clients" class="col-lg-12 mb-4">
-      <div class="card h-100">
+  <div class="row" *ngFor="let pedido of pedidos" >
+    <div class="col-lg-12 mb-4">
+      <div class="card rounded shadow shadow-sm">
         <div class="card-body">
-          <div class="col-md-3 float-left">
-            <img class="card-img-top" [src]="carta.imageUrl" alt="">
-          </div>
-          <div class="col-md-3 float-left">
-            <p class="card-text"><strong>Produto:</strong> {{carta.nome}}</p>
-            <p class="card-text"><strong>Categoria:</strong> {{carta.catCarta}}</p>
-            <p class="card-text"><strong>Jogo:</strong> {{carta.catJogo}}</p>
-            <p class="card-text"><strong>Quantidade requisitada:</strong> 3</p>
-            <p class="card-text"><strong>Parcela:</strong> 1x 52.45</p>
-            <p class="card-text"><strong>Data da compra:</strong> 20/02/2020</p>
-          </div>
-          <div class="col-md-4 float-left">
-            <p class="card-text"><strong>Cliente:</strong> {{client.firstName}} {{client.lastName}}</p>
-            <p class="card-text"><strong>Email:</strong> {{client.email}}</p>
-            <p class="card-text"><strong>Forma de pagamento:</strong> 2 cartões</p>
-            <p class="card-text"><strong>Cartão final 9999:</strong> 20.00</p>
-            <p class="card-text"><strong>Cartão final 5859:</strong> 32.45</p>
-            <p class="card-text"><strong>Data estimada de entrega:</strong> 25/02/2020</p>
-          </div>
-          <div class="col-md-1 float-left">
-            <a class="btn btn-success mb-md-3" [routerLink]="['../transit-orders']">Entregar</a>
+          <div class="row">
+            <div class="col-lg-10">
+              <div class="row" *ngFor="let item of pedido?.itemList">
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-2">
+                      <img class="card-img-top" [src]="item?.carta?.imagemPath" alt="">
+                    </div>
+                    <div class="col-lg-9">
+                      <p class="card-text"><strong>Produto:</strong> {{item?.carta?.nome}}</p>
+                      <p class="card-text"><strong>Categoria:</strong> {{item?.carta?.categoriaCarta?.nome}}</p>
+                      <p class="card-text"><strong>Quantidade requisitada:</strong> {{item?.quantidade}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-10">
+                  <p class="card-text"><strong>Cliente:</strong> {{pedido?.cliente?.nome}} {{pedido?.cliente?.sobrenome}}</p>
+                  <p class="card-text"><strong>Administrador:</strong> {{pedido?.administrador?.nome}} {{pedido?.administrador?.sobrenome}}</p>
+                  <p class="card-text"><strong>Email:</strong> {{pedido?.cliente?.usuario?.email}}</p>
+                  <p class="card-text"><strong>Data da compra:</strong> {{pedido?.dataCompra | date: 'dd/MM/yyyy'}}</p>
+                  <p class="card-text" *ngFor="let formaPagamento of pedido?.formaPagamentoList">
+                    <strong>Cartão final {{formaPagamento?.registroCartao}}:</strong> 20.00
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <button class="btn btn-success " (click)="confirmaPedidoEntrege(pedido)">Confirmar Entrega</button>
+            </div>
           </div>
         </div>
       </div>

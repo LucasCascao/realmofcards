@@ -24,7 +24,6 @@ export class UserOrdersComponent implements OnInit {
     this.service.get(pedido, 'pedidos').subscribe(resultado => {
       this.pedidos = resultado?.entidades;
     });
-
   }
 
 }

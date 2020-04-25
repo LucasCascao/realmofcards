@@ -19,13 +19,15 @@ export class CardDeleteComponent implements OnInit {
     this.getCarta();
   }
 
-  async getCarta(){
+  async getCarta() {
     await this.service.get(this.carta, 'cartas').subscribe( resultado => {
       this.carta = resultado?.entidades[0];
     });
   }
 
   async deletaCarta() {
+    this.carta.quantidadeDisponivel = 0;
+    this.carta.quantidadeEstoque = 0;
     await this.service.delete(this.carta?.id, 'cartas').subscribe(resultado => this.naveguePara());
   }
 

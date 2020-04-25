@@ -23,10 +23,16 @@ public class MoveImagem implements IStrategy {
 
     @Override
     public String processar(EntidadeDominio entidade) {
+
         StringBuilder msg = new StringBuilder();
+
         if (entidade instanceof Carta){
+
             Carta carta = (Carta) entidade;
-            if(carta.getImagemPath() != null){
+
+            if(carta.getImagemPath() != null
+                && !carta.getImagemPath().contains("/assets/images/cartas/")){
+
                 carta.setImagemPath("/assets/images/cartas/" + carta.getImagemPath());
             }
         }

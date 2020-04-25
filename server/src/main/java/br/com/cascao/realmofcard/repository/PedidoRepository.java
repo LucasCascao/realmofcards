@@ -10,4 +10,6 @@ public interface PedidoRepository extends CrudRepository<Pedido, Integer> {
 
    List<Pedido> findByCliente_Id(Integer id);
 
+   List<Pedido> findByStatusPedido_Id(Integer id);
+
 }

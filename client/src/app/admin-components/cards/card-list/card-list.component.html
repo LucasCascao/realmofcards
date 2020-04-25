@@ -24,7 +24,8 @@
           <div class="col-md-6 float-left">
             <p class="card-text"><strong>Produto:</strong> {{carta?.nome}}</p>
             <p class="card-text"><strong>Valor total:</strong> R$ {{carta?.valorVenda}}</p>
-            <p class="card-text"><strong>Quantidade disponível:</strong> 5.</p>
+            <p class="card-text"><strong>Quantidade disponível:</strong> {{carta?.quantidadeDisponivel}}.</p>
+            <p class="card-text"><strong>Quantidade estoque:</strong> {{carta?.quantidadeEstoque}}.</p>
           </div>
           <div class="col-md-3 float-left">
             <a class="btn btn-secondary mb-md-3" (click)="seleciona(carta?.id)" [routerLink]="['/app-logado/admin-product-alter']">Alterar</a>

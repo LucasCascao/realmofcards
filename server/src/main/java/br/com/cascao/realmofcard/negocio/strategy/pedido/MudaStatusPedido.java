@@ -3,13 +3,12 @@ package br.com.cascao.realmofcard.negocio.strategy.pedido;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.Pedido;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
-import br.com.cascao.realmofcard.util.Util;
 import br.com.cascao.realmofcard.util.validador.ValidadorString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ValidaDadosPedido implements IStrategy {
+public class MudaStatusPedido implements IStrategy {
 
     @Autowired
     ValidadorString validadorString;
@@ -25,9 +24,7 @@ public class ValidaDadosPedido implements IStrategy {
 
             msg.append(validadorString.validar(pedido.getCliente(), "cliente"));
             msg.append(validadorString.validar(pedido.getFormaPagamentoList(), "forma de pagamento"));
-            if(Util.isNull(pedido.getEnderecoEscolhido())){
-                msg.append(validadorString.validar(pedido.getEndereco(), "endereco"));
-            }
+            msg.append(validadorString.validar(pedido.getEndereco(), "endereco"));
             msg.append(validadorString.validar(pedido.getItemList(), "itens"));
             msg.append(validadorString.validar(pedido.getStatusPedido(), "status do pedido"));
             msg.append(validadorString.validar(pedido.getValorTotal(), "valor total"));

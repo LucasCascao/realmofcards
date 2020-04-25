@@ -25,8 +25,8 @@
             <!-- <p class="card-text"><strong>Quantidade disponível:</strong> {{carta?.estoque}}.</p> -->
           </div>
           <div class="col-md-3 float-left">
-            <a class="btn btn-secondary mb-md-3" [routerLink]="['../admin-product-alter']">Alterar</a>
-            <a class="btn btn-secondary" [routerLink]="['../admin-product-active']">Ativar</a>
+            <button class="btn btn-secondary mb-md-3" [routerLink]="['../admin-product-alter']">Alterar</button>
+            <button class="btn btn-secondary" (click)="selecionaCarta(carta)">Ativar</button>
           </div>
         </div>
       </div>
