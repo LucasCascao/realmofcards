@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {MockClient} from '../../../../mock/mock-cliente.model';
 import {MockCards} from '../../../../mock/mock-card.model';
+import {Pedido} from '../../../../model/domain/pedido.model';
+import {UtilService} from '../../../../services/util.service';
+import {StatusPedido} from '../../../../model/domain/status-pedido.model';
+import {Troca} from '../../../../model/domain/troca.model';
 
 @Component({
   selector: 'app-request-trade',
@@ -9,14 +13,32 @@ import {MockCards} from '../../../../mock/mock-card.model';
 })
 export class RequestTradeComponent implements OnInit {
 
-  clients = new MockClient().pessoas;
+  trocas: Array<Troca>;
 
-  carta = new MockCards().cards[0];
-
-  constructor() { }
+  constructor(private service: UtilService) { }
 
   ngOnInit(): void {
-    this.carta.value = 52.45;
+    this.getPedidos();
+  }
+
+  getPedidos() {
+    const statusPedido: StatusPedido = new StatusPedido();
+    statusPedido.id = 4;
+    const pedido = new Pedido();
+    pedido.statusPedido = statusPedido;
+    const troca: Troca = new Troca();
+    this.service.get(troca, 'trocas').subscribe(resultado => {
+      this.trocas = resultado?.entidades;
+    });
+  }
+
+  confirmaPedidoEntrege(pedido: Pedido) {
+    const statusPedido: StatusPedido = new StatusPedido();
+    statusPedido.id = 3;
+    pedido.statusPedido = statusPedido;
+    this.service.update(pedido, 'pedidos').subscribe(() => {
+      document.location.reload();
+    });
   }
 
   filtrar(cartas: any) {

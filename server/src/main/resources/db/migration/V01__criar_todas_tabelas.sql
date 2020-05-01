@@ -36,6 +36,23 @@ CREATE TABLE categoria_carta (
     cat_nome  VARCHAR(40) NOT NULL
 );
 
+CREATE TABLE troca (
+    trc_id                  SERIAL NOT NULL,
+    trc_pedido_id           INT NOT NULL
+);
+
+CREATE TABLE item_troca (
+    itc_id          SERIAL NOT NULL,
+    itc_quantidade  INT NOT NULL,
+    itc_item_id     INT NOT NULL,
+    itc_troca_id    INT NOT NULL
+);
+
+CREATE TABLE status_troca (
+    trs_id          SERIAL NOT NULL,
+    trs_status      VARCHAR(16) NOT NULL
+);
+
 CREATE TABLE cidade (
     cid_id         SERIAL NOT NULL,
     cid_nome       VARCHAR(60) NOT NULL,
@@ -142,7 +159,7 @@ CREATE TABLE status (
 
 CREATE TABLE status_pedido (
     spd_id      SERIAL NOT NULL,
-    spd_status  VARCHAR(20) NOT NULL
+    spd_status  VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE user_type (
@@ -220,6 +237,12 @@ ALTER TABLE tipo_telefone ADD CONSTRAINT tipo_telefone_pk PRIMARY KEY ( ttl_id )
 ALTER TABLE forma_pagamento ADD CONSTRAINT forma_pagamento_pk PRIMARY KEY ( fpa_id );
 
 ALTER TABLE forma_pagamento_pedido ADD CONSTRAINT forma_pagamento_pedido_pk PRIMARY KEY ( fpp_id );
+
+ALTER TABLE troca ADD CONSTRAINT troca_pk PRIMARY KEY ( trc_id );
+
+ALTER TABLE item_troca ADD CONSTRAINT item_troca_pk PRIMARY KEY ( itc_id );
+
+ALTER TABLE status_troca ADD CONSTRAINT status_troca_pk PRIMARY KEY ( trs_id );
 
 ALTER TABLE carta
     ADD CONSTRAINT carta_status_fk FOREIGN KEY ( car_status_id )
@@ -320,3 +343,15 @@ ALTER TABLE forma_pagamento_pedido
 ALTER TABLE telefone
     ADD CONSTRAINT telefone_tipo_telefone_fk FOREIGN KEY ( tel_tipo_telefone_id )
         REFERENCES tipo_telefone ( ttl_id );
+
+ALTER TABLE troca
+    ADD CONSTRAINT troca_pedido_fk FOREIGN KEY ( trc_pedido_id )
+        REFERENCES pedido ( ped_id );
+
+ALTER TABLE item_troca
+    ADD CONSTRAINT troca_item_troca_fk FOREIGN KEY ( itc_troca_id )
+        REFERENCES troca ( trc_id );
+
+ALTER TABLE item_troca
+    ADD CONSTRAINT item_item_troca_fk FOREIGN KEY ( itc_item_id )
+        REFERENCES item ( itm_id );

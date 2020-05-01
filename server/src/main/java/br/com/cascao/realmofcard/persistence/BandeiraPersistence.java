@@ -16,7 +16,7 @@ import java.util.List;
 public class BandeiraPersistence implements IPersistence {
 
     @Autowired
-    BandeiraRepository bandeiraRepository;
+    private BandeiraRepository bandeiraRepository;
 
     @Override
     public EntidadeDominio salvar(EntidadeDominio entidade) { return null; }

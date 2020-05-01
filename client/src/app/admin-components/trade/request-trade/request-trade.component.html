@@ -13,11 +13,11 @@
   </div>
   <hr>
   <div class="row">
-    <div *ngFor="let client of clients" class="col-lg-12 mb-4">
+    <div *ngFor="let troca of trocas" class="col-lg-12 mb-4">
       <div class="card h-100">
         <div class="card-body">
           <div class="col-md-3 float-left">
-            <img class="card-img-top" [src]="carta.imageUrl" alt="">
+            <img class="card-img-top" [src]="troca?.itemListParaTroca?.carta.imageUrl" alt="">
           </div>
           <div class="col-md-3 float-left">
             <p class="card-text"><strong>Produto:</strong> {{carta.nome}}</p>

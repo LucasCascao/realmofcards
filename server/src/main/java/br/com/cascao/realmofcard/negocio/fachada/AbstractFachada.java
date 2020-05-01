@@ -15,6 +15,8 @@ import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaExistenciaCidad
 import br.com.cascao.realmofcard.negocio.strategy.pedido.*;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaDadosPessoa;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaExistenciaPessoa;
+import br.com.cascao.realmofcard.negocio.strategy.troca.RetiraQuantidadeItemDoPedido;
+import br.com.cascao.realmofcard.negocio.strategy.troca.ValidaDadosTroca;
 import br.com.cascao.realmofcard.negocio.strategy.usuario.*;
 import br.com.cascao.realmofcard.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +73,9 @@ public class AbstractFachada {
 
     @Autowired
     private ItemPersistence itemPersistence;
+
+    @Autowired
+    private TrocaPersistence trocaPersistence;
 
 
     /*
@@ -167,11 +172,22 @@ public class AbstractFachada {
     @Autowired
     private AtualizaItensPedidos atualizaItensPedidos;
 
+    @Autowired
+    private ValidaDadosTroca validaDadosTroca;
+
+    @Autowired
+    private RetiraQuantidadeItemDoPedido retiraQuantidadeItemDoPedido;
+
+    @Autowired
+    private MudaStatusPedido mudaStatusPedido;
+
 
     public AbstractFachada(){
     }
 
     protected void inicializeMaps(){
+
+        //------------------ Hash Classe e DAO -------------------------//
 
         daos.put(Pessoa.class.getName(), pessoaPersistence);
         daos.put(Usuario.class.getName(), usuarioPersistence);
@@ -185,6 +201,7 @@ public class AbstractFachada {
         daos.put(Carrinho.class.getName(), carrinhoPersistence);
         daos.put(Item.class.getName(), itemPersistence);
         daos.put(Bandeira.class.getName(), bandeiraPersistence);
+        daos.put(Troca.class.getName(), trocaPersistence);
 
         //------------------------ Hash Pessoa ----------------------------//
 
@@ -350,6 +367,7 @@ public class AbstractFachada {
 
         rnsPedidoAlterar.add(validaDadosPedido);
         rnsPedidoAlterar.add(calculaValorPedido);
+        rnsPedidoAlterar.add(mudaStatusPedido);
 
         Map<String, List<IStrategy>> mapaPedido = new HashMap<>();
 
@@ -357,5 +375,24 @@ public class AbstractFachada {
         mapaPedido.put("ALTERAR",rnsPedidoAlterar);
 
         this.regrasNegocio.put(Pedido.class.getName(), mapaPedido);
+
+        //------------------------ Hash Troca --------------------------//
+
+        List<IStrategy> rnsTrocaSalvar = new ArrayList<>();
+
+        rnsTrocaSalvar.add(validaDadosTroca);
+        rnsTrocaSalvar.add(mudaStatusPedido);
+
+        List<IStrategy> rnsTrocaAlterar = new ArrayList<>();
+
+        rnsTrocaAlterar.add(retiraQuantidadeItemDoPedido);
+
+        Map<String, List<IStrategy>> mapaTroca = new HashMap<>();
+
+        mapaTroca.put("SALVAR", rnsTrocaSalvar);
+        mapaTroca.put("ALTERAR", rnsTrocaAlterar);
+
+        regrasNegocio.put(Troca.class.getName(), mapaTroca);
+
     }
 }

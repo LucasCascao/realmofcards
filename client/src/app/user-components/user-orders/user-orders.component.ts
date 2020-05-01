@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/services/util.service';
 import { Pessoa } from 'src/model/domain/pessoa.model';
 import { Pedido } from 'src/model/domain/pedido.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-orders',
@@ -10,7 +11,8 @@ import { Pedido } from 'src/model/domain/pedido.model';
 })
 export class UserOrdersComponent implements OnInit {
 
-  constructor(private service: UtilService) { }
+  constructor(private service: UtilService,
+              private router: Router) { }
 
   pedidos: Array<Pedido>;
 
@@ -24,6 +26,11 @@ export class UserOrdersComponent implements OnInit {
     this.service.get(pedido, 'pedidos').subscribe(resultado => {
       this.pedidos = resultado?.entidades;
     });
+  }
+
+  solicitaTroca(pedido : Pedido){
+    sessionStorage.setItem('pedidoSelecionado', JSON.stringify(pedido));
+    this.router.navigate(['/app-logado/user-product-trade']);
   }
 
 }
