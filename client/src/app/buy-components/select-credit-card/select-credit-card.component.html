@@ -2,21 +2,29 @@
 <div class="container">
   <!-- Page Heading/Breadcrumbs -->
   <h1 class="mt-4 mb-3">Selecione até 2 cartões</h1>
-  <div *ngFor="let cartao of cartoes">
+  <div *ngFor="let formaPagamento of formaPagamentoList">
     <hr>
     <!-- Project One -->
     <div class="row">
       <div class="col-md-12">
         <div class="row">
           <div class="col-lg-1">
-            <input type="checkbox" [id] = "cartao.id" [name]="cartao.id" (click)="selecionaCartao2($event, cartao)">
+            <input type="checkbox" [id] = "formaPagamento?.cartao.id" [name]="formaPagamento?.cartao?.id"
+              (click)="selecionaCartao($event, formaPagamento)">
           </div>
           <div class="col-lg-1">
             <img class="img-fluid" src="/assets/icon/cartao-credito.png">
           </div>
-          <div class="col-lg-9">
-            <p class="card-text"><strong>Ultimos 4 digitos:</strong> {{cartao?.numero}}</p>
-            <p class="card-text"><strong>Bandeira:</strong> {{cartao?.bandeira?.nome}}</p>
+          <div class="col-lg-5">
+            <p class="card-text"><strong>Ultimos 4 digitos:</strong> {{formaPagamento?.cartao?.numero}}</p>
+            <p class="card-text"><strong>Bandeira:</strong> {{formaPagamento?.cartao?.bandeira?.nome}}</p>
+          </div>
+          <div class="col-lg-4">
+            <div *ngIf="formaPagamento?.isSelecionado">
+              <p class="card-text"><strong>Valor</strong> </p>
+              <input type="number" step="0.01" name="quantity" min="0.01" [max]="valorTotal" value="1"
+                [(ngModel)]="formaPagamento.valorPagamento" (change)="calculaValor(formaPagamento)">
+            </div>
           </div>
           <div class="col-md-1">
             <a class="btn btn-danger float-right" [routerLink]="['/app-logado/creditcard-delete']">Excluir</a>
@@ -25,8 +33,13 @@
       </div>
       <hr>
     </div>
-
     <!-- /.row -->
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <h3><strong>Valor a pagar: </strong> {{valorTotal}}</h3>
+    </div>
   </div>
   <hr>
   <div class="row">

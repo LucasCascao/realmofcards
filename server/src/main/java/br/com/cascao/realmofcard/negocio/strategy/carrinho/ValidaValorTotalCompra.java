@@ -26,11 +26,11 @@ public class ValidaValorTotalCompra implements IStrategy {
                 carrinho.getItemList().forEach( item -> {
                     if (cartaRepository.findById(item.getCarta().getId()).get()
                             .getStatus().getId() == 2) {
-                         msg.append("Produto " + item.getCarta().getNome() + " est√° inativo no momento.");
+                         msg.append("Produto " + item.getCarta().getNome() + " est· inativo no momento.");
                     }
                 });
             }else{
-                msg.append("Carrinho est√° vazio");
+                msg.append("Carrinho est· vazio");
             }
         }
 

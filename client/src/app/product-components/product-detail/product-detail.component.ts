@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Carta } from 'src/model/domain/carta.model';
@@ -5,6 +6,7 @@ import { UtilService } from 'src/services/util.service';
 import { Carrinho } from 'src/model/domain/carrinho.model';
 import { Item } from 'src/model/domain/item.model';
 import {Util} from '../../shared/app.util';
+import { Status } from 'src/model/domain/status.model';
 
 @Component({
   selector: 'app-product-detail',
@@ -40,6 +42,10 @@ export class ProductDetailComponent implements OnInit {
 
     carrinho.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
 
+    let statusItem: Status = new Status();
+
+    statusItem.id = 1;
+
     const item: Item = new Item();
 
     item.quantidade = this.quantidade;
@@ -47,6 +53,12 @@ export class ProductDetailComponent implements OnInit {
     item.carta = new Carta();
 
     item.carta = cartaSelecionada;
+
+    item.quantidadeTroca = 0;
+
+    item.quantidadeDevolucao = 0
+
+    item.statusItem = statusItem;
 
     const itens: Item[] = [];
 

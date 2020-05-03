@@ -15,7 +15,7 @@
                   <label class="card-text" for="quantidade_estoque">Quantidade inserida no estoque: </label>
                 </div>
                 <div class="col-lg-3 col-md-8 float-left">
-                  <input type="number" id="quantidade_estoque" name="quantidade_estoque" class="form-control float-left" min="1" [(ngModel)]="carta.quantidadeDisponivel">
+                  <input type="number" id="quantidade_estoque" name="quantidade_estoque" class="form-control float-left" min="1" [(ngModel)]="carta.quantidadeDisponivel" [value]="carta?.quantidadeDisponivel">
                 </div>
               </div>
               <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['../admin-product-inactive-list']" value="Cancelar">

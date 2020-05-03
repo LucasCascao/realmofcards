@@ -25,7 +25,13 @@
       <hr>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col-md-12" *ngIf="correio !== null">
+      <p class="card-text"><strong>Quantidades de dias para entrega:</strong> {{correio?.quantidadeDiasEntrega}}</p>
+      <p class="card-text"><strong>Custo do frete:</strong> {{correio?.valorCusto | currency: 'BRL': true}}</p>
+      <hr>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12">
       <a class="btn btn-secondary float-left" [routerLink]="['/app-logado/address-register']">Adicionar novo endereco

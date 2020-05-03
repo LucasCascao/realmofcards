@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { UtilService } from 'src/services/util.service';
@@ -42,7 +43,7 @@ export class CardAlterComponent implements OnInit {
     await this.service.update(this.carta, 'cartas').subscribe(resultado => {
       if (resultado.msg == null) {
         this.carta = resultado?.entidades[0];
-        this.router.navigate(['/app-logado/admin-product-list']);
+        this.router.navigate(['/app-logado/admin-page/admin-product-list']);
       } else {
         alert(this.util.getMensagensSeparadas(resultado?.msg));
       }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {MockCards} from '../../../../mock/mock-card.model';
 import {Carta} from '../../../../model/domain/carta.model';
@@ -19,6 +20,7 @@ export class CardActiveComponent implements OnInit {
 
   ngOnInit(): void {
     this.carta = JSON.parse(sessionStorage.getItem('cartaInativaSelecionada'));
+    this.carta.quantidadeDisponivel = 1;
   }
 
   ativaCarta() {
@@ -29,7 +31,7 @@ export class CardActiveComponent implements OnInit {
       this.carta.quantidadeEstoque = this.carta.quantidadeDisponivel;
       this.service.update(this.carta, 'cartas').subscribe(resultado => {
         if (resultado.msg == null) {
-          this.router.navigate(['/app-logado/admin-product-inactive-list']);
+          this.router.navigate(['/app-logado/admin-page/admin-product-inactive-list']);
         }
       });
     } else {

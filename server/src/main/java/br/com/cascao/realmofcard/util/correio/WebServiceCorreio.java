@@ -62,8 +62,4 @@ public class WebServiceCorreio {
         }
         return correioDTO;
     }
-
-    public static void main(String[] args) {
-        System.out.println(teste);
-    }
 }

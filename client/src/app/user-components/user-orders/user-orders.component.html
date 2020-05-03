@@ -25,7 +25,15 @@
             <div class="col-lg-5 col-md-10 float-left">
               <p class="card-text"><strong>Produto:</strong> {{item?.carta?.nome}}</p>
               <p class="card-text"><strong>Valor unitario:</strong> {{item?.carta?.valorVenda}}</p>
-              <p class="card-text"><strong>Quantidade:</strong> {{item?.quantidade}}</p>
+              <p class="card-text" *ngIf="item?.quantidade > 0">
+                <strong>Quantidade:</strong> {{item?.quantidade}}
+              </p>
+              <p class="card-text" *ngIf="item?.quantidadeTroca > 0">
+                <strong>Quantidade de itens trocados:</strong> {{item?.quantidadeTroca}}
+              </p>
+              <p class="card-text" *ngIf="item?.quantidadeDevolucao > 0">
+                <strong>Quantidade de itens devolvidos:</strong> {{item?.quantidadeDevolucao}}
+              </p>
             </div>
           </div>
           <div class="row">
@@ -35,14 +43,25 @@
               <p class="card-text"><strong>Endereço de Entrega:</strong> {{pedido?.enderecoEscolhido}}</p>
               <p class="card-text"><strong>Data da compra:</strong> {{pedido?.dataCompra | date: 'dd/MM/yyyy'}}</p>
               <p class="card-text"><strong>Data estimada para entrega:</strong> {{pedido?.dataEstimada | date: 'dd/MM/yyyy'}}</p>
-              <p *ngFor="let formaPagamento of pedido?.formaPagamentoList" class="card-text">
-                <strong>Cartão com final:</strong> {{formaPagamento?.registroCartao}}
-              </p>
+              <div *ngFor="let formaPagamento of pedido?.formaPagamentoList">
+                <div class="row">
+                  <div class="col-lg-3 mb-md-3 float-left">
+                    <p class="card-text">
+                      <strong>Cartão com final:</strong> {{formaPagamento?.registroCartao}}
+                    </p>
+                  </div>
+                  <div class="col-lg-4 mb-md-3 float-left">
+                    <p class="card-text">
+                      <strong>Valor pago nesse cartão:</strong> {{formaPagamento?.valorPagamento.toFixed(2)}}
+                    </p>
+                  </div>
+                </div>
+              </div>
               <div class="row">
                 <div class="col-lg-1 col-md-10">
                   <p class="card-text"><strong>Status:</strong></p>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                   <p class="btn-sm btn-dark text-center">{{pedido?.statusPedido?.status}}</p>
                 </div>
               </div>

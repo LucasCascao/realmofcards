@@ -30,7 +30,7 @@ public class ValidaExistenciaUsuario implements IStrategy {
 
         if(usuarioValidador != null){
             if(usuarioRecebido.getId() != usuarioValidador.getId()){
-                msg.append("Email j√° cadastrado.");
+                msg.append("Email j· cadastrado.");
             }
         }
 

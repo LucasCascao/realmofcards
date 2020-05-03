@@ -366,8 +366,6 @@ public class AbstractFachada {
         List<IStrategy> rnsPedidoAlterar = new ArrayList<>();
 
         rnsPedidoAlterar.add(validaDadosPedido);
-        rnsPedidoAlterar.add(calculaValorPedido);
-        rnsPedidoAlterar.add(mudaStatusPedido);
 
         Map<String, List<IStrategy>> mapaPedido = new HashMap<>();
 
@@ -381,7 +379,7 @@ public class AbstractFachada {
         List<IStrategy> rnsTrocaSalvar = new ArrayList<>();
 
         rnsTrocaSalvar.add(validaDadosTroca);
-        rnsTrocaSalvar.add(mudaStatusPedido);
+        rnsTrocaSalvar.add(retiraQuantidadeItemDoPedido);
 
         List<IStrategy> rnsTrocaAlterar = new ArrayList<>();
 

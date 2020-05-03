@@ -48,9 +48,9 @@
               <h3 class="mt-4 mb-3"><strong>Forma de pagamento solicitada</strong></h3>
             </div>
           </div>
-          <div class="row" *ngFor="let cartao of cartoes">
+          <div class="row" *ngFor="let formaPagamento of formaPagamentoList">
             <div class="col-md-12">
-              <p class="card-text"><strong>Forma de pagamento: </strong>Cartão de crédito: {{cartao?.numero}}.</p>
+              <p class="card-text"><strong>Forma de pagamento: </strong>Cartão de crédito: {{formaPagamento?.cartao?.numero}}.</p>
             </div>
           </div>
           <hr>
@@ -81,6 +81,8 @@
               <p class="card-text"><strong>Endereço: </strong> {{endereco?.logradouro}}, n° {{endereco?.numero}}, {{endereco?.bairro}},
                 {{endereco?.cidade?.nome}} - {{endereco?.cidade?.estado?.sigla}} {{endereco?.cep}}.
               </p>
+              <p class="card-text"><strong>Valor de frete: </strong> {{custoFrete}}</p>
+              <p class="card-text"><strong>Dias para entrega: </strong> {{prazo}}</p>
             </div>
           </div>
         </div>

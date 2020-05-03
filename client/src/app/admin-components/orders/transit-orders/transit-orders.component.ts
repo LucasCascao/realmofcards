@@ -1,6 +1,5 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
-import {MockClient} from '../../../../mock/mock-cliente.model';
-import {MockCards} from '../../../../mock/mock-card.model';
 import {Pedido} from '../../../../model/domain/pedido.model';
 import {UtilService} from '../../../../services/util.service';
 import {StatusPedido} from '../../../../model/domain/status-pedido.model';

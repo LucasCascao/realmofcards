@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {Pessoa} from '../../../model/domain/pessoa.model';
-import {ClienteService} from '../../../services/cliente.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Util} from '../../shared/app.util';
 import {Usuario} from '../../../model/domain/usuario.model';

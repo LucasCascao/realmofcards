@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {MockCards} from '../../../../mock/mock-card.model';
 import { Carta } from 'src/model/domain/carta.model';
@@ -34,7 +35,7 @@ export class CardListInactiveComponent implements OnInit {
 
   selecionaCarta(carta: Carta) {
     sessionStorage.setItem('cartaInativaSelecionada', JSON.stringify(carta));
-    this.router.navigate(['/app-logado/admin-product-active']);
+    this.router.navigate(['/app-logado/admin-page/admin-product-active']);
   }
 
   filtrar(cartas: any) {

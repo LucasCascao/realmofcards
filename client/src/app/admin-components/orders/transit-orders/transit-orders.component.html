@@ -12,45 +12,58 @@
     </div>
   </div>
   <hr>
-  <div class="row" *ngFor="let pedido of pedidos" >
-    <div class="col-lg-12 mb-4">
-      <div class="card rounded shadow shadow-sm">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-10">
-              <div class="row" *ngFor="let item of pedido?.itemList">
-                <div class="col-lg-6">
-                  <div class="row">
-                    <div class="col-lg-2">
-                      <img class="card-img-top" [src]="item?.carta?.imagemPath" alt="">
+  <div *ngIf="pedidos?.length > 0;else semItensEmTransito">
+    <div class="row" *ngFor="let pedido of pedidos" >
+      <div class="col-lg-12 mb-4">
+        <div class="card rounded shadow shadow-sm">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <h3 class="card-text"><strong>Código do pedido:</strong> {{pedido?.codigoPedido}}</h3>
+                <hr>
+              </div>
+              <div class="col-lg-10">
+                <div class="row" *ngFor="let item of pedido?.itemList">
+                  <div class="col-lg-6">
+                    <div class="row">
+                      <div class="col-lg-2">
+                        <img class="card-img-top" [src]="item?.carta?.imagemPath" alt="">
+                      </div>
+                      <div class="col-lg-9">
+                        <p class="card-text"><strong>Produto:</strong> {{item?.carta?.nome}}</p>
+                        <p class="card-text"><strong>Categoria:</strong> {{item?.carta?.categoriaCarta?.nome}}</p>
+                        <p class="card-text"><strong>Quantidade requisitada:</strong> {{item?.quantidade}}</p>
+                      </div>
                     </div>
-                    <div class="col-lg-9">
-                      <p class="card-text"><strong>Produto:</strong> {{item?.carta?.nome}}</p>
-                      <p class="card-text"><strong>Categoria:</strong> {{item?.carta?.categoriaCarta?.nome}}</p>
-                      <p class="card-text"><strong>Quantidade requisitada:</strong> {{item?.quantidade}}</p>
-                    </div>
+                    <hr>
                   </div>
-                  <hr>
+                </div>
+                <div class="row">
+                  <div class="col-lg-10">
+                    <p class="card-text"><strong>Cliente:</strong> {{pedido?.cliente?.nome}} {{pedido?.cliente?.sobrenome}}</p>
+                    <p class="card-text"><strong>Administrador:</strong> {{pedido?.administrador?.nome}} {{pedido?.administrador?.sobrenome}}</p>
+                    <p class="card-text"><strong>Email:</strong> {{pedido?.cliente?.usuario?.email}}</p>
+                    <p class="card-text"><strong>Data da compra:</strong> {{pedido?.dataCompra | date: 'dd/MM/yyyy'}}</p>
+                    <p class="card-text" *ngFor="let formaPagamento of pedido?.formaPagamentoList">
+                      <strong>Cartão final {{formaPagamento?.registroCartao}}:</strong> {{formaPagamento?.valorPagamento | currency: 'BRL': true}}.
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-lg-10">
-                  <p class="card-text"><strong>Cliente:</strong> {{pedido?.cliente?.nome}} {{pedido?.cliente?.sobrenome}}</p>
-                  <p class="card-text"><strong>Administrador:</strong> {{pedido?.administrador?.nome}} {{pedido?.administrador?.sobrenome}}</p>
-                  <p class="card-text"><strong>Email:</strong> {{pedido?.cliente?.usuario?.email}}</p>
-                  <p class="card-text"><strong>Data da compra:</strong> {{pedido?.dataCompra | date: 'dd/MM/yyyy'}}</p>
-                  <p class="card-text" *ngFor="let formaPagamento of pedido?.formaPagamentoList">
-                    <strong>Cartão final {{formaPagamento?.registroCartao}}:</strong> 20.00
-                  </p>
-                </div>
+              <div class="col-lg-2">
+                <button class="btn btn-success " (click)="confirmaPedidoEntrege(pedido)">Confirmar Entrega</button>
               </div>
-            </div>
-            <div class="col-lg-2">
-              <button class="btn btn-success " (click)="confirmaPedidoEntrege(pedido)">Confirmar Entrega</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <ng-template #semItensEmTransito>
+    <div class="row">
+      <div class="col-lg-10">
+        <h3 class="card-text text-center"><strong>Sem pedido em transito.</strong></h3>
+      </div>
+    </div>
+  </ng-template>
 </div>

@@ -33,7 +33,7 @@
         <div class="form-group">
           <label class="col-lg-6 control-label">Imagem de exposição:</label>
           <div class="col-lg-2">
-            <input type="file" value="" required>
+            <input name="cad_carta_imagem" type="file" value="" required>
           </div>
         </div>
         <div class="form-group">
@@ -53,7 +53,7 @@
           <div class="col-md-8">
             <input type="button" class="btn btn-success btn-lg float-right" (click)="alterarCarta()" value="Alterar">
             <span></span>
-            <input type="reset" class="btn btn-secondary btn-lg float-left" [routerLink]="['/app-logado/admin-product-list']" value="Cancelar">
+            <input type="reset" class="btn btn-secondary btn-lg float-left" [routerLink]="['/app-logado/admin-page/admin-product-list']" value="Cancelar">
           </div>
         </div>
       </form>

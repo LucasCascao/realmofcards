@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {Endereco} from '../../../model/domain/endereco.model';
 import {Carrinho} from '../../../model/domain/carrinho.model';
@@ -15,10 +16,11 @@ import {Router} from '@angular/router';
 })
 export class OrderResumeComponent implements OnInit {
 
-  constructor(private service: UtilService,
-              private router: Router) { }
+  constructor(private service: UtilService, private router: Router) { }
 
-  cartoes: Array<CartaoCredito>;
+  //cartoes: Array<CartaoCredito>;
+
+  formaPagamentoList: Array<FormaPagamento>;
 
   endereco: Endereco;
 
@@ -26,15 +28,27 @@ export class OrderResumeComponent implements OnInit {
 
   valorTotal: number;
 
+  custoFrete: number;
+
+  prazo: number;
+
   ngOnInit(): void {
 
-    this.cartoes = JSON.parse(sessionStorage.getItem('cartoesSelecionados'));
+    //this.cartoes = JSON.parse(sessionStorage.getItem('cartoesSelecionados'));
+
+    this.formaPagamentoList = JSON.parse(sessionStorage.getItem('formasPagamentoSelecionadas'));
 
     this.valorTotal = JSON.parse(sessionStorage.getItem('valorTotal'));
 
     this.carrinho = JSON.parse(sessionStorage.getItem('carrinho'));
 
     this.endereco = JSON.parse(sessionStorage.getItem('enderecoSelecionado'));
+
+    this.custoFrete = JSON.parse(sessionStorage.getItem('custoFrete'));
+
+    this.prazo = JSON.parse(sessionStorage.getItem('prazo'));
+
+    this.valorTotal += this.custoFrete;
 
   }
 
@@ -49,12 +63,12 @@ export class OrderResumeComponent implements OnInit {
     pedido.endereco = this.endereco;
     pedido.statusPedido = statusPedido;
     pedido.valorTotal = Number.parseFloat(this.valorTotal?.toFixed(2));
-    pedido.formaPagamentoList = [];
-    this.cartoes?.forEach(cartao => {
-      const formaPagamento: FormaPagamento = new FormaPagamento();
-      formaPagamento.registroCartao = cartao.numero;
-      pedido.formaPagamentoList.push(formaPagamento);
-    });
+    pedido.formaPagamentoList = this.formaPagamentoList;
+    // this.cartoes?.forEach(cartao => {
+    //   const formaPagamento: FormaPagamento = new FormaPagamento();
+    //   formaPagamento.registroCartao = cartao.numero;
+    //   pedido.formaPagamentoList.push(formaPagamento);
+    // });
 
     this.cadastraPedido(pedido);
   }

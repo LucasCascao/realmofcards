@@ -21,12 +21,12 @@ public class ValidaDadosCartaoCredito implements IStrategy {
         if(entidade instanceof CartaoCredito){
 
             CartaoCredito cartaoCredito = (CartaoCredito) entidade;
-            msg.append(validadorString.validar(cartaoCredito.getNumero(), "numero do cart√£o"));
-            msg.append(validadorString.validar(cartaoCredito.getCodigoSeguranca(), "c√≥digo de seguran√ßa"));
-            msg.append(validadorString.validar(cartaoCredito.getVencimentoMes(), "m√™s de vencimento"));
+            msg.append(validadorString.validar(cartaoCredito.getNumero(), "numero do cart„o"));
+            msg.append(validadorString.validar(cartaoCredito.getCodigoSeguranca(), "cÛdigo de seguranÁa"));
+            msg.append(validadorString.validar(cartaoCredito.getVencimentoMes(), "mÍs de vencimento"));
             msg.append(validadorString.validar(cartaoCredito.getVencimentoAno(), "ano de vencimento"));
-            msg.append(validadorString.validar(cartaoCredito.getTitularNome(), "nome do titular do cart√£o"));
-            msg.append(validadorString.validar(cartaoCredito.getBandeira(), "bandeira do cart√£o"));
+            msg.append(validadorString.validar(cartaoCredito.getTitularNome(), "nome do titular do cart„o"));
+            msg.append(validadorString.validar(cartaoCredito.getBandeira(), "bandeira do cart„o"));
 
         }
 

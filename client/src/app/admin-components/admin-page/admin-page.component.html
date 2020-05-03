@@ -1,165 +1,91 @@
-<div class="container">
-  <h1 class="my-4">Gerenciamento</h1>
-  <h2>Análise</h2>
-  <hr>
-  <!--  Row de produtos-->
-  <div class="row">
-    <div class="col-lg-3 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../analyze']">Gráfico de vendas</a>
-        </div>
-      </div>
+<div class="wrapper d-flex align-items-stretch">
+  <nav id="sidebar">
+    <div class="p-4 pt-5">
+      <h1><a href="index.html" class="logo">Admin</a></h1>
+      <ul class="list-unstyled components mb-5">
+        <li class="active">
+          <a href="#analiseSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Análise</a>
+          <ul class="collapse list-unstyled" id="analiseSubmenu">
+            <li>
+              <a class="" [routerLink]="['/app-logado/admin-page/analyze']">Gráfico de vendas</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#produtoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Produto</a>
+          <ul class="collapse list-unstyled" id="produtoSubmenu">
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/admin-product-register']">Novo produto</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/admin-product-list']">Produtos ativos</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/admin-product-inactive-list']">Produtos inativos</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/stock-insert']">Estoque</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#pedidoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pedidos</a>
+          <ul class="collapse list-unstyled" id="pedidoSubmenu">
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/pending-orders']">Pendente</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/transit-orders']">Em Trasito</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/orders-delivered']">Entregue</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="card-text" [routerLink]="['/app-logado/admin-page/admin-client-list']">Clientes ativos</a>
+        </li>
+        <li>
+          <a href="#cupomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cupom</a>
+          <ul class="collapse list-unstyled" id="cupomSubmenu">
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/admin-ticket-value']">Gerar cupom de desconto</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/ticket-devolution-list']">Cupons de Devolução</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/ticket-trade-list']">Cupons de Troca</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#trocaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Troca</a>
+          <ul class="collapse list-unstyled" id="trocaSubmenu">
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/request-trade']">Pendentes de aprovação</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/transit-trade']">Em transito</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#devolucaoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Devolução</a>
+          <ul class="collapse list-unstyled" id="devolucaoSubmenu">
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/devolution-request']">Pendentes de aprovação</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/devolution-transit']">Em transito</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
+  </nav>
+  <div id="content" class="p-4 p-md-5 pt-5">
+    <router-outlet></router-outlet>
   </div>
-  <h2>Produto</h2>
-  <hr>
-<!--  Row de produtos-->
-  <div class="row">
-    <div class="col-lg-3 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../admin-product-register']">Novo produto</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../admin-product-list']">Produtos ativos</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../admin-product-inactive-list']">Produtos inativos</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../stock-insert']">Estoque</a>
-        </div>
-      </div>
-    </div>
-    <hr>
-  </div>
-  <h2>Cliente</h2>
-  <hr>
-<!--  Row de Clientes-->
-  <div class="row">
-    <div class="col-lg-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../admin-client-list']">Clientes ativos</a>
-        </div>
-      </div>
-    </div>
-<!--    <div class="col-lg-4 col-sm-6 portfolio-item">-->
-<!--      <div class="card h-100">-->
-<!--        <div class="card-body">-->
-<!--          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-client-inactive-list']">Clientes inativos</a>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="col-lg-4 col-sm-6 portfolio-item">-->
-<!--      <div class="card h-100">-->
-<!--        <div class="card-body">-->
-<!--          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['/admin-client-request-activation']">Solicitação de ativação</a>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-    <hr>
-  </div>
-  <h2>Cupons</h2>
-  <hr>
-  <!--  Row de Cupons-->
-  <div class="row">
-    <div class="col-lg-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../admin-ticket-value']">Gerar cupom de desconto</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../ticket-devolution-list']">Cupons de Devolução</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class="btn btn-lg btn-secondary btn-block" [routerLink]="['../ticket-trade-list']">Cupons de Troca</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <h2>Pedidos</h2>
-  <hr>
-  <!--  Row de Cupons-->
-  <div class="row">
-    <div class="col-lg-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['../pending-orders']">Vendas Pendentes</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['../transit-orders']">Em Trasito</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['../orders-delivered']">Pedidos Entregues</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <h2>Pedidos em troca</h2>
-  <hr>
-  <!--  Row de Cupons-->
-  <div class="row">
-    <div class="col-lg-6 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['../request-trade']">Pendentes de aprovação</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-6 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['../transit-trade']">Em transito</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <h2>Pedidos em devolução</h2>
-  <hr>
-  <div class="row">
-    <div class="col-lg-6 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['../devolution-request']">Pendentes de aprovação</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-6 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <div class="card-body">
-          <a class=" btn btn-lg btn-secondary btn-block" [routerLink]="['../devolution-transit']">Em transito</a>
-        </div>
-      </div>
-    </div>
-  </div>
+
 </div>

@@ -36,6 +36,15 @@ CREATE TABLE categoria_carta (
     cat_nome  VARCHAR(40) NOT NULL
 );
 
+CREATE TABLE item (
+    itm_id                      SERIAL NOT NULL,
+    itm_quantidade              INT NOT NULL,
+    itm_quantidade_troca        INT NOT NULL,
+    itm_quantidade_devolucao    INT NOT NULL,
+    itm_carta_id                INT NOT NULL,
+    itm_status_id               INT NOT NUll
+);
+
 CREATE TABLE troca (
     trc_id                  SERIAL NOT NULL,
     trc_pedido_id           INT NOT NULL
@@ -46,11 +55,6 @@ CREATE TABLE item_troca (
     itc_quantidade  INT NOT NULL,
     itc_item_id     INT NOT NULL,
     itc_troca_id    INT NOT NULL
-);
-
-CREATE TABLE status_troca (
-    trs_id          SERIAL NOT NULL,
-    trs_status      VARCHAR(16) NOT NULL
 );
 
 CREATE TABLE cidade (
@@ -96,12 +100,6 @@ CREATE TABLE estado (
     est_nome   VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE item (
-    itm_id          SERIAL NOT NULL,
-    itm_quantidade  INT NOT NULL,
-    itm_carta_id    INT NOT NULL
-);
-
 CREATE TABLE carrinho (
     crr_id            SERIAL NOT NULL,
     crr_valorTotal    DECIMAL(4, 2),
@@ -122,12 +120,6 @@ CREATE TABLE jogo (
 CREATE TABLE jogo_categoria_carta (
     jct_carta_id  SERIAL NOT NULL,
     jct_jogo_id   INT NOT NULL
-);
-
-CREATE TABLE log (
-    log_id         SERIAL NOT NULL,
-    log_descricao  VARCHAR(250) NOT NULL,
-    log_data_hora  DATE NOT NULL
 );
 
 CREATE TABLE pedido (
@@ -169,6 +161,7 @@ CREATE TABLE user_type (
 
 CREATE TABLE forma_pagamento (
     fpa_id              SERIAL NOT NULL,
+    fpa_valor_pagamento DECIMAL(8,2) NOT NULL,
     fpa_registro_cartao VARCHAR(4) NOT NULL
 );
 
@@ -216,8 +209,6 @@ ALTER TABLE carrinho_item ADD CONSTRAINT carrinho_item_pk PRIMARY KEY (cri_id);
 
 ALTER TABLE jogo ADD CONSTRAINT jogo_pk PRIMARY KEY ( jog_id );
 
-ALTER TABLE log ADD CONSTRAINT log_pk PRIMARY KEY ( log_id );
-
 ALTER TABLE pedido ADD CONSTRAINT pedido_pk PRIMARY KEY ( ped_id );
 
 ALTER TABLE pessoa ADD CONSTRAINT pessoa_pk PRIMARY KEY ( pes_id );
@@ -241,8 +232,6 @@ ALTER TABLE forma_pagamento_pedido ADD CONSTRAINT forma_pagamento_pedido_pk PRIM
 ALTER TABLE troca ADD CONSTRAINT troca_pk PRIMARY KEY ( trc_id );
 
 ALTER TABLE item_troca ADD CONSTRAINT item_troca_pk PRIMARY KEY ( itc_id );
-
-ALTER TABLE status_troca ADD CONSTRAINT status_troca_pk PRIMARY KEY ( trs_id );
 
 ALTER TABLE carta
     ADD CONSTRAINT carta_status_fk FOREIGN KEY ( car_status_id )
@@ -352,6 +341,6 @@ ALTER TABLE item_troca
     ADD CONSTRAINT troca_item_troca_fk FOREIGN KEY ( itc_troca_id )
         REFERENCES troca ( trc_id );
 
-ALTER TABLE item_troca
-    ADD CONSTRAINT item_item_troca_fk FOREIGN KEY ( itc_item_id )
-        REFERENCES item ( itm_id );
+ALTER TABLE item
+    ADD CONSTRAINT item_status_fk FOREIGN KEY ( itm_status_id )
+        REFERENCES status ( sts_id );

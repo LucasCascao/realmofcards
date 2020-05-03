@@ -1,17 +1,18 @@
 package br.com.cascao.realmofcard.persistence;
 
-import br.com.cascao.realmofcard.domain.Bandeira;
-import br.com.cascao.realmofcard.domain.EntidadeDominio;
-import br.com.cascao.realmofcard.domain.ItemTroca;
-import br.com.cascao.realmofcard.domain.Troca;
-import br.com.cascao.realmofcard.repository.BandeiraRepository;
-import br.com.cascao.realmofcard.repository.ItemTrocaRepository;
-import br.com.cascao.realmofcard.repository.TrocaRepository;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import br.com.cascao.realmofcard.domain.EntidadeDominio;
+import br.com.cascao.realmofcard.domain.ItemTroca;
+import br.com.cascao.realmofcard.domain.Troca;
+import br.com.cascao.realmofcard.repository.ItemTrocaRepository;
+import br.com.cascao.realmofcard.repository.PedidoRepository;
+import br.com.cascao.realmofcard.repository.TrocaRepository;
+import br.com.cascao.realmofcard.util.Util;
 
 @Service
 public class TrocaPersistence implements IPersistence {
@@ -21,6 +22,9 @@ public class TrocaPersistence implements IPersistence {
 
     @Autowired
     private ItemTrocaRepository itemTrocaRepository;
+    
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
     @Override
     public EntidadeDominio salvar(EntidadeDominio entidade) {
@@ -33,7 +37,8 @@ public class TrocaPersistence implements IPersistence {
             itemTroca.setTroca(troca);
             itemTrocaRepository.save(itemTroca);
         }
-
+        
+        pedidoRepository.save(troca.getPedidoParaTroca());
 
         return troca;
     }
@@ -46,6 +51,25 @@ public class TrocaPersistence implements IPersistence {
 
     @Override
     public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
-        return null;
+    	
+    	Troca troca = (Troca) entidade;
+    	
+    	List<EntidadeDominio> trocas = new ArrayList<>();
+    	
+    	if(Util.isNotNull(troca.getId())) {
+    		trocas.add(trocaRepository.findById(troca.getId()).get());
+    		return trocas;
+    	}
+    	
+    	if(Util.isNotNull(troca.getPedidoParaTroca())
+    		&& Util.isNotNull(troca.getPedidoParaTroca().getId())) {
+    		trocas.addAll(trocaRepository
+    				.findByPedidoParaTroca_StatusPedido_Id(troca.getPedidoParaTroca().getId()));
+    		return trocas;
+    	}
+    	
+    	trocaRepository.findAll().forEach(trocaResultado -> trocas.add(trocaResultado));
+    	
+        return trocas;
     }
 }

@@ -28,7 +28,7 @@ public class ValidaNumeroJaExiste implements IStrategy {
 
             if(Util.isNotNull(cartaoCredito.getNumero())){
                 if(cartaoCreditoRepository.existsByNumero(cartaoCredito.getNumero())){
-                    msg.append("NÃºmero de cartÃ£o de crÃ©dito jÃ¡ existe.");
+                    msg.append("Número de cartão de crédito já existe.");
                 }
             }
         }

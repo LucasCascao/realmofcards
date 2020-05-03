@@ -26,7 +26,7 @@ public class ValidaSenhasIguais implements IStrategy {
 
             if(Util.isNotNull(usuario.getPassword()) && Util.isNotNull(usuario.getRePassword())) {
                 if(!usuario.getPassword().equals(usuario.getRePassword())) {
-                    msg.append("Senhas est√£o diferentes.");
+                    msg.append("Senhas est„o diferentes.");
                 }
             }
         }

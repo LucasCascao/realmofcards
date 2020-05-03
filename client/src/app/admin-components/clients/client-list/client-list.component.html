@@ -13,19 +13,27 @@
   </div>
   <hr>
   <div class="row">
-    <div *ngFor="let client of clients" class="col-lg-6 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <div class="col-md-9 float-left">
-            <p class="card-text"><strong>Cliente:</strong> {{client.nome}} {{client.sobrenome}}</p>
-            <p class="card-text"><strong>Email:</strong> {{client.usuario.email}}</p>
-            <p class="card-text"><strong>Numero de pedidos realizados:</strong> {{clients.length}}</p>
-          </div>
-          <div class="col-md-3 float-left">
-            <a class="btn btn-secondary mb-md-3" [routerLink]="['../user-orders']">Pedidos</a>
-          </div>
-        </div>
-      </div>
+    <div class="col-md-12">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Qntd Pedidos</th>
+            <th scope="col">Pedidos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of clients">
+            <td>{{client?.nome}}</td>
+            <td>{{client?.usuario?.email}}</td>
+            <td>{{getPedidoPorCliente(client)}}</td>
+            <td>
+              <button class="btn btn-success mb-md-3">Ver Pedidos</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

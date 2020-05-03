@@ -27,7 +27,7 @@ public class InsereEnderecoEscolhido implements IStrategy {
 
             pedido.setEnderecoEscolhido(
                     enderecoEscolhido.getLogradouro() + ", "
-                    + "nÂº " + enderecoEscolhido.getNumero() + ", "
+                    + "nº " + enderecoEscolhido.getNumero() + ", "
                     + "complemento " + enderecoEscolhido.getComplemento() + ", "
                     + "bairro " + enderecoEscolhido.getBairro() + ", "
                     + enderecoEscolhido.getCidade().getNome() + " - " + enderecoEscolhido.getCidade().getEstado().getSigla() + ", "

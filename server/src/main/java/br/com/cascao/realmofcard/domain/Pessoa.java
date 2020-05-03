@@ -52,9 +52,6 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 	@JoinColumn(name = "pes_usuario_id")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
-//
-//	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
-//	private List<Telefone> telefones = new ArrayList<>();
 
 	@Builder.Default
 	@JsonIgnore

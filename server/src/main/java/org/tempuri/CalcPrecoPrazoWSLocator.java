@@ -22,7 +22,7 @@ public class CalcPrecoPrazoWSLocator extends org.apache.axis.client.Service impl
     }
 
     // Use to get a proxy class for CalcPrecoPrazoWSSoap
-    private java.lang.String CalcPrecoPrazoWSSoap_address = "http://ws.correios.com.br:8084/calculador/CalcPrecoPrazo.asmx";
+    private java.lang.String CalcPrecoPrazoWSSoap_address = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx";
 
     public java.lang.String getCalcPrecoPrazoWSSoapAddress() {
         return CalcPrecoPrazoWSSoap_address;

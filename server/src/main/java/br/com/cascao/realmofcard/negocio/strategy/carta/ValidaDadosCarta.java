@@ -23,9 +23,9 @@ public class ValidaDadosCarta implements IStrategy {
         if (entidade instanceof Carta){
             Carta carta = (Carta) entidade;
             msg.append(validadorString.validar(carta.getNome(), "nome"));
-            msg.append(validadorString.validar(carta.getDescricao(), "descriÃ§Ã£o"));
+            msg.append(validadorString.validar(carta.getDescricao(), "descrição"));
             msg.append(doubleValidador.validar(carta.getValorCompra(), "valor do produto"));
-            msg.append(doubleValidador.validar(carta.getPrecificacao(), "valor de precificaÃ§Ã£o"));
+            msg.append(doubleValidador.validar(carta.getPrecificacao(), "valor de precificação"));
             msg.append(validadorString.validar(carta.getImagemPath(), "imagem"));
             msg.append(validadorString.validar(carta.getJogo().getId(), "jogo"));
             msg.append(validadorString.validar(carta.getCategoriaCarta().getId(), "categoria"));

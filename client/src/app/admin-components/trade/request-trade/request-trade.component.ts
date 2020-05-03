@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {MockClient} from '../../../../mock/mock-cliente.model';
 import {MockCards} from '../../../../mock/mock-card.model';
@@ -18,15 +19,16 @@ export class RequestTradeComponent implements OnInit {
   constructor(private service: UtilService) { }
 
   ngOnInit(): void {
-    this.getPedidos();
+    this.getTrocas();
   }
 
-  getPedidos() {
+  getTrocas() {
     const statusPedido: StatusPedido = new StatusPedido();
     statusPedido.id = 4;
     const pedido = new Pedido();
     pedido.statusPedido = statusPedido;
     const troca: Troca = new Troca();
+    troca.pedidoParaTroca = pedido;
     this.service.get(troca, 'trocas').subscribe(resultado => {
       this.trocas = resultado?.entidades;
     });

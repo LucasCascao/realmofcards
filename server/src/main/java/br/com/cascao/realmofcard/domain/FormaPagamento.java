@@ -22,6 +22,9 @@ public class FormaPagamento extends EntidadeDominio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fpa_id")
     private Integer id;
+    
+    @Column(name = "fpa_valor_pagamento")
+    private Double valorPagamento;
 
     @Column(name = "fpa_registro_cartao")
     private String registroCartao;

@@ -27,9 +27,19 @@ public class Item extends EntidadeDominio {
 
     @Column(name = "itm_quantidade")
     private Integer quantidade;
+    
+    @Column(name = "itm_quantidade_troca")
+    private Integer quantidadeTroca;
+    
+    @Column(name = "itm_quantidade_devolucao")
+    private Integer quantidadeDevolucao;
 
     @ManyToOne()
     @JoinColumn(name = "itm_carta_id")
     private Carta carta;
+    
+    @ManyToOne()
+    @JoinColumn(name = "itm_status_id")
+    private Status statusItem;
 
 }

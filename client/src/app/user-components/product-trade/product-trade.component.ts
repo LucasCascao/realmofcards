@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {Pedido} from '../../../model/domain/pedido.model';
 import {UtilService} from '../../../services/util.service';
-import {Item} from '../../../model/domain/item.model';
 import {Troca} from '../../../model/domain/troca.model';
 import {ItemTroca} from '../../../model/domain/item-troca.model';
 import {Router} from "@angular/router";
@@ -65,6 +65,7 @@ export class ProductTradeComponent implements OnInit {
   trocaProduto() {
     const statusPedido: StatusPedido = new StatusPedido();
     statusPedido.id = 4;
+    this.troca.pedidoParaTroca.statusPedido = statusPedido;
     this.service.add(this.troca, 'trocas').subscribe(() => {
       this.router.navigate(['/app-logado/user-orders']);
     });

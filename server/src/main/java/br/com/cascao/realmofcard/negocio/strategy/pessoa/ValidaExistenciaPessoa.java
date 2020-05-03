@@ -19,7 +19,7 @@ public class ValidaExistenciaPessoa implements IStrategy {
         StringBuilder msg = new StringBuilder();
         if(pessoa.getCpf() != null){
             if(pessoaRepository.existsPessoaByCpf(pessoa.getCpf())){
-                msg.append("CPF j√° cadastrado.");
+                msg.append("CPF j· cadastrado.");
             }
         }
         return msg.toString();
