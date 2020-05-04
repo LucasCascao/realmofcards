@@ -66,7 +66,7 @@ export class SelectCreditCardComponent implements OnInit {
     if(this.formaPagamentoSelecionadoList.length == 2) {
       this.formaPagamentoSelecionadoList.forEach( formaPagamento => {
         if(formaPagamento?.cartao?.id == formaPagamentoSelecionado?.cartao?.id){
-          formaPagamento.valorPagamento = formaPagamentoSelecionado.valorPagamento;
+          formaPagamento.valorPagamento = Number.parseFloat(formaPagamentoSelecionado.valorPagamento.toFixed(2));
         } else {
           formaPagamento.valorPagamento = Number.parseFloat((this.valorTotal - formaPagamentoSelecionado.valorPagamento).toFixed(2));
         }

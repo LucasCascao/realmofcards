@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.ItemTroca;
 import br.com.cascao.realmofcard.domain.Troca;
+import br.com.cascao.realmofcard.repository.ItemRepository;
 import br.com.cascao.realmofcard.repository.ItemTrocaRepository;
 import br.com.cascao.realmofcard.repository.PedidoRepository;
 import br.com.cascao.realmofcard.repository.TrocaRepository;
@@ -25,6 +26,9 @@ public class TrocaPersistence implements IPersistence {
     
     @Autowired
     private PedidoRepository pedidoRepository;
+    
+    @Autowired
+    private ItemRepository itemRepository;
 
     @Override
     public EntidadeDominio salvar(EntidadeDominio entidade) {
@@ -44,7 +48,18 @@ public class TrocaPersistence implements IPersistence {
     }
 
     @Override
-    public void alterar(EntidadeDominio entidade) {}
+    public void alterar(EntidadeDominio entidade) {
+    	
+    	Troca troca = (Troca) entidade;
+    	
+    	for (ItemTroca itemTroca : troca.getItemListParaTroca()) {
+    		itemTroca.setTroca(troca);
+            itemTrocaRepository.save(itemTroca);
+            itemRepository.save(itemTroca.getItemParaTroca());
+        }
+    	
+    	pedidoRepository.save(troca.getPedidoParaTroca());
+    }
 
     @Override
     public void excluir(EntidadeDominio entidade) {}

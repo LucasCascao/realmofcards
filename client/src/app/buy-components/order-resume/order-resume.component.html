@@ -50,7 +50,10 @@
           </div>
           <div class="row" *ngFor="let formaPagamento of formaPagamentoList">
             <div class="col-md-12">
-              <p class="card-text"><strong>Forma de pagamento: </strong>Cartão de crédito: {{formaPagamento?.cartao?.numero}}.</p>
+              <p class="card-text">
+                <strong>Forma de pagamento:</strong> Cartão de crédito com final <strong>{{formaPagamento?.cartao?.numero}}</strong>,
+                valor pago <strong>{{formaPagamento?.valorPagamento | currency: 'BRL': true}}</strong>.
+              </p>
             </div>
           </div>
           <hr>

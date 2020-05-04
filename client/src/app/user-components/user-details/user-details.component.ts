@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {Pessoa} from '../../../model/domain/pessoa.model';
 import {ClienteService} from '../../../services/cliente.service';
@@ -17,6 +18,13 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.client = JSON.parse(sessionStorage.getItem('pessoaLogada'));
+    this.getCliente();
+  }
+
+  getCliente(){
+    this.service.get(this.client, 'pessoas').subscribe( resultado => {
+      this.client = resultado?.entidades[0];
+    });
   }
 
 }

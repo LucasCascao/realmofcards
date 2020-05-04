@@ -18,8 +18,6 @@ export class OrderResumeComponent implements OnInit {
 
   constructor(private service: UtilService, private router: Router) { }
 
-  //cartoes: Array<CartaoCredito>;
-
   formaPagamentoList: Array<FormaPagamento>;
 
   endereco: Endereco;
@@ -33,8 +31,6 @@ export class OrderResumeComponent implements OnInit {
   prazo: number;
 
   ngOnInit(): void {
-
-    //this.cartoes = JSON.parse(sessionStorage.getItem('cartoesSelecionados'));
 
     this.formaPagamentoList = JSON.parse(sessionStorage.getItem('formasPagamentoSelecionadas'));
 
@@ -64,11 +60,6 @@ export class OrderResumeComponent implements OnInit {
     pedido.statusPedido = statusPedido;
     pedido.valorTotal = Number.parseFloat(this.valorTotal?.toFixed(2));
     pedido.formaPagamentoList = this.formaPagamentoList;
-    // this.cartoes?.forEach(cartao => {
-    //   const formaPagamento: FormaPagamento = new FormaPagamento();
-    //   formaPagamento.registroCartao = cartao.numero;
-    //   pedido.formaPagamentoList.push(formaPagamento);
-    // });
 
     this.cadastraPedido(pedido);
   }

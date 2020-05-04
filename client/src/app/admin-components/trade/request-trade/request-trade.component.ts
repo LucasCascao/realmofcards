@@ -43,6 +43,24 @@ export class RequestTradeComponent implements OnInit {
     });
   }
 
+  aprovarRequisicaoTroca(troca: Troca){
+    let status: StatusPedido = new StatusPedido();
+    status.id = 6
+    troca.pedidoParaTroca.statusPedido = status;
+    this.service.update(troca, 'trocas').subscribe(() => {
+      document.location.reload();
+    });
+  }
+
+  rejeitarRequisicaoTroca(troca: Troca){
+    let status: StatusPedido = new StatusPedido();
+    status.id = 7
+    troca.pedidoParaTroca.statusPedido = status;
+    this.service.update(troca, 'trocas').subscribe(() => {
+      document.location.reload();
+    });
+  }
+
   filtrar(cartas: any) {
 
   }

@@ -40,13 +40,20 @@
                     <p class="card-text"><strong>Email:</strong> {{troca?.pedidoParaTroca?.cliente?.usuario?.email}}</p>
                     <p class="card-text"><strong>Data da compra:</strong> {{troca?.pedidoParaTroca?.dataCompra | date: 'dd/mm/yyyy'}}</p>
                     <p class="card-text" *ngFor="let formaPagamento of troca?.pedidoParaTroca?.formaPagamentoList">
-                      <strong>Cartão final {{formaPagamento?.registroCartao}}:</strong> 20.00
+                      <strong>Cartão final {{formaPagamento?.registroCartao}}:</strong> {{formaPagamento.valorPagamento | currency: 'BRL': true}}
                     </p>
                   </div>
                 </div>
               </div>
               <div class="col-lg-2">
-                <button class="btn btn-success " >Despachar para Entrega</button>
+                <div class="row">
+                  <div class="col-lg-12 mb-md-3">
+                    <button class="btn btn-success" (click)="aprovarRequisicaoTroca(troca)">Aprovar Troca</button>
+                  </div>
+                  <div class="col-lg-12">
+                    <button class="btn btn-danger" (click)="rejeitarRequisicaoTroca(troca)">Rejeitar Troca</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -22,3 +22,21 @@ spring:
     jdbc:
       initialize-schema: always
     store-type: jdbc
+    
+  mail:
+    host: smtp.outlook.com
+    username: realmofcards@outlook.com
+    password: 123Fatec
+    port: 587
+    test-connection: true
+    properties:      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          
+          ssl:
+            enable: false
+            
+            

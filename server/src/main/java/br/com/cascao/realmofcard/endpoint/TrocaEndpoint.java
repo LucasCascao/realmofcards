@@ -25,4 +25,9 @@ public class TrocaEndpoint {
     public ResponseEntity<Resultado> salvar(@RequestBody Troca troca){
         return ResponseEntity.ok().body(fachada.salvar(troca));
     }
+    
+    @PutMapping()
+    public ResponseEntity<Resultado> alterar(@RequestBody Troca troca){
+    	return ResponseEntity.ok().body(fachada.alterar(troca));
+    }
 }
