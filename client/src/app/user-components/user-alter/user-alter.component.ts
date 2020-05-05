@@ -15,6 +15,7 @@ export class UserAlterComponent implements OnInit {
 
   client: Pessoa = new Pessoa();
   user: Usuario = new Usuario();
+  mensagens = [];
 
   constructor(private service: UtilService, private router: Router, private route: ActivatedRoute, private util: Util) { }
 
@@ -28,13 +29,14 @@ export class UserAlterComponent implements OnInit {
   }
 
   alterarCliente() {
+    this.mensagens = []
     this.service.update(this.client, 'pessoas').subscribe(
       resultado => {
         if (resultado.msg == null) {
           this.client = resultado.entidades[0];
           this.router.navigate(['/app-logado/user-details']);
         } else {
-          alert(this.util.getMensagensSeparadas(resultado.msg));
+          this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
         }
       }
     );

@@ -27,6 +27,7 @@ export class SelectCreditCardComponent implements OnInit {
 
   mensagemDeErro: string;
 
+  mensagens = [];
 
   ngOnInit(): void {
 
@@ -83,7 +84,7 @@ export class SelectCreditCardComponent implements OnInit {
         formaPagamentoSelecionado.isSelecionado = true;
         this.formaPagamentoSelecionadoList.push(formaPagamentoSelecionado);
       } else {
-        alert('Não é possivel selecionar mais que dois cartões.');
+        this.mensagens.push('Não é possivel selecionar mais que dois cartões.');
         event.target.checked = false;
       }
     } else {
@@ -102,27 +103,21 @@ export class SelectCreditCardComponent implements OnInit {
   }
 
   continua() {
+    this.mensagens = [];
     if(this.validaQuantidadeCartao()){
       if(this.validarFormaPagamentoSelecionados()
         && this.validarValorTotalPorFormaPagamentoSelecionado()) {
         sessionStorage.setItem('formasPagamentoSelecionadas', JSON.stringify(this.formaPagamentoSelecionadoList));
         this.router.navigate(['/app-logado/order-resume']);
-      } else {
-        alert(this.mensagemDeErro);
-        this.mensagemDeErro = '';
       }
-    } else {
-      alert(this.mensagemDeErro);
-      this.mensagemDeErro = '';
     }
-
   }
 
   validaQuantidadeCartao(): boolean{
     if(this.formaPagamentoSelecionadoList.length > 0){
       return true;
     }else{
-      this.mensagemDeErro += 'É necessário escolher pelo menos um cartão.\n';
+      this.mensagens.push('É necessário escolher pelo menos um cartão.');
       return false;
     }
   }
@@ -136,7 +131,7 @@ export class SelectCreditCardComponent implements OnInit {
     })
 
     if(!valorNaoZerado){
-      this.mensagemDeErro += 'Valor de pagamento do cartao(s) está invalido \n';
+      this.mensagens.push('Valor de pagamento do cartao(s) está invalido');
     }
 
     return valorNaoZerado;
@@ -149,10 +144,14 @@ export class SelectCreditCardComponent implements OnInit {
     })
 
     if(valorAcumulado !== this.valorTotal){
-      this.mensagemDeErro +='Valor de pagamento do cartao(s) não está igual a R$ ' + this.valorTotal.toFixed(2) + '\n';
+      this.mensagens.push('Valor de pagamento do cartao(s) não está igual a R$ ' + this.valorTotal.toFixed(2) + '.');
     }
 
     return valorAcumulado == this.valorTotal;
+  }
+
+  selecionaCartaoExcluir(cartao: CartaoCredito) {
+    sessionStorage.setItem('cartaoSelecionado', JSON.stringify(cartao));
   }
 
 }

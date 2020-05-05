@@ -24,6 +24,8 @@ export class ProductDetailComponent implements OnInit {
 
   quantidade: number;
 
+  mensagens = [];
+
   ngOnInit(): void {
     this.quantidade = 1;
     this.carta = JSON.parse(sessionStorage.getItem('cartaSelecionada'));
@@ -70,11 +72,12 @@ export class ProductDetailComponent implements OnInit {
   }
 
   async enviarCarrinho( carrinho: Carrinho) {
+    this.mensagens = [];
     await this.service.add(carrinho, 'carrinhos').subscribe(resultado => {
       if (resultado.msg == null ) {
         this.router.navigate(['/app-logado/cart']);
       } else {
-        alert(this.util.getMensagensSeparadas(resultado?.msg));
+        this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
       }
     });
   }

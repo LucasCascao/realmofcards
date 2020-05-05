@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {UtilService} from '../../../../services/util.service';
 import {Bandeira} from '../../../../model/domain/bandeira.model';
@@ -21,6 +22,8 @@ export class CreditcardRegisterComponent implements OnInit {
 
   cartaoCredito: CartaoCredito;
 
+  mensagens = [];
+
   ngOnInit(): void {
 
     Inputmask().mask(document.querySelectorAll('input'));
@@ -38,9 +41,10 @@ export class CreditcardRegisterComponent implements OnInit {
   }
 
   cadastraCartaoCredito() {
+    this.mensagens = [];
     this.service.add(this.cartaoCredito, 'cartaocredito').subscribe(resultado => {
       if (resultado.msg != null) {
-        alert(this.util.getMensagensSeparadas(resultado.msg));
+        this.mensagens = this.util.getMensagensSeparadas2(resultado.msg);
       } else {
         this.router.navigate(['/app-logado/select-creditcard']);
       }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../../../model/domain/category.model';
 import { UtilService } from 'src/services/util.service';
@@ -22,6 +23,8 @@ export class CardRegisterComponent implements OnInit {
 
   imagemSelecionada: File;
 
+  mensagens = [];
+
   ngOnInit(): void {
     this.imagemSelecionada = null;
     this.carta = new Carta();
@@ -41,11 +44,12 @@ export class CardRegisterComponent implements OnInit {
   }
 
   async cadastraCarta() {
+    this.mensagens = [];
     const nomeArquivo: string[] = this.carta.imagemPath.split('\\');
     this.carta.imagemPath = nomeArquivo[nomeArquivo.length - 1];
     await this.service.add(this.carta, 'cartas').subscribe(resultado => {
       if (resultado.msg != null) {
-        alert(this.util.getMensagensSeparadas(resultado?.msg));
+        this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
       } else {
         this.carta = resultado?.entidades[0];
         this.router.navigate(['/app-logado/admin-page']);

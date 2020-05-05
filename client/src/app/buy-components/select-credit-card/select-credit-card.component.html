@@ -2,6 +2,14 @@
 <div class="container">
   <!-- Page Heading/Breadcrumbs -->
   <h1 class="mt-4 mb-3">Selecione até 2 cartões</h1>
+  <div class="row" *ngIf="mensagens?.length > 0">
+    <div class="col-lg-12 personal-info">
+      <h4 class="erro">Erro(s):</h4>
+    </div>
+    <div class="col-md-9 personal-info">
+      <p class="erro" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+    </div>
+  </div>
   <div *ngFor="let formaPagamento of formaPagamentoList">
     <hr>
     <!-- Project One -->
@@ -27,7 +35,7 @@
             </div>
           </div>
           <div class="col-md-1">
-            <a class="btn btn-danger float-right" [routerLink]="['/app-logado/creditcard-delete']">Excluir</a>
+            <a class="btn btn-danger float-right" (click)="selecionaCartaoExcluir(formaPagamento?.cartao)"  [routerLink]="['/app-logado/creditcard-delete']">Excluir</a>
           </div>
         </div>
       </div>

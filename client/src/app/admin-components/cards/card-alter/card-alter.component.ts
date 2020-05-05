@@ -20,6 +20,7 @@ export class CardAlterComponent implements OnInit {
 
   carta: Carta = new Carta();
   categorias: Category[];
+  mensagens = [];
 
   ngOnInit(): void {
     this.carta = JSON.parse(sessionStorage.getItem('cartaSelecionada'));
@@ -37,6 +38,7 @@ export class CardAlterComponent implements OnInit {
   }
 
   async alterarCarta() {
+    this.mensagens = [];
     const nomeArquivo: string[] = this.carta.imagemPath.split('\\');
     this.carta.imagemPath = nomeArquivo[nomeArquivo.length - 1];
     this.carta.quantidadeEstoque = this.carta.quantidadeDisponivel;
@@ -45,7 +47,7 @@ export class CardAlterComponent implements OnInit {
         this.carta = resultado?.entidades[0];
         this.router.navigate(['/app-logado/admin-page/admin-product-list']);
       } else {
-        alert(this.util.getMensagensSeparadas(resultado?.msg));
+        this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
       }
     });
   }

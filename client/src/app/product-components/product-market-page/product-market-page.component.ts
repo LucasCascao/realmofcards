@@ -27,6 +27,8 @@ export class ProductMarketPageComponent implements OnInit {
 
   carta: Carta;
 
+  mensagens = [];
+
   ngOnInit(): void {
     this.carta = new Carta();
     this.carta.status = new Status();
@@ -81,11 +83,12 @@ export class ProductMarketPageComponent implements OnInit {
   }
 
   async enviarCarrinho( carrinho: Carrinho) {
+    this.mensagens = [];
     await this.service.add(carrinho, 'carrinhos').subscribe(resultado => {
       if (resultado.msg == null ) {
         this.router.navigate(['/app-logado/cart']);
       } else {
-        alert(this.util.getMensagensSeparadas(resultado?.msg));
+        this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
       }
     });
   }

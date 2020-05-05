@@ -31,9 +31,12 @@ public class UsuarioDTO extends EntidadeDominio implements IDTO{
 
             usuarioDTO.setId(usuario.getId());
             usuarioDTO.setEmail(usuario.getEmail());
-
-            if(usuario.getTipoUsuario().getTipo().trim().toLowerCase().equals("administrador")) usuarioDTO.setIsAdmin(true);
-            else usuarioDTO.setIsAdmin(false);
+            
+            if(usuario.getTipoUsuario() != null && usuario.getTipoUsuario().getTipo() != null
+            	&& usuario.getTipoUsuario().getTipo().trim().toLowerCase().equals("administrador"))
+            	usuarioDTO.setIsAdmin(true);
+            else 
+            	usuarioDTO.setIsAdmin(false);
 
             return usuarioDTO;
         }

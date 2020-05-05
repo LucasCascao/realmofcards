@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {UtilService} from '../../../services/util.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -18,6 +19,8 @@ export class AddressAlterComponent implements OnInit {
   endereco: Endereco = new Endereco();
 
   estados: Estado[];
+
+  mensagens = [];
 
   ngOnInit(): void {
     this.endereco = JSON.parse(sessionStorage.getItem('enderecoSelecionado'));
@@ -40,11 +43,12 @@ export class AddressAlterComponent implements OnInit {
   }
 
   async alterarEndereco() {
+    this.mensagens = [];
     await this.service.update(this.endereco, 'enderecos').subscribe(resultado => {
       if (resultado.msg == null) {
-        this.router.navigate(['/app-logado/address-list']);
+        this.router.navigate(['/app-logado/select-address']);
       } else {
-        alert(this.util.getMensagensSeparadas(resultado?.msg));
+        this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
       }
     });
   }

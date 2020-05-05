@@ -3,7 +3,14 @@
   <!-- Page Heading/Breadcrumbs -->
   <h1 class="mt-4 mb-3">Selecione o endereço de entrega</h1>
   <hr>
-
+  <div class="row" *ngIf="mensagens?.length > 0">
+    <div class="col-lg-12 personal-info">
+      <h4 class="erro">Erro(s):</h4>
+    </div>
+    <div class="col-md-9 personal-info">
+      <p class="erro" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+    </div>
+  </div>
   <!-- Project One -->
   <div class="row" *ngFor="let endereco of enderecos">
     <div class="col-md-12">

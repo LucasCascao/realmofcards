@@ -23,6 +23,8 @@ export class SelectAddressComponent implements OnInit {
 
   dataEntrega: Date;
 
+  mensagens = [];
+
   ngOnInit(): void {
     this.endereco.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     this.correio = null;
@@ -44,17 +46,19 @@ export class SelectAddressComponent implements OnInit {
   }
 
   seleciona(endereco: Endereco) {
+    this.mensagens = [];
     this.endereco = endereco;
     sessionStorage.setItem('enderecoSelecionado', JSON.stringify(endereco));
     this.getCustoPrazo(endereco);
   }
 
   continua() {
+    this.mensagens = [];
     if (this.endereco.logradouro != null) {
       this.router.navigate(['/app-logado/select-creditcard']);
     } else {
       // tslint:disable-next-line:max-line-length
-      alert('É necessário selecionar um endereço, caso não tenha o endereço desejado, basta cadastra-lo clicando em "Cadastrar novo endereco"');
+      this.mensagens.push('É necessário selecionar um endereço, caso não tenha o endereço desejado, basta cadastra-lo clicando em "Cadastrar novo endereco"');
     }
   }
 

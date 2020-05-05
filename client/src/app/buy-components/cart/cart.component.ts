@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {MockCards} from '../../../mock/mock-card.model';
 import { UtilService } from 'src/services/util.service';

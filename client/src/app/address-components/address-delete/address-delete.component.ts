@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/services/util.service';
 import { Endereco } from 'src/model/domain/endereco.model';
@@ -28,7 +29,7 @@ export class AddressDeleteComponent implements OnInit {
 
   async deleteEndereco() {
     await this.service.delete(this.endereco.id, 'enderecos').subscribe(() =>{
-      this.router.navigate(['/app-logado/address-list']);
+      this.router.navigate(['app-logado/select-address']);
     });
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {UtilService} from '../../../../services/util.service';
 import {Router} from '@angular/router';
@@ -25,7 +26,7 @@ export class CreditcardDeleteComponent implements OnInit {
 
   deletaCartao() {
     this.service.delete(this.cartaoSelecionado.id, 'cartaocredito').subscribe(resultado => {
-      this.router.navigate(['/app-logado/creditcard-list']);
+      this.router.navigate(['/app-logado/select-creditcard']);
     });
   }
 
