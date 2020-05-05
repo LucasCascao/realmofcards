@@ -21,7 +21,7 @@ export class PendingOrdersComponent implements OnInit {
 
   getPedidos() {
     const statusPedido: StatusPedido = new StatusPedido();
-    statusPedido.id = 1;
+    statusPedido.id = 3;
     const pedido = new Pedido();
     pedido.statusPedido = statusPedido;
     this.service.get(pedido, 'pedidos').subscribe(resultado => {
@@ -31,7 +31,17 @@ export class PendingOrdersComponent implements OnInit {
 
   enviaPedidoParaTransportar(pedido: Pedido) {
     const statusPedido: StatusPedido = new StatusPedido();
-    statusPedido.id = 2;
+    statusPedido.id = 5;
+    pedido.statusPedido = statusPedido;
+    pedido.administrador = JSON.parse(sessionStorage.getItem('pessoaLogada'));
+    this.service.update(pedido, 'pedidos').subscribe(() => {
+      document.location.reload();
+    });
+  }
+
+  recusaPedido(pedido: Pedido) {
+    const statusPedido: StatusPedido = new StatusPedido();
+    statusPedido.id = 4;
     pedido.statusPedido = statusPedido;
     pedido.administrador = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     this.service.update(pedido, 'pedidos').subscribe(() => {

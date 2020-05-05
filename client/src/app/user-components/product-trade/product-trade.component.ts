@@ -64,7 +64,7 @@ export class ProductTradeComponent implements OnInit {
 
   trocaProduto() {
     const statusPedido: StatusPedido = new StatusPedido();
-    statusPedido.id = 4;
+    statusPedido.id = 7;
     this.troca.pedidoParaTroca.statusPedido = statusPedido;
     this.service.add(this.troca, 'trocas').subscribe(() => {
       this.router.navigate(['/app-logado/user-orders']);

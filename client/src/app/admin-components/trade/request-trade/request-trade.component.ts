@@ -24,7 +24,7 @@ export class RequestTradeComponent implements OnInit {
 
   getTrocas() {
     const statusPedido: StatusPedido = new StatusPedido();
-    statusPedido.id = 4;
+    statusPedido.id = 7;
     const pedido = new Pedido();
     pedido.statusPedido = statusPedido;
     const troca: Troca = new Troca();
@@ -34,18 +34,9 @@ export class RequestTradeComponent implements OnInit {
     });
   }
 
-  confirmaPedidoEntrege(pedido: Pedido) {
-    const statusPedido: StatusPedido = new StatusPedido();
-    statusPedido.id = 3;
-    pedido.statusPedido = statusPedido;
-    this.service.update(pedido, 'pedidos').subscribe(() => {
-      document.location.reload();
-    });
-  }
-
   aprovarRequisicaoTroca(troca: Troca){
     let status: StatusPedido = new StatusPedido();
-    status.id = 6
+    status.id = 9;
     troca.pedidoParaTroca.statusPedido = status;
     this.service.update(troca, 'trocas').subscribe(() => {
       document.location.reload();
@@ -54,7 +45,7 @@ export class RequestTradeComponent implements OnInit {
 
   rejeitarRequisicaoTroca(troca: Troca){
     let status: StatusPedido = new StatusPedido();
-    status.id = 7
+    status.id = 8;
     troca.pedidoParaTroca.statusPedido = status;
     this.service.update(troca, 'trocas').subscribe(() => {
       document.location.reload();
