@@ -69,7 +69,7 @@
                 <div class="col-lg-10 col-md-10">
                   <h3><strong>Valor da compra:</strong> {{pedido?.valorTotal | currency: 'BRL': true}}</h3>
                 </div>
-                <div class="col-lg-2" *ngIf="pedido?.statusPedido?.id === 3">
+                <div class="col-lg-2" *ngIf="pedido?.statusPedido?.id === 6">
                   <button class="btn-sm btn-warning text-center" (click)="solicitaTroca(pedido)"><strong>Solicitar troca</strong></button>
                 </div>
               </div>

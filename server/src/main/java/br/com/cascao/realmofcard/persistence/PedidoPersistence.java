@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PedidoPersistence implements IPersistence {
@@ -37,7 +39,9 @@ public class PedidoPersistence implements IPersistence {
             Pedido pedido = (Pedido) entidade;
             pedido.getItemList().forEach(item -> cartaRepository.save(item.getCarta()));
             pedido.setDataCompra(LocalDate.now());
-            pedido.getFormaPagamentoList().replaceAll(formaPagamento -> formaPagamentoRepository.save(formaPagamento));
+            Set<FormaPagamento> formaPagamentoList = new HashSet<>();
+            pedido.getFormaPagamentoList().forEach(formaPagamento -> formaPagamentoList.add(formaPagamentoRepository.save(formaPagamento)));
+            pedido.setFormaPagamentoList(formaPagamentoList);
             pedido = pedidoRepository.save((Pedido) entidade);
             Carrinho carrinho = carrinhoRepository.findByPessoa_Id(pedido.getCliente().getId());
             carrinho.setItemList(new ArrayList<>());

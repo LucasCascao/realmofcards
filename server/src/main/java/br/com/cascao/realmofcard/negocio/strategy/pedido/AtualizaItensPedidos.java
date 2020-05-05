@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class AtualizaItensPedidos implements IStrategy {
@@ -27,7 +28,7 @@ public class AtualizaItensPedidos implements IStrategy {
             Pedido pedido = (Pedido) entidade;
 
             if(Util.isNotNull(pedido.getItemList())){
-                List<Item> itemList = pedido.getItemList();
+                Set<Item> itemList = pedido.getItemList();
                 for (Item item : itemList) {
                     if(Util.isNotNull(item.getId()))
                     item.setCarta(cartaRepository.findById(item.getCarta().getId()).get());

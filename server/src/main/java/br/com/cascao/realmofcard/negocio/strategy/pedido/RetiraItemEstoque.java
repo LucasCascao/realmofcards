@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class RetiraItemEstoque implements IStrategy {
@@ -24,7 +25,7 @@ public class RetiraItemEstoque implements IStrategy {
 
         if(entidade instanceof Pedido){
 
-            List<Item> itemList = ((Pedido) entidade).getItemList();
+            Set<Item> itemList = ((Pedido) entidade).getItemList();
 
             for(Item item : itemList){
 

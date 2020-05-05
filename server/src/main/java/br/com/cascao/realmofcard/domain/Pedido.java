@@ -2,6 +2,7 @@ package br.com.cascao.realmofcard.domain;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -58,15 +59,15 @@ public class Pedido extends EntidadeDominio{
     @Transient
     private Endereco endereco;
 
-    @ManyToMany( cascade = CascadeType.ALL)
+    @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "forma_pagamento_pedido",
             joinColumns = {@JoinColumn(name = "fpp_pedido_id")},
             inverseJoinColumns = {@JoinColumn(name = "fpp_forma_pagamento_id")})
-    private List<FormaPagamento> formaPagamentoList;
+    private Set<FormaPagamento> formaPagamentoList;
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JoinTable(name = "item_pedido",
             joinColumns = {@JoinColumn(name = "itp_pedido_id")},
             inverseJoinColumns = {@JoinColumn(name = "itp_item_id")})
-    private List<Item> itemList;
+    private Set<Item> itemList;
 }

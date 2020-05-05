@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class VerificaPedidosPagamentoPendente implements IStrategy {
@@ -47,12 +48,12 @@ public class VerificaPedidosPagamentoPendente implements IStrategy {
 
         if(entidade instanceof Pedido){
 
-        	List<Pedido> pedidosPagamentoPendente = pedidoRepository
+        	Set<Pedido> pedidosPagamentoPendente = pedidoRepository
                     .findByStatusPedido_Id(Pedido.builder().statusPedido(StatusPedido.builder().id(1).build()).build().getStatusPedido().getId());
 
             for (Pedido pedido : pedidosPagamentoPendente) {
 
-                List<FormaPagamento> formaPagamentoList = pedido.getFormaPagamentoList();
+                Set<FormaPagamento> formaPagamentoList = pedido.getFormaPagamentoList();
 
                 for (FormaPagamento formaPagamento : formaPagamentoList) {
 
