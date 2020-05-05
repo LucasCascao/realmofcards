@@ -22,9 +22,6 @@ public class TarefasSchedule {
 
     @Autowired
     private VerificaPedidosPagamentoPendente verificaPedidosPagamentoPendente;
-
-    @Autowired
-    private VerificaTrocasProdutoPendenteRetorno verificaTrocasProdutoPendenteRetorno;
 	
 	private final long SEGUNDO = 1000;
     private final long MINUTO = SEGUNDO * 60; 

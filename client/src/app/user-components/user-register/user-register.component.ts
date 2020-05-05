@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { Pessoa } from 'src/model/domain/pessoa.model';
 import {ClienteService} from '../../../services/cliente.service';
@@ -24,7 +25,7 @@ export class UserRegisterComponent implements OnInit {
 
   person: Pessoa = new Pessoa();
 
-  msg = null;
+  mensagens = [];
 
   constructor( private service: UtilService, private router: Router, private util: Util) { }
 
@@ -41,9 +42,10 @@ export class UserRegisterComponent implements OnInit {
   }
 
   cadastrarPessoa() {
+    this.mensagens = [];
     this.service.add(this.person, 'pessoas').subscribe(resultado => {
       if (resultado.msg !== null) {
-        alert(this.util.getMensagensSeparadas(resultado?.msg));
+        this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
       } else {
         this.router.navigate(['/']);
       }

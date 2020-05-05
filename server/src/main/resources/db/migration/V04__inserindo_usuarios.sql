@@ -1,5 +1,5 @@
 
-insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('lucas@gmail.com','CFF1A29A5F758BD2D52448F236EFB640', 1, 1);
+insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('lucas_cascao_@outlook.com','CFF1A29A5F758BD2D52448F236EFB640', 1, 1);
 insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('leonardo@gmail.com','CFF1A29A5F758BD2D52448F236EFB640', 1, 2);
 insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('natani@gmail.com','CFF1A29A5F758BD2D52448F236EFB640', 1, 2);
 insert into usuario (usu_email, usu_senha, usu_status_id , usu_type_user_id) values ('joao@gmail.com','CFF1A29A5F758BD2D52448F236EFB640', 1, 2);

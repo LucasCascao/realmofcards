@@ -50,7 +50,14 @@
                 </div>
               </div>
               <div class="col-lg-2">
-                <button class="btn btn-success " (click)="enviaPedidoParaTransportar(pedido)">Despachar para Entrega</button>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <button class="btn btn-success" (click)="enviaPedidoParaTransportar(pedido)">Despachar para Entrega</button>
+                  </div>
+                  <div class="col-lg-12">
+                    <button class="btn btn-danger" (click)="recusaPedido(pedido)">Recusar pedido</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

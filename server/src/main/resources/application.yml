@@ -25,8 +25,8 @@ spring:
     
   mail:
     host: smtp.outlook.com
-    username: lucas_cascao_@hotmail.com
-    password: Gr@ciema111
+    username: realmofcards@outlook.com
+    password: 123Fatec
     port: 587
     test-connection: true
     properties:

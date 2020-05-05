@@ -1,9 +1,6 @@
 package br.com.cascao.realmofcard.persistence;
 
-import br.com.cascao.realmofcard.domain.Carrinho;
-import br.com.cascao.realmofcard.domain.EntidadeDominio;
-import br.com.cascao.realmofcard.domain.FormaPagamento;
-import br.com.cascao.realmofcard.domain.Pedido;
+import br.com.cascao.realmofcard.domain.*;
 import br.com.cascao.realmofcard.repository.CarrinhoRepository;
 import br.com.cascao.realmofcard.repository.CartaRepository;
 import br.com.cascao.realmofcard.repository.FormaPagamentoRepository;
@@ -53,7 +50,13 @@ public class PedidoPersistence implements IPersistence {
 
     @Override
     public void alterar(EntidadeDominio entidade) {
-        if(entidade instanceof Pedido) entidade = pedidoRepository.save((Pedido) entidade);
+        if(entidade instanceof Pedido){
+            Pedido pedido = (Pedido) entidade;
+            for (Item item : pedido.getItemList()) {
+                item.setCarta(cartaRepository.save(item.getCarta()));
+            }
+            pedido = pedidoRepository.save(pedido);
+        }
         else entidade = null;
     }
 

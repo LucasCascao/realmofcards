@@ -10,7 +10,6 @@ import br.com.cascao.realmofcard.negocio.strategy.carta.ValidaDadosCarta;
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaDadosCartaoCredito;
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaNumeroJaExiste;
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaDataValidadeCartao;
-import br.com.cascao.realmofcard.negocio.strategy.email.EnviaEmailTrocaCodigoRastreio;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaDadosEndereco;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaExistenciaCidade;
 import br.com.cascao.realmofcard.negocio.strategy.pedido.*;
@@ -168,6 +167,9 @@ public class AbstractFachada {
 
     @Autowired
     private RetiraItemEstoque retiraItemEstoque;
+
+    @Autowired
+    private RetornaItemEstoque retornaItemEstoque;
 
     @Autowired
     private InsereEnderecoEscolhido insereEnderecoEscolhido;
@@ -372,6 +374,7 @@ public class AbstractFachada {
         List<IStrategy> rnsPedidoAlterar = new ArrayList<>();
 
         rnsPedidoAlterar.add(validaDadosPedido);
+        rnsPedidoAlterar.add(retornaItemEstoque);
 
         Map<String, List<IStrategy>> mapaPedido = new HashMap<>();
 

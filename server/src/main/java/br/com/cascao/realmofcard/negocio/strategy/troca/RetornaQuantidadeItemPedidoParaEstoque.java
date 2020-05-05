@@ -52,8 +52,6 @@ public class RetornaQuantidadeItemPedidoParaEstoque implements IStrategy{
 
 				});
 			}
-
-			
 		}
 
 		return msg.toString();
