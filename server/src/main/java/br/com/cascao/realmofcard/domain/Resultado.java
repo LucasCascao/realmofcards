@@ -1,12 +1,18 @@
 package br.com.cascao.realmofcard.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//extends EntidadeAplicacao 
+//extends EntidadeAplicacao
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Component
 public class Resultado {
 

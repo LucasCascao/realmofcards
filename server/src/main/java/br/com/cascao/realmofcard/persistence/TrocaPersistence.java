@@ -77,9 +77,10 @@ public class TrocaPersistence implements IPersistence {
     	}
     	
     	if(Util.isNotNull(troca.getPedidoParaTroca())
-    		&& Util.isNotNull(troca.getPedidoParaTroca().getId())) {
+            && Util.isNotNull(troca.getPedidoParaTroca().getStatusPedido())
+    		&& Util.isNotNull(troca.getPedidoParaTroca().getStatusPedido().getId())) {
     		trocas.addAll(trocaRepository
-    				.findByPedidoParaTroca_StatusPedido_Id(troca.getPedidoParaTroca().getId()));
+    				.findByPedidoParaTroca_StatusPedido_Id(troca.getPedidoParaTroca().getStatusPedido().getId()));
     		return trocas;
     	}
     	

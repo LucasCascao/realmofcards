@@ -1,15 +1,19 @@
 package br.com.cascao.realmofcard.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.stereotype.Component;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.*;
+
+import org.springframework.stereotype.Component;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Builder
 @Component
 @AllArgsConstructor
 @NoArgsConstructor

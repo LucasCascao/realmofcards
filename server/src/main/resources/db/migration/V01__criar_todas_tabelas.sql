@@ -66,8 +66,9 @@ CREATE TABLE cidade (
 CREATE TABLE cupom (
     cup_id          SERIAL NOT NULL,
     cup_codigo      VARCHAR(60) NOT NULL,
-    cup_valor       DECIMAL(4, 2) NOT NULL,
-    cup_status      BOOLEAN NOT NULL
+    cup_valor       DECIMAL(8, 2) NOT NULL,
+    cup_status_id   INT NOT NULL,
+    cup_troca_id    INT NOT NULL
 );
 
 CREATE TABLE endereco (
@@ -233,6 +234,8 @@ ALTER TABLE troca ADD CONSTRAINT troca_pk PRIMARY KEY ( trc_id );
 
 ALTER TABLE item_troca ADD CONSTRAINT item_troca_pk PRIMARY KEY ( itc_id );
 
+ALTER TABLE cupom ADD CONSTRAINT cupom_pk PRIMARY KEY ( cup_id );
+
 ALTER TABLE carta
     ADD CONSTRAINT carta_status_fk FOREIGN KEY ( car_status_id )
         REFERENCES status ( sts_id );
@@ -344,3 +347,11 @@ ALTER TABLE item_troca
 ALTER TABLE item
     ADD CONSTRAINT item_status_fk FOREIGN KEY ( itm_status_id )
         REFERENCES status ( sts_id );
+
+ALTER TABLE cupom
+    ADD CONSTRAINT cupom_status_fk FOREIGN KEY ( cup_status_id )
+        REFERENCES status ( sts_id );
+
+ALTER TABLE cupom
+    ADD CONSTRAINT cupom_troca_fk FOREIGN KEY ( cup_troca_id )
+        REFERENCES troca ( trc_id );

@@ -50,6 +50,8 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+	compile group: 'axis', name: 'axis', version: '1.4'
+	compile group: 'javax.xml', name: 'jaxrpc-api', version: '1.1'
 }
 
 test {

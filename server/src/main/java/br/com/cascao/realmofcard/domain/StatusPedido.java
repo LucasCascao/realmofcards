@@ -1,6 +1,7 @@
 package br.com.cascao.realmofcard.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
+@Builder
 @Component
 @AllArgsConstructor
 @NoArgsConstructor

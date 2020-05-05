@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/correios")
@@ -23,6 +25,7 @@ public class CorreioEndpoint {
 
     @PostMapping()
     public ResponseEntity<Resultado> consultar(@RequestBody Endereco endereco){
+    	resultado.setEntidades(new ArrayList<>());
     	resultado.addEntidade(new WebServiceCorreio().calculaPrecoPrazo(endereco.getCep()));
         return ResponseEntity.ok().body(resultado);
     }

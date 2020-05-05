@@ -10,19 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ValidaNumeroJaExiste implements IStrategy {
-
-    @Autowired
-    CartaoCreditoRepository cartaoCreditoRepository;
+	
+	@Autowired
+	private CartaoCreditoRepository cartaoCreditoRepository;
 
     @Override
     public String processar(EntidadeDominio entidade) {
-
-        StringBuilder msg = new StringBuilder();
-
-        if(entidade instanceof CartaoCredito){
+    	
+    	StringBuilder msg = new StringBuilder();
+    	
+    	if(entidade instanceof CartaoCredito){
 
             CartaoCredito cartaoCredito = (CartaoCredito) entidade;
 
