@@ -1,12 +1,9 @@
 package br.com.cascao.realmofcard.negocio.strategy.troca;
 
+import br.com.cascao.realmofcard.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.cascao.realmofcard.domain.EntidadeDominio;
-import br.com.cascao.realmofcard.domain.Item;
-import br.com.cascao.realmofcard.domain.Pedido;
-import br.com.cascao.realmofcard.domain.Troca;
 import br.com.cascao.realmofcard.negocio.strategy.IStrategy;
 import br.com.cascao.realmofcard.util.Util;
 import br.com.cascao.realmofcard.util.validador.ValidadorString;
@@ -31,7 +28,7 @@ public class RetornaQuantidadeItemPedidoParaEstoque implements IStrategy{
 			if(Util.isNotNull(pedido)
 				&& Util.isNotNull(pedido.getStatusPedido())
 				&& Util.isNotNull(pedido.getStatusPedido().getId())
-				&& pedido.getStatusPedido().getId().equals(6)) {
+				&& pedido.getStatusPedido().getId().equals(10)) {
 				
 				troca.getItemListParaTroca().forEach( itemTroca -> {
 				
@@ -44,6 +41,15 @@ public class RetornaQuantidadeItemPedidoParaEstoque implements IStrategy{
 					item.setQuantidade(quantidadeAtual - quantidadeParaTrocar);
 					
 					item.setQuantidadeTroca(item.getQuantidadeTroca() + quantidadeParaTrocar);
+
+					Carta carta = item.getCarta();
+
+					carta.setQuantidadeDisponivel(carta.getQuantidadeDisponivel() + itemTroca.getQuantidade());
+					carta.setQuantidadeEstoque(carta.getQuantidadeEstoque() + itemTroca.getQuantidade());
+
+					if(carta.getStatus().getId().equals(2))
+						carta.setStatus(Status.builder().id(1).build());
+
 				});
 			}
 

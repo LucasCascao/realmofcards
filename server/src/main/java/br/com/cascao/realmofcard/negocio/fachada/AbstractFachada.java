@@ -10,12 +10,15 @@ import br.com.cascao.realmofcard.negocio.strategy.carta.ValidaDadosCarta;
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaDadosCartaoCredito;
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaNumeroJaExiste;
 import br.com.cascao.realmofcard.negocio.strategy.cartao_credito.ValidaDataValidadeCartao;
+import br.com.cascao.realmofcard.negocio.strategy.email.EnviaEmailTrocaCodigoRastreio;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaDadosEndereco;
 import br.com.cascao.realmofcard.negocio.strategy.endereco.ValidaExistenciaCidade;
 import br.com.cascao.realmofcard.negocio.strategy.pedido.*;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaDadosPessoa;
 import br.com.cascao.realmofcard.negocio.strategy.pessoa.ValidaExistenciaPessoa;
+import br.com.cascao.realmofcard.negocio.strategy.troca.GeraCodigoRastreio;
 import br.com.cascao.realmofcard.negocio.strategy.troca.RetiraQuantidadeItemDoPedido;
+import br.com.cascao.realmofcard.negocio.strategy.troca.RetornaQuantidadeItemPedidoParaEstoque;
 import br.com.cascao.realmofcard.negocio.strategy.troca.ValidaDadosTroca;
 import br.com.cascao.realmofcard.negocio.strategy.usuario.*;
 import br.com.cascao.realmofcard.persistence.*;
@@ -179,7 +182,10 @@ public class AbstractFachada {
     private RetiraQuantidadeItemDoPedido retiraQuantidadeItemDoPedido;
 
     @Autowired
-    private MudaStatusPedido mudaStatusPedido;
+    private RetornaQuantidadeItemPedidoParaEstoque retornaQuantidadeItemPedidoParaEstoque;
+
+    @Autowired
+    private GeraCodigoRastreio geraCodigoRastreio;
 
 
     public AbstractFachada(){
@@ -384,6 +390,8 @@ public class AbstractFachada {
         List<IStrategy> rnsTrocaAlterar = new ArrayList<>();
 
         rnsTrocaAlterar.add(retiraQuantidadeItemDoPedido);
+        rnsTrocaAlterar.add(retornaQuantidadeItemPedidoParaEstoque);
+        rnsTrocaAlterar.add(geraCodigoRastreio);
 
         Map<String, List<IStrategy>> mapaTroca = new HashMap<>();
 

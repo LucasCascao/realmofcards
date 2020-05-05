@@ -25,11 +25,12 @@ spring:
     
   mail:
     host: smtp.outlook.com
-    username: realmofcards@outlook.com
-    password: 123Fatec
+    username: lucas_cascao_@hotmail.com
+    password: Gr@ciema111
     port: 587
     test-connection: true
-    properties:      mail:
+    properties:
+      mail:
         smtp:
           auth: true
           starttls:

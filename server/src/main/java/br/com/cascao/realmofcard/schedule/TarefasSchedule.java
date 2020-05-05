@@ -5,6 +5,7 @@ import br.com.cascao.realmofcard.domain.Pedido;
 import br.com.cascao.realmofcard.domain.Troca;
 import br.com.cascao.realmofcard.negocio.strategy.pedido.VerificaPedidosPagamentoPendente;
 import br.com.cascao.realmofcard.negocio.strategy.troca.VerificaTrocasAprovadas;
+import br.com.cascao.realmofcard.negocio.strategy.troca.VerificaTrocasProdutoPendenteRetorno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -21,6 +22,9 @@ public class TarefasSchedule {
 
     @Autowired
     private VerificaPedidosPagamentoPendente verificaPedidosPagamentoPendente;
+
+    @Autowired
+    private VerificaTrocasProdutoPendenteRetorno verificaTrocasProdutoPendenteRetorno;
 	
 	private final long SEGUNDO = 1000;
     private final long MINUTO = SEGUNDO * 60; 

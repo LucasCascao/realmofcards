@@ -57,6 +57,12 @@ CREATE TABLE item_troca (
     itc_troca_id    INT NOT NULL
 );
 
+CREATE TABLE rastreio (
+    rto_id                  SERIAL NOT NULL,
+    rto_codigo_rastreio     VARCHAR(20) NOT NULL,
+    rto_troca_id            INT NOT NULL
+);
+
 CREATE TABLE cidade (
     cid_id         SERIAL NOT NULL,
     cid_nome       VARCHAR(60) NOT NULL,
@@ -236,6 +242,8 @@ ALTER TABLE item_troca ADD CONSTRAINT item_troca_pk PRIMARY KEY ( itc_id );
 
 ALTER TABLE cupom ADD CONSTRAINT cupom_pk PRIMARY KEY ( cup_id );
 
+ALTER TABLE rastreio ADD CONSTRAINT rastreio_pk PRIMARY KEY ( rto_id );
+
 ALTER TABLE carta
     ADD CONSTRAINT carta_status_fk FOREIGN KEY ( car_status_id )
         REFERENCES status ( sts_id );
@@ -354,4 +362,8 @@ ALTER TABLE cupom
 
 ALTER TABLE cupom
     ADD CONSTRAINT cupom_troca_fk FOREIGN KEY ( cup_troca_id )
+        REFERENCES troca ( trc_id );
+
+ALTER TABLE rastreio
+    ADD CONSTRAINT rastreio_troca_fk FOREIGN KEY ( rto_troca_id )
         REFERENCES troca ( trc_id );

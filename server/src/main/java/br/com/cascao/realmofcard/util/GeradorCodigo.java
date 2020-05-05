@@ -22,4 +22,12 @@ public class GeradorCodigo {
 		String codigo = String.valueOf(random.nextInt(899999)+100000) + "-" + String.valueOf(random.nextInt(89)+10);
 		return codigo;
 	}
+
+	public static String gerarCodigoRastreio() {
+		Random random = new Random();
+		LocalDateTime localDateTime = LocalDateTime.now();
+		random.setSeed(localDateTime.getHour() + localDateTime.getDayOfYear());
+		String codigo = "BR" + String.valueOf(random.nextInt(899999999)+100000000) + "AA";
+		return codigo;
+	}
 }

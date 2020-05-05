@@ -31,7 +31,7 @@ public class RetiraQuantidadeItemDoPedido implements IStrategy{
 			if(Util.isNotNull(pedido)
 				&& Util.isNotNull(pedido.getStatusPedido())
 				&& Util.isNotNull(pedido.getStatusPedido().getId())
-				&& pedido.getStatusPedido().getId().equals(6)) {
+				&& pedido.getStatusPedido().getId().equals(7)) {
 				
 				troca.getItemListParaTroca().forEach( itemTroca -> {
 				

@@ -3,16 +3,13 @@ package br.com.cascao.realmofcard.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.cascao.realmofcard.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.cascao.realmofcard.domain.EntidadeDominio;
 import br.com.cascao.realmofcard.domain.ItemTroca;
 import br.com.cascao.realmofcard.domain.Troca;
-import br.com.cascao.realmofcard.repository.ItemRepository;
-import br.com.cascao.realmofcard.repository.ItemTrocaRepository;
-import br.com.cascao.realmofcard.repository.PedidoRepository;
-import br.com.cascao.realmofcard.repository.TrocaRepository;
 import br.com.cascao.realmofcard.util.Util;
 
 @Service
@@ -29,6 +26,9 @@ public class TrocaPersistence implements IPersistence {
     
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private CartaRepository cartaRepository;
 
     @Override
     public EntidadeDominio salvar(EntidadeDominio entidade) {
@@ -56,6 +56,7 @@ public class TrocaPersistence implements IPersistence {
     		itemTroca.setTroca(troca);
             itemTrocaRepository.save(itemTroca);
             itemRepository.save(itemTroca.getItemParaTroca());
+            cartaRepository.save(itemTroca.getItemParaTroca().getCarta());
         }
     	
     	pedidoRepository.save(troca.getPedidoParaTroca());

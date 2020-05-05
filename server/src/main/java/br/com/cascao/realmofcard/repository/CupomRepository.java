@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -15,5 +16,6 @@ import javax.transaction.Transactional;
 @Transactional
 public interface CupomRepository extends CrudRepository<Cupom, Integer> {
     List<Cupom> findByStatus_Id(Integer id);
+    Set<Cupom> findByTroca_Id(Integer id);
     List<Cupom> findByTroca_PedidoParaTroca_Cliente_Id(Integer id);
 }

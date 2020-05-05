@@ -21,21 +21,11 @@ export class OrdersDeliveredComponent implements OnInit {
 
   getPedidos() {
     const statusPedido: StatusPedido = new StatusPedido();
-    statusPedido.id = 3;
+    statusPedido.id = 6;
     const pedido = new Pedido();
     pedido.statusPedido = statusPedido;
     this.service.get(pedido, 'pedidos').subscribe(resultado => {
       this.pedidos = resultado?.entidades;
-    });
-  }
-
-  enviaPedidoParaTransportar(pedido: Pedido) {
-    const statusPedido: StatusPedido = new StatusPedido();
-    statusPedido.id = 2;
-    pedido.statusPedido = statusPedido;
-    pedido.administrador = JSON.parse(sessionStorage.getItem('pessoaLogada'));
-    this.service.update(pedido, 'pedidos').subscribe(() => {
-      document.location.reload();
     });
   }
 
