@@ -25,7 +25,7 @@ public class GeraCupomTroca implements IStrategy{
 			Double valorTotal = 0.0;
 
 			for (ItemTroca itemTroca : cupom.getTroca().getItemListParaTroca()) {
-				valorTotal += itemTroca.getItemParaTroca().getCarta().getValorCompra() * itemTroca.getQuantidade();
+				valorTotal += itemTroca.getItemParaTroca().getCarta().getValorVenda() * itemTroca.getQuantidade();
 			}
 
 			cupom.setValor(valorTotal);
