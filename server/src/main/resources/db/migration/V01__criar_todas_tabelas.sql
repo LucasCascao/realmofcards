@@ -18,7 +18,7 @@ CREATE TABLE carta (
     car_status_id                INT NOT NULL
 );
 
-CREATE TABLE cartao (
+CREATE TABLE cartao_credito (
     crt_id                SERIAL NOT NULL,
     crt_numero            VARCHAR(16) NOT NULL UNIQUE,
     crt_codigo_seguranca  VARCHAR(3) NOT NULL,
@@ -196,7 +196,7 @@ ALTER TABLE bandeira ADD CONSTRAINT bandeira_pk PRIMARY KEY ( ban_id );
 
 ALTER TABLE carta ADD CONSTRAINT carta_pk PRIMARY KEY ( car_id );
 
-ALTER TABLE cartao ADD CONSTRAINT cartao_pk PRIMARY KEY ( crt_id );
+ALTER TABLE cartao_credito ADD CONSTRAINT cartao_pk PRIMARY KEY ( crt_id );
 
 ALTER TABLE categoria_carta ADD CONSTRAINT categoria_carta_pk PRIMARY KEY ( cat_id );
 
@@ -256,11 +256,11 @@ ALTER TABLE carta
     ADD CONSTRAINT carta_jogo_fk FOREIGN KEY ( car_jogo_id )
         REFERENCES jogo ( jog_id );
 
-ALTER TABLE cartao
+ALTER TABLE cartao_credito
     ADD CONSTRAINT cartao_bandeira_fk FOREIGN KEY ( crt_bandeira_id )
         REFERENCES bandeira ( ban_id );
 
-ALTER TABLE cartao
+ALTER TABLE cartao_credito
     ADD CONSTRAINT cartao_pessoa_fk FOREIGN KEY ( crt_pessoa_id )
         REFERENCES pessoa ( pes_id );
 

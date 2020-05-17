@@ -1,31 +1,40 @@
 <div class="container">
-  <h3 class="mt-4 mb-3"><strong>{{carta.nome}}</strong></h3>
+  <h1 class="mt-4 mb-3">Carta</h1>
+  <hr>
+  <div class="row" *ngIf="mensagens?.length > 0">
+    <div class="col-lg-12 personal-info">
+      <h4 class="erro">Aviso(s):</h4>
+    </div>
+    <div class="col-md-9 personal-info">
+      <p class="erro" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+    </div>
+  </div>
   <div class="row">
     <div class="col-lg-4">
       <img class="img-fluid rounded mb-4" [src]="carta?.imagemPath" alt="">
     </div>
-    <div class="col-lg-6">
-      <p class="card-text"><strong>Descrição:</strong> {{carta.descricao}}</p>
-      <p class="card-text"><strong>Categoria de jogo:</strong> {{carta?.jogo?.nome}}.</p>
+    <div class="col-lg-3">
+      <h3 class="mt-4 mb-3"><strong>{{carta.nome}}</strong></h3>
       <p class="card-text"><strong>Categoria de carta:</strong> {{carta?.categoriaCarta?.nome}}.</p>
-      <p class="card-text"><strong>Valor:</strong> R$ {{carta?.valorVenda}}.</p>
       <p class="card-text"><strong>Quantidade disponivel:</strong> {{carta?.quantidadeDisponivel}}.</p>
       <p class="card-text"><strong>Quantidade:</strong>
         <input class="form-control w-25 " type="number" name="quantidade" [(ngModel)]="quantidade" [max]="carta?.quantidadeDisponivel" min="1" >
       </p>
     </div>
     <div class="col-lg-2">
-      <button class="btn btn-lg btn-secondary btn-block" (click)="adicionaItemNoCarrinho(carta)">Adicionar ao carrinho</button>
+      <h3 class="card-text mt-4 mb-3"><strong>{{carta?.valorVenda | currency: 'BRL': true}}</strong></h3>
+    </div>
+    <div class="col-lg-3">
+      <button class="btn btn-lg btn-success btn-block mt-4 mb-3" (click)="adicionaItemNoCarrinho(carta)">Comprar</button>
     </div>
   </div>
   <hr>
-  <div class="row" *ngIf="mensagens?.length > 0">
-    <div class="col-lg-12 personal-info">
-      <h4 class="erro">Erro(s):</h4>
-    </div>
-    <div class="col-md-9 personal-info">
-      <p class="erro" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+  <div class="row">
+    <div class="col-lg-12">
+      <h3><strong>Descrição:</strong></h3>
+      <p class="card-text">{{carta.descricao}}</p>
     </div>
   </div>
+  <hr>
 </div>
 
