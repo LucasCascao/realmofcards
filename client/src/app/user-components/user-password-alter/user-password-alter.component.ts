@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/model/domain/usuario.model';
 import {UtilService} from '../../../services/util.service';
@@ -10,6 +11,8 @@ import {UtilService} from '../../../services/util.service';
 export class UserPasswordAlterComponent implements OnInit {
 
   usuario: Usuario;
+
+  mensagens: [];
 
   constructor(private service: UtilService) { }
 

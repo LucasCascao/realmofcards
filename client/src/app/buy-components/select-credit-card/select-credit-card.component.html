@@ -1,13 +1,10 @@
 <!-- Page Content -->
 <div class="container">
   <!-- Page Heading/Breadcrumbs -->
-  <h1 class="mt-4 mb-3">Selecione até 2 cartões</h1>
+  <h1 class="mt-4 mb-3">Selecione até 2 opções</h1>
   <div class="row" *ngIf="mensagens?.length > 0">
     <div class="col-lg-12 personal-info">
-      <h4 class="erro">Erro(s):</h4>
-    </div>
-    <div class="col-md-9 personal-info">
-      <p class="erro" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+      <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
     </div>
   </div>
   <div *ngFor="let formaPagamento of formaPagamentoList">
@@ -43,6 +40,22 @@
     </div>
     <!-- /.row -->
   </div>
+  <hr>
+  <div class="row mt-4">
+    <div class="col-lg-1">
+      <input type="checkbox">
+    </div>
+    <div class="col-lg-1">
+      <h5><strong>Cupom:</strong> </h5>
+    </div>
+    <div class="col-lg-2">
+      <input type="text">
+    </div>
+    <div class="col-lg-3">
+      <button class="btn btn-secondary">Validar</button>
+    </div>
+  </div>
+
   <hr>
   <div class="row">
     <div class="col-md-12">

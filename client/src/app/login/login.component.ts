@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from './auth.service';
 import {Usuario} from '../../model/domain/usuario.model';
 import {Router} from '@angular/router';
 import {Util} from '../shared/app.util';
+import { UtilService } from 'src/services/util.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,9 @@ export class LoginComponent implements OnInit {
 
   public usuario: Usuario = new Usuario();
 
-  constructor(private usuarioService: AuthService, private router: Router, private appUtil: Util) { }
+  mensagens: string[];
+
+  constructor(private router: Router, private service: UtilService, private util: Util) { }
 
   ngOnInit(): void {
     this.estaLogado();
@@ -27,7 +31,16 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    this.usuarioService.signIn(this.usuario);
+    this.mensagens = [];
+    this.service.get(this.usuario, 'usuarios').subscribe( async resuldado => {
+      if (resuldado.msg !== null) {
+        this.mensagens = this.util.getMensagensSeparadas2(resuldado?.msg);
+      } else {
+        sessionStorage?.setItem('pessoaLogada', JSON.stringify(await resuldado?.entidades[0]));
+        sessionStorage?.setItem('isAdmin', JSON.stringify(resuldado?.entidades[0].usuario?.isAdmin));
+        this.router.navigate(['/app-logado']);
+      }
+    });
   }
 
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {EventEmitter, Injectable} from '@angular/core';
 import {Pessoa} from '../../model/domain/pessoa.model';
 import {Router} from '@angular/router';
@@ -17,21 +18,10 @@ export class AuthService {
   clients: Pessoa = new Pessoa();
   resultado: ResultUser = new ResultUser();
 
-  mostrarMenuEmitter = new EventEmitter<boolean>();
-
   constructor(private router: Router, private service: UtilService, private util: Util) { }
 
   async signIn(user: Usuario) {
 
-    await this.service.get(user, 'usuarios').subscribe( async resuldado => {
-      if (resuldado.msg !== null) {
-        alert(this.util?.getMensagensSeparadas(resuldado?.msg));
-      } else {
-        sessionStorage?.setItem('pessoaLogada', JSON.stringify(await resuldado?.entidades[0]));
-        sessionStorage?.setItem('isAdmin', JSON.stringify(resuldado?.entidades[0].usuario?.isAdmin));
-        this.router.navigate(['/app-logado']);
-      }
-    });
   }
 
 }

@@ -36,21 +36,16 @@
   <h2>Cartas a venda: </h2>
   <div class="row" *ngIf="mensagens?.length > 0">
     <div class="col-lg-12 personal-info">
-      <h4 class="erro">Aviso(s):</h4>
-    </div>
-    <div class="col-md-9 personal-info">
-      <p class="erro" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+      <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
     </div>
   </div>
   <div class="row">
-    <div *ngFor="let carta of cartas" class="col-lg-3 col-sm-6 portfolio-item">
+    <div *ngFor="let carta of cartas" class="col-lg-3 col-sm-6 portfolio-item mt-4">
       <div class="card h-100">
         <a (click)="visualizar(carta?.id)" [routerLink]="['/app-logado/product-detail']"><img class="card-img-top" [src]="carta?.imagemPath" alt=""></a>
         <div class="card-body">
           <h6 class="card-title"><strong>{{carta?.nome}}</strong></h6>
-          <p class="card-text">Categoria de jogo: {{carta?.jogo?.nome}}</p>
-          <p class="card-text">Categoria de carta: {{carta?.categoriaCarta?.nome}}</p>
-          <p class="card-text">Valor: {{carta?.valorVenda | currency: 'BRL': true}}</p>
+          <p class="card-text"><strong>À vista:</strong> {{carta?.valorVenda | currency: 'BRL': true}}</p>
           <a class="btn btn-lg btn-secondary btn-block" (click)="visualizar(carta?.id)" [routerLink]="['../product-detail']">Visualizar</a>
           <button class="btn btn-lg btn-success btn-block" (click)="adicionaItemNoCarrinho(carta)">Comprar</button>
         </div>

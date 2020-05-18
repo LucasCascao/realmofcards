@@ -58,7 +58,7 @@ export class SelectAddressComponent implements OnInit {
       this.router.navigate(['/app-logado/select-creditcard']);
     } else {
       // tslint:disable-next-line:max-line-length
-      this.mensagens.push('É necessário selecionar um endereço, caso não tenha o endereço desejado, basta cadastra-lo clicando em "Cadastrar novo endereco"');
+      this.mensagens.push('É necessário selecionar um endereço, caso não tenha o endereço desejado, basta cadastra-lo clicando em "Adicionar novo endereço"');
     }
   }
 

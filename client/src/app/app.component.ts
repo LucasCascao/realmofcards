@@ -1,8 +1,5 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from './login/auth.service';
-import {Observable} from 'rxjs';
-import {Pessoa} from '../model/domain/pessoa.model';
-import {ResultClient} from '../model/results/result-person.model';
 
 @Component({
   selector: 'app-root',
@@ -14,13 +11,10 @@ export class AppComponent {
 
   public mostrarMenu = false;
 
-  constructor(private authService: AuthService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.authService.mostrarMenuEmitter.subscribe(
-      mostrar => this.mostrarMenu = mostrar
-    );
   }
 
 }

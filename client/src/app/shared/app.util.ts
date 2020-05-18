@@ -10,7 +10,9 @@ export class Util {
   }
 
   getMensagensSeparadas2(mensagemRecebida?: string): string[] {
-    return mensagemRecebida?.split('.');
+    let mensagemSeparadas: string[] = mensagemRecebida?.split('.');
+    mensagemSeparadas.pop();
+    return mensagemSeparadas;
   }
 
   isNull(objeto: any): boolean {
