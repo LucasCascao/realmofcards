@@ -24,7 +24,7 @@ public class ValidaDadosPessoa implements IStrategy {
 		msg.append(validadorString.validar(pessoa.getSobrenome(), "sobrenome"));
 		if(pessoa.getId() == null){
 			if(pessoa.getCpf() == null || pessoa.getCpf().trim().equals("")){
-				msg.append("O campo CPF é obrigatório.");
+				msg.append("O campo CPF Ã© obrigatÃ³rio.");
 			}else if( pessoa.getCpf().length() != 11){
 				msg.append("CPF invalido.");
 			}

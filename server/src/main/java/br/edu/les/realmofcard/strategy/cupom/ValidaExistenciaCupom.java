@@ -24,7 +24,7 @@ public class ValidaExistenciaCupom implements IStrategy {
 			Cupom cupom = (Cupom) entidade;
 			if(Util.isNotNull(cupom.getCodigo()) && cupom.getCodigo() != ""){
 				if(Util.isNull(cupomRepository.findCupomByCodigo(cupom.getCodigo()))){
-					msg.append("Cupom n„o existe.");
+					msg.append("Cupom n√£o existe.");
 				}
 			}
 		}

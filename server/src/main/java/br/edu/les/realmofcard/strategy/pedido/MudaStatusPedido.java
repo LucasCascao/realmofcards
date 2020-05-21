@@ -48,7 +48,7 @@ public class MudaStatusPedido implements IStrategy {
                     pedido.setStatusPedido(statusPedidoList.get(4));
                 }
 
-                if(pedido.getStatusPedido().getStatus() == "Solicitação de Troca em Andamento"){
+                if(pedido.getStatusPedido().getStatus() == "SolicitaÃ§Ã£o de Troca em Andamento"){
                     pedido.setStatusPedido(statusPedidoList.get(5));
                 }
 

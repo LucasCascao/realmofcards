@@ -20,7 +20,7 @@ public class ValidaDadosCupom implements IStrategy {
 		StringBuilder msg = new StringBuilder();
 		if(entidade instanceof Cupom){
 			Cupom cupom = (Cupom) entidade;
-			msg.append(validadorString.validar(cupom.getCodigo(), "código do cupom"));
+			msg.append(validadorString.validar(cupom.getCodigo(), "cÃ³digo do cupom"));
 		}
 		return msg.toString();
 	}

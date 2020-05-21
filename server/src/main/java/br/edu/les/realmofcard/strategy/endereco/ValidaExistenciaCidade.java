@@ -28,7 +28,7 @@ public class ValidaExistenciaCidade implements IStrategy {
             if(endereco.getCidade().getNome() != null && endereco.getCidade().getEstado().getId() != null){
                 if(!cidadeRepository
                         .existsByEstado_IdAndAndNome(endereco.getCidade().getEstado().getId(), endereco.getCidade().getNome())){
-                    msg.append("Cidade n„o existe dentro do estado de " + endereco.getCidade().getEstado().getNome());
+                    msg.append("Cidade n√£o existe dentro do estado de " + endereco.getCidade().getEstado().getNome());
                 }
             }
         }

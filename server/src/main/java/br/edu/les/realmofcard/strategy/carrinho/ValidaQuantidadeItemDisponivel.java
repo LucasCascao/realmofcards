@@ -40,10 +40,10 @@ public class ValidaQuantidadeItemDisponivel implements IStrategy {
                         Carta carta = cartaRepository.findById(item.getCarta().getId()).get();
 
                         if(item.getQuantidade() > carta.getQuantidadeEstoque())
-                            msg.append("Quantidade pedido n„o est· disponÌvel no estoque.");
+                            msg.append("Quantidade pedido n√£o est√° dispon√≠vel no estoque.");
 
                         if(item.getQuantidade() < 1)
-                            msg.append("Quantidade pedido n„o È v·lida para incluir no carrinho.");
+                            msg.append("Quantidade pedido n√£o √© v√°lida para incluir no carrinho.");
 
                     });
                 }
@@ -56,7 +56,7 @@ public class ValidaQuantidadeItemDisponivel implements IStrategy {
                 Carta carta = cartaRepository.findById(item.getCarta().getId()).get();
 
                 if(item.getQuantidade() > carta.getQuantidadeEstoque())
-                    msg.append("Quantidade pedido n„o est· disponÌvel no estoque.");
+                    msg.append("Quantidade pedido n√£o est√° dispon√≠vel no estoque.");
             }
 
         }

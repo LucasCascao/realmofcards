@@ -24,8 +24,8 @@ public class ValidaDadosTroca implements IStrategy {
 
 			Troca troca = (Troca) entidade;
 
-			if(Util.isNull(troca.getItemListParaTroca())) msg.append("Campo de item È obrigat·rio.");
-			if(Util.isNull(troca.getPedidoParaTroca())) msg.append("Pedido È obrigat·rio.");
+			if(Util.isNull(troca.getItemListParaTroca())) msg.append("Campo de item √© obrigat√≥rio.");
+			if(Util.isNull(troca.getPedidoParaTroca())) msg.append("Pedido √© obrigat√≥rio.");
 		}
 
 		return msg.toString();

@@ -48,13 +48,13 @@
     <div class="col-lg-1">
       <h5><strong>Cupom:</strong> </h5>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-3">
       <input type="text" name="codigo-cupom" [(ngModel)]="cupom.codigo">
     </div>
     <div class="col-lg-1">
       <button class="btn btn-secondary" (click)="validaCupom()">Validar</button>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-4">
       <div *ngIf="mensagemCupom?.length > 0">
         <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagemCupom">{{mensagem}}</p>
       </div>

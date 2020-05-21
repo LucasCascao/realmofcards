@@ -36,7 +36,7 @@ public class ValidaDataValidadeCartao implements IStrategy {
                 Integer mesAtual = LocalDate.now().getMonth().getValue();
 
                 if(anoVencimento < anoAtual || (anoVencimento.equals(anoAtual) && mesVencimento < mesAtual)){
-                    msg.append("Cartão está vencido.");
+                    msg.append("CartÃ£o estÃ¡ vencido.");
                 }
             }
         }

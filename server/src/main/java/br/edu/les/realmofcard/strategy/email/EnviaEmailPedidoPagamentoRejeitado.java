@@ -41,9 +41,9 @@ public class EnviaEmailPedidoPagamentoRejeitado implements IStrategy {
     		mensagem.setAssunto("Pagamento do pedido " + pedido.getCodigoPedido() + " foi rejeitado.");
     		
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
-    		mensagemTexto.append("este email foi enviado para informar que o pagamento n„o foi aprovado para o pedido " + pedido.getCodigoPedido() + ".\n");
-    		mensagemTexto.append("Caso queira realizar a compra, peÁo que realize novamente o pedido em nosso site.\n\n");
-    		mensagemTexto.append("Realm of Cards agradece sua coompreenÁ„o e te desejamos um Ûtimo dia.");
+    		mensagemTexto.append("este email foi enviado para informar que o pagamento n√£o foi aprovado para o pedido " + pedido.getCodigoPedido() + ".\n");
+    		mensagemTexto.append("Caso queira realizar a compra, pe√ßo que realize novamente o pedido em nosso site.\n\n");
+    		mensagemTexto.append("Realm of Cards agradece sua coompreen√ß√£o e te desejamos um √≥timo dia.");
     		
     		mensagem.setMensagem(mensagemTexto);
     		

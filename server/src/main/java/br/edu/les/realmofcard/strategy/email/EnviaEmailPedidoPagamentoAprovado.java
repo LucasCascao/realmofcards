@@ -42,8 +42,8 @@ public class EnviaEmailPedidoPagamentoAprovado implements IStrategy {
     		
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
     		mensagemTexto.append("este email foi enviado para informar que o pagamento foi aprovado para o pedido " + pedido.getCodigoPedido() + ".\n");
-    		mensagemTexto.append("Caso queira realizar outra compra, peço que realize o pedido em nosso site.\n\n");
-    		mensagemTexto.append("Realm of Cards agradece sua preferência e te desejamos um ótimo dia.");
+    		mensagemTexto.append("Caso queira realizar outra compra, peÃ§o que realize o pedido em nosso site.\n\n");
+    		mensagemTexto.append("Realm of Cards agradece sua preferÃªncia e te desejamos um Ã³timo dia.");
     		
     		mensagem.setMensagem(mensagemTexto);
     		
