@@ -4,6 +4,8 @@ import {UtilService} from '../../../services/util.service';
 import {CartaoCredito} from '../../../model/domain/cartao-credito.model';
 import {Router} from "@angular/router";
 import { FormaPagamento } from 'src/model/domain/forma-pagamento.model';
+import { Cupom } from 'src/model/domain/cupom.model';
+import { Util } from 'src/app/shared/app.util';
 
 @Component({
   selector: 'app-select-credit-card',
@@ -13,7 +15,8 @@ import { FormaPagamento } from 'src/model/domain/forma-pagamento.model';
 export class SelectCreditCardComponent implements OnInit {
 
   constructor(private service: UtilService,
-              private router: Router) { }
+              private router: Router,
+              private util: Util) { }
 
   cartoes: CartaoCredito[];
 
@@ -25,9 +28,11 @@ export class SelectCreditCardComponent implements OnInit {
 
   valorTotal: number;
 
-  mensagemDeErro: string;
+  cupom: Cupom;
 
   mensagens = [];
+
+  mensagemCupom = [];
 
   ngOnInit(): void {
 
@@ -36,11 +41,11 @@ export class SelectCreditCardComponent implements OnInit {
 
     this.valorTotal += custoFrete;
 
-    this.mensagemDeErro = '';
-
     // this.cartoesSelecionados = [];
     this.formaPagamentoList = [];
     this.formaPagamentoSelecionadoList = [];
+
+    this.cupom = new Cupom();
 
     const cartaoCredito = new CartaoCredito();
     const pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
@@ -154,4 +159,15 @@ export class SelectCreditCardComponent implements OnInit {
     sessionStorage.setItem('cartaoSelecionado', JSON.stringify(cartao));
   }
 
+  validaCupom(){
+    this.mensagemCupom = [];
+    this.service.get(this.cupom, '/cupons').subscribe( resultado => {
+      if(resultado?.msg != null){
+        this.mensagemCupom = this.util.getMensagensSeparadas2(resultado?.msg);
+        this.cupom.valor = null;
+      } else {
+        this.cupom = resultado?.entidades[0];
+      }
+    });
+  }
 }

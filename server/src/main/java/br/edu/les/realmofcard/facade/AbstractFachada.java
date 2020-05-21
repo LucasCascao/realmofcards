@@ -1,6 +1,9 @@
 package br.edu.les.realmofcard.facade;
 
 import br.edu.les.realmofcard.strategy.carrinho.*;
+import br.edu.les.realmofcard.strategy.cupom.ValidaCupomAtivo;
+import br.edu.les.realmofcard.strategy.cupom.ValidaDadosCupom;
+import br.edu.les.realmofcard.strategy.cupom.ValidaExistenciaCupom;
 import br.edu.les.realmofcard.strategy.pedido.*;
 import br.edu.les.realmofcard.strategy.usuario.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +82,9 @@ public class AbstractFachada {
 
     @Autowired
     private TrocaDAO trocaDAO;
+
+    @Autowired
+    private CupomDAO cupomDAO;
 
 
     /*
@@ -190,6 +196,15 @@ public class AbstractFachada {
     @Autowired
     private GeraCodigoRastreio geraCodigoRastreio;
 
+    @Autowired
+    private ValidaDadosCupom validaDadosCupom;
+
+    @Autowired
+    private ValidaCupomAtivo validaCupomAtivo;
+
+    @Autowired
+    private ValidaExistenciaCupom validaExistenciaCupom;
+
 
     public AbstractFachada(){
     }
@@ -211,6 +226,8 @@ public class AbstractFachada {
         daos.put(Item.class.getName(), itemDAO);
         daos.put(Bandeira.class.getName(), bandeiraDAO);
         daos.put(Troca.class.getName(), trocaDAO);
+        daos.put(Cupom.class.getName(), cupomDAO);
+
 
         //------------------------ Hash Pessoa ----------------------------//
 
@@ -404,5 +421,18 @@ public class AbstractFachada {
 
         regrasNegocio.put(Troca.class.getName(), mapaTroca);
 
+        //------------------------ Hash Cupom --------------------------//
+
+        List<IStrategy> rnsCupomConsultar = new ArrayList<>();
+
+        rnsCupomConsultar.add(validaDadosCupom);
+        rnsCupomConsultar.add(validaExistenciaCupom);
+        rnsCupomConsultar.add(validaCupomAtivo);
+
+        Map<String, List<IStrategy>> mapaCupom = new HashMap<>();
+
+        mapaCupom.put("CONSULTAR", rnsCupomConsultar);
+
+        regrasNegocio.put(Cupom.class.getName(), mapaCupom);
     }
 }

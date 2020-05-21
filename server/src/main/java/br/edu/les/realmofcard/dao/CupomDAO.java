@@ -3,6 +3,7 @@ package br.edu.les.realmofcard.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.les.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +30,27 @@ public class CupomDAO implements IDAO {
 
     @Override
     public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
+
         List<EntidadeDominio> cupons = new ArrayList<>();
-        if(entidade instanceof Cupom){
+
+        Cupom cupom = (Cupom) entidade;
+
+        if(Util.isNotNull(cupom.getTroca())
+            && Util.isNotNull(cupom.getTroca().getPedidoParaTroca())
+            && Util.isNotNull(cupom.getTroca().getPedidoParaTroca().getCliente())
+            && Util.isNotNull(cupom.getTroca().getPedidoParaTroca().getCliente().getId())){
+            Integer clienteId = cupom.getTroca().getPedidoParaTroca().getCliente().getId();
+            cupons.addAll(cupomRepository.findByTroca_PedidoParaTroca_Cliente_Id(clienteId));
             return cupons;
-        } else return null;
+        }
+
+        if(Util.isNotNull(cupom.getCodigo())){
+            cupons.add(cupomRepository.findCupomByCodigo(cupom.getCodigo()));
+            return cupons;
+        }
+
+        cupomRepository.findAll().forEach( cupomResultado -> cupons.add(cupomResultado));
+
+        return cupons;
     }
 }
