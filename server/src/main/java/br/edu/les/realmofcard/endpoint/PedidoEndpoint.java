@@ -1,5 +1,7 @@
 package br.edu.les.realmofcard.endpoint;
 
+import br.edu.les.realmofcard.dto.PedidoDTO;
+import br.edu.les.realmofcard.util.DTOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +22,12 @@ public class PedidoEndpoint {
     @Autowired
     private Fachada fachada;
 
+    @Autowired
+    private PedidoDTO pedidoDTO;
+
     @PostMapping()
     public ResponseEntity<Resultado> consultar(@RequestBody Pedido pedido){
-        return ResponseEntity.ok().body(fachada.consultar(pedido));
+        return ResponseEntity.ok().body(DTOUtil.tranfereParaDTO(fachada.consultar(pedido), pedidoDTO));
     }
 
     @PostMapping(path = "/cria")

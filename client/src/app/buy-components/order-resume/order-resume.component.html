@@ -50,9 +50,13 @@
           </div>
           <div class="row" *ngFor="let formaPagamento of formaPagamentoList">
             <div class="col-md-12">
-              <p class="card-text">
-                <strong>Forma de pagamento:</strong> Cartão de crédito com final <strong>{{formaPagamento?.cartao?.numero}}</strong>,
+              <p class="card-text" *ngIf="formaPagamento?.cartaoCredito != null">
+                <strong>Forma de pagamento:</strong> Cartão de crédito com final <strong>{{formaPagamento?.cartaoCredito?.numero}}</strong>,
                 valor pago <strong>{{formaPagamento?.valorPagamento | currency: 'BRL': true}}</strong>.
+              </p>
+              <p class="card-text" *ngIf="formaPagamento?.cupom != null">
+                <strong>Código do cupom:</strong> <strong>{{formaPagamento?.cupom?.codigo}}</strong>,
+                valor descontado <strong>{{formaPagamento?.cupom?.valor | currency: 'BRL': true}}</strong>.
               </p>
             </div>
           </div>

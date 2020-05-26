@@ -34,6 +34,8 @@ export class OrderResumeComponent implements OnInit {
 
     this.formaPagamentoList = JSON.parse(sessionStorage.getItem('formasPagamentoSelecionadas'));
 
+    console.log(this.formaPagamentoList);
+
     this.valorTotal = JSON.parse(sessionStorage.getItem('valorTotal'));
 
     this.carrinho = JSON.parse(sessionStorage.getItem('carrinho'));

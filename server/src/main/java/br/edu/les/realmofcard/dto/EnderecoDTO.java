@@ -32,8 +32,6 @@ public class EnderecoDTO extends EntidadeDominio implements IDTO {
 
     private String complemento;
 
-    private Boolean preferido;
-
     private Cidade cidade;
 
     @Override
@@ -51,7 +49,6 @@ public class EnderecoDTO extends EntidadeDominio implements IDTO {
             enderecoDTO.setCep(endereco.getCep());
             enderecoDTO.setComplemento(endereco.getComplemento());
             enderecoDTO.setCidade(endereco.getCidade());
-            enderecoDTO.setPreferido(endereco.getPreferido());
 
             return enderecoDTO;
         }

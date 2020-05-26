@@ -1,17 +1,16 @@
 package br.edu.les.realmofcard.strategy.email;
 
+import br.edu.les.realmofcard.domain.*;
+import br.edu.les.realmofcard.repository.PessoaRepository;
 import br.edu.les.realmofcard.strategy.IStrategy;
+import br.edu.les.realmofcard.util.EmailSender;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.edu.les.realmofcard.domain.*;
-import br.edu.les.realmofcard.repository.PessoaRepository;
-import br.edu.les.realmofcard.util.EmailSender;
-import lombok.extern.log4j.Log4j2;
-
 @Log4j2
 @Component
-public class EnviaEmailTrocaAprovadaComCupom implements IStrategy {
+public class EnviaEmailCupomComValorRestante implements IStrategy {
 	
 	@Autowired
 	private EmailSender emailSender;
@@ -22,13 +21,11 @@ public class EnviaEmailTrocaAprovadaComCupom implements IStrategy {
     @Override
     public String processar(EntidadeDominio entidade) {
     	
-    	if(entidade instanceof Troca) {
+    	if(entidade instanceof Cupom) {
 
-			Troca troca = (Troca) entidade;
-
-    		Pedido pedido = troca.getPedidoParaTroca();
+    		Cupom cupom = (Cupom) entidade;
     		
-    		Usuario usuario = pedido.getCliente().getUsuario();
+    		Usuario usuario = cupom.getPessoa().getUsuario();
     		
     		Pessoa cliente = pessoaRepository.findPessoaByUsuario_Id(usuario.getId());
     		
@@ -36,11 +33,11 @@ public class EnviaEmailTrocaAprovadaComCupom implements IStrategy {
     		
     		StringBuilder mensagemTexto = new StringBuilder();
     		
-    		mensagem.setAssunto("Solicitação de troco do pedido " + pedido.getCodigoPedido() + " foi aprovado.");
+    		mensagem.setAssunto("Foi gerado um cupom com o valor do cupom restante.");
 
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
-    		mensagemTexto.append("este email foi enviado para informar que a solicitação de troca foi aprovado para o pedido " + pedido.getCodigoPedido() + ".\n");
-    		mensagemTexto.append("Seu código de cupom é " + troca.getCupom().getCodigo() + " no valor de R$ " + troca.getCupom().getValor() + ".\n");
+    		mensagemTexto.append("Devido restar um valor do cupom utilizado sua compra anterior foi gerado um novo cupom com o valor restante.\n");
+    		mensagemTexto.append("Seu código de cupom é " + cupom.getCodigo() + " no valor de R$ " + cupom.getValor() + ".\n");
     		mensagemTexto.append("Caso queira realizar outra compra, peço que realize o pedido em nosso site.\n\n");
     		mensagemTexto.append("Realm of Cards agradece sua preferência e te desejamos um ótimo dia.");
     		

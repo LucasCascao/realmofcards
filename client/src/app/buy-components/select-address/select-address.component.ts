@@ -4,6 +4,7 @@ import {UtilService} from '../../../services/util.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Endereco} from '../../../model/domain/endereco.model';
 import { Correio } from 'src/model/domain/correio.model';
+import { Status } from 'src/model/domain/status.model';
 
 @Component({
   selector: 'app-select-address',
@@ -26,7 +27,10 @@ export class SelectAddressComponent implements OnInit {
   mensagens = [];
 
   ngOnInit(): void {
+    const status: Status = new Status();
+    status.id = 1;
     this.endereco.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
+    this.endereco.status = status;
     this.correio = null;
     this.getEnderecos();
   }

@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { CartaoCredito } from './cartao-credito.model';
+import { Cupom } from './cupom.model';
 
 export class FormaPagamento {
   id: number;
-  registroCartao: string;
   valorPagamento: number;
-  cartao: CartaoCredito;
+  cartaoCredito: CartaoCredito;
+  cupom: Cupom;
   isSelecionado: boolean;
 }

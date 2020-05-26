@@ -2,9 +2,12 @@ package br.edu.les.realmofcard.strategy.troca;
 
 import java.util.Set;
 
+import br.edu.les.realmofcard.dao.PedidoDAO;
+import br.edu.les.realmofcard.repository.PedidoRepository;
 import br.edu.les.realmofcard.strategy.IStrategy;
 import br.edu.les.realmofcard.strategy.cupom.GeraCupomTroca;
 import br.edu.les.realmofcard.strategy.email.EnviaEmailTrocaAprovadaComCupom;
+import br.edu.les.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +23,7 @@ public class VerificaTrocasAprovadas implements IStrategy {
 	private TrocaRepository trocaRepository;
 
 	@Autowired
-	private CupomRepository cupomRepository;
+	private PedidoDAO pedidoDAO;
 
 	@Autowired
 	private CupomDAO cupomDAO;
@@ -41,11 +44,16 @@ public class VerificaTrocasAprovadas implements IStrategy {
 			Set<Troca> trocasAprovadas = trocaRepository.getTrocasAprovadas();
 
 			for (Troca trocaAprovada : trocasAprovadas) {
-				if(cupomRepository.findByTroca_Id(trocaAprovada.getId()).size() == 0){
-					Cupom cupom = Cupom.builder().troca(trocaAprovada).build();
+				if(Util.isNull(trocaAprovada.getCupom())){
+					Cupom cupom = Cupom.builder()
+							.valor(trocaAprovada.getSubTotal())
+							.pessoa(trocaAprovada.getPedidoParaTroca().getCliente())
+							.build();
 					geraCupomTroca.processar(cupom);
-					cupom = (Cupom) cupomDAO.salvar(cupom);
-					enviaEmailTrocaAprovadaComCupom.processar(cupom);
+					trocaAprovada.setCupom((Cupom) cupomDAO.salvar(cupom));
+					enviaEmailTrocaAprovadaComCupom.processar(trocaAprovada);
+					trocaAprovada.getPedidoParaTroca().setStatusPedido(StatusPedido.builder().id(6).build());
+					pedidoDAO.alterar(trocaAprovada.getPedidoParaTroca());
 				}
 			}
 		}

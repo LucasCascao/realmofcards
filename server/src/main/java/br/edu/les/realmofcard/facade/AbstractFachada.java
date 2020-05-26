@@ -5,6 +5,7 @@ import br.edu.les.realmofcard.strategy.cupom.ValidaCupomAtivo;
 import br.edu.les.realmofcard.strategy.cupom.ValidaDadosCupom;
 import br.edu.les.realmofcard.strategy.cupom.ValidaExistenciaCupom;
 import br.edu.les.realmofcard.strategy.pedido.*;
+import br.edu.les.realmofcard.strategy.troca.*;
 import br.edu.les.realmofcard.strategy.usuario.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,6 @@ import br.edu.les.realmofcard.strategy.endereco.ValidaDadosEndereco;
 import br.edu.les.realmofcard.strategy.endereco.ValidaExistenciaCidade;
 import br.edu.les.realmofcard.strategy.pessoa.ValidaDadosPessoa;
 import br.edu.les.realmofcard.strategy.pessoa.ValidaExistenciaPessoa;
-import br.edu.les.realmofcard.strategy.troca.GeraCodigoRastreio;
-import br.edu.les.realmofcard.strategy.troca.RetiraQuantidadeItemDoPedido;
-import br.edu.les.realmofcard.strategy.troca.RetornaQuantidadeItemPedidoParaEstoque;
-import br.edu.les.realmofcard.strategy.troca.ValidaDadosTroca;
 import br.edu.les.realmofcard.dao.*;
 
 import java.util.ArrayList;
@@ -179,9 +176,6 @@ public class AbstractFachada {
     private RetornaItemEstoque retornaItemEstoque;
 
     @Autowired
-    private InsereEnderecoEscolhido insereEnderecoEscolhido;
-
-    @Autowired
     private AtualizaItensPedidos atualizaItensPedidos;
 
     @Autowired
@@ -194,6 +188,9 @@ public class AbstractFachada {
     private RetornaQuantidadeItemPedidoParaEstoque retornaQuantidadeItemPedidoParaEstoque;
 
     @Autowired
+    private CalculaValorTroca calculaValorTroca;
+
+    @Autowired
     private GeraCodigoRastreio geraCodigoRastreio;
 
     @Autowired
@@ -204,6 +201,9 @@ public class AbstractFachada {
 
     @Autowired
     private ValidaExistenciaCupom validaExistenciaCupom;
+
+    @Autowired
+    private ValidaValorCupom validaValorCupom;
 
 
     public AbstractFachada(){
@@ -387,7 +387,7 @@ public class AbstractFachada {
         rnsPedidoSalvar.add(geraCodigoPedido);
         rnsPedidoSalvar.add(calcularDataEntrega);
         rnsPedidoSalvar.add(retiraItemEstoque);
-        rnsPedidoSalvar.add(insereEnderecoEscolhido);
+        rnsPedidoSalvar.add(validaValorCupom);
 
         List<IStrategy> rnsPedidoAlterar = new ArrayList<>();
 
@@ -407,6 +407,7 @@ public class AbstractFachada {
 
         rnsTrocaSalvar.add(validaDadosTroca);
         rnsTrocaSalvar.add(retiraQuantidadeItemDoPedido);
+        rnsTrocaSalvar.add(calculaValorTroca);
 
         List<IStrategy> rnsTrocaAlterar = new ArrayList<>();
 

@@ -1,5 +1,6 @@
 package br.edu.les.realmofcard.dao;
 
+import br.edu.les.realmofcard.domain.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,8 @@ public class CartaoCreditoDAO implements IDAO {
     public void excluir(EntidadeDominio entidade) {
         if(entidade instanceof CartaoCredito){
             CartaoCredito cartaoCredito = (CartaoCredito) entidade;
-            cartaoCreditoRepository.deleteById(cartaoCredito.getId());
+            cartaoCredito.setStatus(Status.builder().id(2).build());
+            alterar(cartaoCredito);
         }
     }
 
@@ -45,13 +47,6 @@ public class CartaoCreditoDAO implements IDAO {
 
             if(Util.isNotNull(cartaoCredito.getId())){
                 cartoesCredito.add(cartaoCreditoRepository.findById(cartaoCredito.getId()).get());
-                return cartoesCredito;
-            }
-
-            if(Util.isNotNull(cartaoCredito.getPreferido())){
-                cartaoCreditoRepository
-                        .findByPessoa_IdAndPreferido(cartaoCredito.getPessoa().getId(), cartaoCredito.getPreferido())
-                        .forEach(cartaoCreditoResultado -> cartoesCredito.add(cartaoCreditoResultado));
                 return cartoesCredito;
             }
 

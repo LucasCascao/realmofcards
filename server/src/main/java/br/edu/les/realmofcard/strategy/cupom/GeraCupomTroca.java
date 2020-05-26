@@ -18,13 +18,6 @@ public class GeraCupomTroca implements IStrategy {
 
 			Cupom cupom = (Cupom) entidade;
 
-			Double valorTotal = 0.0;
-
-			for (ItemTroca itemTroca : cupom.getTroca().getItemListParaTroca()) {
-				valorTotal += itemTroca.getItemParaTroca().getCarta().getValorVenda() * itemTroca.getQuantidade();
-			}
-
-			cupom.setValor(valorTotal);
 			cupom.setCodigo(GeradorCodigo.gerarCodigoCupom());
 			cupom.setStatus(Status.builder().id(1).build());
 

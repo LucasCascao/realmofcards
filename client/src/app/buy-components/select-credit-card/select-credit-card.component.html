@@ -14,15 +14,15 @@
       <div class="col-md-12">
         <div class="row">
           <div class="col-lg-1">
-            <input type="checkbox" [id] = "formaPagamento?.cartao.id" [name]="formaPagamento?.cartao?.id"
+            <input type="checkbox" [id] = "formaPagamento?.cartaoCredito.id" [name]="formaPagamento?.cartaoCredito?.id"
               (click)="selecionaCartao($event, formaPagamento)">
           </div>
           <div class="col-lg-1">
             <img class="img-fluid" src="/assets/icon/cartao-credito.png">
           </div>
           <div class="col-lg-5">
-            <p class="card-text"><strong>Ultimos 4 digitos:</strong> {{formaPagamento?.cartao?.numero}}</p>
-            <p class="card-text"><strong>Bandeira:</strong> {{formaPagamento?.cartao?.bandeira?.nome}}</p>
+            <p class="card-text"><strong>Ultimos 4 digitos:</strong> {{formaPagamento?.cartaoCredito?.numero}}</p>
+            <p class="card-text"><strong>Bandeira:</strong> {{formaPagamento?.cartaoCredito?.bandeira?.nome}}</p>
           </div>
           <div class="col-lg-4">
             <div *ngIf="formaPagamento?.isSelecionado">
@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="col-md-1">
-            <a class="btn btn-danger float-right" (click)="selecionaCartaoExcluir(formaPagamento?.cartao)"  [routerLink]="['/app-logado/creditcard-delete']">Excluir</a>
+            <a class="btn btn-danger float-right" (click)="selecionaCartaoExcluir(formaPagamento?.cartaoCredito)"  [routerLink]="['/app-logado/creditcard-delete']">Excluir</a>
           </div>
         </div>
       </div>
@@ -43,32 +43,37 @@
   <hr>
   <div class="row mt-4">
     <div class="col-lg-1">
-      <input type="checkbox">
+      <input type="checkbox" (click)="selecionaCupom($event, formaPagamentoComCupom)">
     </div>
     <div class="col-lg-1">
       <h5><strong>Cupom:</strong> </h5>
     </div>
     <div class="col-lg-3">
-      <input type="text" name="codigo-cupom" [(ngModel)]="cupom.codigo">
+      <input type="text" name="codigo-cupom" [(ngModel)]="formaPagamentoComCupom.cupom.codigo">
     </div>
     <div class="col-lg-1">
       <button class="btn btn-secondary" (click)="validaCupom()">Validar</button>
     </div>
     <div class="col-lg-4">
       <div *ngIf="mensagemCupom?.length > 0">
-        <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagemCupom">{{mensagem}}</p>
+        <div *ngIf="isMsgError;else cupomAprovado">
+          <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagemCupom">{{mensagem}}</p>
+        </div>
+        <ng-template #cupomAprovado>
+          <p class="alert alert-success text-center" *ngFor="let mensagem of mensagemCupom">{{mensagem}}</p>
+        </ng-template>
       </div>
     </div>
     <div class="col-lg-2">
-      <div *ngIf="cupom?.valor != null">
-        <p><Strong>Valor: </Strong>{{cupom?.valor | currency: 'BRL': true}}</p>
+      <div *ngIf="formaPagamentoComCupom?.cupom?.valor != null">
+        <p><Strong>Valor: </Strong>{{formaPagamentoComCupom?.cupom?.valor | currency: 'BRL': true}}</p>
       </div>
     </div>
   </div>
   <hr>
   <div class="row">
     <div class="col-md-12">
-      <h3><strong>Valor a pagar: </strong> {{valorTotal}}</h3>
+      <h3><strong>Valor a pagar: </strong> {{valorTotal | currency: 'BRL': true}}</h3>
     </div>
   </div>
   <hr>

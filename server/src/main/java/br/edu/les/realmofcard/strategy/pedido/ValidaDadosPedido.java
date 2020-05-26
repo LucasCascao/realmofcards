@@ -26,9 +26,7 @@ public class ValidaDadosPedido implements IStrategy {
 
             msg.append(validadorString.validar(pedido.getCliente(), "cliente"));
             msg.append(validadorString.validar(pedido.getFormaPagamentoList(), "forma de pagamento"));
-            if(Util.isNull(pedido.getEnderecoEscolhido())){
-                msg.append(validadorString.validar(pedido.getEndereco(), "endereco"));
-            }
+            msg.append(validadorString.validar(pedido.getEndereco(), "endereço"));
             msg.append(validadorString.validar(pedido.getItemList(), "itens"));
             msg.append(validadorString.validar(pedido.getStatusPedido(), "status do pedido"));
             msg.append(validadorString.validar(pedido.getValorTotal(), "valor total"));

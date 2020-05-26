@@ -53,10 +53,8 @@ public class Pedido extends EntidadeDominio{
     @JoinColumn(name = "ped_status_pedido_id")
     private StatusPedido statusPedido;
 
-    @Column(name = "ped_endereco")
-    private String enderecoEscolhido;
-
-    @Transient
+    @ManyToOne()
+    @JoinColumn(name = "ped_endereco_id")
     private Endereco endereco;
 
     @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -24,6 +24,7 @@ export class UserOrdersComponent implements OnInit {
     const pedido = new Pedido();
     pedido.cliente = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     this.service.get(pedido, 'pedidos').subscribe(resultado => {
+      console.log(resultado)
       this.pedidos = resultado?.entidades;
     });
   }
@@ -31,6 +32,18 @@ export class UserOrdersComponent implements OnInit {
   solicitaTroca(pedido : Pedido){
     sessionStorage.setItem('pedidoSelecionado', JSON.stringify(pedido));
     this.router.navigate(['/app-logado/user-product-trade']);
+  }
+
+  temPermissaoParaTroca(pedido: Pedido) : boolean {
+    let temPermissao: boolean = false;
+    if(pedido?.statusPedido?.id === 6){
+      pedido?.itemList?.forEach( item => {
+        if(item?.quantidade > 0){
+          temPermissao = true;
+        }
+      })
+    }
+    return temPermissao;
   }
 
 }

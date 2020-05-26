@@ -42,9 +42,6 @@ public class CartaoCredito extends EntidadeDominio{
     @Column(name = "crt_cpf_titular")
     private String cpfTitular;
 
-    @Column(name = "crt_preferido")
-    private Boolean preferido;
-
     @ManyToOne()
     @JoinColumn(name = "crt_bandeira_id")
     private Bandeira bandeira;
@@ -52,4 +49,8 @@ public class CartaoCredito extends EntidadeDominio{
     @ManyToOne()
     @JoinColumn(name = "crt_pessoa_id")
     private Pessoa pessoa;
+
+    @ManyToOne()
+    @JoinColumn(name = "crt_status_id")
+    private Status status;
 }

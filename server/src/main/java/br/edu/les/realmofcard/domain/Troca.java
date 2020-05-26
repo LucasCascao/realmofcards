@@ -25,10 +25,17 @@ public class Troca extends EntidadeDominio{
     @Column(name = "trc_id")
     private Integer id;
 
+    @Column(name = "trc_subtotal")
+    private Double subTotal;
+
     @OneToMany(mappedBy = "troca", fetch = FetchType.EAGER)
     private List<ItemTroca> itemListParaTroca;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trc_pedido_id")
     private Pedido pedidoParaTroca;
+
+    @ManyToOne()
+    @JoinColumn(name = "trc_cupom_id")
+    private Cupom cupom;
 }

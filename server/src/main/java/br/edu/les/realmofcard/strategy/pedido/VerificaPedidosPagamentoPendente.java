@@ -3,6 +3,7 @@ package br.edu.les.realmofcard.strategy.pedido;
 import br.edu.les.realmofcard.strategy.IStrategy;
 import br.edu.les.realmofcard.strategy.email.EnviaEmailPedidoPagamentoAprovado;
 import br.edu.les.realmofcard.strategy.email.EnviaEmailPedidoPagamentoRejeitado;
+import br.edu.les.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,11 +41,11 @@ public class VerificaPedidosPagamentoPendente implements IStrategy {
         
         List<String> numeroCartoesPermitidosParaCompra = new ArrayList<>();
 
-    	numeroCartoesPermitidosParaCompra.add("9999");
-    	numeroCartoesPermitidosParaCompra.add("7777");
-    	numeroCartoesPermitidosParaCompra.add("5555");
-    	numeroCartoesPermitidosParaCompra.add("1111");
-    	numeroCartoesPermitidosParaCompra.add("3333");
+    	numeroCartoesPermitidosParaCompra.add("9999999999999999");
+    	numeroCartoesPermitidosParaCompra.add("7777777777777777");
+    	numeroCartoesPermitidosParaCompra.add("5555555555555555");
+    	numeroCartoesPermitidosParaCompra.add("1111111111111111");
+    	numeroCartoesPermitidosParaCompra.add("3333333333333333");
 
         if(entidade instanceof Pedido){
 
@@ -59,7 +60,8 @@ public class VerificaPedidosPagamentoPendente implements IStrategy {
 
                     Boolean naoEValido = false;
 
-                    if(!numeroCartoesPermitidosParaCompra.contains(formaPagamento.getRegistroCartao())){
+                    if(Util.isNotNull(formaPagamento.getCartaoCredito())
+                        && !numeroCartoesPermitidosParaCompra.contains(formaPagamento.getCartaoCredito().getNumero())){
                         naoEValido = true;
                     }
 

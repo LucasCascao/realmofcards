@@ -1,5 +1,6 @@
 import { Cidade } from './cidade.model';
 import { Pessoa } from './pessoa.model';
+import { Status } from './status.model';
 
 export class Endereco {
     id: number;
@@ -11,4 +12,5 @@ export class Endereco {
     preferido: boolean;
     cidade: Cidade;
     pessoa: Pessoa;
+    status: Status;
 }

@@ -1,5 +1,6 @@
 package br.edu.les.realmofcard.dao;
 
+import br.edu.les.realmofcard.domain.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,8 @@ public class EnderecoDAO implements IDAO {
     public void excluir(EntidadeDominio entidade) {
         if (entidade instanceof Endereco){
             Endereco endereco = (Endereco) entidade;
-            enderecoRepository.deleteById(endereco.getId());
+            endereco.setStatus(Status.builder().id(2).build());
+            alterar(endereco);
         }
     }
 
@@ -50,18 +52,15 @@ public class EnderecoDAO implements IDAO {
         if (entidade instanceof Endereco){
             List<EntidadeDominio> enderecos = new ArrayList<>();
             Endereco endereco = (Endereco) entidade;
-
-            if(Util.isNotNull(endereco.getId())){
+            if(Util.isNotNull(endereco.getId()) && Util.isNotNull(endereco.getStatus())){
                 enderecos.add(enderecoRepository.findById(endereco.getId()).get());
                 return enderecos;
             }
-
-            if(Util.isNotNull(endereco.getPreferido())){
-                Endereco enderecoResultado = enderecoRepository.findByPessoa_IdAndPreferido(endereco.getPessoa().getId(), endereco.getPreferido());
-                enderecos.add(enderecoResultado);
-                return enderecos;
+            if(Util.isNotNull(endereco.getPessoa())
+                    && Util.isNotNull(endereco.getPessoa().getId())
+                    && Util.isNotNull(endereco.getStatus())){
+                enderecos.addAll(enderecoRepository.findEnderecoByPessoaAndStatus(endereco.getPessoa().getId(), endereco.getStatus().getId()));
             }
-
             enderecoRepository.findByPessoa_Id(endereco.getPessoa().getId())
                     .forEach( resultadoEndereco -> enderecos.add(resultadoEndereco));
             return enderecos;

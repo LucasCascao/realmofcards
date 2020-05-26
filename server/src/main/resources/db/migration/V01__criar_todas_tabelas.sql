@@ -26,9 +26,9 @@ CREATE TABLE cartao_credito (
     crt_cpf_titular       VARCHAR(11) NOT NULL,
     crt_vencimento_mes    VARCHAR(2) NOT NULL,
     crt_vencimento_ano    VARCHAR(4) NOT NULL,
-    crt_preferido         BOOLEAN NOT NULL,
     crt_bandeira_id       INT NOT NULL,
-    crt_pessoa_id         INT NOT NULL
+    crt_pessoa_id         INT NOT NULL,
+    crt_status_id         INT NOT NULL
 );
 
 CREATE TABLE categoria_carta (
@@ -47,6 +47,8 @@ CREATE TABLE item (
 
 CREATE TABLE troca (
     trc_id                  SERIAL NOT NULL,
+    trc_subtotal            DECIMAL(8,2) NOT NULL,
+    trc_cupom_id            INT,
     trc_pedido_id           INT NOT NULL
 );
 
@@ -73,8 +75,8 @@ CREATE TABLE cupom (
     cup_id          SERIAL NOT NULL,
     cup_codigo      VARCHAR(60) NOT NULL,
     cup_valor       DECIMAL(8, 2) NOT NULL,
-    cup_status_id   INT NOT NULL,
-    cup_troca_id    INT NOT NULL
+    cup_pessoa_id   INT,
+    cup_status_id   INT NOT NULL
 );
 
 CREATE TABLE endereco (
@@ -83,10 +85,10 @@ CREATE TABLE endereco (
     end_numero          VARCHAR(6) NOT NULL,
     end_bairro          VARCHAR(70) NOT NULL,
     end_cep             VARCHAR(8) NOT NULL,
-    end_preferido       BOOLEAN NOT NULL,
     end_complemento     VARCHAR(200) NOT NULL,
     end_cidade_id       INT NOT NULL,
-    end_pessoa_id       INT NOT NULL
+    end_pessoa_id       INT NOT NULL,
+    end_status_id       INT NOT NULL
 );
 
 CREATE TABLE telefone (
@@ -137,7 +139,7 @@ CREATE TABLE pedido (
     ped_valor_total            DECIMAL(8,2) NOT NULL,
     ped_data_compra            DATE NOT NULL,
     ped_data_estimada          DATE NOT NULL,
-    ped_endereco               VARCHAR(500) NOT NULL,
+    ped_endereco_id            INT NOT NULL,
     ped_codigo_pedido          varchar(50) not null
 );
 
@@ -167,9 +169,10 @@ CREATE TABLE user_type (
 );
 
 CREATE TABLE forma_pagamento (
-    fpa_id              SERIAL NOT NULL,
-    fpa_valor_pagamento DECIMAL(8,2) NOT NULL,
-    fpa_registro_cartao VARCHAR(4) NOT NULL
+    fpa_id                  SERIAL NOT NULL,
+    fpa_valor_pagamento     DECIMAL(8,2) NOT NULL,
+    fpa_cartao_credito_id   INT,
+    fpa_cupom_id            INT
 );
 
 CREATE TABLE forma_pagamento_pedido (
@@ -264,6 +267,10 @@ ALTER TABLE cartao_credito
     ADD CONSTRAINT cartao_pessoa_fk FOREIGN KEY ( crt_pessoa_id )
         REFERENCES pessoa ( pes_id );
 
+ALTER TABLE cartao_credito
+    ADD CONSTRAINT cartao_credito_status_fk FOREIGN KEY ( crt_status_id )
+        REFERENCES status ( sts_id );
+
 ALTER TABLE cidade
     ADD CONSTRAINT cidade_estado_fk FOREIGN KEY ( cid_estado_id )
         REFERENCES estado ( est_id );
@@ -283,6 +290,10 @@ ALTER TABLE usuario
 ALTER TABLE endereco
     ADD CONSTRAINT endereco_cidade_fk FOREIGN KEY ( end_cidade_id )
         REFERENCES cidade ( cid_id );
+
+ALTER TABLE endereco
+    ADD CONSTRAINT endereco_status_fk FOREIGN KEY ( end_status_id )
+        REFERENCES status ( sts_id );
 
 ALTER TABLE endereco
     ADD CONSTRAINT endereco_pessoa_fk FOREIGN KEY ( end_pessoa_id )
@@ -332,6 +343,10 @@ ALTER TABLE pedido
     ADD CONSTRAINT pedido_status_pedido_fk FOREIGN KEY ( ped_status_pedido_id )
         REFERENCES status_pedido ( spd_id );
 
+ALTER TABLE pedido
+    ADD CONSTRAINT pedido_endereco_fk FOREIGN KEY ( ped_endereco_id )
+        REFERENCES endereco ( end_id );
+
 ALTER TABLE forma_pagamento_pedido
     ADD CONSTRAINT pedido_forma_pagamento_fk FOREIGN KEY ( fpp_forma_pagamento_id )
         REFERENCES forma_pagamento ( fpa_id );
@@ -339,6 +354,10 @@ ALTER TABLE forma_pagamento_pedido
 ALTER TABLE forma_pagamento_pedido
     ADD CONSTRAINT forma_forma_pagamento_fk FOREIGN KEY ( fpp_pedido_id )
         REFERENCES pedido ( ped_id );
+
+ALTER TABLE forma_pagamento
+    ADD CONSTRAINT forma_pagamento_cartao_credito_fk FOREIGN KEY ( fpa_cartao_credito_id )
+        REFERENCES cartao_credito ( crt_id );
 
 ALTER TABLE telefone
     ADD CONSTRAINT telefone_tipo_telefone_fk FOREIGN KEY ( tel_tipo_telefone_id )
@@ -360,9 +379,9 @@ ALTER TABLE cupom
     ADD CONSTRAINT cupom_status_fk FOREIGN KEY ( cup_status_id )
         REFERENCES status ( sts_id );
 
-ALTER TABLE cupom
-    ADD CONSTRAINT cupom_troca_fk FOREIGN KEY ( cup_troca_id )
-        REFERENCES troca ( trc_id );
+ALTER TABLE troca
+    ADD CONSTRAINT troca_cupom_fk FOREIGN KEY ( trc_cupom_id )
+        REFERENCES cupom ( cup_id );
 
 ALTER TABLE rastreio
     ADD CONSTRAINT rastreio_troca_fk FOREIGN KEY ( rto_troca_id )

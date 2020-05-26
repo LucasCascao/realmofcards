@@ -39,10 +39,10 @@ public class Cupom extends EntidadeDominio{
     private Double valor;
 
     @ManyToOne
+    @JoinColumn(name = "cup_pessoa_id")
+    private Pessoa pessoa;
+
+    @ManyToOne
     @JoinColumn(name = "cup_status_id")
     private Status status;
-    
-    @ManyToOne
-    @JoinColumn(name = "cup_troca_id")
-    private Troca troca;
 }

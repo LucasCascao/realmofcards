@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import { FormaPagamento } from 'src/model/domain/forma-pagamento.model';
 import { Cupom } from 'src/model/domain/cupom.model';
 import { Util } from 'src/app/shared/app.util';
+import { Status } from 'src/model/domain/status.model';
 
 @Component({
   selector: 'app-select-credit-card',
@@ -26,13 +27,17 @@ export class SelectCreditCardComponent implements OnInit {
 
   formaPagamentoSelecionadoList: FormaPagamento[];
 
-  valorTotal: number;
+  formaPagamentoComCupom: FormaPagamento;
 
-  cupom: Cupom;
+  valorTotal: number;
 
   mensagens = [];
 
   mensagemCupom = [];
+
+  isMsgError = false;
+
+  isFirstCartao = true;
 
   ngOnInit(): void {
 
@@ -45,11 +50,15 @@ export class SelectCreditCardComponent implements OnInit {
     this.formaPagamentoList = [];
     this.formaPagamentoSelecionadoList = [];
 
-    this.cupom = new Cupom();
+    this.formaPagamentoComCupom = new FormaPagamento();
+    this.formaPagamentoComCupom.cupom = new Cupom();
 
     const cartaoCredito = new CartaoCredito();
     const pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
+    const status = new Status();
+    status.id = 1;
     cartaoCredito.pessoa = pessoa;
+    cartaoCredito.status = status;
 
     this.getCartoes(cartaoCredito);
   }
@@ -59,10 +68,8 @@ export class SelectCreditCardComponent implements OnInit {
       this.cartoes = resultado?.entidades;
       this.cartoes.forEach(cartao => {
         let formaPagamento: FormaPagamento = new FormaPagamento();
-        formaPagamento.registroCartao = cartao.numero;
-        formaPagamento.cartao = cartao;
+        formaPagamento.cartaoCredito = cartao;
         formaPagamento.valorPagamento = 0;
-        formaPagamento.isSelecionado = false;
         this.formaPagamentoList.push(formaPagamento);
       });
     });
@@ -71,7 +78,7 @@ export class SelectCreditCardComponent implements OnInit {
   calculaValor(formaPagamentoSelecionado: FormaPagamento){
     if(this.formaPagamentoSelecionadoList.length == 2) {
       this.formaPagamentoSelecionadoList.forEach( formaPagamento => {
-        if(formaPagamento?.cartao?.id == formaPagamentoSelecionado?.cartao?.id){
+        if(formaPagamento?.cartaoCredito?.id == formaPagamentoSelecionado?.cartaoCredito?.id){
           formaPagamento.valorPagamento = Number.parseFloat(formaPagamentoSelecionado.valorPagamento.toFixed(2));
         } else {
           formaPagamento.valorPagamento = Number.parseFloat((this.valorTotal - formaPagamentoSelecionado.valorPagamento).toFixed(2));
@@ -83,27 +90,40 @@ export class SelectCreditCardComponent implements OnInit {
   selecionaCartao(event, formaPagamentoSelecionado: FormaPagamento) {
     if (event.target.checked) {
       if (this.formaPagamentoSelecionadoList.length < 2) {
-        if (this.formaPagamentoSelecionadoList.length == 0) {
+        if (formaPagamentoSelecionado.cartaoCredito != null && this.isFirstCartao) {
           formaPagamentoSelecionado.valorPagamento = this.valorTotal;
+          this.isFirstCartao = false;
         }
         formaPagamentoSelecionado.isSelecionado = true;
         this.formaPagamentoSelecionadoList.push(formaPagamentoSelecionado);
       } else {
-        this.mensagens.push('Não é possivel selecionar mais que dois cartões.');
+        this.mensagens = [];
+        this.mensagens.push('Não é possivel selecionar mais que duas formas de pagamento.');
         event.target.checked = false;
       }
     } else {
       formaPagamentoSelecionado.isSelecionado = false;
-      const formaPagamentoSemFormaSelecionada: Array<FormaPagamento> = new Array<FormaPagamento>();
-      this.formaPagamentoSelecionadoList.forEach( FormaPagamento => {
-        if (FormaPagamento.cartao.id !== formaPagamentoSelecionado.cartao.id) {
-          FormaPagamento.valorPagamento = this.valorTotal;
-          formaPagamentoSemFormaSelecionada.push(FormaPagamento);
-        } else {
-          formaPagamentoSelecionado.valorPagamento = 0;
-        }
-      });
-      this.formaPagamentoSelecionadoList = formaPagamentoSemFormaSelecionada;
+      this.formaPagamentoSelecionadoList.splice(this.formaPagamentoSelecionadoList.indexOf(formaPagamentoSelecionado), 1);
+      if(this.formaPagamentoSelecionadoList.length < 1){
+        this.isFirstCartao = true;
+      }
+    }
+    console.log(this.formaPagamentoSelecionadoList);
+  }
+
+  selecionaCupom(event, formaPagamentoSelecionado: FormaPagamento){
+    if(event.target.checked && formaPagamentoSelecionado?.cupom?.valor != null){
+      this.valorTotal -= this.formaPagamentoComCupom?.cupom?.valor;
+      this.selecionaCartao(event, formaPagamentoSelecionado);
+      formaPagamentoSelecionado.valorPagamento = this.formaPagamentoComCupom?.cupom?.valor;
+    } else if(event.target.checked == false){
+      this.valorTotal += this.formaPagamentoComCupom?.cupom?.valor;
+      this.mensagemCupom = [];
+      this.selecionaCartao(event, formaPagamentoSelecionado);
+    } else {
+      this.mensagemCupom = [];
+      this.mensagemCupom.push("É necessário validar o cupom");
+      event.target.checked = false;
     }
   }
 
@@ -122,7 +142,7 @@ export class SelectCreditCardComponent implements OnInit {
     if(this.formaPagamentoSelecionadoList.length > 0){
       return true;
     }else{
-      this.mensagens.push('É necessário escolher pelo menos um cartão.');
+      this.mensagens.push('É necessário escolher pelo menos uma forma de pagamento.');
       return false;
     }
   }
@@ -145,8 +165,10 @@ export class SelectCreditCardComponent implements OnInit {
   validarValorTotalPorFormaPagamentoSelecionado(): boolean{
     let valorAcumulado: number = 0;
     this.formaPagamentoSelecionadoList.forEach(formaPagamento => {
-      valorAcumulado += formaPagamento.valorPagamento;
-    })
+      if(formaPagamento?.cartaoCredito != null){
+        valorAcumulado += formaPagamento.valorPagamento;
+      }
+    });
 
     if(valorAcumulado !== this.valorTotal){
       this.mensagens.push('Valor de pagamento do cartao(s) não está igual a R$ ' + this.valorTotal.toFixed(2) + '.');
@@ -161,12 +183,15 @@ export class SelectCreditCardComponent implements OnInit {
 
   validaCupom(){
     this.mensagemCupom = [];
-    this.service.get(this.cupom, '/cupons').subscribe( resultado => {
+    this.service.get(this.formaPagamentoComCupom.cupom, '/cupons').subscribe( resultado => {
       if(resultado?.msg != null){
         this.mensagemCupom = this.util.getMensagensSeparadas2(resultado?.msg);
-        this.cupom.valor = null;
+        this.formaPagamentoComCupom.cupom.valor = null;
+        this.isMsgError = true;
       } else {
-        this.cupom = resultado?.entidades[0];
+        this.mensagemCupom.push("Cupom válido")
+        this.formaPagamentoComCupom.cupom = resultado?.entidades[0];
+        this.isMsgError = false;
       }
     });
   }

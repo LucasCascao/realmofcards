@@ -26,6 +26,11 @@ public class FormaPagamento extends EntidadeDominio {
     @Column(name = "fpa_valor_pagamento")
     private Double valorPagamento;
 
-    @Column(name = "fpa_registro_cartao")
-    private String registroCartao;
+    @ManyToOne()
+    @JoinColumn(name = "fpa_cupom_id")
+    private Cupom cupom;
+
+    @ManyToOne()
+    @JoinColumn(name = "fpa_cartao_credito_id")
+    private CartaoCredito cartaoCredito;
 }

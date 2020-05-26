@@ -35,15 +35,6 @@ public class CupomDAO implements IDAO {
 
         Cupom cupom = (Cupom) entidade;
 
-        if(Util.isNotNull(cupom.getTroca())
-            && Util.isNotNull(cupom.getTroca().getPedidoParaTroca())
-            && Util.isNotNull(cupom.getTroca().getPedidoParaTroca().getCliente())
-            && Util.isNotNull(cupom.getTroca().getPedidoParaTroca().getCliente().getId())){
-            Integer clienteId = cupom.getTroca().getPedidoParaTroca().getCliente().getId();
-            cupons.addAll(cupomRepository.findByTroca_PedidoParaTroca_Cliente_Id(clienteId));
-            return cupons;
-        }
-
         if(Util.isNotNull(cupom.getCodigo())){
             cupons.add(cupomRepository.findCupomByCodigo(cupom.getCodigo()));
             return cupons;
