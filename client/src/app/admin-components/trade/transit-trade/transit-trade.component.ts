@@ -1,6 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
-import {MockClient} from '../../../../mock/mock-cliente.model';
-import {MockCards} from '../../../../mock/mock-card.model';
+import { Troca } from 'src/model/domain/troca.model';
+import { UtilService } from 'src/services/util.service';
+import { StatusPedido } from 'src/model/domain/status-pedido.model';
+import { Pedido } from 'src/model/domain/pedido.model';
 
 @Component({
   selector: 'app-transit-trade',
@@ -9,14 +12,33 @@ import {MockCards} from '../../../../mock/mock-card.model';
 })
 export class TransitTradeComponent implements OnInit {
 
-  clients = new MockClient().pessoas;
+  trocas: Array<Troca>;
 
-  carta = new MockCards().cards[0];
-
-  constructor() { }
+  constructor(private service: UtilService) { }
 
   ngOnInit(): void {
-    this.carta.value = 52.45;
+    this.getTrocas();
+  }
+
+  getTrocas() {
+    const statusPedido: StatusPedido = new StatusPedido();
+    statusPedido.id = 9;
+    const pedido = new Pedido();
+    pedido.statusPedido = statusPedido;
+    const troca: Troca = new Troca();
+    troca.pedidoParaTroca = pedido;
+    this.service.get(troca, 'trocas').subscribe(resultado => {
+      this.trocas = resultado?.entidades;
+    });
+  }
+
+  acusarRecebimentoDoProduto(troca: Troca){
+    let status: StatusPedido = new StatusPedido();
+    status.id = 10;
+    troca.pedidoParaTroca.statusPedido = status;
+    this.service.update(troca, 'trocas').subscribe(() => {
+      document.location.reload();
+    });
   }
 
   filtrar(cartas: any) {

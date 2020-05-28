@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from './login/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +11,10 @@ export class AppComponent {
 
   public mostrarMenu = false;
 
-  constructor(private authService: AuthService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.authService.mostrarMenuEmitter.subscribe(
-      mostrar => this.mostrarMenu = mostrar
-    );
   }
 
 }

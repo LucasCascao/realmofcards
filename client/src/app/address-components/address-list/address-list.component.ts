@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilService } from 'src/services/util.service';
+import { Endereco } from 'src/model/domain/endereco.model';
+import { ActivatedRoute } from '@angular/router';
+import { Pessoa } from 'src/model/domain/pessoa.model';
+import { Status } from 'src/model/domain/status.model';
 
 @Component({
   selector: 'app-address-list',
@@ -7,30 +12,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddressListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: UtilService, private route: ActivatedRoute) { }
 
-  enderecos = [
-    {
-      logradouro : 'Rua Passos',
-      numero : '876',
-      bairro : 'Cidade Edson',
-      cidade : 'Suzano',
-      estado : 'SP',
-      cep : '08665-410',
-      complemento : 'Casa do muro laranja com o portão branco'
-    },
-    {
-      logradouro : 'Rua João Pereira dos Santos',
-      numero : '70',
-      bairro : 'Jd. Nova Poá',
-      cidade : 'Poá',
-      estado : 'SP',
-      cep : '08568-020',
-      complemento : 'Condominio Village 1'
-    }
-  ];
+  enderecos: Endereco[];
+
+  endereco: Endereco = new Endereco();
 
   ngOnInit(): void {
+    this.endereco.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
+    this.endereco.status = new Status();
+    this.endereco.status.id = 1;
+    this.getEnderecos();
+  }
+
+  async getEnderecos(){
+    await this.service.get( this.endereco, 'enderecos').subscribe( resultado => {
+      this.enderecos = resultado?.entidades;
+    });
+  }
+
+  seleciona(enderecoSelecionado: Endereco) {
+    sessionStorage.setItem('enderecoSelecionado', JSON.stringify(enderecoSelecionado));
   }
 
 }

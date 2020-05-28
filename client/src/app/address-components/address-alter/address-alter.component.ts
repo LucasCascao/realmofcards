@@ -1,4 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
+import {UtilService} from '../../../services/util.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Endereco} from '../../../model/domain/endereco.model';
+import {Pessoa} from '../../../model/domain/pessoa.model';
+import {Util} from '../../shared/app.util';
+import {Estado} from '../../../model/domain/estado.model';
 
 @Component({
   selector: 'app-address-alter',
@@ -7,9 +14,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddressAlterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: UtilService, private route: ActivatedRoute, private router: Router, private util: Util) { }
+
+  endereco: Endereco = new Endereco();
+
+  estados: Estado[];
+
+  mensagens = [];
 
   ngOnInit(): void {
+    this.endereco = JSON.parse(sessionStorage.getItem('enderecoSelecionado'));
+    this.endereco.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
+    this.estados = [];
+    this.getEstados();
   }
 
+  getEstados() {
+    this.service.get(new Estado(), 'estados').subscribe( resultado => {
+      this.estados = resultado?.entidades;
+      this.getEnderecos();
+    });
+  }
+
+  async getEnderecos() {
+    await this.service.get( this.endereco, 'enderecos').subscribe( resultado => {
+      this.endereco = resultado?.entidades[0];
+    });
+  }
+
+  async alterarEndereco() {
+    this.mensagens = [];
+    await this.service.update(this.endereco, 'enderecos').subscribe(resultado => {
+      if (resultado.msg == null) {
+        this.router.navigate(['/app-logado/select-address']);
+      } else {
+        this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
+      }
+    });
+  }
 }

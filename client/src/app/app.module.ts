@@ -21,7 +21,6 @@ import { AddressAlterComponent } from './address-components/address-alter/addres
 import { AddressDeleteComponent } from './address-components/address-delete/address-delete.component';
 import { AddressListComponent } from './address-components/address-list/address-list.component';
 import { CreditcardRegisterComponent } from './buy-components/creditcard/creditcard-register/creditcard-register.component';
-import { CreditcardAlterComponent } from './buy-components/creditcard/creditcard-alter/creditcard-alter.component';
 import { CreditcardDeleteComponent } from './buy-components/creditcard/creditcard-delete/creditcard-delete.component';
 import { CreditcardListComponent } from './buy-components/creditcard/creditcard-list/creditcard-list.component';
 import { UserPasswordAlterComponent } from './user-components/user-password-alter/user-password-alter.component';
@@ -67,6 +66,17 @@ import { ProviderInativeComponent } from './admin-components/provider/provider-i
 import { TicketListComponent } from './admin-components/tickets/ticket-list/ticket-list.component';
 import { TicketDevolutionListComponent } from './admin-components/tickets/ticket-devolution-list/ticket-devolution-list.component';
 import { TicketTradeListComponent } from './admin-components/tickets/ticket-trade-list/ticket-trade-list.component';
+import {ClienteService} from '../services/cliente.service';
+import {HttpClientModule} from '@angular/common/http';
+import {Util} from './shared/app.util';
+import {UsuarioService} from '../services/usuario.service';
+import { AppLogadoComponent } from './app-logado/app-logado.component';
+import { SelectCreditCardComponent } from './buy-components/select-credit-card/select-credit-card.component';
+import { SelectAddressComponent } from './buy-components/select-address/select-address.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { ClientOrdersComponent } from './admin-components/clients/client-orders/client-orders.component';
+
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
 @NgModule({
   declarations: [
@@ -86,7 +96,6 @@ import { TicketTradeListComponent } from './admin-components/tickets/ticket-trad
     AddressDeleteComponent,
     AddressListComponent,
     CreditcardRegisterComponent,
-    CreditcardAlterComponent,
     CreditcardDeleteComponent,
     CreditcardListComponent,
     UserPasswordAlterComponent,
@@ -129,15 +138,21 @@ import { TicketTradeListComponent } from './admin-components/tickets/ticket-trad
     ProviderInativeComponent,
     TicketListComponent,
     TicketDevolutionListComponent,
-    TicketTradeListComponent
+    TicketTradeListComponent,
+    AppLogadoComponent,
+    SelectCreditCardComponent,
+    SelectAddressComponent,
+    ClientOrdersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(ROUTES),
-    FormsModule
+    FormsModule,
+    NgxMaskModule.forRoot(options),
+    HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, ClienteService, Util, UsuarioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

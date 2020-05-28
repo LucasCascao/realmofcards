@@ -11,8 +11,8 @@
             <div class="card-body">
               <p>Devolução do produto: carta <strong>{{carta.nome}}</strong>, pertecente ao cliente <strong>{{cliente.firstName}}.</strong>.</p>
               <p>Clique no botão abaixo para confirmar a troca.</p>
-              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['/user-orders']" value="Cancelar">
-              <input type="button" class="btn btn-danger btn-lg float-right" [routerLink]="['/user-devolution-finalization']" value="Confirmar Devolução">
+              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['../user-orders']" value="Cancelar">
+              <input type="button" class="btn btn-danger btn-lg float-right" [routerLink]="['../user-devolution-finalization']" value="Confirmar Devolução">
             </div>
             <!--/card-block-->
           </div>

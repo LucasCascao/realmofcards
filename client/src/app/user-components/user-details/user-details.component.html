@@ -7,32 +7,35 @@
     <div class="col-md-9 personal-info">
 
       <div class="form-group">
-        <label class="col-lg-10 control-label"><strong>Primeiro nome:</strong> Lucas</label>
+        <label class="col-lg-10 control-label"><strong>Primeiro nome:</strong> {{client?.nome}}</label>
       </div>
       <div class="form-group">
-        <label class="col-lg-10 control-label"><strong>Ultimo nome:</strong> De Almeida Rama Cascão</label>
+        <label class="col-lg-10 control-label"><strong>Ultimo nome:</strong> {{client?.sobrenome}}</label>
       </div>
       <div class="form-group">
-        <label class="col-lg-10 control-label"><strong>Email:</strong> lucas.cascao@gmail.com</label>
+        <label class="col-lg-10 control-label"><strong>Email:</strong> {{client?.usuario?.email}}</label>
       </div>
       <div class="form-group">
-        <label class="col-lg-10 control-label"><strong>CPF:</strong> 433.836.258-85</label>
+        <label class="col-lg-10 control-label"><strong>CPF:</strong> {{client?.cpf | mask: '999.999.999-99'}}</label>
       </div>
       <div class="form-group">
-        <label class="col-md-10 control-label"><strong>Nome de usuário:</strong> lucascascao</label>
+        <label class="col-lg-10 control-label"><strong>Data de Nascimento:</strong> {{client?.dataNascimento | date: 'dd/MM/yyyy'}}</label>
       </div>
       <div class="form-group">
-        <a class="col-md-3 btn btn-secondary" [routerLink]="['/address-list']">Endereços cadastrados</a>
+        <label class="col-lg-10 control-label"><strong>Sexo:</strong> {{client?.sexo}}</label>
       </div>
       <div class="form-group">
-        <a class="col-md-3 btn btn-secondary" [routerLink]="['/creditcard-list']">Cartões cadastrados</a>
+        <a class="col-md-3 btn btn-secondary" [routerLink]="['/app-logado/address-list']" id="btn_enderecos">Endereços cadastrados</a>
+      </div>
+      <div class="form-group">
+        <a class="col-md-3 btn btn-secondary" [routerLink]="['/app-logado/creditcard-list']" id="btn_cartoes">Cartões cadastrados</a>
       </div>
       <div class="form-group">
         <label class="col-md-10 control-label"></label>
         <div class="col-md-8">
-          <input type="button" class="btn btn-secondary btn-lg float-right" [routerLink]="['/user-alter']" value="Alterar">
+          <input type="button" class="btn btn-secondary btn-lg float-right" [routerLink]="['/app-logado/user-alter']" id="btn_pes_alterar" value="Alterar">
           <span></span>
-          <input type="button" class="btn btn-danger btn-lg float-left" [routerLink]="['/user-delete']" value="Excluir Conta">
+          <input type="button" class="btn btn-danger btn-lg float-left" [routerLink]="['/app-logado/user-delete']" id="btn_pes_excluir" value="Inativar Conta">
         </div>
       </div>
     </div>

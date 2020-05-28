@@ -1,6 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {MockClient} from '../../../../mock/mock-cliente.model';
 import {MockCards} from '../../../../mock/mock-card.model';
+import {Pedido} from '../../../../model/domain/pedido.model';
+import {UtilService} from '../../../../services/util.service';
+import {StatusPedido} from '../../../../model/domain/status-pedido.model';
+import {Troca} from '../../../../model/domain/troca.model';
 
 @Component({
   selector: 'app-request-trade',
@@ -9,14 +14,42 @@ import {MockCards} from '../../../../mock/mock-card.model';
 })
 export class RequestTradeComponent implements OnInit {
 
-  clients = new MockClient().pessoas;
+  trocas: Array<Troca>;
 
-  carta = new MockCards().cards[0];
-
-  constructor() { }
+  constructor(private service: UtilService) { }
 
   ngOnInit(): void {
-    this.carta.value = 52.45;
+    this.getTrocas();
+  }
+
+  getTrocas() {
+    const statusPedido: StatusPedido = new StatusPedido();
+    statusPedido.id = 7;
+    const pedido = new Pedido();
+    pedido.statusPedido = statusPedido;
+    const troca: Troca = new Troca();
+    troca.pedidoParaTroca = pedido;
+    this.service.get(troca, 'trocas').subscribe(resultado => {
+      this.trocas = resultado?.entidades;
+    });
+  }
+
+  aprovarRequisicaoTroca(troca: Troca){
+    let status: StatusPedido = new StatusPedido();
+    status.id = 9;
+    troca.pedidoParaTroca.statusPedido = status;
+    this.service.update(troca, 'trocas').subscribe(() => {
+      document.location.reload();
+    });
+  }
+
+  rejeitarRequisicaoTroca(troca: Troca){
+    let status: StatusPedido = new StatusPedido();
+    status.id = 8;
+    troca.pedidoParaTroca.statusPedido = status;
+    this.service.update(troca, 'trocas').subscribe(() => {
+      document.location.reload();
+    });
   }
 
   filtrar(cartas: any) {
