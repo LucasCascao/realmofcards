@@ -1,8 +1,8 @@
 package br.edu.les.realmofcard.strategy.pedido;
 
 import br.edu.les.realmofcard.strategy.IStrategy;
-import br.edu.les.realmofcard.strategy.email.EnviaEmailPedidoPagamentoAprovado;
-import br.edu.les.realmofcard.strategy.email.EnviaEmailPedidoPagamentoRejeitado;
+import br.edu.les.realmofcard.strategy.email.pedido.EnviaEmailPedidoPagamentoAprovado;
+import br.edu.les.realmofcard.strategy.email.pedido.EnviaEmailPedidoPagamentoRejeitado;
 import br.edu.les.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

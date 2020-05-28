@@ -1,21 +1,17 @@
-package br.edu.les.realmofcard.strategy.email;
+package br.edu.les.realmofcard.strategy.email.troca;
 
 import br.edu.les.realmofcard.strategy.IStrategy;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.edu.les.realmofcard.domain.EntidadeDominio;
-import br.edu.les.realmofcard.domain.Mensagem;
-import br.edu.les.realmofcard.domain.Pedido;
-import br.edu.les.realmofcard.domain.Pessoa;
-import br.edu.les.realmofcard.domain.Usuario;
+import br.edu.les.realmofcard.domain.*;
 import br.edu.les.realmofcard.repository.PessoaRepository;
 import br.edu.les.realmofcard.util.EmailSender;
-import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Component
-public class EnviaEmailPedidoPagamentoRejeitado implements IStrategy {
+public class EnviaEmailTrocaCodigoRastreio implements IStrategy {
 	
 	@Autowired
 	private EmailSender emailSender;
@@ -26,9 +22,11 @@ public class EnviaEmailPedidoPagamentoRejeitado implements IStrategy {
     @Override
     public String processar(EntidadeDominio entidade) {
     	
-    	if(entidade instanceof Pedido) {
-    		
-    		Pedido pedido = (Pedido) entidade;
+    	if(entidade instanceof Troca) {
+
+			Troca troca = (Troca) entidade;
+
+    		Pedido pedido = troca.getPedidoParaTroca();
     		
     		Usuario usuario = pedido.getCliente().getUsuario();
     		
@@ -38,12 +36,13 @@ public class EnviaEmailPedidoPagamentoRejeitado implements IStrategy {
     		
     		StringBuilder mensagemTexto = new StringBuilder();
     		
-    		mensagem.setAssunto("Pagamento do pedido " + pedido.getCodigoPedido() + " foi rejeitado.");
-    		
+    		mensagem.setAssunto("Solicitação de troca aprovada do pedido " + pedido.getCodigoPedido() + ".");
+
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
-    		mensagemTexto.append("este email foi enviado para informar que o pagamento não foi aprovado para o pedido " + pedido.getCodigoPedido() + ".\n");
-    		mensagemTexto.append("Caso queira realizar a compra, peço que realize novamente o pedido em nosso site.\n\n");
-    		mensagemTexto.append("Realm of Cards agradece sua coompreenção e te desejamos um ótimo dia.");
+    		mensagemTexto.append("este email foi enviado para diponibilizar o código de rastreio para o você possa enviar o item(s) para troca.\n");
+    		mensagemTexto.append("Seu código de rastrio é " + troca.getRastreio().getCodigoRastreio() + ".\n");
+    		mensagemTexto.append("Caso queira realizar outra compra, peço que realize o pedido em nosso site.\n\n");
+    		mensagemTexto.append("Realm of Cards agradece sua preferência e te desejamos um ótimo dia.");
     		
     		mensagem.setMensagem(mensagemTexto);
     		

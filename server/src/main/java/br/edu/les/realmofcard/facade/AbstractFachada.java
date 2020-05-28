@@ -179,6 +179,12 @@ public class AbstractFachada {
     private AtualizaItensPedidos atualizaItensPedidos;
 
     @Autowired
+    private MudaStatusCupom mudaStatusCupom;
+
+    @Autowired
+    private EnviaEmailStatusDoPedido enviaEmailStatusDoPedido;
+
+    @Autowired
     private ValidaDadosTroca validaDadosTroca;
 
     @Autowired
@@ -191,7 +197,7 @@ public class AbstractFachada {
     private CalculaValorTroca calculaValorTroca;
 
     @Autowired
-    private GeraCodigoRastreio geraCodigoRastreio;
+    private EnviaEmailStatusDaTroca enviaEmailStatusDaTroca;
 
     @Autowired
     private ValidaDadosCupom validaDadosCupom;
@@ -203,7 +209,7 @@ public class AbstractFachada {
     private ValidaExistenciaCupom validaExistenciaCupom;
 
     @Autowired
-    private ValidaValorCupom validaValorCupom;
+    private GeraCupomComValorRestante geraCupomComValorRestante;
 
 
     public AbstractFachada(){
@@ -387,12 +393,15 @@ public class AbstractFachada {
         rnsPedidoSalvar.add(geraCodigoPedido);
         rnsPedidoSalvar.add(calcularDataEntrega);
         rnsPedidoSalvar.add(retiraItemEstoque);
-        rnsPedidoSalvar.add(validaValorCupom);
+        rnsPedidoSalvar.add(geraCupomComValorRestante);
+        rnsPedidoSalvar.add(mudaStatusCupom);
+        rnsPedidoSalvar.add(enviaEmailStatusDoPedido);
 
         List<IStrategy> rnsPedidoAlterar = new ArrayList<>();
 
         rnsPedidoAlterar.add(validaDadosPedido);
         rnsPedidoAlterar.add(retornaItemEstoque);
+        rnsPedidoAlterar.add(enviaEmailStatusDoPedido);
 
         Map<String, List<IStrategy>> mapaPedido = new HashMap<>();
 
@@ -408,12 +417,13 @@ public class AbstractFachada {
         rnsTrocaSalvar.add(validaDadosTroca);
         rnsTrocaSalvar.add(retiraQuantidadeItemDoPedido);
         rnsTrocaSalvar.add(calculaValorTroca);
+        rnsTrocaSalvar.add(enviaEmailStatusDaTroca);
 
         List<IStrategy> rnsTrocaAlterar = new ArrayList<>();
 
         rnsTrocaAlterar.add(retiraQuantidadeItemDoPedido);
         rnsTrocaAlterar.add(retornaQuantidadeItemPedidoParaEstoque);
-        rnsTrocaAlterar.add(geraCodigoRastreio);
+        rnsTrocaAlterar.add(enviaEmailStatusDaTroca);
 
         Map<String, List<IStrategy>> mapaTroca = new HashMap<>();
 

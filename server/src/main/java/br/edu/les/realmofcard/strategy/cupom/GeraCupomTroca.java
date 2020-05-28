@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 import br.edu.les.realmofcard.domain.*;
 import br.edu.les.realmofcard.util.GeradorCodigo;
 
+import java.time.LocalDate;
+
 @Component
 public class GeraCupomTroca implements IStrategy {
 
 	@Override
 	public String processar(final EntidadeDominio entidade) {
-
-		StringBuilder msg = new StringBuilder();
 
 		if(entidade instanceof Cupom){
 
@@ -20,9 +20,8 @@ public class GeraCupomTroca implements IStrategy {
 
 			cupom.setCodigo(GeradorCodigo.gerarCodigoCupom());
 			cupom.setStatus(Status.builder().id(1).build());
-
+			cupom.setDataCriacao(LocalDate.now());
 		}
-
-		return msg.toString();
+		return null;
 	}
 }

@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.edu.les.realmofcard.domain.*;
-import br.edu.les.realmofcard.strategy.email.EnviaEmailTrocaCodigoRastreio;
+import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailTrocaCodigoRastreio;
 import br.edu.les.realmofcard.dao.RastreioDAO;
 import br.edu.les.realmofcard.util.GeradorCodigo;
 
 @Component
-public class GeraCodigoRastreio implements IStrategy {
+public class GeraCodigoRastreioTroca implements IStrategy {
 
 	@Autowired
 	private RastreioDAO rastreioDAO;
@@ -32,9 +32,9 @@ public class GeraCodigoRastreio implements IStrategy {
 				Rastreio rastreio = new Rastreio();
 
 				rastreio.setCodigoRastreio(GeradorCodigo.gerarCodigoRastreio());
-				rastreio.setTroca(troca);
 				rastreio = (Rastreio) rastreioDAO.salvar(rastreio);
-				enviaEmailTrocaCodigoRastreio.processar(rastreio);
+				troca.setRastreio(rastreio);
+				enviaEmailTrocaCodigoRastreio.processar(troca);
 			}
 		}
 

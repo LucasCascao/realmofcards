@@ -19,17 +19,15 @@
           <tr>
             <th scope="col">Nome</th>
             <th scope="col">Email</th>
-            <th scope="col">Qntd Pedidos</th>
             <th scope="col">Pedidos</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let client of clients">
-            <td>{{client?.nome}}</td>
+            <td class="text-center">{{client?.nome}} {{client?.sobrenome}}</td>
             <td>{{client?.usuario?.email}}</td>
-            <td>{{getPedidoPorCliente(client)}}</td>
             <td>
-              <button class="btn btn-success mb-md-3">Ver Pedidos</button>
+              <button class="btn btn-success mb-md-3" (click)="verPedidosDoCliente(client)">Ver Pedidos</button>
             </td>
           </tr>
         </tbody>

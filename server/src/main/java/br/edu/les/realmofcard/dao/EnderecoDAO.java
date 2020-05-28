@@ -40,11 +40,8 @@ public class EnderecoDAO implements IDAO {
 
     @Override
     public void excluir(EntidadeDominio entidade) {
-        if (entidade instanceof Endereco){
-            Endereco endereco = (Endereco) entidade;
-            endereco.setStatus(Status.builder().id(2).build());
-            alterar(endereco);
-        }
+        Endereco endereco = (Endereco) entidade;
+        enderecoRepository.inativaEndereco(endereco.getId());
     }
 
     @Override
@@ -52,7 +49,7 @@ public class EnderecoDAO implements IDAO {
         if (entidade instanceof Endereco){
             List<EntidadeDominio> enderecos = new ArrayList<>();
             Endereco endereco = (Endereco) entidade;
-            if(Util.isNotNull(endereco.getId()) && Util.isNotNull(endereco.getStatus())){
+            if(Util.isNotNull(endereco.getId())){
                 enderecos.add(enderecoRepository.findById(endereco.getId()).get());
                 return enderecos;
             }
@@ -60,6 +57,7 @@ public class EnderecoDAO implements IDAO {
                     && Util.isNotNull(endereco.getPessoa().getId())
                     && Util.isNotNull(endereco.getStatus())){
                 enderecos.addAll(enderecoRepository.findEnderecoByPessoaAndStatus(endereco.getPessoa().getId(), endereco.getStatus().getId()));
+                return enderecos;
             }
             enderecoRepository.findByPessoa_Id(endereco.getPessoa().getId())
                     .forEach( resultadoEndereco -> enderecos.add(resultadoEndereco));

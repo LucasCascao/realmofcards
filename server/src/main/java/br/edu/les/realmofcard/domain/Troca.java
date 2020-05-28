@@ -38,4 +38,8 @@ public class Troca extends EntidadeDominio{
     @ManyToOne()
     @JoinColumn(name = "trc_cupom_id")
     private Cupom cupom;
+
+    @ManyToOne()
+    @JoinColumn(name = "trc_rastreio_id")
+    private Rastreio rastreio;
 }

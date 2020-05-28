@@ -1,17 +1,16 @@
-package br.edu.les.realmofcard.strategy.email;
-
-import br.edu.les.realmofcard.strategy.IStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+package br.edu.les.realmofcard.strategy.email.pedido;
 
 import br.edu.les.realmofcard.domain.*;
 import br.edu.les.realmofcard.repository.PessoaRepository;
+import br.edu.les.realmofcard.strategy.IStrategy;
 import br.edu.les.realmofcard.util.EmailSender;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Log4j2
 @Component
-public class EnviaEmailTrocaAprovadaComCupom implements IStrategy {
+public class EnviaEmailPedidoPendentePagamento implements IStrategy {
 	
 	@Autowired
 	private EmailSender emailSender;
@@ -22,11 +21,9 @@ public class EnviaEmailTrocaAprovadaComCupom implements IStrategy {
     @Override
     public String processar(EntidadeDominio entidade) {
     	
-    	if(entidade instanceof Troca) {
+    	if(entidade instanceof Pedido) {
 
-			Troca troca = (Troca) entidade;
-
-    		Pedido pedido = troca.getPedidoParaTroca();
+    		Pedido pedido = (Pedido) entidade;
     		
     		Usuario usuario = pedido.getCliente().getUsuario();
     		
@@ -36,11 +33,10 @@ public class EnviaEmailTrocaAprovadaComCupom implements IStrategy {
     		
     		StringBuilder mensagemTexto = new StringBuilder();
     		
-    		mensagem.setAssunto("Solicitação de troco do pedido " + pedido.getCodigoPedido() + " foi aprovado.");
+    		mensagem.setAssunto("Pedido pendente pagamento.");
 
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
-    		mensagemTexto.append("este email foi enviado para informar que a solicitação de troca foi aprovado para o pedido " + pedido.getCodigoPedido() + ".\n");
-    		mensagemTexto.append("Seu código de cupom é " + troca.getCupom().getCodigo() + " no valor de R$ " + troca.getCupom().getValor() + ".\n");
+    		mensagemTexto.append("este email foi enviado para comunicar que seu pedido está sendo processado e está aguardando o recebimento do pagamento.\n");
     		mensagemTexto.append("Caso queira realizar outra compra, peço que realize o pedido em nosso site.\n\n");
     		mensagemTexto.append("Realm of Cards agradece sua preferência e te desejamos um ótimo dia.");
     		

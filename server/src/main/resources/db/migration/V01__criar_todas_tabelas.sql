@@ -49,6 +49,7 @@ CREATE TABLE troca (
     trc_id                  SERIAL NOT NULL,
     trc_subtotal            DECIMAL(8,2) NOT NULL,
     trc_cupom_id            INT,
+    trc_rastreio_id         INT,
     trc_pedido_id           INT NOT NULL
 );
 
@@ -61,8 +62,7 @@ CREATE TABLE item_troca (
 
 CREATE TABLE rastreio (
     rto_id                  SERIAL NOT NULL,
-    rto_codigo_rastreio     VARCHAR(20) NOT NULL,
-    rto_troca_id            INT NOT NULL
+    rto_codigo_rastreio     VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE cidade (
@@ -72,11 +72,12 @@ CREATE TABLE cidade (
 );
 
 CREATE TABLE cupom (
-    cup_id          SERIAL NOT NULL,
-    cup_codigo      VARCHAR(60) NOT NULL,
-    cup_valor       DECIMAL(8, 2) NOT NULL,
-    cup_pessoa_id   INT,
-    cup_status_id   INT NOT NULL
+    cup_id              SERIAL NOT NULL,
+    cup_codigo          VARCHAR(60) NOT NULL,
+    cup_valor           DECIMAL(8, 2) NOT NULL,
+    cup_data_criacao    DATE NOT NULL,
+    cup_pessoa_id       INT,
+    cup_status_id       INT NOT NULL
 );
 
 CREATE TABLE endereco (
@@ -133,6 +134,7 @@ CREATE TABLE jogo_categoria_carta (
 
 CREATE TABLE pedido (
     ped_id                     SERIAL NOT NULL,
+    ped_codigo_pedido          VARCHAR(50) NOT NULL,
     ped_administrador_id       INT,
     ped_cliente_id             INT NOT NULL,
     ped_status_pedido_id       INT NOT NULL,
@@ -140,7 +142,7 @@ CREATE TABLE pedido (
     ped_data_compra            DATE NOT NULL,
     ped_data_estimada          DATE NOT NULL,
     ped_endereco_id            INT NOT NULL,
-    ped_codigo_pedido          varchar(50) not null
+    ped_rastreio_id            INT
 );
 
 CREATE TABLE pessoa (
@@ -347,6 +349,10 @@ ALTER TABLE pedido
     ADD CONSTRAINT pedido_endereco_fk FOREIGN KEY ( ped_endereco_id )
         REFERENCES endereco ( end_id );
 
+ALTER TABLE pedido
+    ADD CONSTRAINT pedido_rastreio_fk FOREIGN KEY ( ped_rastreio_id )
+        REFERENCES rastreio ( rto_id );
+
 ALTER TABLE forma_pagamento_pedido
     ADD CONSTRAINT pedido_forma_pagamento_fk FOREIGN KEY ( fpp_forma_pagamento_id )
         REFERENCES forma_pagamento ( fpa_id );
@@ -383,6 +389,6 @@ ALTER TABLE troca
     ADD CONSTRAINT troca_cupom_fk FOREIGN KEY ( trc_cupom_id )
         REFERENCES cupom ( cup_id );
 
-ALTER TABLE rastreio
-    ADD CONSTRAINT rastreio_troca_fk FOREIGN KEY ( rto_troca_id )
-        REFERENCES troca ( trc_id );
+ALTER TABLE troca
+    ADD CONSTRAINT rastreio_troca_fk FOREIGN KEY ( trc_rastreio_id )
+        REFERENCES rastreio ( rto_id );

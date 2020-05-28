@@ -1,4 +1,4 @@
-package br.edu.les.realmofcard.strategy.email;
+package br.edu.les.realmofcard.strategy.email.troca;
 
 import br.edu.les.realmofcard.domain.*;
 import br.edu.les.realmofcard.repository.PessoaRepository;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Log4j2
 @Component
-public class EnviaEmailCupomComValorRestante implements IStrategy {
+public class EnviaEmailSolicitacaoTroca implements IStrategy {
 	
 	@Autowired
 	private EmailSender emailSender;
@@ -21,11 +21,13 @@ public class EnviaEmailCupomComValorRestante implements IStrategy {
     @Override
     public String processar(EntidadeDominio entidade) {
     	
-    	if(entidade instanceof Cupom) {
+    	if(entidade instanceof Troca) {
 
-    		Cupom cupom = (Cupom) entidade;
+			Troca troca = (Troca) entidade;
+
+    		Pedido pedido = troca.getPedidoParaTroca();
     		
-    		Usuario usuario = cupom.getPessoa().getUsuario();
+    		Usuario usuario = pedido.getCliente().getUsuario();
     		
     		Pessoa cliente = pessoaRepository.findPessoaByUsuario_Id(usuario.getId());
     		
@@ -33,11 +35,11 @@ public class EnviaEmailCupomComValorRestante implements IStrategy {
     		
     		StringBuilder mensagemTexto = new StringBuilder();
     		
-    		mensagem.setAssunto("Foi gerado um cupom com o valor do cupom restante.");
+    		mensagem.setAssunto("Solicitação de troco do pedido " + pedido.getCodigoPedido() + " pendente.");
 
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
-    		mensagemTexto.append("Devido restar um valor do cupom utilizado sua compra anterior foi gerado um novo cupom com o valor restante.\n");
-    		mensagemTexto.append("Seu código de cupom é " + cupom.getCodigo() + " no valor de R$ " + cupom.getValor() + ".\n");
+    		mensagemTexto.append("este email foi enviado para confirmar que sua solicitação de troca do pedido " + pedido.getCodigoPedido() + " foi realizada com sucesso.\n");
+    		mensagemTexto.append("Nesse momento sua solicitação está pendente de aprovação, pedimos que aguarde até 48 horas para finalizarmos a análise do pedido.\n");
     		mensagemTexto.append("Caso queira realizar outra compra, peço que realize o pedido em nosso site.\n\n");
     		mensagemTexto.append("Realm of Cards agradece sua preferência e te desejamos um ótimo dia.");
     		

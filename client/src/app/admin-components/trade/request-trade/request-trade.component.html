@@ -40,8 +40,9 @@
                     <p class="card-text"><strong>Email:</strong> {{troca?.pedidoParaTroca?.cliente?.usuario?.email}}</p>
                     <p class="card-text"><strong>Data da compra:</strong> {{troca?.pedidoParaTroca?.dataCompra | date: 'dd/mm/yyyy'}}</p>
                     <p class="card-text" *ngFor="let formaPagamento of troca?.pedidoParaTroca?.formaPagamentoList">
-                      <strong>Cartão final {{formaPagamento?.registroCartao}}:</strong> {{formaPagamento.valorPagamento | currency: 'BRL': true}}
+                      <strong>Cartão com final {{formaPagamento?.cartaoCredito?.numero}}:</strong> {{formaPagamento.valorPagamento | currency: 'BRL': true}}
                     </p>
+                    <p><strong>Valor da troca:</strong> {{troca?.subTotal | currency: 'BRL': true}}</p>
                   </div>
                 </div>
               </div>

@@ -3,17 +3,15 @@ package br.edu.les.realmofcard.strategy.troca;
 import java.util.Set;
 
 import br.edu.les.realmofcard.dao.PedidoDAO;
-import br.edu.les.realmofcard.repository.PedidoRepository;
 import br.edu.les.realmofcard.strategy.IStrategy;
 import br.edu.les.realmofcard.strategy.cupom.GeraCupomTroca;
-import br.edu.les.realmofcard.strategy.email.EnviaEmailTrocaAprovadaComCupom;
+import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailTrocaAprovadaComCupom;
 import br.edu.les.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.edu.les.realmofcard.domain.*;
 import br.edu.les.realmofcard.dao.CupomDAO;
-import br.edu.les.realmofcard.repository.CupomRepository;
 import br.edu.les.realmofcard.repository.TrocaRepository;
 
 @Component

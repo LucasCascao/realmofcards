@@ -8,4 +8,5 @@ export class Cupom {
   valor: number;
   status: Status;
   pessoa: Pessoa;
+  dataCriacao: Date;
 }

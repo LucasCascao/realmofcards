@@ -3,6 +3,7 @@ import { UtilService } from 'src/services/util.service';
 import { Endereco } from 'src/model/domain/endereco.model';
 import { ActivatedRoute } from '@angular/router';
 import { Pessoa } from 'src/model/domain/pessoa.model';
+import { Status } from 'src/model/domain/status.model';
 
 @Component({
   selector: 'app-address-list',
@@ -19,6 +20,8 @@ export class AddressListComponent implements OnInit {
 
   ngOnInit(): void {
     this.endereco.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
+    this.endereco.status = new Status();
+    this.endereco.status.id = 1;
     this.getEnderecos();
   }
 

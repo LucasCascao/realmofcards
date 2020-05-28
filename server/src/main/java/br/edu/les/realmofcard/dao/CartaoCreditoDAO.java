@@ -32,11 +32,8 @@ public class CartaoCreditoDAO implements IDAO {
 
     @Override
     public void excluir(EntidadeDominio entidade) {
-        if(entidade instanceof CartaoCredito){
-            CartaoCredito cartaoCredito = (CartaoCredito) entidade;
-            cartaoCredito.setStatus(Status.builder().id(2).build());
-            alterar(cartaoCredito);
-        }
+        CartaoCredito cartaoCredito = (CartaoCredito) entidade;
+        cartaoCreditoRepository.inativaCartaoCredito(cartaoCredito.getId());
     }
 
     @Override
@@ -44,12 +41,16 @@ public class CartaoCreditoDAO implements IDAO {
         if(entidade instanceof CartaoCredito){
             List<EntidadeDominio> cartoesCredito = new ArrayList<>();
             CartaoCredito cartaoCredito = (CartaoCredito) entidade;
-
             if(Util.isNotNull(cartaoCredito.getId())){
                 cartoesCredito.add(cartaoCreditoRepository.findById(cartaoCredito.getId()).get());
                 return cartoesCredito;
             }
+            if(Util.isNotNull(cartaoCredito.getPessoa()) && Util.isNotNull(cartaoCredito.getPessoa().getId())
+                && Util.isNotNull(cartaoCredito.getStatus()) && Util.isNotNull(cartaoCredito.getStatus().getId())){
 
+                cartoesCredito.addAll(cartaoCreditoRepository.findEnderecoByPessoaAndStatus(cartaoCredito.getPessoa().getId(), cartaoCredito.getStatus().getId()));
+                return cartoesCredito;
+            }
             cartaoCreditoRepository.findByPessoa_Id(cartaoCredito.getPessoa().getId())
                     .forEach(resultado -> cartoesCredito.add(resultado));
             return cartoesCredito;

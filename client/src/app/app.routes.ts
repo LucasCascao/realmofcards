@@ -58,6 +58,7 @@ import {TicketTradeListComponent} from './admin-components/tickets/ticket-trade-
 import {AppLogadoComponent} from './app-logado/app-logado.component';
 import {SelectCreditCardComponent} from './buy-components/select-credit-card/select-credit-card.component';
 import {SelectAddressComponent} from './buy-components/select-address/select-address.component';
+import { ClientOrdersComponent } from './admin-components/clients/client-orders/client-orders.component';
 
 export const ROUTES: Routes = [
   {path: '', component: LoginComponent},
@@ -118,7 +119,8 @@ export const ROUTES: Routes = [
         {path: 'provider-delete', component: ProviderInativeComponent},
         {path: 'provider-list', component: ProviderListComponent},
         {path: 'ticket-devolution-list', component: TicketDevolutionListComponent},
-        {path: 'ticket-trade-list', component: TicketTradeListComponent}
+        {path: 'ticket-trade-list', component: TicketTradeListComponent},
+        {path: 'client-orders', component: ClientOrdersComponent}
       ]},
     ]},
   {path: 'user-register', component: UserRegisterComponent},

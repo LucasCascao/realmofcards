@@ -32,11 +32,6 @@ public class RastreioDAO implements IDAO {
         List<EntidadeDominio> rastrios = new ArrayList<>();
         if(entidade instanceof Rastreio){
             Rastreio rastreio = (Rastreio) entidade;
-
-            if(rastreio.getTroca() != null){
-                rastreio.setCodigoRastreio(rastreioRepository.findByTroca_Id(rastreio.getTroca().getId()).getCodigoRastreio());
-            }
-
             rastreioRepository.findAll().forEach( bandeira -> rastrios.add(bandeira));
             return rastrios;
         } else return null;

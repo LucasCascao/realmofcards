@@ -55,8 +55,8 @@
                 valor pago <strong>{{formaPagamento?.valorPagamento | currency: 'BRL': true}}</strong>.
               </p>
               <p class="card-text" *ngIf="formaPagamento?.cupom != null">
-                <strong>Código do cupom:</strong> <strong>{{formaPagamento?.cupom?.codigo}}</strong>,
-                valor descontado <strong>{{formaPagamento?.cupom?.valor | currency: 'BRL': true}}</strong>.
+                <strong>Código do cupom:</strong> {{formaPagamento?.cupom?.codigo}},
+                valor descontado <strong>{{formaPagamento?.valorPagamento | currency: 'BRL': true}}</strong>.
               </p>
             </div>
           </div>

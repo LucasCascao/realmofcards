@@ -85,7 +85,7 @@ export class ProductTradeComponent implements OnInit {
         }
       });
     } else {
-      this.mensagens.push('Deve ser selecionado pelo menos um produto.')
+      this.mensagens.push('Deve ser selecionado pelo menos um produto.');
     }
   }
 }

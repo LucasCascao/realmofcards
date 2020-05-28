@@ -1,17 +1,21 @@
-package br.edu.les.realmofcard.strategy.email;
+package br.edu.les.realmofcard.strategy.email.pedido;
 
 import br.edu.les.realmofcard.strategy.IStrategy;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.edu.les.realmofcard.domain.*;
+import br.edu.les.realmofcard.domain.EntidadeDominio;
+import br.edu.les.realmofcard.domain.Mensagem;
+import br.edu.les.realmofcard.domain.Pedido;
+import br.edu.les.realmofcard.domain.Pessoa;
+import br.edu.les.realmofcard.domain.Usuario;
 import br.edu.les.realmofcard.repository.PessoaRepository;
 import br.edu.les.realmofcard.util.EmailSender;
+import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Component
-public class EnviaEmailTrocaCodigoRastreio implements IStrategy {
+public class EnviaEmailPedidoPagamentoAprovado implements IStrategy {
 	
 	@Autowired
 	private EmailSender emailSender;
@@ -22,11 +26,9 @@ public class EnviaEmailTrocaCodigoRastreio implements IStrategy {
     @Override
     public String processar(EntidadeDominio entidade) {
     	
-    	if(entidade instanceof Rastreio) {
-
-			Rastreio rastreio = (Rastreio) entidade;
-
-    		Pedido pedido = rastreio.getTroca().getPedidoParaTroca();
+    	if(entidade instanceof Pedido) {
+    		
+    		Pedido pedido = (Pedido) entidade;
     		
     		Usuario usuario = pedido.getCliente().getUsuario();
     		
@@ -36,11 +38,10 @@ public class EnviaEmailTrocaCodigoRastreio implements IStrategy {
     		
     		StringBuilder mensagemTexto = new StringBuilder();
     		
-    		mensagem.setAssunto("Envio do código de rastreio para envio do produto(s) para troca.");
-
+    		mensagem.setAssunto("Pagamento do pedido " + pedido.getCodigoPedido() + " foi aprovado.");
+    		
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
-    		mensagemTexto.append("este email foi enviado para diponibilizar o código de rastreio para o você possa enviar o item(s) para troca.\n");
-    		mensagemTexto.append("Seu código de rastrio é " + rastreio.getCodigoRastreio() + ".\n");
+    		mensagemTexto.append("este email foi enviado para informar que o pagamento foi aprovado para o pedido " + pedido.getCodigoPedido() + ".\n");
     		mensagemTexto.append("Caso queira realizar outra compra, peço que realize o pedido em nosso site.\n\n");
     		mensagemTexto.append("Realm of Cards agradece sua preferência e te desejamos um ótimo dia.");
     		

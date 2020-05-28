@@ -17,6 +17,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Builder
 @Component
 @AllArgsConstructor
@@ -37,6 +39,9 @@ public class Cupom extends EntidadeDominio{
 
     @Column(name = "cup_valor")
     private Double valor;
+
+    @Column(name = "cup_data_criacao")
+    private LocalDate dataCriacao;
 
     @ManyToOne
     @JoinColumn(name = "cup_pessoa_id")

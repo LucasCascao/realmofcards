@@ -35,7 +35,7 @@ export class SelectCreditCardComponent implements OnInit {
 
   mensagemCupom = [];
 
-  isMsgError = false;
+  isMsgError = true;
 
   isFirstCartao = true;
 
@@ -46,19 +46,20 @@ export class SelectCreditCardComponent implements OnInit {
 
     this.valorTotal += custoFrete;
 
-    // this.cartoesSelecionados = [];
-    this.formaPagamentoList = [];
-    this.formaPagamentoSelecionadoList = [];
-
-    this.formaPagamentoComCupom = new FormaPagamento();
-    this.formaPagamentoComCupom.cupom = new Cupom();
-
     const cartaoCredito = new CartaoCredito();
     const pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     const status = new Status();
     status.id = 1;
     cartaoCredito.pessoa = pessoa;
     cartaoCredito.status = status;
+
+    // this.cartoesSelecionados = [];
+    this.formaPagamentoList = [];
+    this.formaPagamentoSelecionadoList = [];
+
+    this.formaPagamentoComCupom = new FormaPagamento();
+    this.formaPagamentoComCupom.cupom = new Cupom();
+    this.formaPagamentoComCupom.cupom.pessoa = pessoa;
 
     this.getCartoes(cartaoCredito);
   }
@@ -91,7 +92,7 @@ export class SelectCreditCardComponent implements OnInit {
     if (event.target.checked) {
       if (this.formaPagamentoSelecionadoList.length < 2) {
         if (formaPagamentoSelecionado.cartaoCredito != null && this.isFirstCartao) {
-          formaPagamentoSelecionado.valorPagamento = this.valorTotal;
+          formaPagamentoSelecionado.valorPagamento = Number.parseFloat(this.valorTotal.toFixed(2));
           this.isFirstCartao = false;
         }
         formaPagamentoSelecionado.isSelecionado = true;
@@ -112,16 +113,20 @@ export class SelectCreditCardComponent implements OnInit {
   }
 
   selecionaCupom(event, formaPagamentoSelecionado: FormaPagamento){
+    this.mensagemCupom = [];
     if(event.target.checked && formaPagamentoSelecionado?.cupom?.valor != null){
-      this.valorTotal -= this.formaPagamentoComCupom?.cupom?.valor;
+      if(this.valorTotal >= this.formaPagamentoComCupom?.cupom?.valor ){
+        this.valorTotal = Number.parseFloat((this.valorTotal - this.formaPagamentoComCupom?.cupom?.valor).toFixed(2));
+        formaPagamentoSelecionado.valorPagamento = this.formaPagamentoComCupom?.cupom?.valor;
+      }else{
+        formaPagamentoSelecionado.valorPagamento = this.valorTotal;
+        this.valorTotal = 0;
+      }
       this.selecionaCartao(event, formaPagamentoSelecionado);
-      formaPagamentoSelecionado.valorPagamento = this.formaPagamentoComCupom?.cupom?.valor;
     } else if(event.target.checked == false){
-      this.valorTotal += this.formaPagamentoComCupom?.cupom?.valor;
-      this.mensagemCupom = [];
+      this.valorTotal += this.formaPagamentoComCupom?.valorPagamento;
       this.selecionaCartao(event, formaPagamentoSelecionado);
     } else {
-      this.mensagemCupom = [];
       this.mensagemCupom.push("É necessário validar o cupom");
       event.target.checked = false;
     }

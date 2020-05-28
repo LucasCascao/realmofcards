@@ -6,6 +6,7 @@ import {ClienteService} from '../../../../services/cliente.service';
 import {ResultClient} from '../../../../model/results/result-person.model';
 import { UtilService } from 'src/services/util.service';
 import { Pedido } from 'src/model/domain/pedido.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-list',
@@ -18,7 +19,8 @@ export class ClientListComponent implements OnInit {
 
   clients: Array<Pessoa>;
 
-  constructor(private service: UtilService) { }
+  constructor(private service: UtilService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.listar();
@@ -31,11 +33,11 @@ export class ClientListComponent implements OnInit {
     });
   }
 
-  getPedidoPorCliente(cliente: Pessoa): number{
-    let pedidos: Array<Pedido>;
+  async getPedidoPorCliente(cliente: Pessoa){
+    let pedidos: [];
     let pedido: Pedido = new Pedido();
     pedido.cliente = cliente;
-    this.service.get(pedido, 'pedidos').subscribe(resultado => {
+    await this.service.get(pedido, 'pedidos').subscribe(resultado => {
       pedidos = resultado?.entidades;
     });
     return pedidos.length;
@@ -43,6 +45,11 @@ export class ClientListComponent implements OnInit {
 
   filtrar(cartas: any) {
 
+  }
+
+  verPedidosDoCliente(cliente: Pessoa){
+    sessionStorage.setItem('clienteEscolhido', JSON.stringify(cliente));
+    this.router.navigate(['/app-logado/admin-page/client-orders']);
   }
 
 }

@@ -74,6 +74,7 @@ import { AppLogadoComponent } from './app-logado/app-logado.component';
 import { SelectCreditCardComponent } from './buy-components/select-credit-card/select-credit-card.component';
 import { SelectAddressComponent } from './buy-components/select-address/select-address.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { ClientOrdersComponent } from './admin-components/clients/client-orders/client-orders.component';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -140,7 +141,8 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     TicketTradeListComponent,
     AppLogadoComponent,
     SelectCreditCardComponent,
-    SelectAddressComponent
+    SelectAddressComponent,
+    ClientOrdersComponent
   ],
   imports: [
     BrowserModule,

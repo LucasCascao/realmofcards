@@ -22,8 +22,4 @@ public class Rastreio extends EntidadeDominio{
 
     @Column(name = "rto_codigo_rastreio")
     private String codigoRastreio;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "rto_troca_id")
-    private Troca troca;
 }

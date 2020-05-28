@@ -1,13 +1,10 @@
 package br.edu.les.realmofcard.dao;
 
+import br.edu.les.realmofcard.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.les.realmofcard.domain.*;
-import br.edu.les.realmofcard.repository.CarrinhoRepository;
-import br.edu.les.realmofcard.repository.CartaRepository;
-import br.edu.les.realmofcard.repository.FormaPagamentoRepository;
-import br.edu.les.realmofcard.repository.PedidoRepository;
 import br.edu.les.realmofcard.util.Util;
 
 import java.time.LocalDate;
@@ -31,6 +28,9 @@ public class PedidoDAO implements IDAO {
     @Autowired
     private CartaRepository cartaRepository;
 
+    @Autowired
+    private CupomRepository cupomRepository;
+
     @Override
     public EntidadeDominio salvar(EntidadeDominio entidade) {
         if(entidade instanceof Pedido){
@@ -38,7 +38,12 @@ public class PedidoDAO implements IDAO {
             pedido.getItemList().forEach(item -> cartaRepository.save(item.getCarta()));
             pedido.setDataCompra(LocalDate.now());
             Set<FormaPagamento> formaPagamentoList = new HashSet<>();
-            pedido.getFormaPagamentoList().forEach(formaPagamento -> formaPagamentoList.add(formaPagamentoRepository.save(formaPagamento)));
+            pedido.getFormaPagamentoList().forEach(formaPagamento -> {
+                if(Util.isNotNull(formaPagamento.getCupom())){
+                    cupomRepository.save(formaPagamento.getCupom());
+                }
+                formaPagamentoList.add(formaPagamentoRepository.save(formaPagamento));
+            });
             pedido.setFormaPagamentoList(formaPagamentoList);
             pedido = pedidoRepository.save((Pedido) entidade);
             Carrinho carrinho = carrinhoRepository.findByPessoa_Id(pedido.getCliente().getId());
