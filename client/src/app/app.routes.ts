@@ -59,6 +59,7 @@ import {AppLogadoComponent} from './app-logado/app-logado.component';
 import {SelectCreditCardComponent} from './buy-components/select-credit-card/select-credit-card.component';
 import {SelectAddressComponent} from './buy-components/select-address/select-address.component';
 import { ClientOrdersComponent } from './admin-components/clients/client-orders/client-orders.component';
+import { UserTicketsComponent } from './user-components/user-tickets/user-tickets.component';
 
 export const ROUTES: Routes = [
   {path: '', component: LoginComponent},
@@ -75,9 +76,10 @@ export const ROUTES: Routes = [
       {path: 'user-product-generate-trade-code', component: ProductGenerateTradeCodeComponent},
       {path: 'user-devolution', component: DevolutionComponent},
       {path: 'user-devolution-finalization', component: DevolutionFinalizationComponent},
+      {path: 'user-tickets', component: UserTicketsComponent},
       {path: 'address-register', component: AddressRegisterComponent},
-      {path: 'address-alter/:id', component: AddressAlterComponent},
-      {path: 'address-delete/:id', component: AddressDeleteComponent},
+      {path: 'address-alter', component: AddressAlterComponent},
+      {path: 'address-delete', component: AddressDeleteComponent},
       {path: 'address-list', component: AddressListComponent},
       {path: 'creditcard-register', component: CreditcardRegisterComponent},
       {path: 'creditcard-delete', component: CreditcardDeleteComponent},

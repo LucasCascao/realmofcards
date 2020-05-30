@@ -188,6 +188,8 @@ export class SelectCreditCardComponent implements OnInit {
 
   validaCupom(){
     this.mensagemCupom = [];
+    this.formaPagamentoComCupom.cupom.status = new Status();
+    this.formaPagamentoComCupom.cupom.status.id = 1;
     this.service.get(this.formaPagamentoComCupom.cupom, '/cupons').subscribe( resultado => {
       if(resultado?.msg != null){
         this.mensagemCupom = this.util.getMensagensSeparadas2(resultado?.msg);

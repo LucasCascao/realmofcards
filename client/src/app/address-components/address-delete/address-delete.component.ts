@@ -16,8 +16,7 @@ export class AddressDeleteComponent implements OnInit {
   constructor(private service: UtilService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.endereco = new Endereco();
-    this.endereco.id = this.route.snapshot.params.id;
+    this.endereco = JSON.parse(sessionStorage.getItem('enderecoSelecionado'));
     this.getEndereco();
   }
 
@@ -29,7 +28,8 @@ export class AddressDeleteComponent implements OnInit {
 
   async deleteEndereco() {
     await this.service.delete(this.endereco.id, 'enderecos').subscribe(() =>{
-      this.router.navigate(['app-logado/select-address']);
+      let paginaRetorno = JSON.parse(sessionStorage.getItem('paginaParaRetorno'));
+      this.router.navigate([paginaRetorno]);
     });
   }
 

@@ -49,11 +49,25 @@ export class SelectAddressComponent implements OnInit {
     });
   }
 
-  seleciona(endereco: Endereco) {
+  insereEnderecoNaSessao(endereco: Endereco) {
+    sessionStorage.setItem('enderecoSelecionado', JSON.stringify(endereco));
+  }
+
+  inserePaginaParaRetornoNaSessao() {
+    sessionStorage.setItem('paginaParaRetorno', JSON.stringify('/app-logado/select-address'));
+  }
+
+  selecionaEnderecoParaCompra(endereco: Endereco){
     this.mensagens = [];
     this.endereco = endereco;
-    sessionStorage.setItem('enderecoSelecionado', JSON.stringify(endereco));
+    this.insereEnderecoNaSessao(endereco)
     this.getCustoPrazo(endereco);
+  }
+
+  enviarPara(endereco: Endereco, enderecoPagina: String) {
+    this.insereEnderecoNaSessao(endereco);
+    this.inserePaginaParaRetornoNaSessao();
+    this.router.navigate([enderecoPagina]);
   }
 
   continua() {

@@ -17,5 +17,6 @@ import javax.transaction.Transactional;
 @Transactional
 public interface CupomRepository extends CrudRepository<Cupom, Integer> {
     List<Cupom> findByStatus_Id(Integer id);
+    List<Cupom> findByPessoa_Id(Integer id);
     Cupom findCupomByCodigo(String codigo);
 }

@@ -19,18 +19,6 @@ import java.util.List;
 public class RetornaItemEstoque implements IStrategy {
 
     @Autowired
-    private EnviaEmailPedidoPagamentoAprovado enviaEmailPedidoPagamentoAprovado;
-
-    @Autowired
-    private EnviaEmailPedidoPagamentoRejeitado enviaEmailPedidoPagamentoRejeitado;
-
-    @Autowired
-    private PedidoRepository pedidoRepository;
-
-    @Autowired
-    private PedidoDAO pedidoDAO;
-
-    @Autowired
     private CartaDAO cartaDAO;
 
     @Override

@@ -19,6 +19,10 @@ export class ClientListComponent implements OnInit {
 
   clients: Array<Pessoa>;
 
+  clientsFiltrados: Array<Pessoa>;
+
+  valorBuscado: string;
+
   constructor(private service: UtilService,
               private router: Router) { }
 
@@ -30,6 +34,7 @@ export class ClientListComponent implements OnInit {
     console.log(this.resultClient);
     this.service.get(new Pessoa(), 'pessoas').subscribe(resultado => {
       this.clients = resultado?.entidades;
+      this.clientsFiltrados = resultado?.entidades;
     });
   }
 
@@ -43,8 +48,8 @@ export class ClientListComponent implements OnInit {
     return pedidos.length;
   }
 
-  filtrar(cartas: any) {
-
+  filtrar() {
+    this.clientsFiltrados = this.clients.filter((client) => client.nome.toUpperCase().startsWith(this.valorBuscado.toUpperCase()));
   }
 
   verPedidosDoCliente(cliente: Pessoa){

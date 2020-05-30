@@ -13,7 +13,7 @@
     <div class="col-md-12">
       <div class="row">
         <div class="col-lg-1">
-          <input type="radio" name="enderecoSelecionado" (click)="seleciona(endereco)">
+          <input type="radio" name="enderecoSelecionado" (click)="selecionaEnderecoParaCompra(endereco)">
         </div>
         <div class="col-lg-1">
           <img class="img-fluid" src="/assets/icon/transporte.png">
@@ -22,8 +22,8 @@
           <p class="card-text">{{endereco?.logradouro}}, nº {{endereco?.numero}}, {{endereco?.bairro}}, {{endereco?.cidade?.nome}} / {{endereco?.cidade?.estado?.nome}} - {{endereco?.cep}}</p>
         </div>
         <div class="col-lg-2">
-          <a class="btn btn-danger float-right"  [routerLink]="['/app-logado/address-delete', endereco?.id]">Excluir</a>
-          <a class="btn btn-warning float-left" (click)="seleciona(endereco)" [routerLink]="['/app-logado/address-alter', endereco?.id]">Editar</a>
+          <a class="btn btn-danger float-right" (click)="enviarPara(endereco, '/app-logado/address-delete')">Excluir</a>
+          <a class="btn btn-warning float-left" (click)="enviarPara(endereco, '/app-logado/address-alter')">Editar</a>
         </div>
       </div>
       <hr>

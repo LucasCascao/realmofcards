@@ -4,6 +4,7 @@ import { Troca } from 'src/model/domain/troca.model';
 import { UtilService } from 'src/services/util.service';
 import { StatusPedido } from 'src/model/domain/status-pedido.model';
 import { Pedido } from 'src/model/domain/pedido.model';
+import { Item } from 'src/model/domain/item.model';
 
 @Component({
   selector: 'app-transit-trade',
@@ -13,6 +14,10 @@ import { Pedido } from 'src/model/domain/pedido.model';
 export class TransitTradeComponent implements OnInit {
 
   trocas: Array<Troca>;
+
+  trocasFiltrada: Array<Troca>;
+
+  valorBuscado: string;
 
   constructor(private service: UtilService) { }
 
@@ -29,6 +34,7 @@ export class TransitTradeComponent implements OnInit {
     troca.pedidoParaTroca = pedido;
     this.service.get(troca, 'trocas').subscribe(resultado => {
       this.trocas = resultado?.entidades;
+      this.trocasFiltrada = this.trocas;
     });
   }
 
@@ -41,7 +47,23 @@ export class TransitTradeComponent implements OnInit {
     });
   }
 
-  filtrar(cartas: any) {
+  filtrar() {
+    this.trocasFiltrada = this.trocas.filter((troca) =>
+      troca?.pedidoParaTroca?.cliente?.nome.toUpperCase().startsWith(this.valorBuscado.toUpperCase())
+      || troca?.pedidoParaTroca?.codigoPedido.startsWith(this.valorBuscado)
+      || this.contemCarta(troca?.pedidoParaTroca?.itemList)
+      || troca?.pedidoParaTroca?.cliente?.usuario?.email.startsWith(this.valorBuscado)
+      || troca?.pedidoParaTroca?.dataCompra.toString().startsWith(this.valorBuscado)
+    );
+  }
 
+  contemCarta(itens: Item[]): boolean{
+    let contemCarta: boolean = false;
+    itens?.forEach( item => {
+      if(item?.carta?.nome.startsWith(this.valorBuscado)){
+        contemCarta = true;
+      }
+    });
+    return contemCarta;
   }
 }

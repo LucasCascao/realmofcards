@@ -30,18 +30,18 @@ public class CupomDAO implements IDAO {
 
     @Override
     public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
-
         List<EntidadeDominio> cupons = new ArrayList<>();
-
         Cupom cupom = (Cupom) entidade;
-
         if(Util.isNotNull(cupom.getCodigo())){
             cupons.add(cupomRepository.findCupomByCodigo(cupom.getCodigo()));
             return cupons;
         }
-
+        if(Util.isNotNull(cupom.getPessoa())
+            && Util.isNotNull(cupom.getPessoa().getId())){
+            cupons.addAll(cupomRepository.findByPessoa_Id(cupom.getPessoa().getId()));
+            return cupons;
+        }
         cupomRepository.findAll().forEach( cupomResultado -> cupons.add(cupomResultado));
-
         return cupons;
     }
 }

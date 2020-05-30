@@ -6,6 +6,7 @@ import {Endereco} from '../../../model/domain/endereco.model';
 import {Util} from '../../shared/app.util';
 import { Estado } from 'src/model/domain/estado.model';
 import { Cidade } from 'src/model/domain/cidade.model';
+import { Status } from 'src/model/domain/status.model';
 
 @Component({
   selector: 'app-address-register',
@@ -19,6 +20,10 @@ export class AddressRegisterComponent implements OnInit {
   estados: Estado[];
 
   mensagens = [];
+
+  estadoSelecionado: Estado;
+
+  cidades: Cidade[];
 
   constructor(private service: UtilService, private router: Router, private util: Util) { }
 
@@ -39,6 +44,9 @@ export class AddressRegisterComponent implements OnInit {
   }
 
   cadastra() {
+    let status: Status = new Status();
+    status.id = 1;
+    this.endereco.status = status;
     this.mensagens = [];
     this.service.add(this.endereco, 'enderecos').subscribe(resultado => {
       if (resultado.msg == null) {
@@ -46,6 +54,13 @@ export class AddressRegisterComponent implements OnInit {
       } else {
         this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
       }
+    });
+  }
+
+  chamaCidade(){
+    this.endereco.cidade.estado = this.estadoSelecionado;
+    this.service.get( this.endereco.cidade, 'cidades').subscribe( resultado => {
+      this.cidades = resultado?.entidades;
     });
   }
 }

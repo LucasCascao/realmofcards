@@ -25,8 +25,8 @@
           </p>
         </div>
         <div class="col-lg-2">
-          <a class="btn btn-danger float-left" (click)="seleciona(endereco)" [routerLink]="['/app-logado/address-delete', endereco?.id]">Excluir</a>
-          <a class="btn btn-warning float-right" (click)="seleciona(endereco)" [routerLink]="['/app-logado/address-alter', endereco?.id]">Editar</a>
+          <button class="btn btn-danger float-left" (click)="enviarPara(endereco, '/app-logado/address-delete')">Excluir</button>
+          <button class="btn btn-warning float-right" (click)="enviarPara(endereco, '/app-logado/address-alter')">Editar</button>
         </div>
       </div>
       <hr>

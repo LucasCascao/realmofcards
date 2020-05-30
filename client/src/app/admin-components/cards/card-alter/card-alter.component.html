@@ -29,8 +29,7 @@
           <div class="col-lg-4">
             <div class="ui-select">
               <select id="user_time_zone" class="form-control" [(ngModel)]="carta.categoriaCarta">
-                <option name="alt_carta_categoria"
-                        *ngFor="let categoria of categorias" [ngValue]="categoria">{{categoria?.nome}}</option>
+                  <option *ngFor="let categoria of categorias" name="alt_carta_categoria" [ngValue]="categoria">{{categoria?.nome}}</option>
               </select>
             </div>
           </div>

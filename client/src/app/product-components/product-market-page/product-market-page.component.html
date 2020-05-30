@@ -1,4 +1,4 @@
-<header>
+<!-- <header>
  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
    <ol class="carousel-indicators">
      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -7,16 +7,8 @@
      <div class="carousel-item active" style="background-image: url('/assets/images/logo2.png')">
      </div>
    </div>
-   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-     <span class="sr-only">Previous</span>
-   </a>
-   <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-     <span class="sr-only">Next</span>
-   </a>
  </div>
-</header>
+</header> -->
 
 <!-- Page Content -->
 <div class="container">
@@ -24,10 +16,11 @@
   <div class="row mb-md-3">
     <div class="col-lg-10 offset-1">
       <div class="col-lg-10 float-left">
-        <input type="text" class="form-control" placeholder="Pesquisar produto">
+        <!-- <input type="text" (keyup)="filtrar($event.target.value)" class="form-control" placeholder="Pesquisar produto"> -->
+        <input type="text" name="valorBusca" [(ngModel)]="valorBuscado" class="form-control" placeholder="Pesquisar produto">
       </div>
       <div class="col-lg-2 float-right">
-        <input type="button" (click)="filtrar(cartas)" class="btn btn-secondary" value="Pesquisar">
+        <input type="button" (click)="filtrar()" class="btn btn-secondary" value="Pesquisar">
       </div>
     </div>
   </div>
@@ -39,8 +32,8 @@
       <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
     </div>
   </div>
-  <div class="row">
-    <div *ngFor="let carta of cartas" class="col-lg-3 col-sm-6 portfolio-item mt-4">
+  <div class="row" *ngIf="cartasFiltradas?.length > 0; else semCartaProcurada">
+    <div *ngFor="let carta of cartasFiltradas" class="col-lg-3 col-sm-6 portfolio-item mt-4">
       <div class="card h-100">
         <a (click)="visualizar(carta?.id)" [routerLink]="['/app-logado/product-detail']"><img class="card-img-top" [src]="carta?.imagemPath" alt=""></a>
         <div class="card-body">
@@ -53,5 +46,12 @@
     </div>
   <hr>
   </div>
+  <ng-template #semCartaProcurada>
+    <div class="row" >
+      <div class="col-lg-3 col-sm-6 portfolio-item mt-4">
+        <h4 class="text-center"><strong>Carta não encontrada.</strong></h4>
+      </div>
+    </div>
+  </ng-template>
 </div>
 <!-- /.container -->

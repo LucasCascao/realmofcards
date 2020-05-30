@@ -4,10 +4,10 @@
   <div class="row">
     <div class="col-lg-10 offset-1">
       <div class="col-lg-10 float-left">
-        <input type="text" class="form-control" placeholder="Pesquisar pedido">
+        <input type="text" name="valorBusca" [(ngModel)]="valorBuscado" class="form-control" placeholder="Pesquisar carta">
       </div>
       <div class="col-lg-2 float-right">
-        <input type="button" (click)="filtrar(null)" class="btn btn-secondary" value="Pesquisar">
+        <input type="button" (click)="filtrar()" class="btn btn-secondary" value="Pesquisar">
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let carta of cartas">
+          <tr *ngFor="let carta of cartasFiltradas">
             <td>
               <div class="row">
                 <div class="col-lg-3 ">

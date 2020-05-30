@@ -22,12 +22,15 @@ export class ProductMarketPageComponent implements OnInit {
 
   client: Pessoa;
 
-
   cartas: Carta[];
+
+  cartasFiltradas: Carta[];
 
   carta: Carta;
 
   mensagens = [];
+
+  valorBuscado: string;
 
   ngOnInit(): void {
     this.carta = new Carta();
@@ -40,6 +43,7 @@ export class ProductMarketPageComponent implements OnInit {
     this.service.get(this.carta, 'cartas')
     .subscribe( resultado => {
       this.cartas = resultado?.entidades;
+      this.cartasFiltradas = resultado?.entidades;
     });
   }
 
@@ -93,6 +97,7 @@ export class ProductMarketPageComponent implements OnInit {
     });
   }
 
-  filtrar(cartas: any) {
+  filtrar() {
+    this.cartasFiltradas = this.cartas.filter((carta) => carta.nome.toUpperCase().startsWith(this.valorBuscado.toUpperCase()));
   }
 }

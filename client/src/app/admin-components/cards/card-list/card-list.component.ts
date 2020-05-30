@@ -15,6 +15,10 @@ export class CardListComponent implements OnInit {
 
   cartas: Carta[];
 
+  cartasFiltradas: Carta[];
+
+  valorBuscado: string;
+
   constructor(private service: UtilService) { }
 
   ngOnInit(): void {
@@ -28,6 +32,7 @@ export class CardListComponent implements OnInit {
 
     await this.service.get(carta, 'cartas').subscribe(resultado => {
       this.cartas = resultado?.entidades;
+      this.cartasFiltradas = resultado?.entidades;
     });
   }
 
@@ -37,8 +42,8 @@ export class CardListComponent implements OnInit {
     sessionStorage.setItem('cartaSelecionada', JSON.stringify(carta));
   }
 
-  filtrar(cartas: any) {
-
+  filtrar() {
+    this.cartasFiltradas = this.cartas.filter((carta) => carta.nome.toUpperCase().startsWith(this.valorBuscado.toUpperCase()));
   }
 
 }

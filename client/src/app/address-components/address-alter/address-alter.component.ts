@@ -6,6 +6,8 @@ import {Endereco} from '../../../model/domain/endereco.model';
 import {Pessoa} from '../../../model/domain/pessoa.model';
 import {Util} from '../../shared/app.util';
 import {Estado} from '../../../model/domain/estado.model';
+import { Cidade } from 'src/model/domain/cidade.model';
+import * as Inputmask from 'inputmask';
 
 @Component({
   selector: 'app-address-alter',
@@ -20,12 +22,18 @@ export class AddressAlterComponent implements OnInit {
 
   estados: Estado[];
 
+  cidades: Cidade[];
+
+  estadoSelecionado: Estado;
+
   mensagens = [];
 
   ngOnInit(): void {
+    Inputmask().mask(document.querySelectorAll('input'));
     this.endereco = JSON.parse(sessionStorage.getItem('enderecoSelecionado'));
     this.endereco.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     this.estados = [];
+    this.estadoSelecionado = new Estado();
     this.getEstados();
   }
 
@@ -36,20 +44,32 @@ export class AddressAlterComponent implements OnInit {
     });
   }
 
-  async getEnderecos() {
-    await this.service.get( this.endereco, 'enderecos').subscribe( resultado => {
+  getEnderecos() {
+    this.service.get( this.endereco, 'enderecos').subscribe( resultado => {
       this.endereco = resultado?.entidades[0];
     });
+  }
+
+  enviarPara(){
+    let paginaRetorno = JSON.parse(sessionStorage.getItem('paginaParaRetorno'));
+    this.router.navigate([paginaRetorno]);
   }
 
   async alterarEndereco() {
     this.mensagens = [];
     await this.service.update(this.endereco, 'enderecos').subscribe(resultado => {
       if (resultado.msg == null) {
-        this.router.navigate(['/app-logado/select-address']);
+        this.enviarPara();
       } else {
         this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
       }
+    });
+  }
+
+  chamaCidade(){
+    this.endereco.cidade.estado = this.estadoSelecionado;
+    this.service.get( this.endereco.cidade, 'cidades').subscribe( resultado => {
+      this.cidades = resultado?.entidades;
     });
   }
 }

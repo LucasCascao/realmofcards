@@ -75,6 +75,7 @@ import { SelectCreditCardComponent } from './buy-components/select-credit-card/s
 import { SelectAddressComponent } from './buy-components/select-address/select-address.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { ClientOrdersComponent } from './admin-components/clients/client-orders/client-orders.component';
+import { UserTicketsComponent } from './user-components/user-tickets/user-tickets.component';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -142,7 +143,8 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     AppLogadoComponent,
     SelectCreditCardComponent,
     SelectAddressComponent,
-    ClientOrdersComponent
+    ClientOrdersComponent,
+    UserTicketsComponent
   ],
   imports: [
     BrowserModule,
