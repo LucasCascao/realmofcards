@@ -60,6 +60,7 @@ import {SelectCreditCardComponent} from './buy-components/select-credit-card/sel
 import {SelectAddressComponent} from './buy-components/select-address/select-address.component';
 import { ClientOrdersComponent } from './admin-components/clients/client-orders/client-orders.component';
 import { UserTicketsComponent } from './user-components/user-tickets/user-tickets.component';
+import { TicketListComponent } from './admin-components/tickets/ticket-list/ticket-list.component';
 
 export const ROUTES: Routes = [
   {path: '', component: LoginComponent},
@@ -121,6 +122,7 @@ export const ROUTES: Routes = [
         {path: 'provider-delete', component: ProviderInativeComponent},
         {path: 'provider-list', component: ProviderListComponent},
         {path: 'ticket-devolution-list', component: TicketDevolutionListComponent},
+        {path: 'ticket-list', component: TicketListComponent},
         {path: 'ticket-trade-list', component: TicketTradeListComponent},
         {path: 'client-orders', component: ClientOrdersComponent}
       ]},

@@ -39,8 +39,11 @@ export class TransitOrdersComponent implements OnInit {
     const statusPedido: StatusPedido = new StatusPedido();
     statusPedido.id = 6;
     pedido.statusPedido = statusPedido;
-    this.service.update(pedido, 'pedidos').subscribe(() => {
-      document.location.reload();
+    this.service.update(pedido, 'pedidos').subscribe((resultado) => {
+      if(resultado?.msg == null){
+        this.pedidos.splice(this.pedidos.indexOf(pedido), 1);
+        this.pedidosFiltrados = this.pedidos;
+      }
     });
   }
 

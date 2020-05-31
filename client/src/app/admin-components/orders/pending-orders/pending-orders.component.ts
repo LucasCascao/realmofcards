@@ -40,8 +40,11 @@ export class PendingOrdersComponent implements OnInit {
     statusPedido.id = 5;
     pedido.statusPedido = statusPedido;
     pedido.administrador = JSON.parse(sessionStorage.getItem('pessoaLogada'));
-    this.service.update(pedido, 'pedidos').subscribe(() => {
-      document.location.reload();
+    this.service.update(pedido, 'pedidos').subscribe((resultado) => {
+      if(resultado?.msg == null){
+        this.pedidos.splice(this.pedidos.indexOf(pedido), 1);
+        this.pedidosFiltrados = this.pedidos;
+      }
     });
   }
 

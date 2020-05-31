@@ -1,1 +1,53 @@
-<p>ticket-list works!</p>
+<!-- Page Content -->
+<div class="container">
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">Cupons</h1>
+  <hr>
+  <div class="row">
+    <div class="col-lg-10 offset-1">
+      <div class="col-lg-10 float-left">
+        <input type="text" name="valorBusca" [(ngModel)]="valorBuscado" class="form-control" placeholder="Pesquisar cupom">
+      </div>
+      <div class="col-lg-2 float-right">
+        <input type="button" (click)="filtrar()" class="btn btn-secondary" value="Pesquisar">
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="cuponsFiltrado?.length > 0; else semCupom">
+    <!-- Project One -->
+    <div class="row" *ngFor="let cupom of cuponsFiltrado">
+      <div class="col-lg-12 col-md-8 mx-auto">
+        <div class="card rounded shadow shadow-sm">
+          <div class="card-body">
+            <p><strong>Nº do Cupom:</strong> {{cupom?.codigo}}</p>
+            <p><strong>Data de geração:</strong> {{cupom?.dataCriacao | date: 'dd/MM/yyyy'}}</p>
+            <p><strong>Valor:</strong> {{cupom?.valor | currency: 'BRL': true}}</p>
+            <p *ngIf="cupom?.pessoa != null">
+              <strong>Cliente:</strong> {{cupom?.pessoa?.usuario?.email}}
+            </p>
+            <div class="row">
+              <div class="col-lg-2">
+                <p><strong>Status:</strong> </p>
+              </div>
+              <div class="col-lg-2">
+                <div *ngIf="cupom?.status?.id == 1; else cupomInativo">
+                  <p class="btn-sm btn-success text-center">{{cupom?.status?.status}}</p>
+                </div>
+                <ng-template #cupomInativo>
+                  <p class="btn-sm btn-danger text-center">{{cupom?.status?.status}}</p>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+  <ng-template class="row" #semCupom>
+    <div class="col-lg-12">
+      <h3 class="text-center"><strong>Não possui cupons.</strong></h3>
+    </div>
+  </ng-template>
+</div>

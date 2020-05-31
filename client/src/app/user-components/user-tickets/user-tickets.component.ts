@@ -23,7 +23,7 @@ export class UserTicketsComponent implements OnInit {
     cupom.pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     this.service.get(cupom, 'cupons').subscribe(resultado => {
       this.cupons = resultado?.entidades;
-    })
+    });
   }
 
 }

@@ -122,14 +122,28 @@ export class SelectCreditCardComponent implements OnInit {
         formaPagamentoSelecionado.valorPagamento = this.valorTotal;
         this.valorTotal = 0;
       }
+      this.retiraValorSeJaTiverFormaDePagamentoNaLista();
       this.selecionaCartao(event, formaPagamentoSelecionado);
     } else if(event.target.checked == false){
       this.valorTotal += this.formaPagamentoComCupom?.valorPagamento;
       this.selecionaCartao(event, formaPagamentoSelecionado);
+      this.incrementaValorSeTirarCupomDaLista();
     } else {
       this.mensagemCupom.push("É necessário validar o cupom");
       event.target.checked = false;
     }
+  }
+
+  retiraValorSeJaTiverFormaDePagamentoNaLista(){
+    this.formaPagamentoSelecionadoList.forEach( formaPagamento => {
+      formaPagamento.valorPagamento = this.valorTotal;
+    })
+  }
+
+  incrementaValorSeTirarCupomDaLista(){
+    this.formaPagamentoSelecionadoList.forEach( formaPagamento => {
+      formaPagamento.valorPagamento = this.valorTotal;
+    })
   }
 
   continua() {

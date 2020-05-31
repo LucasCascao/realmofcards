@@ -44,8 +44,11 @@ export class RequestTradeComponent implements OnInit {
     let status: StatusPedido = new StatusPedido();
     status.id = 9;
     troca.pedidoParaTroca.statusPedido = status;
-    this.service.update(troca, 'trocas').subscribe(() => {
-      document.location.reload();
+    this.service.update(troca, 'trocas').subscribe((resultado) => {
+      if(resultado?.msg == null){
+        this.trocas.splice(this.trocas.indexOf(troca), 1);
+        this.trocasFiltrada = this.trocas;
+      }
     });
   }
 
