@@ -15,8 +15,8 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "item_troca")
-public class ItemTroca extends EntidadeDominio {
+@Table(name = "item_transicao")
+public class ItemTransacao extends EntidadeDominio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +28,10 @@ public class ItemTroca extends EntidadeDominio {
 
     @ManyToOne()
     @JoinColumn(name = "itc_item_id")
-    private Item itemParaTroca;
+    private Item item;
 
     @JsonIgnore()
     @ManyToOne()
-    @JoinColumn(name = "itc_troca_id")
-    private Troca troca;
+    @JoinColumn(name = "itc_transicao_id")
+    private Transicao transicao;
 }

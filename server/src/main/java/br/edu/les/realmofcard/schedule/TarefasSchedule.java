@@ -6,7 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import br.edu.les.realmofcard.domain.Pedido;
-import br.edu.les.realmofcard.domain.Troca;
+import br.edu.les.realmofcard.domain.Transicao;
 import br.edu.les.realmofcard.strategy.pedido.VerificaPedidosPagamentoPendente;
 import br.edu.les.realmofcard.strategy.troca.VerificaTrocasAprovadas;
 
@@ -26,7 +26,7 @@ public class TarefasSchedule {
     
     @Scheduled(initialDelay = 1000 * 3, fixedDelay = MINUTO)
     public void verificaPorHora() {
-        verificaTrocasAprovadas.processar(new Troca());
+        verificaTrocasAprovadas.processar(new Transicao());
         verificaPedidosPagamentoPendente.processar(new Pedido());
     }
 

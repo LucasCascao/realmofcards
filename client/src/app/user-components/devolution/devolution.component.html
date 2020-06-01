@@ -2,17 +2,44 @@
   <div class="row">
     <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
       <div class="row">
-        <div class="col-lg-6 col-md-8 mx-auto">
+        <div class="col-lg-10 col-md-8 mx-auto">
           <!-- form card login -->
           <div class="card rounded shadow shadow-sm">
             <div class="card-header">
-              <h3 class="mb-0">Solicitar Devolução</h3>
+              <h3 class="mb-0">Devolução</h3>
             </div>
             <div class="card-body">
-              <p>Devolução do produto: carta <strong>{{carta.nome}}</strong>, pertecente ao cliente <strong>{{cliente.firstName}}.</strong>.</p>
-              <p>Clique no botão abaixo para confirmar a troca.</p>
-              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['../user-orders']" value="Cancelar">
-              <input type="button" class="btn btn-danger btn-lg float-right" [routerLink]="['../user-devolution-finalization']" value="Confirmar Devolução">
+              <div class="row" *ngFor="let itemDevolucao of devolucao.itemTransicaoList">
+                <div *ngIf="itemDevolucao?.item?.quantidade > 0">
+                  <div class="col-lg-12">
+                    <div class="row">
+                      <div class="col-lg-1 col-md-5">
+                        <a [routerLinkActive]="['/product-detail']">
+                          <img class="img-fluid rounded mb-3 mb-md-3" [src]="itemDevolucao?.item?.carta?.imagemPath" [alt]="itemDevolucao?.item?.carta?.nome">
+                        </a>
+                      </div>
+                      <div class="col-lg-10 col-md-08 float-left">
+                        <p class="card-text">
+                          <strong>Produto:</strong> {{itemDevolucao?.item?.carta?.nome}},  (valor unitário) .
+                        </p>
+                        <p>
+                          <strong>Valor unitário:</strong> {{itemDevolucao?.item?.carta?.valorVenda | currency: 'BRL': true}}
+                        </p>
+                        <p>
+                          <strong>Valor total:</strong> {{devolucao?.subTotal | currency: 'BRL': true}}
+                        </p>
+                        <p>
+                          <strong>Quantidade de devolução:</strong> {{itemDevolucao?.quantidade}}
+                        </p>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <p>Clique no botão abaixo para confirmar a devolução.</p>
+              <button class="btn btn-secondary btn-lg float-left" [routerLink]="['/app-logado/user-orders']">Cancelar</button>
+              <button class="btn btn-danger btn-lg float-right" (click)="trocaProduto()">Confirmar Devolução</button>
             </div>
             <!--/card-block-->
           </div>
@@ -20,6 +47,7 @@
         </div>
       </div>
       <!--/row-->
+      <hr>
     </div>
     <!--/col-->
   </div>

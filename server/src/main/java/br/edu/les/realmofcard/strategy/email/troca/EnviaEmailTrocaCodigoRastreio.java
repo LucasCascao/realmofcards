@@ -22,11 +22,11 @@ public class EnviaEmailTrocaCodigoRastreio implements IStrategy {
     @Override
     public String processar(EntidadeDominio entidade) {
     	
-    	if(entidade instanceof Troca) {
+    	if(entidade instanceof Transicao) {
 
-			Troca troca = (Troca) entidade;
+			Transicao transicao = (Transicao) entidade;
 
-    		Pedido pedido = troca.getPedidoParaTroca();
+    		Pedido pedido = transicao.getPedido();
     		
     		Usuario usuario = pedido.getCliente().getUsuario();
     		
@@ -40,7 +40,7 @@ public class EnviaEmailTrocaCodigoRastreio implements IStrategy {
 
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
     		mensagemTexto.append("este email foi enviado para diponibilizar o código de rastreio para o você possa enviar o item(s) para troca.\n");
-    		mensagemTexto.append("Seu código de rastrio é " + troca.getRastreio().getCodigoRastreio() + ".\n");
+    		mensagemTexto.append("Seu código de rastrio é " + transicao.getRastreio().getCodigoRastreio() + ".\n");
     		mensagemTexto.append("Caso queira realizar outra compra, peço que realize o pedido em nosso site.\n\n");
     		mensagemTexto.append("Realm of Cards agradece sua preferência e te desejamos um ótimo dia.");
     		

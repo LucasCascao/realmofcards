@@ -1,10 +1,10 @@
 import {Pedido} from './pedido.model';
 import {Item} from './item.model';
-import {Troca} from './troca.model';
+import {Transicao} from './transicao.model';
 
-export class ItemTroca {
+export class ItemTransicao {
   id: number;
   quantidade: number;
-  itemParaTroca: Item;
-  troca: Troca;
+  item: Item;
+  troca: Transicao;
 }

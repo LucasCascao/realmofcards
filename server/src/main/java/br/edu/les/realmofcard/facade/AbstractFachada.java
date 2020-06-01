@@ -78,7 +78,7 @@ public class AbstractFachada {
     private ItemDAO itemDAO;
 
     @Autowired
-    private TrocaDAO trocaDAO;
+    private TransacaoDAO transacaoDAO;
 
     @Autowired
     private CupomDAO cupomDAO;
@@ -211,6 +211,9 @@ public class AbstractFachada {
     @Autowired
     private GeraCupomComValorRestante geraCupomComValorRestante;
 
+    @Autowired
+    private GeraCodigoTransacaoTroca geraCodigoTransacaoTroca;
+
 
     public AbstractFachada(){
     }
@@ -231,7 +234,7 @@ public class AbstractFachada {
         daos.put(Carrinho.class.getName(), carrinhoDAO);
         daos.put(Item.class.getName(), itemDAO);
         daos.put(Bandeira.class.getName(), bandeiraDAO);
-        daos.put(Troca.class.getName(), trocaDAO);
+        daos.put(Transicao.class.getName(), transacaoDAO);
         daos.put(Cupom.class.getName(), cupomDAO);
 
 
@@ -418,6 +421,7 @@ public class AbstractFachada {
         rnsTrocaSalvar.add(retiraQuantidadeItemDoPedido);
         rnsTrocaSalvar.add(calculaValorTroca);
         rnsTrocaSalvar.add(enviaEmailStatusDaTroca);
+        rnsTrocaSalvar.add(geraCodigoTransacaoTroca);
 
         List<IStrategy> rnsTrocaAlterar = new ArrayList<>();
 
@@ -430,7 +434,7 @@ public class AbstractFachada {
         mapaTroca.put("SALVAR", rnsTrocaSalvar);
         mapaTroca.put("ALTERAR", rnsTrocaAlterar);
 
-        regrasNegocio.put(Troca.class.getName(), mapaTroca);
+        regrasNegocio.put(Transicao.class.getName(), mapaTroca);
 
         //------------------------ Hash Cupom --------------------------//
 

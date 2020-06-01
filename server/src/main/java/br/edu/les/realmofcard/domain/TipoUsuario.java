@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @Component
 @Entity
-@Table(name = "user_type")
+@Table(name = "tipo_usuario")
 public class TipoUsuario extends EntidadeDominio implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

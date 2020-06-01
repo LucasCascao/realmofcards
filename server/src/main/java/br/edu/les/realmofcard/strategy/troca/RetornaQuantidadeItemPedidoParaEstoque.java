@@ -19,24 +19,24 @@ public class RetornaQuantidadeItemPedidoParaEstoque implements IStrategy {
 
 		StringBuilder msg = new StringBuilder();
 
-		if(entidade instanceof Troca){
+		if(entidade instanceof Transicao){
 
-			Troca troca = (Troca) entidade;
+			Transicao transicao = (Transicao) entidade;
 			
-			Pedido pedido = troca.getPedidoParaTroca();
+			Pedido pedido = transicao.getPedido();
 			
 			if(Util.isNotNull(pedido)
 				&& Util.isNotNull(pedido.getStatusPedido())
 				&& Util.isNotNull(pedido.getStatusPedido().getId())
 				&& pedido.getStatusPedido().getId().equals(10)) {
 				
-				troca.getItemListParaTroca().forEach( itemTroca -> {
+				transicao.getItemTransicaoList().forEach(itemTransacao -> {
 				
-					Item item = itemTroca.getItemParaTroca();
+					Item item = itemTransacao.getItem();
 	
 					Integer quantidadeAtual = item.getQuantidade();
 	
-					Integer quantidadeParaTrocar = itemTroca.getQuantidade();
+					Integer quantidadeParaTrocar = itemTransacao.getQuantidade();
 	
 					item.setQuantidade(quantidadeAtual - quantidadeParaTrocar);
 					
@@ -44,8 +44,8 @@ public class RetornaQuantidadeItemPedidoParaEstoque implements IStrategy {
 
 					Carta carta = item.getCarta();
 
-					carta.setQuantidadeDisponivel(carta.getQuantidadeDisponivel() + itemTroca.getQuantidade());
-					carta.setQuantidadeEstoque(carta.getQuantidadeEstoque() + itemTroca.getQuantidade());
+					carta.setQuantidadeDisponivel(carta.getQuantidadeDisponivel() + itemTransacao.getQuantidade());
+					carta.setQuantidadeEstoque(carta.getQuantidadeEstoque() + itemTransacao.getQuantidade());
 
 					if(carta.getStatus().getId().equals(2))
 						carta.setStatus(Status.builder().id(1).build());

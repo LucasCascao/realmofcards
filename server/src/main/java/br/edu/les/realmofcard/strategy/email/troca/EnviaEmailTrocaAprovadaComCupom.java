@@ -22,11 +22,11 @@ public class EnviaEmailTrocaAprovadaComCupom implements IStrategy {
     @Override
     public String processar(EntidadeDominio entidade) {
     	
-    	if(entidade instanceof Troca) {
+    	if(entidade instanceof Transicao) {
 
-			Troca troca = (Troca) entidade;
+			Transicao transicao = (Transicao) entidade;
 
-    		Pedido pedido = troca.getPedidoParaTroca();
+    		Pedido pedido = transicao.getPedido();
     		
     		Usuario usuario = pedido.getCliente().getUsuario();
     		
@@ -40,7 +40,7 @@ public class EnviaEmailTrocaAprovadaComCupom implements IStrategy {
 
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
     		mensagemTexto.append("este email foi enviado para informar que a solicitação de troca foi aprovado para o pedido " + pedido.getCodigoPedido() + ".\n");
-    		mensagemTexto.append("Seu código de cupom é " + troca.getCupom().getCodigo() + " no valor de R$ " + troca.getCupom().getValor() + ".\n");
+    		mensagemTexto.append("Seu código de cupom é " + transicao.getCupom().getCodigo() + " no valor de R$ " + transicao.getCupom().getValor() + ".\n");
     		mensagemTexto.append("Caso queira realizar outra compra, peço que realize o pedido em nosso site.\n\n");
     		mensagemTexto.append("Realm of Cards agradece sua preferência e te desejamos um ótimo dia.");
     		

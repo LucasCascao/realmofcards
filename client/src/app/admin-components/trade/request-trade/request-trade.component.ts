@@ -5,7 +5,7 @@ import {MockCards} from '../../../../mock/mock-card.model';
 import {Pedido} from '../../../../model/domain/pedido.model';
 import {UtilService} from '../../../../services/util.service';
 import {StatusPedido} from '../../../../model/domain/status-pedido.model';
-import {Troca} from '../../../../model/domain/troca.model';
+import {Transicao} from '../../../../model/domain/transicao.model';
 import { Item } from 'src/model/domain/item.model';
 
 @Component({
@@ -15,9 +15,9 @@ import { Item } from 'src/model/domain/item.model';
 })
 export class RequestTradeComponent implements OnInit {
 
-  trocas: Array<Troca>;
+  trocas: Array<Transicao>;
 
-  trocasFiltrada: Array<Troca>;
+  trocasFiltrada: Array<Transicao>;
 
   valorBuscado: string;
 
@@ -32,18 +32,18 @@ export class RequestTradeComponent implements OnInit {
     statusPedido.id = 7;
     const pedido = new Pedido();
     pedido.statusPedido = statusPedido;
-    const troca: Troca = new Troca();
-    troca.pedidoParaTroca = pedido;
+    const troca: Transicao = new Transicao();
+    troca.pedido = pedido;
     this.service.get(troca, 'trocas').subscribe(resultado => {
       this.trocas = resultado?.entidades;
       this.trocasFiltrada = this.trocas;
     });
   }
 
-  aprovarRequisicaoTroca(troca: Troca){
+  aprovarRequisicaoTroca(troca: Transicao){
     let status: StatusPedido = new StatusPedido();
     status.id = 9;
-    troca.pedidoParaTroca.statusPedido = status;
+    troca.pedido.statusPedido = status;
     this.service.update(troca, 'trocas').subscribe((resultado) => {
       if(resultado?.msg == null){
         this.trocas.splice(this.trocas.indexOf(troca), 1);
@@ -52,10 +52,10 @@ export class RequestTradeComponent implements OnInit {
     });
   }
 
-  rejeitarRequisicaoTroca(troca: Troca){
+  rejeitarRequisicaoTroca(troca: Transicao){
     let status: StatusPedido = new StatusPedido();
     status.id = 8;
-    troca.pedidoParaTroca.statusPedido = status;
+    troca.pedido.statusPedido = status;
     this.service.update(troca, 'trocas').subscribe(() => {
       document.location.reload();
     });
@@ -63,10 +63,11 @@ export class RequestTradeComponent implements OnInit {
 
   filtrar() {
     this.trocasFiltrada = this.trocas.filter((troca) =>
-      troca?.pedidoParaTroca?.cliente?.nome.toUpperCase().startsWith(this.valorBuscado.toUpperCase())
-      || troca?.pedidoParaTroca?.codigoPedido.startsWith(this.valorBuscado)
-      || this.contemCarta(troca?.pedidoParaTroca?.itemList)
-      || troca?.pedidoParaTroca?.cliente?.usuario?.email.startsWith(this.valorBuscado)
+      troca?.pedido?.cliente?.nome.toUpperCase().startsWith(this.valorBuscado.toUpperCase())
+      || troca?.pedido?.codigoPedido.startsWith(this.valorBuscado)
+      || this.contemCarta(troca?.pedido?.itemList)
+      || troca?.pedido?.cliente?.usuario?.email.startsWith(this.valorBuscado)
+      || troca?.codigo.startsWith(this.valorBuscado)
     );
   }
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
-import { Troca } from 'src/model/domain/troca.model';
+import { Transicao } from 'src/model/domain/transicao.model';
 import { UtilService } from 'src/services/util.service';
 import { StatusPedido } from 'src/model/domain/status-pedido.model';
 import { Pedido } from 'src/model/domain/pedido.model';
@@ -13,9 +13,9 @@ import { Item } from 'src/model/domain/item.model';
 })
 export class TransitTradeComponent implements OnInit {
 
-  trocas: Array<Troca>;
+  trocas: Array<Transicao>;
 
-  trocasFiltrada: Array<Troca>;
+  trocasFiltrada: Array<Transicao>;
 
   valorBuscado: string;
 
@@ -30,18 +30,18 @@ export class TransitTradeComponent implements OnInit {
     statusPedido.id = 9;
     const pedido = new Pedido();
     pedido.statusPedido = statusPedido;
-    const troca: Troca = new Troca();
-    troca.pedidoParaTroca = pedido;
+    const troca: Transicao = new Transicao();
+    troca.pedido = pedido;
     this.service.get(troca, 'trocas').subscribe(resultado => {
       this.trocas = resultado?.entidades;
       this.trocasFiltrada = this.trocas;
     });
   }
 
-  acusarRecebimentoDoProduto(troca: Troca){
+  acusarRecebimentoDoProduto(troca: Transicao){
     let status: StatusPedido = new StatusPedido();
     status.id = 10;
-    troca.pedidoParaTroca.statusPedido = status;
+    troca.pedido.statusPedido = status;
     this.service.update(troca, 'trocas').subscribe((resultado) => {
       if(resultado?.msg == null){
         this.trocas.splice(this.trocas.indexOf(troca), 1);
@@ -52,11 +52,12 @@ export class TransitTradeComponent implements OnInit {
 
   filtrar() {
     this.trocasFiltrada = this.trocas.filter((troca) =>
-      troca?.pedidoParaTroca?.cliente?.nome.toUpperCase().startsWith(this.valorBuscado.toUpperCase())
-      || troca?.pedidoParaTroca?.codigoPedido.startsWith(this.valorBuscado)
-      || this.contemCarta(troca?.pedidoParaTroca?.itemList)
-      || troca?.pedidoParaTroca?.cliente?.usuario?.email.startsWith(this.valorBuscado)
-      || troca?.pedidoParaTroca?.dataCompra.toString().startsWith(this.valorBuscado)
+      troca?.pedido?.cliente?.nome.toUpperCase().startsWith(this.valorBuscado.toUpperCase())
+      || troca?.pedido?.codigoPedido.startsWith(this.valorBuscado)
+      || this.contemCarta(troca?.pedido?.itemList)
+      || troca?.pedido?.cliente?.usuario?.email.startsWith(this.valorBuscado)
+      || troca?.pedido?.dataCompra.toString().startsWith(this.valorBuscado)
+      || troca?.codigo.startsWith(this.valorBuscado)
     );
   }
 

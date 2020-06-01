@@ -5,6 +5,7 @@ CREATE TABLE bandeira (
 
 CREATE TABLE carta (
     car_id                       SERIAL NOT NULL,
+    car_codigo                   VARCHAR(50) NOT NULL UNIQUE,
     car_nome                     VARCHAR(50) NOT NULL UNIQUE,
     car_descricao                VARCHAR(500) NOT NULL,
     car_valor_compra             DECIMAL(4, 2) NOT NULL,
@@ -45,19 +46,32 @@ CREATE TABLE item (
     itm_status_id               INT NOT NUll
 );
 
-CREATE TABLE troca (
-    trc_id                  SERIAL NOT NULL,
-    trc_subtotal            DECIMAL(8,2) NOT NULL,
-    trc_cupom_id            INT,
-    trc_rastreio_id         INT,
-    trc_pedido_id           INT NOT NULL
+CREATE TABLE status_transicao(
+    stt_id              SERIAL NOT NULL,
+    stt_status_nome     VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE item_troca (
-    itc_id          SERIAL NOT NULL,
-    itc_quantidade  INT NOT NULL,
-    itc_item_id     INT NOT NULL,
-    itc_troca_id    INT NOT NULL
+CREATE TABLE tipo_transicao(
+    tit_id              SERIAL NOT NULL,
+    tit_tipo_nome     VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE transicao (
+    tsc_id                  SERIAL NOT NULL,
+    tsc_codigo              VARCHAR(60) NOT NULL,
+    tsc_subtotal            DECIMAL(8,2) NOT NULL,
+    tsc_cupom_id            INT,
+    tsc_rastreio_id         INT,
+    tsc_pedido_id           INT NOT NULL,
+    tsc_status_trasicao_id  INT NOT NULL,
+    tsc_tipo_transicao_id   INT NOT NULL
+);
+
+CREATE TABLE item_transicao (
+    itc_id              SERIAL NOT NULL,
+    itc_quantidade      INT NOT NULL,
+    itc_item_id         INT NOT NULL,
+    itc_transicao_id    INT NOT NULL
 );
 
 CREATE TABLE rastreio (
@@ -77,7 +91,13 @@ CREATE TABLE cupom (
     cup_valor           DECIMAL(8, 2) NOT NULL,
     cup_data_criacao    DATE NOT NULL,
     cup_pessoa_id       INT,
-    cup_status_id       INT NOT NULL
+    cup_status_id       INT NOT NULL,
+    cup_tipo_cupom_id   INT NOT NULL
+);
+
+CREATE TABLE tipo_cupom (
+    tcp_id          SERIAL NOT NULL,
+    tcp_tipo_nome   VARCHAR(60) NOT NULL
 );
 
 CREATE TABLE endereco (
@@ -165,7 +185,7 @@ CREATE TABLE status_pedido (
     spd_status  VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE user_type (
+CREATE TABLE tipo_usuario (
     tus_id         SERIAL NOT NULL,
     tus_nome_tipo  VARCHAR(30) NOT NULL
 );
@@ -193,7 +213,7 @@ CREATE TABLE usuario (
     usu_id				 SERIAL NOT NULL,
     usu_email            VARCHAR(80) NOT NULL UNIQUE,
     usu_senha            VARCHAR(60) NOT NULL,
-    usu_type_user_id     INT NOT NULL,
+    usu_tipo_usuario_id     INT NOT NULL,
     usu_status_id        INT NOT NULL
 );
 
@@ -229,9 +249,11 @@ ALTER TABLE status ADD CONSTRAINT status_pk PRIMARY KEY ( sts_id );
 
 ALTER TABLE status_pedido ADD CONSTRAINT status_pedido_pk PRIMARY KEY ( spd_id );
 
+ALTER TABLE status_transicao ADD CONSTRAINT status_transicao_pk PRIMARY KEY ( stt_id );
+
 ALTER TABLE usuario ADD CONSTRAINT usuario_pk PRIMARY KEY ( usu_id );
 
-ALTER TABLE user_type ADD CONSTRAINT user_type_pk PRIMARY KEY ( tus_id );
+ALTER TABLE tipo_usuario ADD CONSTRAINT user_type_pk PRIMARY KEY ( tus_id );
 
 ALTER TABLE telefone ADD CONSTRAINT telefone_pk PRIMARY KEY ( tel_id );
 
@@ -241,13 +263,17 @@ ALTER TABLE forma_pagamento ADD CONSTRAINT forma_pagamento_pk PRIMARY KEY ( fpa_
 
 ALTER TABLE forma_pagamento_pedido ADD CONSTRAINT forma_pagamento_pedido_pk PRIMARY KEY ( fpp_id );
 
-ALTER TABLE troca ADD CONSTRAINT troca_pk PRIMARY KEY ( trc_id );
+ALTER TABLE transicao ADD CONSTRAINT troca_pk PRIMARY KEY ( tsc_id );
 
-ALTER TABLE item_troca ADD CONSTRAINT item_troca_pk PRIMARY KEY ( itc_id );
+ALTER TABLE item_transicao ADD CONSTRAINT item_troca_pk PRIMARY KEY ( itc_id );
 
 ALTER TABLE cupom ADD CONSTRAINT cupom_pk PRIMARY KEY ( cup_id );
 
+ALTER TABLE tipo_cupom ADD CONSTRAINT tipo_cupom_pk PRIMARY KEY ( tcp_id );
+
 ALTER TABLE rastreio ADD CONSTRAINT rastreio_pk PRIMARY KEY ( rto_id );
+
+ALTER TABLE tipo_transicao ADD CONSTRAINT tipo_transicao_pk PRIMARY KEY ( tit_id );
 
 ALTER TABLE carta
     ADD CONSTRAINT carta_status_fk FOREIGN KEY ( car_status_id )
@@ -282,8 +308,8 @@ ALTER TABLE pessoa
         REFERENCES usuario ( usu_id );
 
 ALTER TABLE usuario
-    ADD CONSTRAINT usuario_type_fk FOREIGN KEY ( usu_type_user_id )
-        REFERENCES user_type ( tus_id );
+    ADD CONSTRAINT usuario_type_fk FOREIGN KEY ( usu_tipo_usuario_id )
+        REFERENCES tipo_usuario ( tus_id );
 
 ALTER TABLE usuario
     ADD CONSTRAINT usuario_status_fk FOREIGN KEY ( usu_status_id )
@@ -369,13 +395,13 @@ ALTER TABLE telefone
     ADD CONSTRAINT telefone_tipo_telefone_fk FOREIGN KEY ( tel_tipo_telefone_id )
         REFERENCES tipo_telefone ( ttl_id );
 
-ALTER TABLE troca
-    ADD CONSTRAINT troca_pedido_fk FOREIGN KEY ( trc_pedido_id )
+ALTER TABLE transicao
+    ADD CONSTRAINT transicao_pedido_fk FOREIGN KEY ( tsc_pedido_id )
         REFERENCES pedido ( ped_id );
 
-ALTER TABLE item_troca
-    ADD CONSTRAINT troca_item_troca_fk FOREIGN KEY ( itc_troca_id )
-        REFERENCES troca ( trc_id );
+ALTER TABLE item_transicao
+    ADD CONSTRAINT transicao_item_troca_fk FOREIGN KEY ( itc_transicao_id )
+        REFERENCES transicao ( tsc_id );
 
 ALTER TABLE item
     ADD CONSTRAINT item_status_fk FOREIGN KEY ( itm_status_id )
@@ -385,10 +411,22 @@ ALTER TABLE cupom
     ADD CONSTRAINT cupom_status_fk FOREIGN KEY ( cup_status_id )
         REFERENCES status ( sts_id );
 
-ALTER TABLE troca
-    ADD CONSTRAINT troca_cupom_fk FOREIGN KEY ( trc_cupom_id )
+ALTER TABLE cupom
+    ADD CONSTRAINT cupom_tipo_cupom_fk FOREIGN KEY ( cup_tipo_cupom_id )
+        REFERENCES tipo_cupom ( tcp_id );
+
+ALTER TABLE transicao
+    ADD CONSTRAINT transicao_cupom_fk FOREIGN KEY ( tsc_cupom_id )
         REFERENCES cupom ( cup_id );
 
-ALTER TABLE troca
-    ADD CONSTRAINT rastreio_troca_fk FOREIGN KEY ( trc_rastreio_id )
+ALTER TABLE transicao
+    ADD CONSTRAINT transicao_rastreio_fk FOREIGN KEY ( tsc_rastreio_id )
         REFERENCES rastreio ( rto_id );
+
+ALTER TABLE transicao
+    ADD CONSTRAINT transicao_status_transicao_fk FOREIGN KEY ( tsc_status_trasicao_id )
+        REFERENCES status_transicao ( stt_id );
+
+ALTER TABLE transicao
+    ADD CONSTRAINT transicao_tipo_transicao_fk FOREIGN KEY ( tsc_tipo_transicao_id )
+        REFERENCES tipo_transicao ( tit_id );

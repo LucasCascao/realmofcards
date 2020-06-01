@@ -1,15 +1,11 @@
 package br.edu.les.realmofcard.strategy.pedido;
 
 import br.edu.les.realmofcard.strategy.IStrategy;
-import br.edu.les.realmofcard.strategy.email.pedido.EnviaEmailPedidoPagamentoAprovado;
-import br.edu.les.realmofcard.strategy.email.pedido.EnviaEmailPedidoPagamentoRejeitado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.edu.les.realmofcard.domain.*;
 import br.edu.les.realmofcard.dao.CartaDAO;
-import br.edu.les.realmofcard.dao.PedidoDAO;
-import br.edu.les.realmofcard.repository.PedidoRepository;
 import br.edu.les.realmofcard.util.Util;
 
 import java.util.ArrayList;
@@ -24,14 +20,14 @@ public class RetornaItemEstoque implements IStrategy {
     @Override
     public String processar(EntidadeDominio entidade) {
 
-        if(entidade instanceof Pedido || entidade instanceof Troca){
+        if(entidade instanceof Pedido || entidade instanceof Transicao){
 
             Pedido pedido = null;
 
             if(entidade instanceof Pedido)
                 pedido = (Pedido) entidade;
-            else if(entidade instanceof Troca)
-                pedido = ((Troca) entidade).getPedidoParaTroca();
+            else if(entidade instanceof Transicao)
+                pedido = ((Transicao) entidade).getPedido();
 
             List<Integer> listaStatusPermitidos = new ArrayList<>();
 

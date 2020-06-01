@@ -86,11 +86,14 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-lg-10 col-md-10">
+                <div class="col-lg-8 col-md-10">
                   <h3><strong>Valor da compra:</strong> {{pedido?.valorTotal | currency: 'BRL': true}}</h3>
                 </div>
+                <div class="col-lg-2" *ngIf="temPermissaoParaDevolucao(pedido)">
+                  <button class="btn-sm btn-danger text-center" name="solicita-devolucao" (click)="solicitaDevolucao(pedido)"><strong>Solicitar devolucão</strong></button>
+                </div>
                 <div class="col-lg-2" *ngIf="temPermissaoParaTroca(pedido)">
-                  <button class="btn-sm btn-warning text-center" (click)="solicitaTroca(pedido)"><strong>Solicitar troca</strong></button>
+                  <button class="btn-sm btn-warning text-center" name="solicita-troca" (click)="solicitaTroca(pedido)"><strong>Solicitar troca</strong></button>
                 </div>
               </div>
             </div>

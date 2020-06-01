@@ -25,6 +25,9 @@ public class Carta extends EntidadeDominio implements Comparable<Carta>{
     @Column(name = "car_id")
     private Integer id;
 
+    @Column(name = "car_codigo")
+    private String codigo;
+
     @Column(name = "car_nome")
     private String nome;
 

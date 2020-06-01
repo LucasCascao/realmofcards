@@ -4,6 +4,7 @@ import { Status } from './status.model';
 
 export class Carta {
   id: number;
+  codigo: string;
   nome: string;
   descricao: string;
   valorCompra: number;

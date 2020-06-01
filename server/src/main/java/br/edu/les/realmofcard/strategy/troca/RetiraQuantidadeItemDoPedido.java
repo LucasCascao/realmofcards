@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import br.edu.les.realmofcard.domain.EntidadeDominio;
 import br.edu.les.realmofcard.domain.Item;
 import br.edu.les.realmofcard.domain.Pedido;
-import br.edu.les.realmofcard.domain.Troca;
+import br.edu.les.realmofcard.domain.Transicao;
 import br.edu.les.realmofcard.util.Util;
 import br.edu.les.realmofcard.util.validador.ValidadorString;
 
@@ -22,24 +22,24 @@ public class RetiraQuantidadeItemDoPedido implements IStrategy {
 
 		StringBuilder msg = new StringBuilder();
 
-		if(entidade instanceof Troca){
+		if(entidade instanceof Transicao){
 
-			Troca troca = (Troca) entidade;
+			Transicao transicao = (Transicao) entidade;
 			
-			Pedido pedido = troca.getPedidoParaTroca();
+			Pedido pedido = transicao.getPedido();
 			
 			if(Util.isNotNull(pedido)
 				&& Util.isNotNull(pedido.getStatusPedido())
 				&& Util.isNotNull(pedido.getStatusPedido().getId())
 				&& pedido.getStatusPedido().getId().equals(7)) {
 				
-				troca.getItemListParaTroca().forEach( itemTroca -> {
+				transicao.getItemTransicaoList().forEach(itemTransacao -> {
 				
-					Item item = itemTroca.getItemParaTroca();
+					Item item = itemTransacao.getItem();
 	
 					Integer quantidadeAtual = item.getQuantidade();
 	
-					Integer quantidadeParaTrocar = itemTroca.getQuantidade();
+					Integer quantidadeParaTrocar = itemTransacao.getQuantidade();
 	
 					item.setQuantidade(quantidadeAtual - quantidadeParaTrocar);
 					

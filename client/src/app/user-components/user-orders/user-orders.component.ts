@@ -29,9 +29,30 @@ export class UserOrdersComponent implements OnInit {
     });
   }
 
-  solicitaTroca(pedido : Pedido){
+  inserePedidoSelecionadoNaSessao(pedido: Pedido){
     sessionStorage.setItem('pedidoSelecionado', JSON.stringify(pedido));
+  }
+
+  solicitaTroca(pedido : Pedido){
+    this.inserePedidoSelecionadoNaSessao(pedido);
     this.router.navigate(['/app-logado/user-product-trade']);
+  }
+
+  solicitaDevolucao(pedido : Pedido){
+    this.inserePedidoSelecionadoNaSessao(pedido);
+    this.router.navigate(['/app-logado/user-devolution']);
+  }
+
+  temPermissaoParaDevolucao(pedido: Pedido) : boolean {
+    let temPermissao: boolean = false;
+    if(pedido?.statusPedido?.id <= 6){
+      pedido?.itemList?.forEach( item => {
+        if(item?.quantidade > 0){
+          temPermissao = true;
+        }
+      })
+    }
+    return temPermissao;
   }
 
   temPermissaoParaTroca(pedido: Pedido) : boolean {

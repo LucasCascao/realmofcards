@@ -2,14 +2,12 @@ package br.edu.les.realmofcard.strategy.troca;
 
 import br.edu.les.realmofcard.dao.RastreioDAO;
 import br.edu.les.realmofcard.domain.EntidadeDominio;
-import br.edu.les.realmofcard.domain.Status;
-import br.edu.les.realmofcard.domain.StatusPedido;
-import br.edu.les.realmofcard.domain.Troca;
+import br.edu.les.realmofcard.domain.Transicao;
 import br.edu.les.realmofcard.strategy.IStrategy;
 import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailSolicitacaoTroca;
 import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailTrocaAprovadaComCupom;
-import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailTrocaCodigoRastreio;
 import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailTrocaRecusada;
+import br.edu.les.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +18,7 @@ import java.util.Map;
 public class EnviaEmailStatusDaTroca implements IStrategy {
 
 	@Autowired
-	private RastreioDAO rastreioDAO;
+	private ValidaDadosTroca validaDadosTroca;
 
 	@Autowired
 	private GeraCodigoRastreioTroca geraCodigoRastreioTroca;
@@ -29,21 +27,18 @@ public class EnviaEmailStatusDaTroca implements IStrategy {
 	private EnviaEmailSolicitacaoTroca enviaEmailSolicitacaoTroca;
 
 	@Autowired
-	private EnviaEmailTrocaAprovadaComCupom enviaEmailTrocaAprovadaComCupom;
-
-	@Autowired
 	private EnviaEmailTrocaRecusada enviaEmailTrocaRecusada;
 
 	@Override
 	public String processar(final EntidadeDominio entidade) {
 
-		if(entidade instanceof Troca){
+		if(entidade instanceof Transicao){
 
-			Troca troca = (Troca) entidade;
+			Transicao transicao = (Transicao) entidade;
 
-			if(troca.getPedidoParaTroca() != null
-				&& troca.getPedidoParaTroca().getStatusPedido() != null
-				&& troca.getPedidoParaTroca().getStatusPedido().getId() != null){
+			if(transicao.getPedido() != null
+				&& transicao.getPedido().getStatusPedido() != null
+				&& transicao.getPedido().getStatusPedido().getId() != null){
 
 				Map<Integer, IStrategy> mapaEnvioDeEmail = new HashMap<>();
 
@@ -51,10 +46,12 @@ public class EnviaEmailStatusDaTroca implements IStrategy {
 				mapaEnvioDeEmail.put(8, enviaEmailTrocaRecusada);
 				mapaEnvioDeEmail.put(9, geraCodigoRastreioTroca);
 
-				Integer statusPedidoId = troca.getPedidoParaTroca().getStatusPedido().getId();
+				Integer statusPedidoId = transicao.getPedido().getStatusPedido().getId();
 
-				if(mapaEnvioDeEmail.containsKey(statusPedidoId)){
-					mapaEnvioDeEmail.get(statusPedidoId).processar(troca);
+				String msg = validaDadosTroca.processar(transicao);
+
+				if(mapaEnvioDeEmail.containsKey(statusPedidoId) && msg.isEmpty()){
+					mapaEnvioDeEmail.get(statusPedidoId).processar(transicao);
 				}
 			}
 		}

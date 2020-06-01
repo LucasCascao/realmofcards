@@ -21,20 +21,20 @@ public class GeraCodigoRastreioTroca implements IStrategy {
 	@Override
 	public String processar(final EntidadeDominio entidade) {
 
-		if(entidade instanceof Troca){
+		if(entidade instanceof Transicao){
 
-			Troca troca = (Troca) entidade;
+			Transicao transicao = (Transicao) entidade;
 
-			if(troca.getPedidoParaTroca() != null
-				&& troca.getPedidoParaTroca().getStatusPedido() != null
-				&& troca.getPedidoParaTroca().getStatusPedido().getId().equals(9)){
+			if(transicao.getPedido() != null
+				&& transicao.getPedido().getStatusPedido() != null
+				&& transicao.getPedido().getStatusPedido().getId().equals(9)){
 
 				Rastreio rastreio = new Rastreio();
 
 				rastreio.setCodigoRastreio(GeradorCodigo.gerarCodigoRastreio());
 				rastreio = (Rastreio) rastreioDAO.salvar(rastreio);
-				troca.setRastreio(rastreio);
-				enviaEmailTrocaCodigoRastreio.processar(troca);
+				transicao.setRastreio(rastreio);
+				enviaEmailTrocaCodigoRastreio.processar(transicao);
 			}
 		}
 

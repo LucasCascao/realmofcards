@@ -2,12 +2,11 @@ package br.edu.les.realmofcard.strategy.troca;
 
 import br.edu.les.realmofcard.domain.EntidadeDominio;
 import br.edu.les.realmofcard.domain.Item;
-import br.edu.les.realmofcard.domain.ItemTroca;
-import br.edu.les.realmofcard.domain.Troca;
+import br.edu.les.realmofcard.domain.ItemTransacao;
+import br.edu.les.realmofcard.domain.Transicao;
 import br.edu.les.realmofcard.repository.ItemRepository;
 import br.edu.les.realmofcard.strategy.IStrategy;
 import br.edu.les.realmofcard.util.Util;
-import br.edu.les.realmofcard.util.validador.ValidadorString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,17 +19,17 @@ public class CalculaValorTroca implements IStrategy {
 	@Override
 	public String processar(final EntidadeDominio entidade) {
 		StringBuilder msg = new StringBuilder();
-		if(entidade instanceof Troca){
-			Troca troca = (Troca) entidade;
-			if(Util.isNotNull(troca.getItemListParaTroca())){
+		if(entidade instanceof Transicao){
+			Transicao transicao = (Transicao) entidade;
+			if(Util.isNotNull(transicao.getItemTransicaoList())){
 				Double subTotal = 0.0;
-				for (ItemTroca itemTroca : troca.getItemListParaTroca()) {
-					if(Util.isNotNull(itemTroca.getItemParaTroca().getId())){
-						Item item = itemRepository.findById(itemTroca.getItemParaTroca().getId()).get();
-						subTotal += item.getCarta().getValorVenda() * itemTroca.getQuantidade();
+				for (ItemTransacao itemTransacao : transicao.getItemTransicaoList()) {
+					if(Util.isNotNull(itemTransacao.getItem().getId())){
+						Item item = itemRepository.findById(itemTransacao.getItem().getId()).get();
+						subTotal += item.getCarta().getValorVenda() * itemTransacao.getQuantidade();
 					}
 				}
-				troca.setSubTotal(subTotal);
+				transicao.setSubTotal(subTotal);
 			}
 		}
 		return msg.toString();

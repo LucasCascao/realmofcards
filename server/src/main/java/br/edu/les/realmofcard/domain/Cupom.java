@@ -50,4 +50,8 @@ public class Cupom extends EntidadeDominio{
     @ManyToOne
     @JoinColumn(name = "cup_status_id")
     private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "cup_tipo_cupom_id")
+    private TipoCupom tipoCupom;
 }

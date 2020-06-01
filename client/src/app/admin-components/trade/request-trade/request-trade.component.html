@@ -19,15 +19,15 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-10">
-                <div class="row" *ngFor="let item of troca?.itemListParaTroca">
+                <div class="row" *ngFor="let item of troca?.itemTransicaoList">
                   <div class="col-lg-6">
                     <div class="row">
                       <div class="col-lg-2">
-                        <img class="card-img-top" [src]="item?.itemParaTroca?.carta?.imagemPath" alt="">
+                        <img class="card-img-top" [src]="item?.item?.carta?.imagemPath" alt="">
                       </div>
                       <div class="col-lg-9">
-                        <p class="card-text"><strong>Produto:</strong> {{item?.itemParaTroca?.carta?.nome}}</p>
-                        <p class="card-text"><strong>Categoria:</strong> {{item?.itemParaTroca?.carta?.categoriaCarta?.nome}}</p>
+                        <p class="card-text"><strong>Produto:</strong> {{item?.item?.carta?.nome}}</p>
+                        <p class="card-text"><strong>Categoria:</strong> {{item?.item?.carta?.categoriaCarta?.nome}}</p>
                         <p class="card-text"><strong>Quantidade requisitada:</strong> {{item?.quantidade}}</p>
                       </div>
                     </div>
@@ -36,10 +36,11 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-10">
-                    <p class="card-text"><strong>Nº do pedido pertencente:</strong> {{troca?.pedidoParaTroca?.codigoPedido}}.</p>
-                    <p class="card-text"><strong>Cliente:</strong> {{troca?.pedidoParaTroca?.cliente?.nome}} {{troca?.pedidoParaTroca?.cliente?.sobrenome}}</p>
-                    <p class="card-text"><strong>Email:</strong> {{troca?.pedidoParaTroca?.cliente?.usuario?.email}}</p>
-                    <p class="card-text"><strong>Data da compra:</strong> {{troca?.pedidoParaTroca?.dataCompra | date: 'dd/MM/yyyy'}}</p>
+                    <p class="card-text"><strong>Código de troca:</strong> {{troca?.codigo}}.</p>
+                    <p class="card-text"><strong>Nº do pedido pertencente:</strong> {{troca?.pedido?.codigoPedido}}.</p>
+                    <p class="card-text"><strong>Cliente:</strong> {{troca?.pedido?.cliente?.nome}} {{troca?.pedido?.cliente?.sobrenome}}</p>
+                    <p class="card-text"><strong>Email:</strong> {{troca?.pedido?.cliente?.usuario?.email}}</p>
+                    <p class="card-text"><strong>Data da compra:</strong> {{troca?.pedido?.dataCompra | date: 'dd/MM/yyyy'}}</p>
                     <p><strong>Valor da troca:</strong> {{troca?.subTotal | currency: 'BRL': true}}</p>
                   </div>
                 </div>

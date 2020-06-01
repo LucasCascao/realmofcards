@@ -1,15 +1,9 @@
 package br.edu.les.realmofcard.strategy.pedido;
 
-import br.edu.les.realmofcard.dao.RastreioDAO;
 import br.edu.les.realmofcard.domain.EntidadeDominio;
 import br.edu.les.realmofcard.domain.Pedido;
-import br.edu.les.realmofcard.domain.Troca;
 import br.edu.les.realmofcard.strategy.IStrategy;
 import br.edu.les.realmofcard.strategy.email.pedido.*;
-import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailSolicitacaoTroca;
-import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailTrocaAprovadaComCupom;
-import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailTrocaRecusada;
-import br.edu.les.realmofcard.strategy.troca.GeraCodigoRastreioTroca;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

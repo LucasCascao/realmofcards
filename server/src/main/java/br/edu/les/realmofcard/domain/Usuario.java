@@ -39,6 +39,6 @@ public class Usuario extends EntidadeDominio implements Serializable{
 	private Status status;
 
 	@ManyToOne()
-	@JoinColumn(name = "usu_type_user_id")
+	@JoinColumn(name = "usu_tipo_usuario_id")
 	private TipoUsuario tipoUsuario;
 }

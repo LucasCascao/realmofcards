@@ -21,11 +21,11 @@ public class EnviaEmailTrocaRecusada implements IStrategy {
     @Override
     public String processar(EntidadeDominio entidade) {
     	
-    	if(entidade instanceof Troca) {
+    	if(entidade instanceof Transicao) {
 
-			Troca troca = (Troca) entidade;
+			Transicao transicao = (Transicao) entidade;
 
-    		Pedido pedido = troca.getPedidoParaTroca();
+    		Pedido pedido = transicao.getPedido();
     		
     		Usuario usuario = pedido.getCliente().getUsuario();
     		

@@ -15,7 +15,7 @@
                 </div>
               </div>
               <div class="row" *ngFor="let itemTroca of trocaItemList">
-                <div *ngIf="itemTroca?.itemParaTroca?.quantidade > 0">
+                <div *ngIf="itemTroca?.item?.quantidade > 0">
                   <div class="col-lg-12">
                     <div class="row">
                       <div class="col-lg-1">
@@ -23,24 +23,24 @@
                       </div>
                       <div class="col-lg-1 col-md-5">
                         <a [routerLinkActive]="['/product-detail']">
-                          <img class="img-fluid rounded mb-3 mb-md-3" [src]="itemTroca?.itemParaTroca?.carta?.imagemPath" [alt]="itemTroca?.itemParaTroca?.carta?.nome">
+                          <img class="img-fluid rounded mb-3 mb-md-3" [src]="itemTroca?.item?.carta?.imagemPath" [alt]="itemTroca?.item?.carta?.nome">
                         </a>
                       </div>
                       <div class="col-lg-10 col-md-08 float-left">
                         <p class="card-text">
-                          <strong>Produto:</strong> {{itemTroca?.itemParaTroca?.carta?.nome}},  (valor unitário) .
+                          <strong>Produto:</strong> {{itemTroca?.item?.carta?.nome}},  (valor unitário) .
                         </p>
                         <p>
-                          <strong>Valor unitário:</strong> {{itemTroca?.itemParaTroca?.carta?.valorVenda | currency: 'BRL': true}}
+                          <strong>Valor unitário:</strong> {{itemTroca?.item?.carta?.valorVenda | currency: 'BRL': true}}
                         </p>
                         <p>
-                          <strong>Valor total:</strong> {{calculaValorTotalItem(itemTroca?.itemParaTroca?.carta?.valorVenda, itemTroca?.itemParaTroca?.quantidade) | currency: 'BRL': true}}
+                          <strong>Valor total:</strong> {{calculaValorTotalItem(itemTroca?.item?.carta?.valorVenda, itemTroca?.item?.quantidade) | currency: 'BRL': true}}
                         </p>
                         <p>
-                          <strong>Quantidade comprada:</strong> {{itemTroca?.itemParaTroca?.quantidade}}
+                          <strong>Quantidade comprada:</strong> {{itemTroca?.item?.quantidade}}
                         </p>
                         <p>
-                          <strong>Quantidade para trocar:</strong> <input type="number" [max]="itemTroca?.itemParaTroca?.quantidade" [(ngModel)]="itemTroca.quantidade" name="button-troca-quantidade" min="1" value="1">
+                          <strong>Quantidade para trocar:</strong> <input type="number" [max]="itemTroca?.item?.quantidade" [(ngModel)]="itemTroca.quantidade" name="button-troca-quantidade" min="1" value="1">
                         </p>
                       </div>
                     </div>
