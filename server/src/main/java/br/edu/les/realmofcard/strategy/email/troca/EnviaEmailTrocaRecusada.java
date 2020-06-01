@@ -35,7 +35,7 @@ public class EnviaEmailTrocaRecusada implements IStrategy {
     		
     		StringBuilder mensagemTexto = new StringBuilder();
     		
-    		mensagem.setAssunto("Solicitação de troca recusada do pedido " + pedido.getCodigoPedido() + ".");
+    		mensagem.setAssunto("Solicitação de troca foi recusada referente ao pedido " + pedido.getCodigoPedido() + ".");
 
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
     		mensagemTexto.append("este email foi enviado para comunicar que sua solicitação de troca do pedido " + pedido.getCodigoPedido() + " foi recusada.\n");

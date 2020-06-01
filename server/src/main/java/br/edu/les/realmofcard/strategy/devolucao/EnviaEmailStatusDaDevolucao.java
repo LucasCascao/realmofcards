@@ -1,12 +1,16 @@
-package br.edu.les.realmofcard.strategy.troca;
+package br.edu.les.realmofcard.strategy.devolucao;
 
 import br.edu.les.realmofcard.domain.EntidadeDominio;
 import br.edu.les.realmofcard.domain.Transicao;
 import br.edu.les.realmofcard.strategy.IStrategy;
+import br.edu.les.realmofcard.strategy.email.devolucao.EnviaEmailDevolucaoAprovadaComCupom;
+import br.edu.les.realmofcard.strategy.email.devolucao.EnviaEmailDevolucaoCodigoRastreio;
+import br.edu.les.realmofcard.strategy.email.devolucao.EnviaEmailDevolucaoRecusada;
+import br.edu.les.realmofcard.strategy.email.devolucao.EnviaEmailSolicitacaoDevolucao;
 import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailSolicitacaoTroca;
-import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailTrocaCodigoRastreio;
 import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailTrocaRecusada;
 import br.edu.les.realmofcard.strategy.transicao.GeraCodigoRastreioTransicao;
+import br.edu.les.realmofcard.strategy.troca.ValidaDadosTroca;
 import br.edu.les.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,19 +19,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class EnviaEmailStatusDaTroca implements IStrategy {
+public class EnviaEmailStatusDaDevolucao implements IStrategy {
 
 	@Autowired
-	private ValidaDadosTroca validaDadosTroca;
+	private EnviaEmailSolicitacaoDevolucao enviaEmailSolicitacaoDevolucao;
 
 	@Autowired
-	private EnviaEmailSolicitacaoTroca enviaEmailSolicitacaoTroca;
+	private EnviaEmailDevolucaoRecusada enviaEmailDevolucaoRecusada;
 
 	@Autowired
-	private EnviaEmailTrocaCodigoRastreio enviaEmailTrocaCodigoRastreio;
-
-	@Autowired
-	private EnviaEmailTrocaRecusada enviaEmailTrocaRecusada;
+	private EnviaEmailDevolucaoCodigoRastreio enviaEmailDevolucaoCodigoRastreio;
 
 	@Override
 	public String processar(final EntidadeDominio entidade) {
@@ -40,17 +41,15 @@ public class EnviaEmailStatusDaTroca implements IStrategy {
 				&& transicao.getPedido().getStatusPedido() != null
 				&& transicao.getPedido().getStatusPedido().getId() != null
 				&& Util.isNotNull(transicao.getTipoTransicao())
-				&& transicao.getTipoTransicao().getId().equals(1)){
+				&& transicao.getTipoTransicao().getId().equals(2)){
 
 				Map<Integer, IStrategy> mapaEnvioDeEmail = new HashMap<>();
 
-				mapaEnvioDeEmail.put(7, enviaEmailSolicitacaoTroca);
-				mapaEnvioDeEmail.put(8, enviaEmailTrocaRecusada);
-				mapaEnvioDeEmail.put(9, enviaEmailTrocaCodigoRastreio);
+				mapaEnvioDeEmail.put(11, enviaEmailSolicitacaoDevolucao);
+				mapaEnvioDeEmail.put(12, enviaEmailDevolucaoRecusada);
+				mapaEnvioDeEmail.put(9, enviaEmailDevolucaoCodigoRastreio);
 
 				Integer statusPedidoId = transicao.getPedido().getStatusPedido().getId();
-
-				String msg = validaDadosTroca.processar(transicao);
 
 				if(mapaEnvioDeEmail.containsKey(statusPedidoId)){
 					mapaEnvioDeEmail.get(statusPedidoId).processar(transicao);

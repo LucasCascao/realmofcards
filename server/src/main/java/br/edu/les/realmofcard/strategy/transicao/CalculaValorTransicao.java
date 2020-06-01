@@ -1,4 +1,4 @@
-package br.edu.les.realmofcard.strategy.troca;
+package br.edu.les.realmofcard.strategy.transicao;
 
 import br.edu.les.realmofcard.domain.EntidadeDominio;
 import br.edu.les.realmofcard.domain.Item;
@@ -11,14 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CalculaValorTroca implements IStrategy {
+public class CalculaValorTransicao implements IStrategy {
 
 	@Autowired
 	private ItemRepository itemRepository;
 
 	@Override
 	public String processar(final EntidadeDominio entidade) {
-		StringBuilder msg = new StringBuilder();
 		if(entidade instanceof Transicao){
 			Transicao transicao = (Transicao) entidade;
 			if(Util.isNotNull(transicao.getItemTransicaoList())){
@@ -32,6 +31,6 @@ public class CalculaValorTroca implements IStrategy {
 				transicao.setSubTotal(subTotal);
 			}
 		}
-		return msg.toString();
+		return null;
 	}
 }

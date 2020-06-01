@@ -26,9 +26,6 @@
                           <strong>Valor unitário:</strong> {{itemDevolucao?.item?.carta?.valorVenda | currency: 'BRL': true}}
                         </p>
                         <p>
-                          <strong>Valor total:</strong> {{devolucao?.subTotal | currency: 'BRL': true}}
-                        </p>
-                        <p>
                           <strong>Quantidade de devolução:</strong> {{itemDevolucao?.quantidade}}
                         </p>
                       </div>
@@ -37,6 +34,7 @@
                   </div>
                 </div>
               </div>
+              <h4><strong>Valor total da devolução: </strong>{{devolucao?.subTotal | currency: 'BRL': true}}</h4>
               <p>Clique no botão abaixo para confirmar a devolução.</p>
               <button class="btn btn-secondary btn-lg float-left" [routerLink]="['/app-logado/user-orders']">Cancelar</button>
               <button class="btn btn-danger btn-lg float-right" (click)="trocaProduto()">Confirmar Devolução</button>

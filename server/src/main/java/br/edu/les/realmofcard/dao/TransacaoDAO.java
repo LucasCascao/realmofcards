@@ -39,6 +39,7 @@ public class TransacaoDAO implements IDAO {
 
         for (ItemTransacao itemTransacao : transicao.getItemTransicaoList()) {
             itemTransacao.setTransicao(transicao);
+            itemRepository.save(itemTransacao.getItem());
             itemTransicaoRepository.save(itemTransacao);
         }
         
@@ -58,7 +59,8 @@ public class TransacaoDAO implements IDAO {
             itemRepository.save(itemTransacao.getItem());
             cartaRepository.save(itemTransacao.getItem().getCarta());
         }
-    	
+
+    	transicaoRepository.save(transicao);
     	pedidoRepository.save(transicao.getPedido());
     }
 
@@ -76,6 +78,22 @@ public class TransacaoDAO implements IDAO {
     		trocas.add(transicaoRepository.findById(transicao.getId()).get());
     		return trocas;
     	}
+
+        if(Util.isNotNull(transicao.getPedido())
+                && Util.isNotNull(transicao.getPedido().getStatusPedido())
+                && Util.isNotNull(transicao.getPedido().getStatusPedido().getId())
+                && Util.isNotNull(transicao.getStatusTransacao())
+                && Util.isNotNull(transicao.getStatusTransacao().getId())
+                && Util.isNotNull(transicao.getTipoTransicao())
+                && Util.isNotNull(transicao.getTipoTransicao().getId())) {
+
+            Integer idStatusTransicao = transicao.getStatusTransacao().getId();
+            Integer idStatusPedido = transicao.getPedido().getStatusPedido().getId();
+            Integer idTipoTransicao = transicao.getTipoTransicao().getId();
+
+            trocas.addAll(transicaoRepository.getTrocasByStatusAndPedidoStatus(idStatusTransicao, idStatusPedido, idTipoTransicao));
+            return trocas;
+        }
     	
     	if(Util.isNotNull(transicao.getPedido())
             && Util.isNotNull(transicao.getPedido().getStatusPedido())

@@ -4,43 +4,68 @@
   <div class="row">
     <div class="col-lg-10 offset-1">
       <div class="col-lg-10 float-left">
-        <input type="text" class="form-control" placeholder="Pesquisar pedido">
+        <input type="text"  name="valorBusca" [(ngModel)]="valorBuscado" class="form-control" placeholder="Pesquisar troca">
       </div>
       <div class="col-lg-2 float-right">
-        <input type="button" (click)="filtrar(clients)" class="btn btn-secondary" value="Pesquisar">
+        <input type="button" (click)="filtrar()" class="btn btn-secondary" value="Pesquisar">
       </div>
     </div>
   </div>
   <hr>
-  <div class="row">
-    <div *ngFor="let client of clients" class="col-lg-12 mb-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <div class="col-md-3 float-left">
-            <img class="card-img-top" [src]="carta.imageUrl" alt="">
-          </div>
-          <div class="col-md-3 float-left">
-            <p class="card-text"><strong>Produto:</strong> {{carta.nome}}</p>
-            <p class="card-text"><strong>Categoria:</strong> {{carta.catCarta}}</p>
-            <p class="card-text"><strong>Jogo:</strong> {{carta.catJogo}}</p>
-            <p class="card-text"><strong>Quantidade requisitada:</strong> 3</p>
-            <p class="card-text"><strong>Parcela:</strong> 1x 52.45</p>
-            <p class="card-text"><strong>Data da compra:</strong> 20/02/2020</p>
-          </div>
-          <div class="col-md-4 float-left">
-            <p class="card-text"><strong>Cliente:</strong> {{client.firstName}} {{client.lastName}}</p>
-            <p class="card-text"><strong>Email:</strong> {{client.email}}</p>
-            <p class="card-text"><strong>Forma de pagamento:</strong> 2 cartões</p>
-            <p class="card-text"><strong>Cartão final 9999:</strong> 20.00</p>
-            <p class="card-text"><strong>Cartão final 5859:</strong> 32.45</p>
-            <p class="card-text"><strong>Data da solicitação de devolução:</strong> 01/03/2020</p>
-          </div>
-          <div class="col-md-2 float-left">
-            <a class="btn btn-success mb-md-3" [routerLink]="['../devolution-request']">Aprovar Devolução</a>
-            <!--            <a class="btn btn-danger mb-md-3" [routerLink]="['/pending-orders']">Negar</a>-->
+  <div *ngIf="devolucoesFiltrada?.length > 0;else semItemTroca">
+    <div class="row" *ngFor="let devolucao of devolucoesFiltrada" >
+      <div class="col-lg-12 mb-4">
+        <div class="card rounded shadow shadow-sm">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-10">
+                <div class="row" *ngFor="let item of devolucao?.itemTransicaoList">
+                  <div class="col-lg-6">
+                    <div class="row">
+                      <div class="col-lg-2">
+                        <img class="card-img-top" [src]="item?.item?.carta?.imagemPath" alt="">
+                      </div>
+                      <div class="col-lg-9">
+                        <p class="card-text"><strong>Produto:</strong> {{item?.item?.carta?.nome}}</p>
+                        <p class="card-text"><strong>Categoria:</strong> {{item?.item?.carta?.categoriaCarta?.nome}}</p>
+                        <p class="card-text"><strong>Quantidade requisitada:</strong> {{item?.quantidade}}</p>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-10">
+                    <p class="card-text"><strong>Código de devolução:</strong> {{devolucao?.codigo}}.</p>
+                    <p class="card-text"><strong>Nº do pedido pertencente:</strong> {{devolucao?.pedido?.codigoPedido}}.</p>
+                    <p class="card-text"><strong>Cliente:</strong> {{devolucao?.pedido?.cliente?.nome}} {{devolucao?.pedido?.cliente?.sobrenome}}</p>
+                    <p class="card-text"><strong>Email:</strong> {{devolucao?.pedido?.cliente?.usuario?.email}}</p>
+                    <p class="card-text"><strong>Data da compra:</strong> {{devolucao?.pedido?.dataCompra | date: 'dd/MM/yyyy'}}</p>
+                    <p><strong>Valor da troca:</strong> {{devolucao?.subTotal | currency: 'BRL': true}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="row">
+                  <div class="col-lg-12 mb-md-3">
+                    <button class="btn btn-success" (click)="aprovarRequisicaoDevolucao(devolucao)">Aprovar Devolução</button>
+                  </div>
+                  <div class="col-lg-12">
+                    <button class="btn btn-danger" (click)="rejeitarRequisicaoDevolucao(devolucao)">Rejeitar Devolução</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <ng-template #semItemTroca>
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="card-text text-center"><strong>Nenhuma troca encontrada.</strong></h3>
+      </div>
+    </div>
+  </ng-template>
 </div>

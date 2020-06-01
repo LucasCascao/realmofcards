@@ -1,4 +1,4 @@
-package br.edu.les.realmofcard.strategy.troca;
+package br.edu.les.realmofcard.strategy.transicao;
 
 import br.edu.les.realmofcard.domain.EntidadeDominio;
 import br.edu.les.realmofcard.domain.Transicao;
@@ -7,7 +7,7 @@ import br.edu.les.realmofcard.util.GeradorCodigo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GeraCodigoTransacaoTroca implements IStrategy {
+public class GeraCodigoTransacaoTransicao implements IStrategy {
 
 	@Override
 	public String processar(final EntidadeDominio entidade) {

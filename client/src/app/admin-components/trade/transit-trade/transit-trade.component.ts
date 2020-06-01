@@ -5,6 +5,8 @@ import { UtilService } from 'src/services/util.service';
 import { StatusPedido } from 'src/model/domain/status-pedido.model';
 import { Pedido } from 'src/model/domain/pedido.model';
 import { Item } from 'src/model/domain/item.model';
+import { StatusTransacao } from 'src/model/domain/status-transicao';
+import { TipoTransicao } from 'src/model/domain/tipo-transicao';
 
 @Component({
   selector: 'app-transit-trade',
@@ -26,13 +28,19 @@ export class TransitTradeComponent implements OnInit {
   }
 
   getTrocas() {
-    const statusPedido: StatusPedido = new StatusPedido();
+    let statusPedido: StatusPedido = new StatusPedido();
     statusPedido.id = 9;
-    const pedido = new Pedido();
+    let pedido = new Pedido();
     pedido.statusPedido = statusPedido;
-    const troca: Transicao = new Transicao();
+    let statusTransacao: StatusTransacao = new StatusTransacao();
+    statusTransacao.id = 1;
+    let tipoTransicao: TipoTransicao = new TipoTransicao();
+    tipoTransicao.id = 1;
+    let troca: Transicao = new Transicao();
     troca.pedido = pedido;
-    this.service.get(troca, 'trocas').subscribe(resultado => {
+    troca.statusTransacao = statusTransacao;
+    troca.tipoTransicao = tipoTransicao;
+    this.service.get(troca, 'transicoes').subscribe(resultado => {
       this.trocas = resultado?.entidades;
       this.trocasFiltrada = this.trocas;
     });
@@ -42,7 +50,7 @@ export class TransitTradeComponent implements OnInit {
     let status: StatusPedido = new StatusPedido();
     status.id = 10;
     troca.pedido.statusPedido = status;
-    this.service.update(troca, 'trocas').subscribe((resultado) => {
+    this.service.update(troca, 'transicoes').subscribe((resultado) => {
       if(resultado?.msg == null){
         this.trocas.splice(this.trocas.indexOf(troca), 1);
         this.trocasFiltrada = this.trocas;

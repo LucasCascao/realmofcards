@@ -1,4 +1,4 @@
-package br.edu.les.realmofcard.strategy.troca;
+package br.edu.les.realmofcard.strategy.transicao;
 
 import br.edu.les.realmofcard.strategy.IStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,28 +28,20 @@ public class RetornaQuantidadeItemPedidoParaEstoque implements IStrategy {
 			if(Util.isNotNull(pedido)
 				&& Util.isNotNull(pedido.getStatusPedido())
 				&& Util.isNotNull(pedido.getStatusPedido().getId())
-				&& pedido.getStatusPedido().getId().equals(10)) {
+				&& (pedido.getStatusPedido().getId().equals(10) || pedido.getStatusPedido().getId().equals(13))) {
 				
 				transicao.getItemTransicaoList().forEach(itemTransacao -> {
 				
 					Item item = itemTransacao.getItem();
-	
-					Integer quantidadeAtual = item.getQuantidade();
-	
-					Integer quantidadeParaTrocar = itemTransacao.getQuantidade();
-	
-					item.setQuantidade(quantidadeAtual - quantidadeParaTrocar);
-					
-					item.setQuantidadeTroca(item.getQuantidadeTroca() + quantidadeParaTrocar);
 
 					Carta carta = item.getCarta();
 
 					carta.setQuantidadeDisponivel(carta.getQuantidadeDisponivel() + itemTransacao.getQuantidade());
 					carta.setQuantidadeEstoque(carta.getQuantidadeEstoque() + itemTransacao.getQuantidade());
 
-					if(carta.getStatus().getId().equals(2))
+					if(carta.getStatus().getId().equals(2)){
 						carta.setStatus(Status.builder().id(1).build());
-
+					}
 				});
 			}
 		}

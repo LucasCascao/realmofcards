@@ -1,6 +1,7 @@
 package br.edu.les.realmofcard.strategy.email.troca;
 
 import br.edu.les.realmofcard.strategy.IStrategy;
+import br.edu.les.realmofcard.strategy.transicao.GeraCodigoRastreioTransicao;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,12 +20,17 @@ public class EnviaEmailTrocaCodigoRastreio implements IStrategy {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 
+	@Autowired
+	private GeraCodigoRastreioTransicao geraCodigoRastreioTransicao;
+
     @Override
     public String processar(EntidadeDominio entidade) {
     	
     	if(entidade instanceof Transicao) {
 
 			Transicao transicao = (Transicao) entidade;
+
+			geraCodigoRastreioTransicao.processar(transicao);
 
     		Pedido pedido = transicao.getPedido();
     		
@@ -36,7 +42,7 @@ public class EnviaEmailTrocaCodigoRastreio implements IStrategy {
     		
     		StringBuilder mensagemTexto = new StringBuilder();
     		
-    		mensagem.setAssunto("Solicitação de troca aprovada do pedido " + pedido.getCodigoPedido() + ".");
+    		mensagem.setAssunto("Solicitação de troca foi aprovada referente ao pedido " + pedido.getCodigoPedido() + ".");
 
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
     		mensagemTexto.append("este email foi enviado para diponibilizar o código de rastreio para o você possa enviar o item(s) para troca.\n");

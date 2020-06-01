@@ -1,4 +1,4 @@
-package br.edu.les.realmofcard.strategy.email.troca;
+package br.edu.les.realmofcard.strategy.email.devolucao;
 
 import br.edu.les.realmofcard.domain.*;
 import br.edu.les.realmofcard.repository.PessoaRepository;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Log4j2
 @Component
-public class EnviaEmailSolicitacaoTroca implements IStrategy {
+public class EnviaEmailDevolucaoAprovadaComCupom implements IStrategy {
 	
 	@Autowired
 	private EmailSender emailSender;
@@ -35,11 +35,11 @@ public class EnviaEmailSolicitacaoTroca implements IStrategy {
     		
     		StringBuilder mensagemTexto = new StringBuilder();
     		
-    		mensagem.setAssunto("Solicitação de troco referente ao pedido " + pedido.getCodigoPedido() + " está pendente.");
+    		mensagem.setAssunto("Solicitação de devolução do pedido " + pedido.getCodigoPedido() + " foi finalizada.");
 
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
-    		mensagemTexto.append("este email foi enviado para confirmar que sua solicitação de troca do pedido " + pedido.getCodigoPedido() + " foi realizada com sucesso.\n");
-    		mensagemTexto.append("Nesse momento sua solicitação está pendente de aprovação, pedimos que aguarde até 48 horas para finalizarmos a análise do pedido.\n");
+    		mensagemTexto.append("este email foi enviado para informar que a solicitação de devolução foi finalizada para o pedido " + pedido.getCodigoPedido() + ".\n");
+    		mensagemTexto.append("Seu código de cupom é " + transicao.getCupom().getCodigo() + " no valor de R$ " + transicao.getCupom().getValor() + ".\n");
     		mensagemTexto.append("Caso queira realizar outra compra, peço que realize o pedido em nosso site.\n\n");
     		mensagemTexto.append("Realm of Cards agradece sua preferência e te desejamos um ótimo dia.");
     		

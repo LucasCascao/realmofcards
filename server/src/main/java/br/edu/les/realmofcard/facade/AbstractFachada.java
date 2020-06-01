@@ -4,7 +4,12 @@ import br.edu.les.realmofcard.strategy.carrinho.*;
 import br.edu.les.realmofcard.strategy.cupom.ValidaCupomAtivo;
 import br.edu.les.realmofcard.strategy.cupom.ValidaDadosCupom;
 import br.edu.les.realmofcard.strategy.cupom.ValidaExistenciaCupom;
+import br.edu.les.realmofcard.strategy.devolucao.EnviaEmailStatusDaDevolucao;
 import br.edu.les.realmofcard.strategy.pedido.*;
+import br.edu.les.realmofcard.strategy.transicao.CalculaValorTransicao;
+import br.edu.les.realmofcard.strategy.transicao.GeraCodigoTransacaoTransicao;
+import br.edu.les.realmofcard.strategy.transicao.RetiraQuantidadeItemDoPedido;
+import br.edu.les.realmofcard.strategy.transicao.RetornaQuantidadeItemPedidoParaEstoque;
 import br.edu.les.realmofcard.strategy.troca.*;
 import br.edu.les.realmofcard.strategy.usuario.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -185,6 +190,9 @@ public class AbstractFachada {
     private EnviaEmailStatusDoPedido enviaEmailStatusDoPedido;
 
     @Autowired
+    private EnviaEmailStatusDaDevolucao enviaEmailStatusDaDevolucao;
+
+    @Autowired
     private ValidaDadosTroca validaDadosTroca;
 
     @Autowired
@@ -194,7 +202,7 @@ public class AbstractFachada {
     private RetornaQuantidadeItemPedidoParaEstoque retornaQuantidadeItemPedidoParaEstoque;
 
     @Autowired
-    private CalculaValorTroca calculaValorTroca;
+    private CalculaValorTransicao calculaValorTransicao;
 
     @Autowired
     private EnviaEmailStatusDaTroca enviaEmailStatusDaTroca;
@@ -212,7 +220,7 @@ public class AbstractFachada {
     private GeraCupomComValorRestante geraCupomComValorRestante;
 
     @Autowired
-    private GeraCodigoTransacaoTroca geraCodigoTransacaoTroca;
+    private GeraCodigoTransacaoTransicao geraCodigoTransacaoTransicao;
 
 
     public AbstractFachada(){
@@ -418,16 +426,18 @@ public class AbstractFachada {
         List<IStrategy> rnsTrocaSalvar = new ArrayList<>();
 
         rnsTrocaSalvar.add(validaDadosTroca);
-        rnsTrocaSalvar.add(retiraQuantidadeItemDoPedido);
-        rnsTrocaSalvar.add(calculaValorTroca);
+        rnsTrocaSalvar.add(calculaValorTransicao);
+        rnsTrocaSalvar.add(geraCodigoTransacaoTransicao);
         rnsTrocaSalvar.add(enviaEmailStatusDaTroca);
-        rnsTrocaSalvar.add(geraCodigoTransacaoTroca);
+        rnsTrocaSalvar.add(retiraQuantidadeItemDoPedido);
+        rnsTrocaSalvar.add(enviaEmailStatusDaDevolucao);
 
         List<IStrategy> rnsTrocaAlterar = new ArrayList<>();
 
         rnsTrocaAlterar.add(retiraQuantidadeItemDoPedido);
         rnsTrocaAlterar.add(retornaQuantidadeItemPedidoParaEstoque);
         rnsTrocaAlterar.add(enviaEmailStatusDaTroca);
+        rnsTrocaAlterar.add(enviaEmailStatusDaDevolucao);
 
         Map<String, List<IStrategy>> mapaTroca = new HashMap<>();
 

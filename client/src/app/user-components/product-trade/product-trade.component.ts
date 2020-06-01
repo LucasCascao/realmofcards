@@ -86,7 +86,7 @@ export class ProductTradeComponent implements OnInit {
       this.troca.pedido.statusPedido = statusPedido;
       this.troca.statusTransacao = statusTransicao;
       this.troca.tipoTransicao = tipoTransicao;
-      this.service.add(this.troca, 'trocas').subscribe(resultado => {
+      this.service.add(this.troca, 'transicoes').subscribe(resultado => {
         if(resultado?.msg != null){
           this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
         } else {

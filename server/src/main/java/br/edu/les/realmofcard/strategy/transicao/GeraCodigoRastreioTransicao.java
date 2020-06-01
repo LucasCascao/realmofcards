@@ -1,4 +1,4 @@
-package br.edu.les.realmofcard.strategy.troca;
+package br.edu.les.realmofcard.strategy.transicao;
 
 import br.edu.les.realmofcard.strategy.IStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +10,10 @@ import br.edu.les.realmofcard.dao.RastreioDAO;
 import br.edu.les.realmofcard.util.GeradorCodigo;
 
 @Component
-public class GeraCodigoRastreioTroca implements IStrategy {
+public class GeraCodigoRastreioTransicao implements IStrategy {
 
 	@Autowired
 	private RastreioDAO rastreioDAO;
-
-	@Autowired
-	private EnviaEmailTrocaCodigoRastreio enviaEmailTrocaCodigoRastreio;
 
 	@Override
 	public String processar(final EntidadeDominio entidade) {
@@ -34,7 +31,6 @@ public class GeraCodigoRastreioTroca implements IStrategy {
 				rastreio.setCodigoRastreio(GeradorCodigo.gerarCodigoRastreio());
 				rastreio = (Rastreio) rastreioDAO.salvar(rastreio);
 				transicao.setRastreio(rastreio);
-				enviaEmailTrocaCodigoRastreio.processar(transicao);
 			}
 		}
 

@@ -4,6 +4,7 @@ import { Item } from './item.model';
 import {FormaPagamento} from './forma-pagamento.model';
 import {Endereco} from "./endereco.model";
 import {Pessoa} from "./pessoa.model";
+import { Rastreio } from './rastreio.model';
 
 export class Pedido {
   id: number;
@@ -18,4 +19,5 @@ export class Pedido {
   enderecoEscolhido: string;
   dataCompra: Date;
   dataEstimada: Date;
+  rastreio: Rastreio;
 }

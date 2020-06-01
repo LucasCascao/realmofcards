@@ -1,4 +1,4 @@
-package br.edu.les.realmofcard.strategy.troca;
+package br.edu.les.realmofcard.strategy.transicao;
 
 import br.edu.les.realmofcard.strategy.IStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,6 @@ public class RetiraQuantidadeItemDoPedido implements IStrategy {
 	@Override
 	public String processar(final EntidadeDominio entidade) {
 
-		StringBuilder msg = new StringBuilder();
-
 		if(entidade instanceof Transicao){
 
 			Transicao transicao = (Transicao) entidade;
@@ -31,7 +29,7 @@ public class RetiraQuantidadeItemDoPedido implements IStrategy {
 			if(Util.isNotNull(pedido)
 				&& Util.isNotNull(pedido.getStatusPedido())
 				&& Util.isNotNull(pedido.getStatusPedido().getId())
-				&& pedido.getStatusPedido().getId().equals(7)) {
+				&& (pedido.getStatusPedido().getId().equals(7) || pedido.getStatusPedido().getId().equals(11))) {
 				
 				transicao.getItemTransicaoList().forEach(itemTransacao -> {
 				
@@ -39,17 +37,19 @@ public class RetiraQuantidadeItemDoPedido implements IStrategy {
 	
 					Integer quantidadeAtual = item.getQuantidade();
 	
-					Integer quantidadeParaTrocar = itemTransacao.getQuantidade();
+					Integer quantidadeEstorno = itemTransacao.getQuantidade();
 	
-					item.setQuantidade(quantidadeAtual - quantidadeParaTrocar);
-					
-					item.setQuantidadeTroca(item.getQuantidadeTroca() + quantidadeParaTrocar);
+					item.setQuantidade(quantidadeAtual - quantidadeEstorno);
+
+					if(transicao.getTipoTransicao().getId().equals(1)){
+						item.setQuantidadeTroca(item.getQuantidadeTroca() + quantidadeEstorno);
+					}
+					if(transicao.getTipoTransicao().getId().equals(2)){
+						item.setQuantidadeDevolucao(item.getQuantidadeDevolucao() + quantidadeEstorno);
+					}
 				});
 			}
-
-			
 		}
-
-		return msg.toString();
+		return null;
 	}
 }

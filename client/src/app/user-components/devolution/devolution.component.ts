@@ -34,9 +34,8 @@ export class DevolutionComponent implements OnInit {
     this.devolucao = new Transicao();
     this.devolucao.pedido = this.pedido;
     this.devolucao.itemTransicaoList = new Array<ItemTransicao>();
-    this.devolucao.subTotal = this.pedido?.valorTotal;
     this.adcionaItensNaDevolucao();
-    console.log(this.devolucao);
+    this.devolucao.subTotal = this.calculaValorTotalDevolucao();
   }
 
   adcionaItensNaDevolucao() {
@@ -48,8 +47,12 @@ export class DevolutionComponent implements OnInit {
     });
   }
 
-  calculaValorTotalItem(valor: number, quantidade: number) {
-    return valor * quantidade;
+  calculaValorTotalDevolucao() : number {
+    let valorTotalDevolucao: number = 0;
+    this.devolucao.itemTransicaoList.forEach( itemTransicao => {
+      valorTotalDevolucao += itemTransicao?.quantidade * itemTransicao?.item?.carta?.valorVenda;
+    });
+    return valorTotalDevolucao;
   }
 
   trocaProduto() {
@@ -58,13 +61,13 @@ export class DevolutionComponent implements OnInit {
       let statusPedido: StatusPedido = new StatusPedido();
       statusPedido.id = 11;
       let tipoTransicao: TipoTransicao = new TipoTransicao();
-      tipoTransicao.id = 2
+      tipoTransicao.id = 2;
       let statusTransicao: StatusTransacao = new StatusTransacao();
       statusTransicao.id = 1;
       this.devolucao.pedido.statusPedido = statusPedido;
       this.devolucao.statusTransacao = statusTransicao;
       this.devolucao.tipoTransicao = tipoTransicao;
-      this.service.add(this.devolucao, 'trocas').subscribe(resultado => {
+      this.service.add(this.devolucao, 'transicoes').subscribe(resultado => {
         if(resultado?.msg != null){
           this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
         } else {

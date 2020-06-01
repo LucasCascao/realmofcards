@@ -33,7 +33,7 @@ public class EnviaEmailPedidoPendentePagamento implements IStrategy {
     		
     		StringBuilder mensagemTexto = new StringBuilder();
     		
-    		mensagem.setAssunto("Pedido pendente pagamento.");
+    		mensagem.setAssunto("Pedido pendente pagamento para o pedido " + pedido.getCodigoPedido() + ".");
 
     		mensagemTexto.append("Prezado " + cliente.getNome() + " " + cliente.getSobrenome() + ", ");
     		mensagemTexto.append("este email foi enviado para comunicar que seu pedido está sendo processado e está aguardando o recebimento do pagamento.\n");
