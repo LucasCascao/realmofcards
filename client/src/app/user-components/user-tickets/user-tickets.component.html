@@ -12,11 +12,12 @@
             <p><strong>Nº do Cupom:</strong> {{cupom?.codigo}}</p>
             <p><strong>Data de geração:</strong> {{cupom?.dataCriacao | date: 'dd/MM/yyyy'}}</p>
             <p><strong>Valor:</strong> {{cupom?.valor | currency: 'BRL': true}}</p>
+            <p><strong>Tipo de cupom:</strong> {{cupom?.tipoCupom?.tipoNome}}</p>
             <div class="row">
               <div class="col-lg-1">
                 <p><strong>Status:</strong> </p>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-2">
                 <div *ngIf="cupom?.status?.id == 1; else cupomInativo">
                   <p class="btn-sm btn-success text-center">{{cupom?.status?.status}}</p>
                 </div>

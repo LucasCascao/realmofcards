@@ -19,7 +19,7 @@
                   <div class="col-lg-12">
                     <div class="row">
                       <div class="col-lg-1">
-                        <input type="checkbox" (click)="adicionaItem(itemTroca, $event, itemTroca?.quantidade)">
+                        <input type="checkbox" name="selecionaItemTroca" (click)="adicionaItem(itemTroca, $event, itemTroca?.quantidade)">
                       </div>
                       <div class="col-lg-1 col-md-5">
                         <a [routerLinkActive]="['/product-detail']">
@@ -49,8 +49,8 @@
                 </div>
               </div>
               <p>Clique no botão abaixo para confirmar a troca.</p>
-              <button class="btn btn-secondary btn-lg float-left" [routerLink]="['/app-logado/user-orders']">Cancelar</button>
-              <button class="btn btn-danger btn-lg float-right" (click)="trocaProduto()">Confirmar Troca</button>
+              <button class="btn btn-secondary btn-lg float-left" name="cancelaTroca" [routerLink]="['/app-logado/user-orders']">Cancelar</button>
+              <button class="btn btn-danger btn-lg float-right" name="confirmaTroca" (click)="trocaProduto()">Confirmar Troca</button>
             </div>
             <!--/card-block-->
           </div>
