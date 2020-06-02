@@ -18,6 +18,7 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col">Imagem</th>
+            <th scope="col">Código</th>
             <th scope="col">Nome</th>
             <th scope="col">Valor venda</th>
             <th scope="col">Qntd Disponível</th>
@@ -35,15 +36,16 @@
                 </div>
               </div>
             </td>
+            <td>{{carta?.codigo}}</td>
             <td>{{carta?.nome}}</td>
             <td>{{carta?.valorVenda | currency: 'BRL': true}}</td>
             <td>{{carta?.quantidadeDisponivel}}</td>
             <td>{{carta?.quantidadeEstoque}}</td>
             <td>
-              <button class="btn btn-secondary mb-md-3" (click)="seleciona(carta?.id)" [routerLink]="['/app-logado/admin-page/admin-product-alter']">Alterar</button>
+              <button class="btn btn-warning mb-md-3" (click)="seleciona(carta?.id)" [routerLink]="['/app-logado/admin-page/admin-product-alter']">Alterar</button>
             </td>
             <td>
-              <button class="btn btn-secondary" (click)="seleciona(carta?.id)" [routerLink]="['/app-logado/admin-page/admin-product-delete']">Inativar</button>
+              <button class="btn btn-danger" (click)="seleciona(carta?.id)" [routerLink]="['/app-logado/admin-page/admin-product-delete']">Inativar</button>
             </td>
           </tr>
         </tbody>

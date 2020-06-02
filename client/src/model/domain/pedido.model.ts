@@ -16,6 +16,7 @@ export class Pedido {
   statusPedido: StatusPedido;
   itemList: Array<Item>;
   endereco: Endereco;
+  valorFrete: number;
   enderecoEscolhido: string;
   dataCompra: Date;
   dataEstimada: Date;

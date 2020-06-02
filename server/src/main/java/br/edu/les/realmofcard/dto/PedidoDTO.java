@@ -27,11 +27,15 @@ public class PedidoDTO extends EntidadeDominio implements IDTO {
 
     private String codigoPedido;
 
+    private Double valorFrete;
+
     private Pessoa cliente;
 
     private StatusPedido statusPedido;
 
     private Endereco endereco;
+
+    private Rastreio rastreio;
 
     private Set<FormaPagamentoDTO> formaPagamentoList;
 
@@ -48,6 +52,8 @@ public class PedidoDTO extends EntidadeDominio implements IDTO {
         pedidoDTO.setDataCompra(pedido.getDataCompra());
         pedidoDTO.setDataEstimada(pedido.getDataEstimada());
         pedidoDTO.setEndereco(pedido.getEndereco());
+        pedidoDTO.setValorFrete(pedido.getValorFrete());
+        pedidoDTO.setRastreio(pedido.getRastreio());
         pedidoDTO.setItemList(pedido.getItemList());
         pedidoDTO.setValorTotal(pedido.getValorTotal());
         pedidoDTO.setCliente(pedido.getCliente());

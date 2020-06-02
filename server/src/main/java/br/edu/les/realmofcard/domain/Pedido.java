@@ -41,6 +41,9 @@ public class Pedido extends EntidadeDominio{
     @Column(name = "ped_codigo_pedido")
     private String codigoPedido;
 
+    @Column(name = "ped_valor_frete")
+    private Double valorFrete;
+
     @OneToOne()
     @JoinColumn(name = "ped_cliente_id")
     private Pessoa cliente;

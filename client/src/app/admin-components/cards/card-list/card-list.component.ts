@@ -43,7 +43,10 @@ export class CardListComponent implements OnInit {
   }
 
   filtrar() {
-    this.cartasFiltradas = this.cartas.filter((carta) => carta.nome.toUpperCase().startsWith(this.valorBuscado.toUpperCase()));
+    this.cartasFiltradas = this.cartas.filter((carta) =>
+      carta?.nome?.toUpperCase().startsWith(this.valorBuscado.toUpperCase())
+      || carta?.codigo?.startsWith(this.valorBuscado)
+    );
   }
 
 }

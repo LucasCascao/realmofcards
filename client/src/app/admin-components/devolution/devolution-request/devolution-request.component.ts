@@ -44,6 +44,7 @@ export class DevolutionRequestComponent implements OnInit {
     this.service.get(devolucao, 'transicoes').subscribe(resultado => {
       this.devolucoes = resultado?.entidades;
       this.devolucoesFiltrada = this.devolucoes;
+      console.log(this.devolucoes);
     });
   }
 

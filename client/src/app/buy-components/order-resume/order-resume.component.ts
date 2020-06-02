@@ -52,16 +52,17 @@ export class OrderResumeComponent implements OnInit {
 
   confirmarCompra() {
 
-    const statusPedido: StatusPedido = new StatusPedido();
+    let statusPedido: StatusPedido = new StatusPedido();
     statusPedido.id = 1;
 
-    const pedido: Pedido = new Pedido();
+    let pedido: Pedido = new Pedido();
     pedido.cliente = JSON.parse(sessionStorage.getItem('pessoaLogada'));
     pedido.itemList = this.carrinho?.itemList;
     pedido.endereco = this.endereco;
     pedido.statusPedido = statusPedido;
     pedido.valorTotal = Number.parseFloat(this.valorTotal?.toFixed(2));
     pedido.formaPagamentoList = this.formaPagamentoList;
+    pedido.valorFrete = this.valorTotal;
 
     this.cadastraPedido(pedido);
   }
