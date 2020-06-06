@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/services/util.service';
 import { Pessoa } from 'src/model/domain/pessoa.model';
@@ -45,7 +46,8 @@ export class UserOrdersComponent implements OnInit {
 
   temPermissaoParaDevolucao(pedido: Pedido) : boolean {
     let temPermissao: boolean = false;
-    if(pedido?.statusPedido?.id <= 6){
+    let statusPermitidos: Array<Number> = [1,3,5,6];
+    if(statusPermitidos.includes( pedido?.statusPedido?.id)){
       pedido?.itemList?.forEach( item => {
         if(item?.quantidade > 0){
           temPermissao = true;
@@ -57,7 +59,8 @@ export class UserOrdersComponent implements OnInit {
 
   temPermissaoParaTroca(pedido: Pedido) : boolean {
     let temPermissao: boolean = false;
-    if(pedido?.statusPedido?.id === 6){
+    let statusPermitidos: Array<Number> = [6];
+    if(statusPermitidos.includes( pedido?.statusPedido?.id)){
       pedido?.itemList?.forEach( item => {
         if(item?.quantidade > 0){
           temPermissao = true;

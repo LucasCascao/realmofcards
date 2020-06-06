@@ -6,6 +6,7 @@ import {CartaoCredito} from '../../../../model/domain/cartao-credito.model';
 import {Util} from '../../../shared/app.util';
 import {Router} from '@angular/router';
 import * as Inputmask from 'inputmask';
+import { Status } from 'src/model/domain/status.model';
 
 @Component({
   selector: 'app-creditcard-register',
@@ -31,6 +32,8 @@ export class CreditcardRegisterComponent implements OnInit {
     this.cartaoCredito = new CartaoCredito();
     this.cartaoCredito.pessoa = JSON.parse(sessionStorage?.getItem('pessoaLogada'));
     this.cartaoCredito.preferido = false;
+    this.cartaoCredito.status = new Status();
+    this.cartaoCredito.status.id = 1;
     this.getBandeiras();
   }
 

@@ -9,6 +9,9 @@ import br.edu.les.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Component
 public class GeraCupomComValorRestante implements IStrategy {
 
@@ -32,6 +35,9 @@ public class GeraCupomComValorRestante implements IStrategy {
                             Cupom cupom = Cupom.builder()
                                     .valor(formaPagamento.getCupom().getValor() - pedido.getValorTotal())
                                     .pessoa(pedido.getCliente())
+                                    .status(Status.builder().id(1).build())
+                                    .tipoCupom(formaPagamento.getCupom().getTipoCupom())
+                                    .dataCriacao(LocalDate.now())
                                     .build();
                             geraCupomTroca.processar(cupom);
                             cupomDAO.salvar(cupom);
