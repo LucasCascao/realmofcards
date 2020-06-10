@@ -1,9 +1,11 @@
 package br.edu.les.realmofcard.facade;
 
+import br.edu.les.realmofcard.domain.grafico.Dashboard;
 import br.edu.les.realmofcard.strategy.carrinho.*;
 import br.edu.les.realmofcard.strategy.cupom.ValidaCupomAtivo;
 import br.edu.les.realmofcard.strategy.cupom.ValidaDadosCupom;
 import br.edu.les.realmofcard.strategy.cupom.ValidaExistenciaCupom;
+import br.edu.les.realmofcard.strategy.dashboard.ValidaDadosDashboard;
 import br.edu.les.realmofcard.strategy.devolucao.EnviaEmailStatusDaDevolucao;
 import br.edu.les.realmofcard.strategy.pedido.*;
 import br.edu.les.realmofcard.strategy.transicao.CalculaValorTransicao;
@@ -87,6 +89,9 @@ public class AbstractFachada {
 
     @Autowired
     private CupomDAO cupomDAO;
+
+    @Autowired
+    private DashboardDAO dashboardDAO;
 
 
     /*
@@ -222,6 +227,9 @@ public class AbstractFachada {
     @Autowired
     private GeraCodigoTransacaoTransicao geraCodigoTransacaoTransicao;
 
+    @Autowired
+    private ValidaDadosDashboard validaDadosDashboard;
+
 
     public AbstractFachada(){
     }
@@ -244,6 +252,7 @@ public class AbstractFachada {
         daos.put(Bandeira.class.getName(), bandeiraDAO);
         daos.put(Transicao.class.getName(), transacaoDAO);
         daos.put(Cupom.class.getName(), cupomDAO);
+        daos.put(Dashboard.class.getName(), dashboardDAO);
 
 
         //------------------------ Hash Pessoa ----------------------------//
@@ -459,5 +468,17 @@ public class AbstractFachada {
         mapaCupom.put("CONSULTAR", rnsCupomConsultar);
 
         regrasNegocio.put(Cupom.class.getName(), mapaCupom);
+
+        //------------------------ Hash Dashboard ------------------------//
+
+        List<IStrategy> rnsDashboardConsultar = new ArrayList<>();
+
+        rnsDashboardConsultar.add(validaDadosDashboard);
+
+        Map<String, List<IStrategy>> mapaDashboard = new HashMap<>();
+
+        mapaDashboard.put("CONSULTAR", rnsDashboardConsultar);
+
+        regrasNegocio.put(Dashboard.class.getName(), mapaDashboard);
     }
 }

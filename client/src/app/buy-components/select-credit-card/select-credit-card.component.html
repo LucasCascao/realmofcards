@@ -28,7 +28,7 @@
             <div *ngIf="formaPagamento?.isSelecionado">
               <p class="card-text"><strong>Valor</strong> </p>
               <input type="number" step="0.01" name="quantity" min="0.01" [max]="valorTotal" value="1"
-                [(ngModel)]="formaPagamento.valorPagamento" (change)="calculaValor(formaPagamento)">
+                [(ngModel)]="formaPagamento.valorPagamento" (keyup)="calculaValor(formaPagamento)">
             </div>
           </div>
           <div class="col-md-1">

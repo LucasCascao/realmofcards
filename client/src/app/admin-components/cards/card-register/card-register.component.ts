@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 /* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../../../model/domain/category.model';
@@ -15,7 +16,7 @@ import {Router, ChildActivationStart} from '@angular/router';
 })
 export class CardRegisterComponent implements OnInit {
 
-  constructor(private service: UtilService, private util: Util, private router: Router) { }
+  constructor(private service: UtilService, private util: Util, private router: Router, private http: HttpClient) { }
 
   categorias: Category[];
 
@@ -56,6 +57,23 @@ export class CardRegisterComponent implements OnInit {
       }
     });
   }
+
+  // onChange(event) {
+  //   console.log(event);
+  //   if (event.target.files && event.target.files[0]) {
+  //     const foto = event.srcElement.files[0] as File;
+  //     document.getElementById('customFileLabel').innerHTML = foto.name;
+
+  //     const formData = new FormData();
+  //     formData.append('foto', foto);
+
+  //     // const fotoObj = new Foto();
+
+  //     fotoObj.foto = foto;
+
+  //     this.http.post('http://localhost:8080/fotos', fotoObj).subscribe();
+  //   }
+  // }
 
   // inputFileChange(event) {
   //   if (event.target.files && event.target.files) {

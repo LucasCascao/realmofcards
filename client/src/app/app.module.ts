@@ -76,6 +76,8 @@ import { SelectAddressComponent } from './buy-components/select-address/select-a
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { ClientOrdersComponent } from './admin-components/clients/client-orders/client-orders.component';
 import { UserTicketsComponent } from './user-components/user-tickets/user-tickets.component';
+import { ChartModule } from 'angular-highcharts';
+import { HighchartsService } from './admin-components/analyze/highcharts.service';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -152,9 +154,10 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     RouterModule.forRoot(ROUTES),
     FormsModule,
     NgxMaskModule.forRoot(options),
-    HttpClientModule
+    HttpClientModule,
+    ChartModule
   ],
-  providers: [AuthService, ClienteService, Util, UsuarioService],
+  providers: [AuthService, ClienteService, Util, UsuarioService, HighchartsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

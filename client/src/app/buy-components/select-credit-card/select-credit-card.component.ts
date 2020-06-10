@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
-import {UtilService} from '../../../services/util.service';
-import {CartaoCredito} from '../../../model/domain/cartao-credito.model';
-import {Router} from "@angular/router";
+import { UtilService } from '../../../services/util.service';
+import { CartaoCredito } from '../../../model/domain/cartao-credito.model';
+import { Router } from '@angular/router';
 import { FormaPagamento } from 'src/model/domain/forma-pagamento.model';
 import { Cupom } from 'src/model/domain/cupom.model';
 import { Util } from 'src/app/shared/app.util';
@@ -42,7 +42,7 @@ export class SelectCreditCardComponent implements OnInit {
   ngOnInit(): void {
 
     this.valorTotal = JSON.parse(sessionStorage.getItem('valorTotal'));
-    let custoFrete = JSON.parse(sessionStorage.getItem('custoFrete'));
+    const custoFrete = JSON.parse(sessionStorage.getItem('custoFrete'));
 
     this.valorTotal += custoFrete;
 
@@ -68,7 +68,7 @@ export class SelectCreditCardComponent implements OnInit {
     this.service.get(cartaoCredito, 'cartaocredito').subscribe( resultado => {
       this.cartoes = resultado?.entidades;
       this.cartoes.forEach(cartao => {
-        let formaPagamento: FormaPagamento = new FormaPagamento();
+        const formaPagamento: FormaPagamento = new FormaPagamento();
         formaPagamento.cartaoCredito = cartao;
         formaPagamento.valorPagamento = 0;
         this.formaPagamentoList.push(formaPagamento);
@@ -76,15 +76,15 @@ export class SelectCreditCardComponent implements OnInit {
     });
   }
 
-  calculaValor(formaPagamentoSelecionado: FormaPagamento){
-    if(this.formaPagamentoSelecionadoList.length == 2) {
+  calculaValor(formaPagamentoSelecionado: FormaPagamento) {
+    if (this.formaPagamentoSelecionadoList.length === 2) {
       this.formaPagamentoSelecionadoList.forEach( formaPagamento => {
-        if(formaPagamento?.cartaoCredito?.id == formaPagamentoSelecionado?.cartaoCredito?.id){
+        if (formaPagamento?.cartaoCredito?.id === formaPagamentoSelecionado?.cartaoCredito?.id) {
           formaPagamento.valorPagamento = Number.parseFloat(formaPagamentoSelecionado.valorPagamento.toFixed(2));
         } else {
           formaPagamento.valorPagamento = Number.parseFloat((this.valorTotal - formaPagamentoSelecionado.valorPagamento).toFixed(2));
         }
-      })
+      });
     }
   }
 
@@ -104,52 +104,55 @@ export class SelectCreditCardComponent implements OnInit {
       }
     } else {
       formaPagamentoSelecionado.isSelecionado = false;
+      formaPagamentoSelecionado.valorPagamento = 0;
       this.formaPagamentoSelecionadoList.splice(this.formaPagamentoSelecionadoList.indexOf(formaPagamentoSelecionado), 1);
-      if(this.formaPagamentoSelecionadoList.length < 1){
+      if (this.formaPagamentoSelecionadoList.length === 1) {
+        this.formaPagamentoSelecionadoList[0].valorPagamento = this.valorTotal;
+      }
+      if (this.formaPagamentoSelecionadoList.length < 1) {
         this.isFirstCartao = true;
       }
     }
-    console.log(this.formaPagamentoSelecionadoList);
   }
 
-  selecionaCupom(event, formaPagamentoSelecionado: FormaPagamento){
+  selecionaCupom(event, formaPagamentoSelecionado: FormaPagamento) {
     this.mensagemCupom = [];
-    if(event.target.checked && formaPagamentoSelecionado?.cupom?.valor != null){
-      if(this.valorTotal >= this.formaPagamentoComCupom?.cupom?.valor ){
+    if (event.target.checked && formaPagamentoSelecionado?.cupom?.valor != null) {
+      if (this.valorTotal >= this.formaPagamentoComCupom?.cupom?.valor ) {
         this.valorTotal = Number.parseFloat((this.valorTotal - this.formaPagamentoComCupom?.cupom?.valor).toFixed(2));
         formaPagamentoSelecionado.valorPagamento = this.formaPagamentoComCupom?.cupom?.valor;
-      }else{
+      } else {
         formaPagamentoSelecionado.valorPagamento = this.valorTotal;
         this.valorTotal = 0;
       }
       this.retiraValorSeJaTiverFormaDePagamentoNaLista();
       this.selecionaCartao(event, formaPagamentoSelecionado);
-    } else if(event.target.checked == false){
+    } else if (event.target.checked === false) {
       this.valorTotal += this.formaPagamentoComCupom?.valorPagamento;
       this.selecionaCartao(event, formaPagamentoSelecionado);
       this.incrementaValorSeTirarCupomDaLista();
     } else {
-      this.mensagemCupom.push("É necessário validar o cupom");
+      this.mensagemCupom.push('É necessário validar o cupom');
       event.target.checked = false;
     }
   }
 
-  retiraValorSeJaTiverFormaDePagamentoNaLista(){
+  retiraValorSeJaTiverFormaDePagamentoNaLista() {
     this.formaPagamentoSelecionadoList.forEach( formaPagamento => {
       formaPagamento.valorPagamento = this.valorTotal;
-    })
+    });
   }
 
-  incrementaValorSeTirarCupomDaLista(){
+  incrementaValorSeTirarCupomDaLista() {
     this.formaPagamentoSelecionadoList.forEach( formaPagamento => {
       formaPagamento.valorPagamento = this.valorTotal;
-    })
+    });
   }
 
   continua() {
     this.mensagens = [];
-    if(this.validaQuantidadeCartao()){
-      if(this.validarFormaPagamentoSelecionados()
+    if (this.validaQuantidadeCartao()) {
+      if (this.validarFormaPagamentoSelecionados()
         && this.validarValorTotalPorFormaPagamentoSelecionado()) {
         sessionStorage.setItem('formasPagamentoSelecionadas', JSON.stringify(this.formaPagamentoSelecionadoList));
         this.router.navigate(['/app-logado/order-resume']);
@@ -157,60 +160,60 @@ export class SelectCreditCardComponent implements OnInit {
     }
   }
 
-  validaQuantidadeCartao(): boolean{
-    if(this.formaPagamentoSelecionadoList.length > 0){
+  validaQuantidadeCartao(): boolean {
+    if (this.formaPagamentoSelecionadoList.length > 0) {
       return true;
-    }else{
+    } else {
       this.mensagens.push('É necessário escolher pelo menos uma forma de pagamento.');
       return false;
     }
   }
 
-  validarFormaPagamentoSelecionados(): boolean{
-    let valorNaoZerado:boolean = true;
+  validarFormaPagamentoSelecionados(): boolean {
+    let valorNaoZerado = true;
     this.formaPagamentoSelecionadoList.forEach(formaPagamento => {
-      if(formaPagamento.valorPagamento < 0.01){
+      if (formaPagamento.valorPagamento < 0.01) {
         valorNaoZerado = false;
       }
-    })
+    });
 
-    if(!valorNaoZerado){
+    if (!valorNaoZerado) {
       this.mensagens.push('Valor de pagamento do cartao(s) está invalido');
     }
 
     return valorNaoZerado;
   }
 
-  validarValorTotalPorFormaPagamentoSelecionado(): boolean{
-    let valorAcumulado: number = 0;
+  validarValorTotalPorFormaPagamentoSelecionado(): boolean {
+    let valorAcumulado = 0;
     this.formaPagamentoSelecionadoList.forEach(formaPagamento => {
-      if(formaPagamento?.cartaoCredito != null){
+      if (formaPagamento?.cartaoCredito != null) {
         valorAcumulado += formaPagamento.valorPagamento;
       }
     });
 
-    if(valorAcumulado !== this.valorTotal){
+    if (valorAcumulado !== this.valorTotal) {
       this.mensagens.push('Valor de pagamento do cartao(s) não está igual a R$ ' + this.valorTotal.toFixed(2) + '.');
     }
 
-    return valorAcumulado == this.valorTotal;
+    return valorAcumulado === this.valorTotal;
   }
 
   selecionaCartaoExcluir(cartao: CartaoCredito) {
     sessionStorage.setItem('cartaoSelecionado', JSON.stringify(cartao));
   }
 
-  validaCupom(){
+  validaCupom() {
     this.mensagemCupom = [];
     this.formaPagamentoComCupom.cupom.status = new Status();
     this.formaPagamentoComCupom.cupom.status.id = 1;
     this.service.get(this.formaPagamentoComCupom.cupom, '/cupons').subscribe( resultado => {
-      if(resultado?.msg != null){
+      if (resultado?.msg != null) {
         this.mensagemCupom = this.util.getMensagensSeparadas2(resultado?.msg);
         this.formaPagamentoComCupom.cupom.valor = null;
         this.isMsgError = true;
       } else {
-        this.mensagemCupom.push("Cupom válido")
+        this.mensagemCupom.push('Cupom válido');
         this.formaPagamentoComCupom.cupom = resultado?.entidades[0];
         this.isMsgError = false;
       }
