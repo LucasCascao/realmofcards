@@ -17,4 +17,5 @@ export class Carta {
   jogo: Jogo;
   categoriaCarta: Category;
   status: Status;
+  selecionadoAlterar: boolean;
 }

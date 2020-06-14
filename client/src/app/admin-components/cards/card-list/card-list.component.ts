@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Category} from '../../../../model/domain/category.model';
-import {MockCategory} from '../../../../mock/mock-categories.model';
-import {MockCards} from '../../../../mock/mock-card.model';
 import { UtilService } from 'src/services/util.service';
 import { Carta } from 'src/model/domain/carta.model';
 import { Status } from 'src/model/domain/status.model';
@@ -25,15 +22,20 @@ export class CardListComponent implements OnInit {
     this.getCartasAtivas();
   }
 
-  async getCartasAtivas(){
+  async getCartasAtivas() {
     const carta: Carta = new Carta();
     carta.status = new Status();
     carta.status.id = 1;
 
     await this.service.get(carta, 'cartas').subscribe(resultado => {
       this.cartas = resultado?.entidades;
+      this.insereFalso();
       this.cartasFiltradas = resultado?.entidades;
     });
+  }
+
+  insereFalso() {
+    this.cartas.forEach(carta => carta.selecionadoAlterar = false);
   }
 
   seleciona(id: number) {
@@ -49,4 +51,11 @@ export class CardListComponent implements OnInit {
     );
   }
 
+  selecionarCartaParaAltarar(event, cartaSelecionada: Carta) {
+    if (event.target.checked) {
+      cartaSelecionada.selecionadoAlterar = true;
+    } else {
+      cartaSelecionada.selecionadoAlterar = false;
+    }
+  }
 }

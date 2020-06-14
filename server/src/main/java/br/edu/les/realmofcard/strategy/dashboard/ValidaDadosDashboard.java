@@ -24,15 +24,21 @@ public class ValidaDadosDashboard implements IStrategy {
                 if(dashboard.getDataInicio().getYear() < 2019){
                     msg.append("Data de inicio está abaixo da data permitida.");
                 }
+                if(dashboard.getDataInicio().getYear() > 2020 || (dashboard.getDataInicio().getYear() == 2020 && dashboard.getDataInicio().getMonthValue() > 6)){
+                    msg.append("Data de inicio está maior que a data permitida.");
+                }
             } else {
-                msg.append("Está faltando a data de inicio.");
+                msg.append(validadorString.validar(null, "data de inicio"));
             }
             if(Util.isNotNull(dashboard.getDataFim())){
-                if(dashboard.getDataFim().getYear() > 2020 || dashboard.getDataFim().getMonthValue() > 6){
+                if(dashboard.getDataFim().getYear() < 2019){
+                    msg.append("Data de fim está abaixo da data permitida.");
+                }
+                if(dashboard.getDataFim().getYear() > 2020 || (dashboard.getDataFim().getYear() == 2020 && dashboard.getDataFim().getMonthValue() > 6)){
                     msg.append("Data de fim está maior que a data permitida.");
                 }
             } else {
-                msg.append("Está faltando a data de fim.");
+                msg.append(validadorString.validar(null, "data de fim"));
             }
             if(msg.length() == 0 && dashboard.getDataInicio().isAfter(dashboard.getDataFim())){
                 msg.append("Data de inicio é maior que a data de fim.");

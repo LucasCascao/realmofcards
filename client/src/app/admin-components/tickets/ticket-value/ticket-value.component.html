@@ -3,24 +3,43 @@
     <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
       <div class="row">
         <div class="col-lg-6 col-md-8 mx-auto">
+          <div *ngIf="mensagensErro?.length > 0">
+            <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagensErro">{{mensagem}}</p>
+          </div>
+          <div *ngIf="mensagemSucesso != null">
+            <p class="alert alert-success text-center">{{mensagemSucesso}}</p>
+          </div>
           <!-- form card login -->
           <div class="card rounded shadow shadow-sm">
             <div class="card-header">
               <h3 class="mb-0">Cupom de Desconto</h3>
             </div>
             <div class="card-body">
-              <div class="col-lg-6 float-left">
-                <p>Insira o valor do desconto: </p>
+              <div class="row">
+                <div class="col-lg-6 float-left">
+                  <p>Insira o valor do desconto: </p>
+                </div>
+                <div class="col-lg-6 float-left">
+                  <input type="number" min="0.1" [(ngModel)]="cupom.valor">
+                </div>
+                <div class="col-lg-6">
+                  <p>Email: </p>
+                </div>
+                <div class="col-lg-6">
+                  <input type="text" min="0.1" [(ngModel)]="cupom.pessoa.usuario.email">
+                </div>
               </div>
-              <div class="col-lg-6 float-left">
-                <input type="number" min="0.1">
-              </div>
-
             </div>
             <!--/card-block-->
             <div class="card-footer">
-              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['../admin-page']" value="Voltar">
-              <input type="button" class="btn btn-success btn-lg float-right" [routerLink]="['../admin-generate-discount-ticket']" value="Gerar">
+              <div class="row">
+                <div class="col-lg-6" >
+                  <p class="alert alert-success text-center" *ngIf="cupom.codigo"><strong>{{cupom?.codigo}}</strong></p>
+                </div>
+                <div class="col-lg-6">
+                  <button class="btn btn-success btn-lg float-right" (click)="gerarCupom()">Gerar</button>
+                </div>
+              </div>
             </div>
           </div>
           <!-- /form card login -->

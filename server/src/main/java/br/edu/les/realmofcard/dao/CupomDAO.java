@@ -3,6 +3,7 @@ package br.edu.les.realmofcard.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.les.realmofcard.repository.PessoaRepository;
 import br.edu.les.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,14 @@ public class CupomDAO implements IDAO {
     @Autowired
     private CupomRepository cupomRepository;
 
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
     @Override
-    public EntidadeDominio salvar(EntidadeDominio entidade) { 
-    	return cupomRepository.save((Cupom) entidade); 
+    public EntidadeDominio salvar(EntidadeDominio entidade) {
+        Cupom cupom = (Cupom) entidade;
+        cupom.setPessoa(pessoaRepository.findByUsuario_Email(cupom.getPessoa().getUsuario().getEmail()));
+    	return cupomRepository.save(cupom);
     }
 
     @Override

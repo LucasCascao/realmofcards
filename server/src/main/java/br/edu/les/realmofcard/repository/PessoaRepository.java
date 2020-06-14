@@ -13,4 +13,6 @@ public interface PessoaRepository extends CrudRepository<Pessoa, Integer> {
 
     Pessoa findPessoaByUsuario_Id(Integer id);
 
+    Pessoa findByUsuario_Email(String email);
+
 }

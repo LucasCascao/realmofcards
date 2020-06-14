@@ -3,14 +3,13 @@ package br.edu.les.realmofcard.strategy.pedido;
 import br.edu.les.realmofcard.dao.CupomDAO;
 import br.edu.les.realmofcard.domain.*;
 import br.edu.les.realmofcard.strategy.IStrategy;
-import br.edu.les.realmofcard.strategy.cupom.GeraCupomTroca;
+import br.edu.les.realmofcard.strategy.cupom.GeraCodigoCupom;
 import br.edu.les.realmofcard.strategy.email.pedido.EnviaEmailCupomComValorRestante;
 import br.edu.les.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Component
 public class GeraCupomComValorRestante implements IStrategy {
@@ -19,7 +18,7 @@ public class GeraCupomComValorRestante implements IStrategy {
     private CupomDAO cupomDAO;
 
     @Autowired
-    private GeraCupomTroca geraCupomTroca;
+    private GeraCodigoCupom geraCodigoCupom;
 
     @Autowired
     private EnviaEmailCupomComValorRestante enviaEmailCupomComValorRestante;
@@ -39,7 +38,7 @@ public class GeraCupomComValorRestante implements IStrategy {
                                     .tipoCupom(formaPagamento.getCupom().getTipoCupom())
                                     .dataCriacao(LocalDate.now())
                                     .build();
-                            geraCupomTroca.processar(cupom);
+                            geraCodigoCupom.processar(cupom);
                             cupomDAO.salvar(cupom);
                             enviaEmailCupomComValorRestante.processar(cupom);
                         }

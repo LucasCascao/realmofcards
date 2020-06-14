@@ -5,7 +5,7 @@ import java.util.Set;
 import br.edu.les.realmofcard.dao.PedidoDAO;
 import br.edu.les.realmofcard.dao.TransacaoDAO;
 import br.edu.les.realmofcard.strategy.IStrategy;
-import br.edu.les.realmofcard.strategy.cupom.GeraCupomTroca;
+import br.edu.les.realmofcard.strategy.cupom.GeraCodigoCupom;
 import br.edu.les.realmofcard.strategy.email.devolucao.EnviaEmailDevolucaoAprovadaComCupom;
 import br.edu.les.realmofcard.strategy.email.troca.EnviaEmailTrocaAprovadaComCupom;
 import br.edu.les.realmofcard.util.Util;
@@ -32,7 +32,7 @@ public class VerificaTransacoesAprovadas implements IStrategy {
 	private CupomDAO cupomDAO;
 
 	@Autowired
-	private GeraCupomTroca geraCupomTroca;
+	private GeraCodigoCupom geraCodigoCupom;
 
 	@Autowired
 	private EnviaEmailTrocaAprovadaComCupom enviaEmailTrocaAprovadaComCupom;
@@ -55,7 +55,7 @@ public class VerificaTransacoesAprovadas implements IStrategy {
 							.valor(transicaoAprovada.getSubTotal())
 							.pessoa(transicaoAprovada.getPedido().getCliente())
 							.build();
-					geraCupomTroca.processar(cupom);
+					geraCodigoCupom.processar(cupom);
 
 					if(transicaoAprovada.getTipoTransicao().getId() == 1){
 						cupom.setTipoCupom(TipoCupom.builder().id(1).build());

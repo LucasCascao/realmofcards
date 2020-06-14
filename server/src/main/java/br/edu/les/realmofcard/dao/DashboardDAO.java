@@ -25,6 +25,8 @@ public class DashboardDAO implements IDAO {
     @Autowired
     private CategoriaCartaRepository categoriaCartaRepository;
 
+    private Map<Integer, String> mapaMesesTraduzidos;
+
     @Override
     public EntidadeDominio salvar(EntidadeDominio entidade) { return null; }
 
@@ -39,6 +41,21 @@ public class DashboardDAO implements IDAO {
 
         List<EntidadeDominio> dashboardList = new ArrayList<>();
         Dashboard dashboard = (Dashboard) entidade;
+
+        mapaMesesTraduzidos = new HashMap<>();
+
+        mapaMesesTraduzidos.put(1, "Janeiro");
+        mapaMesesTraduzidos.put(2, "Fevereiro");
+        mapaMesesTraduzidos.put(3, "Março");
+        mapaMesesTraduzidos.put(4, "Abril");
+        mapaMesesTraduzidos.put(5, "Maio");
+        mapaMesesTraduzidos.put(6, "Junho");
+        mapaMesesTraduzidos.put(7, "Julho");
+        mapaMesesTraduzidos.put(8, "Agosto");
+        mapaMesesTraduzidos.put(9, "Setembro");
+        mapaMesesTraduzidos.put(10, "Outubro");
+        mapaMesesTraduzidos.put(11, "Novembro");
+        mapaMesesTraduzidos.put(12, "Dezembro");
 
         if(dashboard.getTipoGrafico().trim().toUpperCase().equals("ANTIGO")) {
 
@@ -66,13 +83,13 @@ public class DashboardDAO implements IDAO {
             DecimalFormat df = new DecimalFormat("#####0.00");
 
             LocalDate ultimaDataAnalisada = pedidosFiltrados.get(0).getDataCompra();
-            serieMeses.getData().add(pedidosFiltrados.get(0).getDataCompra().getMonth().name());
+            serieMeses.getData().add(mapaMesesTraduzidos.get(pedidosFiltrados.get(0).getDataCompra().getMonthValue()));
             for (Pedido pedidoFiltrado : pedidosFiltrados) {
                 LocalDate dataAtualParaAnalise = pedidoFiltrado.getDataCompra();
                 if(dataAtualParaAnalise.getMonthValue() != ultimaDataAnalisada.getMonthValue()){
 
                     serieValorVenda.getData().add(Double.valueOf(df.format(valorTotalDoMes).replace(",",".")));
-                    serieMeses.getData().add(pedidoFiltrado.getDataCompra().getMonth().name());
+                    serieMeses.getData().add(mapaMesesTraduzidos.get(pedidoFiltrado.getDataCompra().getMonthValue()));
                     serieQuantidadeVenda.getData().add(valorQuantidadeVenda);
 
                     valorTotalDoMes = 0.0;
@@ -119,11 +136,11 @@ public class DashboardDAO implements IDAO {
             }
 
             LocalDate ultimaDataAnalisada = pedidosFiltrados.get(0).getDataCompra();
-            serieMeses.getData().add(pedidosFiltrados.get(0).getDataCompra().getMonth().name());
+            serieMeses.getData().add(mapaMesesTraduzidos.get(pedidosFiltrados.get(0).getDataCompra().getMonthValue()));
             for (Pedido pedidoFiltrado : pedidosFiltrados) {
                 LocalDate dataAtualParaAnalise = pedidoFiltrado.getDataCompra();
                 if(dataAtualParaAnalise.getMonthValue() != ultimaDataAnalisada.getMonthValue()){
-                    serieMeses.getData().add(pedidoFiltrado.getDataCompra().getMonth().name());
+                    serieMeses.getData().add(mapaMesesTraduzidos.get(pedidoFiltrado.getDataCompra().getMonthValue()));
                     mapaCategoriaSerie.forEach((nomeCategoria, serie) -> {
                         serie.getData().add(mapaCategoriaContadorQuantidade.get(nomeCategoria));
                         mapaCategoriaContadorQuantidade.put(nomeCategoria, 0);

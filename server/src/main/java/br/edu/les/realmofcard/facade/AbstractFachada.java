@@ -2,9 +2,7 @@ package br.edu.les.realmofcard.facade;
 
 import br.edu.les.realmofcard.domain.grafico.Dashboard;
 import br.edu.les.realmofcard.strategy.carrinho.*;
-import br.edu.les.realmofcard.strategy.cupom.ValidaCupomAtivo;
-import br.edu.les.realmofcard.strategy.cupom.ValidaDadosCupom;
-import br.edu.les.realmofcard.strategy.cupom.ValidaExistenciaCupom;
+import br.edu.les.realmofcard.strategy.cupom.*;
 import br.edu.les.realmofcard.strategy.dashboard.ValidaDadosDashboard;
 import br.edu.les.realmofcard.strategy.devolucao.EnviaEmailStatusDaDevolucao;
 import br.edu.les.realmofcard.strategy.pedido.*;
@@ -214,6 +212,12 @@ public class AbstractFachada {
 
     @Autowired
     private ValidaDadosCupom validaDadosCupom;
+
+    @Autowired
+    private GeraCodigoCupom geraCodigoCupom;
+
+    @Autowired
+    private ValidaDadosCupomConsulta validaDadosCupomConsulta;
 
     @Autowired
     private ValidaCupomAtivo validaCupomAtivo;
@@ -457,14 +461,20 @@ public class AbstractFachada {
 
         //------------------------ Hash Cupom --------------------------//
 
+        List<IStrategy> rnsCupomSalvar = new ArrayList<>();
+
+        rnsCupomSalvar.add(geraCodigoCupom);
+        rnsCupomSalvar.add(validaDadosCupom);
+
         List<IStrategy> rnsCupomConsultar = new ArrayList<>();
 
-        rnsCupomConsultar.add(validaDadosCupom);
+        rnsCupomConsultar.add(validaDadosCupomConsulta);
         rnsCupomConsultar.add(validaExistenciaCupom);
         rnsCupomConsultar.add(validaCupomAtivo);
 
         Map<String, List<IStrategy>> mapaCupom = new HashMap<>();
 
+        mapaCupom.put("SALVAR", rnsCupomSalvar);
         mapaCupom.put("CONSULTAR", rnsCupomConsultar);
 
         regrasNegocio.put(Cupom.class.getName(), mapaCupom);

@@ -9,7 +9,7 @@ import br.edu.les.realmofcard.util.GeradorCodigo;
 import java.time.LocalDate;
 
 @Component
-public class GeraCupomTroca implements IStrategy {
+public class GeraCodigoCupom implements IStrategy {
 
 	@Override
 	public String processar(final EntidadeDominio entidade) {
