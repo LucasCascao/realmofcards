@@ -40,7 +40,7 @@ import {TransitOrdersComponent} from './admin-components/orders/transit-orders/t
 import {OrdersDeliveredComponent} from './admin-components/orders/orders-delivered/orders-delivered.component';
 import {TicketDescontGenerateComponent} from './admin-components/tickets/ticket-descont-generate/ticket-descont-generate.component';
 import {TicketValueComponent} from './admin-components/tickets/ticket-value/ticket-value.component';
-import {StockInsertComponent} from './admin-components/stock/stock-insert/stock-insert.component';
+import {StockInsertComponent} from './admin-components/cards/stock/stock-insert/stock-insert.component';
 import {RequestTradeComponent} from './admin-components/trade/request-trade/request-trade.component';
 import {TransitTradeComponent} from './admin-components/trade/transit-trade/transit-trade.component';
 import {AnalyzeComponent} from './admin-components/analyze/analyze.component';

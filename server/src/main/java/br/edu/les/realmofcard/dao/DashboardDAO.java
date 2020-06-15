@@ -83,13 +83,13 @@ public class DashboardDAO implements IDAO {
             DecimalFormat df = new DecimalFormat("#####0.00");
 
             LocalDate ultimaDataAnalisada = pedidosFiltrados.get(0).getDataCompra();
-            serieMeses.getData().add(mapaMesesTraduzidos.get(pedidosFiltrados.get(0).getDataCompra().getMonthValue()));
+            serieMeses.getData().add(mapaMesesTraduzidos.get(pedidosFiltrados.get(0).getDataCompra().getMonthValue()) + " / " + pedidosFiltrados.get(0).getDataCompra().getYear());
             for (Pedido pedidoFiltrado : pedidosFiltrados) {
                 LocalDate dataAtualParaAnalise = pedidoFiltrado.getDataCompra();
                 if(dataAtualParaAnalise.getMonthValue() != ultimaDataAnalisada.getMonthValue()){
 
                     serieValorVenda.getData().add(Double.valueOf(df.format(valorTotalDoMes).replace(",",".")));
-                    serieMeses.getData().add(mapaMesesTraduzidos.get(pedidoFiltrado.getDataCompra().getMonthValue()));
+                    serieMeses.getData().add(mapaMesesTraduzidos.get(pedidoFiltrado.getDataCompra().getMonthValue()) + " / " + pedidoFiltrado.getDataCompra().getYear());
                     serieQuantidadeVenda.getData().add(valorQuantidadeVenda);
 
                     valorTotalDoMes = 0.0;
@@ -136,11 +136,11 @@ public class DashboardDAO implements IDAO {
             }
 
             LocalDate ultimaDataAnalisada = pedidosFiltrados.get(0).getDataCompra();
-            serieMeses.getData().add(mapaMesesTraduzidos.get(pedidosFiltrados.get(0).getDataCompra().getMonthValue()));
+            serieMeses.getData().add(mapaMesesTraduzidos.get(pedidosFiltrados.get(0).getDataCompra().getMonthValue()) + " / " + pedidosFiltrados.get(0).getDataCompra().getYear());
             for (Pedido pedidoFiltrado : pedidosFiltrados) {
                 LocalDate dataAtualParaAnalise = pedidoFiltrado.getDataCompra();
                 if(dataAtualParaAnalise.getMonthValue() != ultimaDataAnalisada.getMonthValue()){
-                    serieMeses.getData().add(mapaMesesTraduzidos.get(pedidoFiltrado.getDataCompra().getMonthValue()));
+                    serieMeses.getData().add(mapaMesesTraduzidos.get(pedidoFiltrado.getDataCompra().getMonthValue()) + " / " + pedidoFiltrado.getDataCompra().getYear());
                     mapaCategoriaSerie.forEach((nomeCategoria, serie) -> {
                         serie.getData().add(mapaCategoriaContadorQuantidade.get(nomeCategoria));
                         mapaCategoriaContadorQuantidade.put(nomeCategoria, 0);

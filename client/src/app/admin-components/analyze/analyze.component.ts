@@ -56,8 +56,8 @@ export class AnalyzeComponent implements OnInit {
     return null;
   }
 
-  validaDigito(digito: string, quantidade: number, maximo: number): boolean{
-    const digitoConvertido = Number.parseInt(digito);
+  validaDigito(digito: string, quantidade: number, maximo: number): boolean {
+    const digitoConvertido = Number.parseInt(digito, 10);
     return this.validaQuantidade(digito, quantidade) && (digitoConvertido > 0 && digitoConvertido <= maximo) ? true : false;
   }
 
@@ -83,13 +83,13 @@ export class AnalyzeComponent implements OnInit {
     }
   }
 
-  getGraficoVendaPorCategoria(){
+  getGraficoVendaPorCategoria() {
     this.dashboard = new Dashboard();
     this.dashboard.tipoGrafico = 'VENDAPORCATEGORIA';
     this.getDadosParaConstruirDashboard();
   }
 
-  getGraficoAntigo(){
+  getGraficoAntigo() {
     this.dashboard = new Dashboard();
     this.dashboard.tipoGrafico = 'ANTIGO';
     this.getDadosParaConstruirDashboard();

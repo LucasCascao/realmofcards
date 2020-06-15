@@ -31,10 +31,16 @@
             <td class="text-center">{{carta?.codigo}}</td>
             <td class="text-center">{{carta?.nome}}</td>
             <td class="text-center">{{carta?.quantidadeEstoque}}</td>
-            <td class="text-center"><input type="number" name="quantidadeAlterar" maxlength="4"></td>
+            <td class="text-center"><input type="number" name="quantidade" [(ngModel)]="valor" maxlength="4"></td>
             <td class="text-center">
-              <button class="btn btn-success mb-2">Adicionar</button>
-              <button class="btn btn-danger mb-md-1">Retirar</button>
+              <div class="row">
+                <div class="col-md-12">
+                  <button class="btn btn-success mb-2" (click)="adcionar(carta)" >Adicionar</button>
+                </div>
+                <div class="col-md-12">
+                  <button class="btn btn-danger mb-md-1" (click)="retirar(carta)">Retirar</button>
+                </div>
+              </div>
             </td>
           </tr>
         </tbody>

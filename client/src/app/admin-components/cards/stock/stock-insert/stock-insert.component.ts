@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MockCards} from '../../../../mock/mock-card.model';
 import { Carta } from 'src/model/domain/carta.model';
 import { UtilService } from 'src/services/util.service';
 import { Status } from 'src/model/domain/status.model';
@@ -16,6 +15,8 @@ export class StockInsertComponent implements OnInit {
   cartasFiltradas: Carta[];
 
   valorBuscado: string;
+
+  valor: number;
 
   constructor(private service: UtilService) { }
 
@@ -58,5 +59,13 @@ export class StockInsertComponent implements OnInit {
     } else {
       cartaSelecionada.selecionadoAlterar = false;
     }
+  }
+
+  adcionar(carta: Carta) {
+
+  }
+
+  retirar(carta: Carta) {
+
   }
 }
