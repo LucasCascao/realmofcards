@@ -2,67 +2,67 @@ insert into carta (car_nome, car_codigo, car_descricao, car_valor_compra, car_pr
 
 ('Abundância', '65329899',
  'Se for comprar um card, em vez disso, você pode escolher se deve ser ou não um terreno, e revelar cards do topo de seu grimório até revelar um card do tipo escolhido. Coloque aquele card em sua mão e coloque todos os outros cards revelados deste modo no fundo de seu grimório em qualquer ordem.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/abundance.jpeg', 2, 2, 1),
+ 0.55, 16.0, 0.63, 10, 10, '/assets/images/cartas/abundance.jpeg', 2, 2, 1),
 
 ('Pesquisadores da Academia', '78589965',
  'Quando Pesquisadores da Academia entra em jogo, você pode colocar um card de Aura de sua mão em jogo anexado a Pesquisadores da Academia.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/pesquisadores-da-academia.jpeg', 2, 2, 1),
+ 2.15, 17.5, 2.52, 10, 10, '/assets/images/cartas/pesquisadores-da-academia.jpeg', 2, 2, 1),
 
 ('Regiões Agrestes de Adarkar', '36528745',
  'Adicione 1 de mana de mana à sua reserva de mana. Adicione 1 de mana de luz ou 1 de mana de água à sua reserva de mana. Regiões Agrestes de Adarkar causa 1 ponto de dano a você.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/regioes-agretes-de-adakar.jpeg', 2, 1, 1),
+ 1.50, 38.0, 2.07, 10, 10, '/assets/images/cartas/regioes-agretes-de-adakar.jpeg', 2, 1, 1),
 
 ('Afligir', '63985263',
  'A criatura alvo recebe -1/-1 até o final do turno. Compre um card.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/afligir.jpeg', 2, 6, 1),
+ 3.10, 50.0, 4.65, 10, 10, '/assets/images/cartas/afligir.jpeg', 2, 6, 1),
 
 ('Ímpeto Agressivo', '85217936',
  'A criatura alvo recebe +1/+1 até o final do turno.\nCompre um card.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/impeto-agressivo.jpeg', 2, 6, 1),
+ 2.72, 33.0, 3.62, 10, 10, '/assets/images/cartas/impeto-agressivo.jpeg', 2, 6, 1),
 
 ('Lembranças Angustiantes', '12365874',
  'Olhe a mão do jogador alvo e escolha dois cards dela. Coloque-os no topo do grimório daquele jogador em qualquer ordem.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/lembrancas-angustiantes.jpeg', 2, 5, 1),
+ 4.07, 45.0, 5.90, 10, 10, '/assets/images/cartas/lembrancas-angustiantes.jpeg', 2, 5, 1),
 
 ('Elemental do Ar', '96583265',
  'Voar (Esta criatura só pode ser bloqueada por criaturas com a habilidade de voar ou alcance.)',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/elemental-do-ar.jpeg', 2, 2, 1),
+ 2.80, 5.0, 15.75, 10, 10, '/assets/images/cartas/elemental-do-ar.jpeg', 2, 2, 1),
 
 ('Embaixador Laquatus', '78566352',
  'Custa 3 manas: O jogador alvo coloca os três primeiros cards de seu próprio grimório em seu próprio cemitério.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/embaixador-laquatus.jpeg', 2, 2, 1),
+ 1.20, 60.0, 1.92, 10, 10, '/assets/images/cartas/embaixador-laquatus.jpeg', 2, 2, 1),
 
 ('Guarda-Costas de Anaba', '45525895',
  'Iniciativa (Esta criatura causa dano de combate antes de criaturas sem a habilidade de iniciativa.)',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/guarda-costas-de-anaba.jpeg', 2, 2, 1),
+ 3.40, 30.0, 4.42, 10, 10, '/assets/images/cartas/guarda-costas-de-anaba.jpeg', 2, 2, 1),
 
 ('Eleito da Ancestral', '63695225',
  'Iniciativa (Esta criatura causa dano de combate antes de criaturas sem a habilidade de iniciativa.). Quando Eleito da Ancestral entra em jogo, você ganha 1 ponto de vida para cada card em seu cemitério.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/eleito-da-ancestral.jpeg', 2, 2, 1),
+ 12.10, 15.0, 13.91, 10, 10, '/assets/images/cartas/eleito-da-ancestral.jpeg', 2, 2, 1),
 
 ('Anjo de Misericórdia', '36265425',
  'Voar (Esta criatura só pode ser bloqueada por criaturas com a habilidade de voar ou alcance.) Quando Anjo de Misericórdia entra em jogo, você ganha 3 pontos de vida.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/anjo-da-misericordia.jpeg', 2, 2, 1),
+ 6.15, 16.0, 7.13, 10, 10, '/assets/images/cartas/anjo-da-misericordia.jpeg', 2, 2, 1),
 
 ('Pluma de Anjo', '78587523',
  'Toda vez que um jogador joga uma mágica branca, você pode ganhar 1 ponto de vida.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/pluma-de-aco.jpeg', 2, 2, 1),
+ 5.40, 5.0, 5.67, 10, 10, '/assets/images/cartas/pluma-de-aco.jpeg', 2, 2, 1),
 
 ('Coro Angelical', '45256985',
  'Toda vez que uma criatura entra em jogo sob seu controle, você ganha uma quantidade de pontos de vida igual à resistência dela.',
- 15.00, 5.0, 15.75, 10,  10,'/assets/images/cartas/coro-angelical.jpeg', 2, 3, 1),
+ 8.30, 22.0, 10.12, 10,  10,'/assets/images/cartas/coro-angelical.jpeg', 2, 3, 1),
 
 ('Bênção Angelical', '99965256',
  'A criatura alvo recebe +3/+3 e ganha a habilidade de voar até o final do turno. (Ela só pode ser bloqueada por criaturas com a habilidade de voar ou alcance.)',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/bencao-angelical.jpeg', 2, 5, 1),
+ 6.70, 45.0, 9.71, 10, 10, '/assets/images/cartas/bencao-angelical.jpeg', 2, 5, 1),
 
 ('Barreira Angelical', '56369856',
  'Defensor, voar (Esta criatura não pode atacar, e pode bloquear criaturas com a habilidade de voar.)',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/barreira-angelical.jpeg', 2, 2, 1),
+ 7.10, 35.0, 9.58, 10, 10, '/assets/images/cartas/barreira-angelical.jpeg', 2, 2, 1),
 
 ('Ensinamentos Arcanos', '19652452',
  'Encantar criatura (Ao jogar este card, escolha uma criatura alvo. Este card entra em jogo anexado àquela criatura.)\nA criatura encantada recebe +2/+2 e tem \"Esta criatura causa 1 ponto de dano à criatura ou ao jogador alvo.\"',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/ensinamentos-arcanos.jpeg', 2, 3, 1),
+ 8.42, 21.0, 10.19, 10, 10, '/assets/images/cartas/ensinamentos-arcanos.jpeg', 2, 3, 1),
 
 ('Arcanis, o Onipotente', '85996325',
  'Compre três cards. Custa 2 manas quaisquer e 2 manas de água: Devolva Arcanis, o Onipotente, para a mão de seu dono.',
@@ -70,12 +70,12 @@ insert into carta (car_nome, car_codigo, car_descricao, car_valor_compra, car_pr
 
 ('Evincar Ascendente', '25699856',
  'Voar (Esta criatura só pode ser bloqueada por criaturas com a habilidade de voar ou alcance.) As outras criaturas pretas recebem +1/+1. As criaturas que não sejam pretas recebem -1/-1.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/evincar-ascendente.jpeg', 2, 2, 1),
+ 13.50, 25.0, 16.88, 10, 10, '/assets/images/cartas/evincar-ascendente.jpeg', 2, 2, 1),
 
 ('Assassinar', '33652582',
  'Destrua a criatura alvo virada.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/assassinar.jpeg', 2, 5, 1),
+ 8.50, 38.0, 11.73, 10, 10, '/assets/images/cartas/assassinar.jpeg', 2, 5, 1),
 
 ('Enxerto de Aura', '75848521',
  'Ganhe o controle da Aura alvo anexada a uma permanente. Anexe-a a outra permanente que ela possa encantar.',
- 15.00, 5.0, 15.75, 10, 10, '/assets/images/cartas/enxerto-de-aura.jpeg', 2, 6, 1);
+ 50.0, 25.0, 62.5, 10, 10, '/assets/images/cartas/enxerto-de-aura.jpeg', 2, 6, 1);

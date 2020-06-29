@@ -153,7 +153,8 @@ export class SelectCreditCardComponent implements OnInit {
     this.mensagens = [];
     if (this.validaQuantidadeCartao()) {
       if (this.validarFormaPagamentoSelecionados()
-        && this.validarValorTotalPorFormaPagamentoSelecionado()) {
+        && this.validarValorTotalPorFormaPagamentoSelecionado()
+        && this.validaValorTotalAcimaDoObrigatorioParaCartaoCredito()) {
         sessionStorage.setItem('formasPagamentoSelecionadas', JSON.stringify(this.formaPagamentoSelecionadoList));
         this.router.navigate(['/app-logado/order-resume']);
       }
@@ -197,6 +198,15 @@ export class SelectCreditCardComponent implements OnInit {
     }
 
     return valorAcumulado === this.valorTotal;
+  }
+
+  validaValorTotalAcimaDoObrigatorioParaCartaoCredito(): boolean{
+    if ((this.formaPagamentoSelecionadoList.find( el => el.valorPagamento !== null || el.valorPagamento !== undefined))
+         && this.valorTotal < 10.00) {
+      this.mensagens.push('Valor a ser pago deve ser maior que R$10,00 quando é utilizado cartão de crédito como forma de pagamento.');
+      return false;
+    }
+    return true;
   }
 
   selecionaCartaoExcluir(cartao: CartaoCredito) {

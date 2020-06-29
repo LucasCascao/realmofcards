@@ -293,13 +293,14 @@ public class AbstractFachada {
 
         List<IStrategy> rnsUsuarioAlterar = new ArrayList<>();
 
-        rnsUsuarioAlterar.add(validaDadosUsuario);
-        rnsUsuarioAlterar.add(validaSenhaUsuario);
         rnsUsuarioAlterar.add(validaSenhasIguais);
+        rnsUsuarioAlterar.add(validaDadosUsuario);
+        rnsUsuarioAlterar.add(criptografarSenha);
 
         Map<String, List<IStrategy>> mapaUsuario = new HashMap<>();
 
         mapaUsuario.put("CONSULTAR",rnsUsuarioConsultar);
+        mapaUsuario.put("ALTERAR",rnsUsuarioAlterar);
 
         this.regrasNegocio.put(Usuario.class.getName(), mapaUsuario);
 

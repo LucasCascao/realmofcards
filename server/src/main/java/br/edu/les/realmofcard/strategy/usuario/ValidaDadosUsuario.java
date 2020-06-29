@@ -19,22 +19,32 @@ public class ValidaDadosUsuario implements IStrategy {
     public String processar(EntidadeDominio entidade) {
 
         StringBuilder msg = new StringBuilder();
+        Boolean eInstanciaDePessoa = false;
 
         if (entidade instanceof Pessoa || entidade instanceof Usuario) {
 
-            Usuario usuario;
+            Usuario usuario = null;
 
-            if(entidade instanceof Pessoa){
-                Pessoa pessoa = (Pessoa) entidade;
-                usuario = pessoa.getUsuario();
+            if(entidade instanceof Pessoa) {
+                usuario = ((Pessoa) entidade).getUsuario();
+                eInstanciaDePessoa = true;
             } else {
                 usuario = (Usuario) entidade;
             }
 
             msg.append(validadorString.validar(usuario.getEmail(), "email"));
-
-            if (usuario.getId() == null) {
-                msg.append(validadorString.validar(usuario.getPassword(), "senha"));
+            if(eInstanciaDePessoa){
+                if (usuario.getId() == null) {
+                    msg.append(validadorString.validar(usuario.getPassword(), "senha"));
+                    msg.append(validadorString.validar(usuario.getRePassword(), "confirmar senha"));
+                }
+            } else {
+                if (usuario.getId() == null) {
+                    msg.append(validadorString.validar(usuario.getPassword(), "senha"));
+                } else {
+                    msg.append(validadorString.validar(usuario.getPassword(), "senha"));
+                    msg.append(validadorString.validar(usuario.getRePassword(), "confirmar senha"));
+                }
             }
         }
 

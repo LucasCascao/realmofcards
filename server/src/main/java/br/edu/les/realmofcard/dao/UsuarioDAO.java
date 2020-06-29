@@ -56,8 +56,9 @@ public class UsuarioDAO implements IDAO {
 	@Override
 	public void alterar(EntidadeDominio entidade) {
 		Usuario usuario = (Usuario) entidade;
-		usuario.setPassword(usuarioRepository.findUsuarioById(usuario.getId()).getPassword());
-		entidade = usuarioRepository.save(usuario);
+		Usuario usuarioSalvo = usuarioRepository.findUsuarioById(usuario.getId());
+		usuarioSalvo.setPassword(usuario.getPassword());
+		entidade = usuarioRepository.save(usuarioSalvo);
 		usuario.setPassword(null);
 	}
 
