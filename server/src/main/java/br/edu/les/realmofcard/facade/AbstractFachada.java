@@ -1,10 +1,15 @@
 package br.edu.les.realmofcard.facade;
 
 import br.edu.les.realmofcard.domain.grafico.Dashboard;
+import br.edu.les.realmofcard.strategy.telefone.ValidaDadosTelefone;
+import br.edu.les.realmofcard.strategy.transacao_status_carta.AltararStatusCarta;
+import br.edu.les.realmofcard.strategy.transacao_status_carta.ValidaDadosTransacaoStatusCarta;
 import br.edu.les.realmofcard.strategy.carrinho.*;
+import br.edu.les.realmofcard.strategy.carta.*;
 import br.edu.les.realmofcard.strategy.cupom.*;
 import br.edu.les.realmofcard.strategy.dashboard.ValidaDadosDashboard;
 import br.edu.les.realmofcard.strategy.devolucao.EnviaEmailStatusDaDevolucao;
+import br.edu.les.realmofcard.strategy.grupo_precificacao.ValidaDadosGrupoPrecificacao;
 import br.edu.les.realmofcard.strategy.pedido.*;
 import br.edu.les.realmofcard.strategy.transicao.CalculaValorTransicao;
 import br.edu.les.realmofcard.strategy.transicao.GeraCodigoTransacaoTransicao;
@@ -17,10 +22,6 @@ import org.springframework.stereotype.Service;
 
 import br.edu.les.realmofcard.domain.*;
 import br.edu.les.realmofcard.strategy.IStrategy;
-import br.edu.les.realmofcard.strategy.carta.CalcularPrecoVenda;
-import br.edu.les.realmofcard.strategy.carta.InseriItemDisponivelParaEstoque;
-import br.edu.les.realmofcard.strategy.carta.MoveImagem;
-import br.edu.les.realmofcard.strategy.carta.ValidaDadosCarta;
 import br.edu.les.realmofcard.strategy.cartao_credito.ValidaDadosCartaoCredito;
 import br.edu.les.realmofcard.strategy.cartao_credito.ValidaDataValidadeCartao;
 import br.edu.les.realmofcard.strategy.cartao_credito.ValidaNumeroJaExiste;
@@ -51,6 +52,9 @@ public class AbstractFachada {
 
     @Autowired
     private UsuarioDAO usuarioDAO;
+
+    @Autowired
+    private TipoTelefoneDAO tipoTelefoneDAO;
 
     @Autowired
     private CartaDAO cartaDAO;
@@ -91,6 +95,11 @@ public class AbstractFachada {
     @Autowired
     private DashboardDAO dashboardDAO;
 
+    @Autowired
+    private TransacaoStatusCartaDAO transacaoStatusCartaDAO;
+
+    @Autowired
+    private GrupoPrecificacaoDAO grupoPrecificacaoDAO;
 
     /*
         Todas Strategy
@@ -98,6 +107,9 @@ public class AbstractFachada {
 
     @Autowired
     private ValidaDadosPessoa validaDadosPessoa;
+
+    @Autowired
+    private ValidaDadosTelefone validaDadosTelefone;
 
     @Autowired
     private ValidaExistenciaPessoa validaExistenciaPessoa;
@@ -112,6 +124,9 @@ public class AbstractFachada {
     private ValidaExistenciaUsuario validaExistenciaUsuario;
 
     @Autowired
+    private ValidaUsuarioAtivo validaUsuarioAtivo;
+
+    @Autowired
     private CriptografaSenha criptografarSenha;
 
     @Autowired
@@ -121,10 +136,28 @@ public class AbstractFachada {
     private ValidaDadosCarta validaDadosCarta;
 
     @Autowired
-    private CalcularPrecoVenda calcularPrecoVenda;
+    private GeraCodigoCarta geraCodigoCarta;
+
+    @Autowired
+    private ValidaQuantidadeEstoque validaQuantidadeEstoque;
+
+    @Autowired
+    private  RetiraCartaNaoDisponivelDoCarrinho retiraCartaNaoDisponivelDoCarrinho;
+
+    @Autowired
+    private ValidaDadosTransacaoStatusCarta validaDadosTransacaoStatusCarta;
+
+    @Autowired
+    private AltararStatusCarta altararStatusCarta;
+
+    @Autowired
+    private ValidaDadosGrupoPrecificacao validaDadosGrupoPrecificacao;
 
     @Autowired
     private MoveImagem moveImagem;
+
+    @Autowired
+    private InativaCartaNaoDisponivel inativaCartaNaoDisponivel;
 
     @Autowired
     private InseriItemDisponivelParaEstoque inseriItemDisponivelParaEstoque;
@@ -244,6 +277,7 @@ public class AbstractFachada {
 
         daos.put(Pessoa.class.getName(), pessoaDAO);
         daos.put(Usuario.class.getName(), usuarioDAO);
+        daos.put(TipoTelefone.class.getName(), tipoTelefoneDAO);
         daos.put(Carta.class.getName(), cartaDAO);
         daos.put(Endereco.class.getName(), enderecoDAO);
         daos.put(CartaoCredito.class.getName(), cartaoCreditoDAO);
@@ -257,13 +291,15 @@ public class AbstractFachada {
         daos.put(Transicao.class.getName(), transacaoDAO);
         daos.put(Cupom.class.getName(), cupomDAO);
         daos.put(Dashboard.class.getName(), dashboardDAO);
-
+        daos.put(TransacaoStatusCarta.class.getName(), transacaoStatusCartaDAO);
+        daos.put(GrupoPrecificacao.class.getName(), grupoPrecificacaoDAO);
 
         //------------------------ Hash Pessoa ----------------------------//
 
         List<IStrategy> rnsPessoaSalvar = new ArrayList<>();
 
         rnsPessoaSalvar.add(validaDadosPessoa);
+        rnsPessoaSalvar.add(validaDadosTelefone);
         rnsPessoaSalvar.add(validaExistenciaPessoa);
         rnsPessoaSalvar.add(validaDadosUsuario);
         rnsPessoaSalvar.add(validaSenhasIguais);
@@ -290,6 +326,7 @@ public class AbstractFachada {
 
         rnsUsuarioConsultar.add(validaDadosUsuario);
         rnsUsuarioConsultar.add(validaSenhaUsuario);
+        rnsUsuarioConsultar.add(validaUsuarioAtivo);
 
         List<IStrategy> rnsUsuarioAlterar = new ArrayList<>();
 
@@ -310,13 +347,16 @@ public class AbstractFachada {
 
         rnsCartaSalvar.add(validaDadosCarta);
         rnsCartaSalvar.add(moveImagem);
-        rnsCartaSalvar.add(calcularPrecoVenda);
         rnsCartaSalvar.add(inseriItemDisponivelParaEstoque);
+        rnsCartaSalvar.add(geraCodigoCarta);
 
         List<IStrategy> rnsCartaAlterar = new ArrayList<>();
 
         rnsCartaAlterar.add(validaDadosCarta);
         rnsCartaAlterar.add(moveImagem);
+        rnsCartaAlterar.add(validaQuantidadeEstoque);
+        rnsCartaAlterar.add(inativaCartaNaoDisponivel);
+        rnsCartaAlterar.add(retiraCartaNaoDisponivelDoCarrinho);
 
         Map<String, List<IStrategy>> mapaCarta = new HashMap<>();
 
@@ -324,6 +364,39 @@ public class AbstractFachada {
         mapaCarta.put("ALTERAR",rnsCartaAlterar);
 
         this.regrasNegocio.put(Carta.class.getName(), mapaCarta);
+
+        //----------------- Hash TransacaoStatusCarta --------------------//
+
+        List<IStrategy> rnsTransacaoStatusCartaSalvar = new ArrayList<>();
+
+        rnsTransacaoStatusCartaSalvar.add(validaDadosTransacaoStatusCarta);
+        rnsTransacaoStatusCartaSalvar.add(altararStatusCarta);
+
+        List<IStrategy> rnsTransacaoStatusCartaAlterar = new ArrayList<>();
+
+        rnsTransacaoStatusCartaAlterar.add(validaDadosTransacaoStatusCarta);
+
+        Map<String, List<IStrategy>> mapaTransacaoStatusCarta = new HashMap<>();
+
+        mapaTransacaoStatusCarta.put("SALVAR", rnsTransacaoStatusCartaSalvar);
+        mapaTransacaoStatusCarta.put("ALTERAR", rnsTransacaoStatusCartaAlterar);
+
+        this.regrasNegocio.put(TransacaoStatusCarta.class.getName(), mapaTransacaoStatusCarta);
+
+        //------------------ Hash GrupoPrecificacao ----------------------//
+
+        List<IStrategy> rnsGrupoPrecificacaoSalvar = new ArrayList<>();
+        rnsGrupoPrecificacaoSalvar.add(validaDadosGrupoPrecificacao);
+
+        List<IStrategy> rnsGrupoPrecificacaoAlterar = new ArrayList<>();
+        rnsGrupoPrecificacaoAlterar.add(validaDadosGrupoPrecificacao);
+
+        Map<String, List<IStrategy>> mapaGrupoPrecificacao = new HashMap<>();
+
+        mapaGrupoPrecificacao.put("SALVAR", rnsGrupoPrecificacaoSalvar);
+        mapaGrupoPrecificacao.put("ALTERAR", rnsGrupoPrecificacaoAlterar);
+
+        this.regrasNegocio.put(GrupoPrecificacao.class.getName(), mapaGrupoPrecificacao);
 
         //----------------------- Hash Endereco --------------------------//
 

@@ -1,10 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/services/util.service';
-import { Endereco } from 'src/model/domain/endereco.model';
 import {Util} from '../../shared/app.util';
 import { CartaoCredito } from 'src/model/domain/cartao-credito.model';
-import { Carta } from 'src/model/domain/carta.model';
-import { async } from '@angular/core/testing';
 import { PaymentPage } from 'src/model/page-data/payment-page';
 import {Router} from "@angular/router";
 
@@ -55,7 +53,7 @@ export class PaymentPageComponent implements OnInit {
     this.valorTotal = 0;
 
     this.paymentPageData.carrinho.itemList.forEach(item => {
-      this.valorTotal += (item?.carta?.valorVenda * item?.quantidade);
+      this.valorTotal += (this.util.calculaValorPreco(item?.carta) * item?.quantidade);
     });
 
     this.valores = [];

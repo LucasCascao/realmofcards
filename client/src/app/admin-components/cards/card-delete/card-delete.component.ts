@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import {UtilService} from '../../../../services/util.service';
 import {Carta} from '../../../../model/domain/carta.model';
 import {ActivatedRoute, Route, Router} from '@angular/router';
+import { TransacaoStatusCarta } from 'src/model/domain/transacao-status-carta.model';
+import { Status } from 'src/model/domain/status.model';
 
 @Component({
   selector: 'app-card-delete',
@@ -14,9 +17,12 @@ export class CardDeleteComponent implements OnInit {
 
   carta: Carta;
 
+  transacaoStatus: TransacaoStatusCarta;
+
   ngOnInit(): void {
-    this.carta = JSON.parse(sessionStorage.getItem('cartaSelecionada'));
-    this.getCarta();
+    this.transacaoStatus = new TransacaoStatusCarta;
+    this.transacaoStatus.carta = JSON.parse(sessionStorage.getItem('cartaSelecionada'));
+    //this.getCarta();
   }
 
   async getCarta() {
@@ -26,9 +32,9 @@ export class CardDeleteComponent implements OnInit {
   }
 
   async deletaCarta() {
-    this.carta.quantidadeDisponivel = 0;
-    this.carta.quantidadeEstoque = 0;
-    await this.service.delete(this.carta?.id, 'cartas').subscribe(resultado => this.naveguePara());
+    this.transacaoStatus.carta.quantidadeDisponivel = 0;
+    this.transacaoStatus.carta.quantidadeEstoque = 0;
+    this.service.add(this.transacaoStatus, '/transacaos/status/cartas').subscribe(resultado => this.naveguePara());
   }
 
   naveguePara() {

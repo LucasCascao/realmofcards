@@ -19,7 +19,7 @@
       </p>
     </div>
     <div class="col-lg-3">
-      <h3 class="card-text mt-4 mb-3 alert alert-success" ><strong>{{carta?.valorVenda | currency: 'BRL': true}} à vista</strong></h3>
+      <h3 class="card-text mt-4 mb-3 alert alert-success" ><strong>{{(carta?.valorCompra + (carta?.valorCompra * (carta?.grupoPrecificacao?.valor / 100))) | currency: 'BRL': true}} à vista</strong></h3>
     </div>
     <div class="col-lg-2">
       <button class="btn btn-lg btn-success btn-block mt-4 mb-3" (click)="adicionaItemNoCarrinho(carta)">Comprar</button>

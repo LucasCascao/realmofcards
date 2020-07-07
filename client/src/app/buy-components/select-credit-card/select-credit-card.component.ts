@@ -45,6 +45,7 @@ export class SelectCreditCardComponent implements OnInit {
     const custoFrete = JSON.parse(sessionStorage.getItem('custoFrete'));
 
     this.valorTotal += custoFrete;
+    this.valorTotal = Number.parseFloat(this.valorTotal.toFixed(2));
 
     const cartaoCredito = new CartaoCredito();
     const pessoa = JSON.parse(sessionStorage.getItem('pessoaLogada'));

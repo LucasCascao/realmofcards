@@ -68,4 +68,8 @@ public class Pessoa extends EntidadeDominio implements Serializable{
 	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
 	private List<Carrinho> carrinhos = new ArrayList<>();
 
+	@Builder.Default
+	@OneToMany(mappedBy = "pessoa" ,cascade = CascadeType.ALL)
+	private List<Telefone> telefones = new ArrayList<>();
+
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {TipoTelefone} from './tipo-telefone';
 
 export class Telefone {

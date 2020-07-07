@@ -1,3 +1,6 @@
+// eslint-disable-next-line no-unused-vars
+import { Carta } from 'src/model/domain/carta.model';
+
 /* eslint-disable no-unused-vars */
 export class Util {
 
@@ -49,4 +52,6 @@ export class Util {
     const ano = data.pop();
     return dia + mes + ano;
   }
+
+  calculaValorPreco = (carta: Carta): number => (carta?.valorCompra + (carta?.valorCompra * (carta?.grupoPrecificacao?.valor / 100)));
 }

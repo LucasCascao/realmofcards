@@ -38,7 +38,7 @@
         <a (click)="visualizar(carta?.id)" [routerLink]="['/app-logado/product-detail']"><img class="card-img-top" [src]="carta?.imagemPath" alt=""></a>
         <div class="card-body">
           <h6 class="card-title"><strong>{{carta?.nome}}</strong></h6>
-          <p class="card-text"><strong>À vista:</strong> {{carta?.valorVenda | currency: 'BRL': true}}</p>
+          <p class="card-text"><strong>À vista:</strong> {{(carta?.valorCompra + (carta?.valorCompra * (carta?.grupoPrecificacao?.valor / 100))) | currency: 'BRL': true}}</p>
           <a class="btn btn-lg btn-secondary btn-block" (click)="visualizar(carta?.id)" [routerLink]="['../product-detail']">Visualizar</a>
           <button class="btn btn-lg btn-success btn-block" (click)="adicionaItemNoCarrinho(carta)">Comprar</button>
         </div>

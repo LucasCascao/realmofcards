@@ -25,8 +25,11 @@ public class CalculaValorPedido implements IStrategy {
 
                 Double valorTotal = 0.0;
 
+                Double valorGrupoPrecificacao;
+
                 for (Item item: pedido.getItemList()) {
-                    valorTotal += item.getCarta().getValorVenda() * item.getQuantidade();
+                    valorGrupoPrecificacao = item.getCarta().getGrupoPrecificacao().getValor() / 100;
+                    valorTotal += (item.getCarta().getValorCompra() + (item.getCarta().getValorCompra() * valorGrupoPrecificacao)) * item.getQuantidade();
                 }
                 
                 if(Util.isNotNull(custoFrete))

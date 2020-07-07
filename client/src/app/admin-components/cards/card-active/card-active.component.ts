@@ -5,6 +5,7 @@ import {Carta} from '../../../../model/domain/carta.model';
 import {UtilService} from '../../../../services/util.service';
 import {Router} from '@angular/router';
 import {Status} from '../../../../model/domain/status.model';
+import { TransacaoStatusCarta } from 'src/model/domain/transacao-status-carta.model';
 
 @Component({
   selector: 'app-card-active',
@@ -13,23 +14,21 @@ import {Status} from '../../../../model/domain/status.model';
 })
 export class CardActiveComponent implements OnInit {
 
-  carta: Carta;
+  transacaoStatusCarta: TransacaoStatusCarta;
 
   constructor(private service: UtilService,
               private router: Router) { }
 
   ngOnInit(): void {
-    this.carta = JSON.parse(sessionStorage.getItem('cartaInativaSelecionada'));
-    this.carta.quantidadeDisponivel = 1;
+    this.transacaoStatusCarta = new TransacaoStatusCarta;
+    this.transacaoStatusCarta.carta = JSON.parse(sessionStorage.getItem('cartaInativaSelecionada'));
+    this.transacaoStatusCarta.carta.quantidadeDisponivel = 1;
   }
 
   ativaCarta() {
-    if (this.carta.quantidadeDisponivel > 0) {
-      const statusAtivo = new Status();
-      statusAtivo.id = 1;
-      this.carta.status = statusAtivo;
-      this.carta.quantidadeEstoque = this.carta.quantidadeDisponivel;
-      this.service.update(this.carta, 'cartas').subscribe(resultado => {
+    if (this.transacaoStatusCarta.carta.quantidadeDisponivel > 0) {
+      this.transacaoStatusCarta.carta.quantidadeEstoque = this.transacaoStatusCarta.carta.quantidadeDisponivel;
+      this.service.add(this.transacaoStatusCarta, '/transacaos/status/cartas').subscribe(resultado => {
         if (resultado.msg == null) {
           this.router.navigate(['/app-logado/admin-page/admin-product-inactive-list']);
         }

@@ -21,11 +21,9 @@ public class CartaDTO extends EntidadeDominio implements IDTO {
 
     private String descricao;
 
-    private Double valorCompra;
-
-    private Double precificacao;
-
     private Double valorVenda;
+
+    private GrupoPrecificacao grupoPrecificacao;
 
     private Integer quantidadeDisponivel;
 
@@ -55,7 +53,7 @@ public class CartaDTO extends EntidadeDominio implements IDTO {
             cartaDTO.setId(carta.getId());
             cartaDTO.setNome(carta.getNome());
             cartaDTO.setDescricao(carta.getDescricao());
-            cartaDTO.setValorVenda(carta.getValorVenda());
+            cartaDTO.setValorVenda(carta.getValorCompra() * carta.getGrupoPrecificacao().getValor());
             cartaDTO.setJogo(carta.getJogo());
             cartaDTO.setQuantidadeDisponivel(carta.getQuantidadeDisponivel());
             cartaDTO.setQuantidadeEstoque(carta.getQuantidadeEstoque());
@@ -77,9 +75,6 @@ public class CartaDTO extends EntidadeDominio implements IDTO {
             carta.setId(cartaDTO.id);
             carta.setNome(cartaDTO.nome);
             carta.setDescricao(cartaDTO.descricao);
-            carta.setValorCompra(cartaDTO.valorCompra);
-            carta.setPrecificacao(cartaDTO.precificacao);
-            carta.setValorVenda(cartaDTO.valorVenda);
             carta.setJogo(cartaDTO.jogo);
             carta.setStatus(cartaDTO.status);
             carta.setQuantidadeDisponivel(cartaDTO.quantidadeDisponivel);

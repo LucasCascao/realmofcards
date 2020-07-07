@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import {Category} from './category.model';
 import { Jogo } from './jogo.model';
 import { Status } from './status.model';
+import { GrupoPrecificacao } from './grupo-precificacao.model';
 
 export class Carta {
   id: number;
@@ -8,8 +10,7 @@ export class Carta {
   nome: string;
   descricao: string;
   valorCompra: number;
-  precificacao: number;
-  valorVenda: number;
+  grupoPrecificacao: GrupoPrecificacao;
   quantidadeDisponivel: number;
   quantidadeEstoque: number;
   imagemPath: string;
@@ -17,5 +18,5 @@ export class Carta {
   jogo: Jogo;
   categoriaCarta: Category;
   status: Status;
-  selecionadoAlterar: boolean;
+  estoqueAlterar: number;
 }

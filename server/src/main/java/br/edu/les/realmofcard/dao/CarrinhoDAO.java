@@ -1,5 +1,6 @@
 package br.edu.les.realmofcard.dao;
 
+import br.edu.les.realmofcard.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,10 +51,12 @@ public class CarrinhoDAO implements IDAO {
     @Override
     public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
         List<EntidadeDominio> carrinhos = new ArrayList<>();
-        if(entidade instanceof Carrinho){
-            Carrinho carrinho = (Carrinho) entidade;
+        Carrinho carrinho = (Carrinho) entidade;
+        if(Util.isNotNull(carrinho.getPessoa()) && Util.isNotNull(carrinho.getPessoa().getId())){
             carrinhos.add(carrinhoRepository.findByPessoa_Id(carrinho.getPessoa().getId()));
             return carrinhos;
-        } else return null;
+        }
+        carrinhoRepository.findAll().forEach(carrinhoResultado -> carrinhos.add(carrinhoResultado));
+        return carrinhos;
     }
 }

@@ -38,14 +38,14 @@
             </td>
             <td>{{carta?.codigo}}</td>
             <td>{{carta?.nome}}</td>
-            <td>{{carta?.valorVenda | currency: 'BRL': true}}</td>
+            <td>{{util.calculaValorPreco(carta) | currency: 'BRL': true}}</td>
             <td>{{carta?.quantidadeDisponivel}}</td>
             <td>{{carta?.quantidadeEstoque}}</td>
             <td>
-              <button class="btn btn-warning mb-md-3" (click)="seleciona(carta?.id)" [routerLink]="['/app-logado/admin-page/admin-product-alter']">Alterar</button>
+              <button class="btn btn-warning mb-md-3" (click)="altera(carta)">Alterar</button>
             </td>
             <td>
-              <button class="btn btn-danger" (click)="seleciona(carta?.id)" [routerLink]="['/app-logado/admin-page/admin-product-delete']">Inativar</button>
+              <button class="btn btn-danger" (click)="inativa(carta)">Inativar</button>
             </td>
           </tr>
         </tbody>

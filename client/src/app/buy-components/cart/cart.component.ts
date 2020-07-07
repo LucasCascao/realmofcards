@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
-import {MockCards} from '../../../mock/mock-card.model';
+import { MockCards } from '../../../mock/mock-card.model';
 import { UtilService } from 'src/services/util.service';
 import { Carrinho } from 'src/model/domain/carrinho.model';
 import { Pessoa } from 'src/model/domain/pessoa.model';
-import {Item} from '../../../model/domain/item.model';
-import {Router} from '@angular/router';
+import { Item } from '../../../model/domain/item.model';
+import { Router } from '@angular/router';
+import { Util } from 'src/app/shared/app.util';
 
 @Component({
   selector: 'app-cart',
@@ -23,7 +24,8 @@ export class CartComponent implements OnInit {
   valorTotal: number;
 
   constructor(private service: UtilService,
-              private router: Router) { }
+              private router: Router,
+              public util: Util) { }
 
   ngOnInit(): void {
     this.carrinho = new Carrinho();
@@ -41,7 +43,7 @@ export class CartComponent implements OnInit {
   calculaValorTotal() {
     this.valorTotal = 0;
     this.carrinho?.itemList?.forEach(item => {
-      this.valorTotal += (item?.carta?.valorVenda * item?.quantidade);
+      this.valorTotal += (this.util.calculaValorPreco(item?.carta) * item?.quantidade);
     });
   }
 
@@ -49,7 +51,8 @@ export class CartComponent implements OnInit {
     if (item?.carta?.quantidadeDisponivel > 0) {
       item.quantidade ++;
       item.carta.quantidadeDisponivel --;
-      this.valorTotal += item?.carta?.valorVenda;
+      let carta = item?.carta;
+      this.valorTotal += (this.util.calculaValorPreco(item?.carta));
     }
   }
 
@@ -57,7 +60,8 @@ export class CartComponent implements OnInit {
     if (item?.quantidade > 1 ) {
       item.quantidade --;
       item.carta.quantidadeDisponivel ++;
-      this.valorTotal -= item?.carta?.valorVenda;
+      let carta = item?.carta;
+      this.valorTotal -= (this.util.calculaValorPreco(item?.carta));
     }
   }
 

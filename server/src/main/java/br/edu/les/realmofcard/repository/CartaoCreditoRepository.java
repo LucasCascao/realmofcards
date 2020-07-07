@@ -6,10 +6,12 @@ import org.springframework.data.repository.CrudRepository;
 
 import br.edu.les.realmofcard.domain.CartaoCredito;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Repository
 public interface CartaoCreditoRepository extends CrudRepository<CartaoCredito, Integer> {
 
     List<CartaoCredito> findByPessoa_Id(Integer id);

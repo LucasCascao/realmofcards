@@ -8,3 +8,4 @@ insert into tipo_cupom (tcp_tipo_nome) values ('Troca');
 insert into tipo_cupom (tcp_tipo_nome) values ('Devolução');
 insert into tipo_cupom (tcp_tipo_nome) values ('Desconto');
 
+insert into tipo_telefone (ttl_tipo) values ('Residencial'), ('Celular'), ('Comercial');

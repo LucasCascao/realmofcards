@@ -1,7 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { Carta } from 'src/model/domain/carta.model';
 import { UtilService } from 'src/services/util.service';
 import { Status } from 'src/model/domain/status.model';
+import { Util } from 'src/app/shared/app.util';
+import { Category } from 'src/model/domain/category.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stock-insert',
@@ -16,11 +20,14 @@ export class StockInsertComponent implements OnInit {
 
   valorBuscado: string;
 
-  valor: number;
+  mensagens: string[];
 
-  constructor(private service: UtilService) { }
+  constructor(private service: UtilService,
+              private util: Util,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.mensagens = [];
     this.getCartasAtivas();
   }
 
@@ -29,21 +36,10 @@ export class StockInsertComponent implements OnInit {
     carta.status = new Status();
     carta.status.id = 1;
 
-    await this.service.get(carta, 'cartas').subscribe(resultado => {
+    this.service.get(carta, 'cartas').subscribe(resultado => {
       this.cartas = resultado?.entidades;
-      this.insereFalso();
       this.cartasFiltradas = resultado?.entidades;
     });
-  }
-
-  insereFalso() {
-    this.cartas.forEach(carta => carta.selecionadoAlterar = false);
-  }
-
-  seleciona(id: number) {
-    const carta: Carta = new Carta();
-    carta.id = id;
-    sessionStorage.setItem('cartaSelecionada', JSON.stringify(carta));
   }
 
   filtrar() {
@@ -53,19 +49,58 @@ export class StockInsertComponent implements OnInit {
     );
   }
 
-  selecionarCartaParaAltarar(event, cartaSelecionada: Carta) {
-    if (event.target.checked) {
-      cartaSelecionada.selecionadoAlterar = true;
+  alterar(cartaAlterada: Carta){
+    this.service.update(cartaAlterada, 'cartas').subscribe(resultado => {
+      if(resultado?.msg == null) {
+        this.getCartasAtivas();
+      } else {
+        this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
+      }
+    });
+  }
+
+  adcionar(cartaSemAlteracao: Carta) {
+    const cartaAlterada = cartaSemAlteracao;
+    const qntdParaAdcionar = cartaSemAlteracao.estoqueAlterar;
+    if(qntdParaAdcionar > 0){
+      cartaAlterada.quantidadeEstoque += qntdParaAdcionar;
+      cartaAlterada.quantidadeDisponivel += qntdParaAdcionar;
+      this.alterar(cartaAlterada);
     } else {
-      cartaSelecionada.selecionadoAlterar = false;
+      this.insereMensagemValorZerado();
     }
   }
 
-  adcionar(carta: Carta) {
-
+  retirar(cartaSemAlteracao: Carta) {
+    const cartaAlterada = cartaSemAlteracao;
+    const qntdParaRetirar = cartaSemAlteracao.estoqueAlterar;
+    const qntdEstoqueAtual = cartaSemAlteracao.quantidadeEstoque;
+    if(qntdParaRetirar > 0){
+      if(qntdParaRetirar <= qntdEstoqueAtual){
+        if(qntdEstoqueAtual - qntdParaRetirar == 0){
+          this.seleciona(cartaSemAlteracao);
+          this.inativa(cartaSemAlteracao);
+        } else {
+          cartaAlterada.quantidadeEstoque -= qntdParaRetirar;
+          cartaAlterada.quantidadeDisponivel -= qntdParaRetirar;
+          this.alterar(cartaAlterada);
+        }
+      }
+    } else {
+      this.insereMensagemValorZerado();
+    }
   }
 
-  retirar(carta: Carta) {
+  inativa(carta: Carta){
+    this.seleciona(carta);
+    this.router.navigate(['/app-logado/admin-page/admin-product-delete']);
+  }
 
+  seleciona(carta: Carta) {
+    sessionStorage.setItem('cartaSelecionada', JSON.stringify(carta));
+  }
+
+  insereMensagemValorZerado(){
+    this.mensagens.push("Valor para altarar não pode ser 0");
   }
 }

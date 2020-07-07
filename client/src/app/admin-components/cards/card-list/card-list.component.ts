@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { UtilService } from 'src/services/util.service';
 import { Carta } from 'src/model/domain/carta.model';
 import { Status } from 'src/model/domain/status.model';
+import { Util } from 'src/app/shared/app.util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-list',
@@ -16,7 +19,7 @@ export class CardListComponent implements OnInit {
 
   valorBuscado: string;
 
-  constructor(private service: UtilService) { }
+  constructor(private service: UtilService, public util: Util, private router: Router) { }
 
   ngOnInit(): void {
     this.getCartasAtivas();
@@ -29,33 +32,29 @@ export class CardListComponent implements OnInit {
 
     await this.service.get(carta, 'cartas').subscribe(resultado => {
       this.cartas = resultado?.entidades;
-      this.insereFalso();
       this.cartasFiltradas = resultado?.entidades;
     });
   }
 
-  insereFalso() {
-    this.cartas.forEach(carta => carta.selecionadoAlterar = false);
+  altera(carta: Carta){
+    this.seleciona(carta);
+    this.router.navigate(['/app-logado/admin-page/admin-product-alter']);
   }
 
-  seleciona(id: number) {
-    const carta: Carta = new Carta();
-    carta.id = id;
+  inativa(carta: Carta){
+    this.seleciona(carta);
+    this.router.navigate(['/app-logado/admin-page/admin-product-delete']);
+  }
+
+  seleciona(carta: Carta) {
     sessionStorage.setItem('cartaSelecionada', JSON.stringify(carta));
   }
+
 
   filtrar() {
     this.cartasFiltradas = this.cartas.filter((carta) =>
       carta?.nome?.toUpperCase().startsWith(this.valorBuscado.toUpperCase())
       || carta?.codigo?.startsWith(this.valorBuscado)
     );
-  }
-
-  selecionarCartaParaAltarar(event, cartaSelecionada: Carta) {
-    if (event.target.checked) {
-      cartaSelecionada.selecionadoAlterar = true;
-    } else {
-      cartaSelecionada.selecionadoAlterar = false;
-    }
   }
 }

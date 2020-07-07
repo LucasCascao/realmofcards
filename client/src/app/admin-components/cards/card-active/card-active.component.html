@@ -9,13 +9,19 @@
               <h3 class="mb-0">Ativar carta</h3>
             </div>
             <div class="card-body">
-              <p>Confirmação e inserção da quantidade em estoque para que a carta <strong>{{carta.nome}}</strong> seja ativada.</p>
+              <p>Confirmação e inserção da quantidade em estoque para que a carta <strong>{{transacaoStatusCarta.carta.nome}}</strong> seja ativada.</p>
               <div class="row mb-md-3">
-                <div class="col-lg-6 col-md-8 float-left">
+                <div class="col-lg-12 col-md-8 float-left">
+                  <label class="card-text" for="quantidade_estoque">Motivo: </label>
+                </div>
+                <div class="col-lg-12 col-md-8 float-left">
+                  <input type="text" id="quantidade_estoque" name="quantidade_estoque" class="form-control float-left" min="1" [(ngModel)]="transacaoStatusCarta.motivo">
+                </div>
+                <div class="col-lg-6 mb-3 mb-2 float-left">
                   <label class="card-text" for="quantidade_estoque">Quantidade inserida no estoque: </label>
                 </div>
                 <div class="col-lg-3 col-md-8 float-left">
-                  <input type="number" id="quantidade_estoque" name="quantidade_estoque" class="form-control float-left" min="1" [(ngModel)]="carta.quantidadeDisponivel" [value]="carta?.quantidadeDisponivel">
+                  <input type="number" id="quantidade_estoque" name="quantidade_estoque" class="form-control float-left" min="1" [(ngModel)]="transacaoStatusCarta.carta.quantidadeDisponivel" [value]="transacaoStatusCarta?.carta?.quantidadeDisponivel">
                 </div>
               </div>
               <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['../admin-product-inactive-list']" value="Cancelar">

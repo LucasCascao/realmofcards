@@ -37,12 +37,6 @@ public class Carta extends EntidadeDominio implements Comparable<Carta>{
     @Column(name = "car_valor_compra")
     private Double valorCompra;
 
-    @Column(name = "car_precificacao")
-    private Double precificacao;
-
-    @Column(name = "car_valor_venda")
-    private Double valorVenda;
-
     @Column(name = "car_quantidade_disponivel")
     private Integer quantidadeDisponivel;
 
@@ -63,6 +57,10 @@ public class Carta extends EntidadeDominio implements Comparable<Carta>{
     @ManyToOne
     @JoinColumn(name = "car_status_id")
     private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "car_grupo_precificacao_id")
+    private GrupoPrecificacao grupoPrecificacao;
 
     @Override
     public int compareTo(@NotNull Carta o) {

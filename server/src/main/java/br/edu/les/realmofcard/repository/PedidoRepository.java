@@ -5,11 +5,13 @@ import org.springframework.data.repository.CrudRepository;
 
 import br.edu.les.realmofcard.domain.Item;
 import br.edu.les.realmofcard.domain.Pedido;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
+@Repository
 public interface PedidoRepository extends CrudRepository<Pedido, Integer> {
 
    List<Pedido> findByCliente_Id(Integer id);

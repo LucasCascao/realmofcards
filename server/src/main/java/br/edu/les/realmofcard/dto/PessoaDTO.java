@@ -1,5 +1,7 @@
 package br.edu.les.realmofcard.dto;
 
+import br.edu.les.realmofcard.domain.Telefone;
+import br.edu.les.realmofcard.util.Util;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +11,8 @@ import br.edu.les.realmofcard.domain.EntidadeDominio;
 import br.edu.les.realmofcard.domain.Pessoa;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -30,6 +34,8 @@ public class PessoaDTO extends EntidadeDominio implements IDTO{
 
     private UsuarioDTO usuario;
 
+    private List<TelefoneDTO> telefones;
+
     @Override
     public EntidadeDominio parseEntityToDTO(EntidadeDominio dominio) {
         if(dominio instanceof Pessoa){
@@ -42,8 +48,14 @@ public class PessoaDTO extends EntidadeDominio implements IDTO{
             pessoaDTO.setCpf(pessoa.getCpf());
             pessoaDTO.setSexo(pessoa.getSexo());
             pessoaDTO.setDataNascimento(pessoa.getDataNascimento());
-            if(pessoa.getUsuario() != null
-                && pessoa.getUsuario().getId() != null)
+            if(Util.isNotNull(pessoa.getTelefones())){
+                List<TelefoneDTO> telefones = new ArrayList<>();
+                pessoa.getTelefones().forEach(telefone -> telefones.add((TelefoneDTO) new TelefoneDTO().parseEntityToDTO(telefone)));
+                pessoaDTO.setTelefones(telefones);
+            }
+
+            if(Util.isNotNull(pessoa.getUsuario())
+                && Util.isNotNull(pessoa.getUsuario().getId()) != null)
                 pessoaDTO.setUsuario((UsuarioDTO) new UsuarioDTO()
                         .parseEntityToDTO(pessoa.getUsuario()));
 

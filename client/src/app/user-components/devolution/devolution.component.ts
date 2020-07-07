@@ -1,6 +1,5 @@
+/* eslint-disable no-unused-vars */
 import { Component, OnInit } from '@angular/core';
-import {MockCards} from '../../../mock/mock-card.model';
-import {MockClient} from '../../../mock/mock-cliente.model';
 import { Pedido } from 'src/model/domain/pedido.model';
 import { Transicao } from 'src/model/domain/transicao.model';
 import { ItemTransicao } from 'src/model/domain/item-transicao.model';
@@ -50,7 +49,8 @@ export class DevolutionComponent implements OnInit {
   calculaValorTotalDevolucao() : number {
     let valorTotalDevolucao: number = 0;
     this.devolucao.itemTransicaoList.forEach( itemTransicao => {
-      valorTotalDevolucao += itemTransicao?.quantidade * itemTransicao?.item?.carta?.valorVenda;
+      let carta = itemTransicao?.item?.carta;
+      valorTotalDevolucao += itemTransicao?.quantidade * (carta.valorCompra + (carta.valorCompra * (carta.grupoPrecificacao?.valor / 100)));
     });
     return valorTotalDevolucao;
   }

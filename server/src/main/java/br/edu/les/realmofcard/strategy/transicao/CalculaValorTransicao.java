@@ -1,9 +1,6 @@
 package br.edu.les.realmofcard.strategy.transicao;
 
-import br.edu.les.realmofcard.domain.EntidadeDominio;
-import br.edu.les.realmofcard.domain.Item;
-import br.edu.les.realmofcard.domain.ItemTransacao;
-import br.edu.les.realmofcard.domain.Transicao;
+import br.edu.les.realmofcard.domain.*;
 import br.edu.les.realmofcard.repository.ItemRepository;
 import br.edu.les.realmofcard.strategy.IStrategy;
 import br.edu.les.realmofcard.util.Util;
@@ -25,7 +22,9 @@ public class CalculaValorTransicao implements IStrategy {
 				for (ItemTransacao itemTransacao : transicao.getItemTransicaoList()) {
 					if(Util.isNotNull(itemTransacao.getItem().getId())){
 						Item item = itemRepository.findById(itemTransacao.getItem().getId()).get();
-						subTotal += item.getCarta().getValorVenda() * itemTransacao.getQuantidade();
+						Carta carta = item.getCarta();
+						Double precificacao = item.getCarta().getGrupoPrecificacao().getValor();
+						subTotal += (carta.getValorCompra() + (carta.getValorCompra() * precificacao)) * itemTransacao.getQuantidade();
 					}
 				}
 				transicao.setSubTotal(subTotal);

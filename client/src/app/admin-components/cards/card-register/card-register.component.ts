@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 /* eslint-disable no-unused-vars */
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../../../model/domain/category.model';
 import { UtilService } from 'src/services/util.service';
@@ -8,6 +8,7 @@ import {Jogo} from '../../../../model/domain/jogo.model';
 import {Status} from '../../../../model/domain/status.model';
 import {Util} from '../../../shared/app.util';
 import {Router, ChildActivationStart} from '@angular/router';
+import { GrupoPrecificacao } from 'src/model/domain/grupo-precificacao.model';
 
 @Component({
   selector: 'app-card-register',
@@ -19,6 +20,8 @@ export class CardRegisterComponent implements OnInit {
   constructor(private service: UtilService, private util: Util, private router: Router, private http: HttpClient) { }
 
   categorias: Category[];
+
+  gruposPrecificacao: GrupoPrecificacao[];
 
   carta: Carta;
 
@@ -38,17 +41,24 @@ export class CardRegisterComponent implements OnInit {
     this.getCategorias();
   }
 
-  async getCategorias() {
-    await this.service.get(new Category(), 'categorias').subscribe(resultado => {
+  getCategorias() {
+    this.service.get(new Category(), 'categorias').subscribe(resultado => {
       this.categorias = resultado?.entidades;
+      this.getGrupoPrecificacao();
     });
   }
 
-  async cadastraCarta() {
+  getGrupoPrecificacao(){
+    this.service.get(new GrupoPrecificacao, '/grupo-precificacao').subscribe(resultado => {
+      this.gruposPrecificacao = resultado?.entidades;
+    });
+  }
+
+  cadastraCarta() {
     this.mensagens = [];
     const nomeArquivo: string[] = this.carta.imagemPath.split('\\');
     this.carta.imagemPath = nomeArquivo[nomeArquivo.length - 1];
-    await this.service.add(this.carta, 'cartas').subscribe(resultado => {
+    this.service.add(this.carta, 'cartas').subscribe(resultado => {
       if (resultado.msg != null) {
         this.mensagens = this.util.getMensagensSeparadas2(resultado?.msg);
       } else {
@@ -57,6 +67,8 @@ export class CardRegisterComponent implements OnInit {
       }
     });
   }
+
+
 
   // onChange(event) {
   //   console.log(event);

@@ -3,12 +3,10 @@ package br.edu.les.realmofcard.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.les.realmofcard.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.les.realmofcard.domain.EntidadeDominio;
-import br.edu.les.realmofcard.domain.Pessoa;
-import br.edu.les.realmofcard.domain.Usuario;
 import br.edu.les.realmofcard.repository.PessoaRepository;
 import br.edu.les.realmofcard.repository.UsuarioRepository;
 
@@ -16,19 +14,25 @@ import br.edu.les.realmofcard.repository.UsuarioRepository;
 public class PessoaDAO implements IDAO {
 
 	@Autowired
-	PessoaRepository pessoaRepository;
+	private PessoaRepository pessoaRepository;
 
 	@Autowired
-	UsuarioRepository usuarioRepository;
+	private UsuarioRepository usuarioRepository;
 
 	@Autowired
-	UsuarioDAO usuarioDAO;
+	private UsuarioDAO usuarioDAO;
 
+	@Autowired
+	private TelefoneDAO telefoneDAO;
 	@Override
 	public EntidadeDominio salvar(EntidadeDominio entidade) {
 		Pessoa pessoa = (Pessoa) entidade;
 		pessoa.setUsuario( (Usuario) usuarioDAO.salvar(pessoa.getUsuario()));
-		return pessoaRepository.save((Pessoa)entidade);
+		for (Telefone telefone : pessoa.getTelefones()) {
+			telefone.setPessoa(pessoa);
+		}
+		pessoa = pessoaRepository.save((Pessoa)entidade);
+		return pessoa;
 	}
 	
 	@Override
@@ -69,7 +73,8 @@ public class PessoaDAO implements IDAO {
 
 	@Override
 	public void excluir(EntidadeDominio entidade) {
-		Pessoa pessoa = (Pessoa) entidade;
-		pessoaRepository.deleteById(pessoa.getId());
+		Pessoa pessoa = pessoaRepository.findById(((Pessoa) entidade).getId()).get();
+		pessoa.getUsuario().setStatus(Status.builder().id(2).build());
+		usuarioRepository.save(pessoa.getUsuario());
 	}
 }

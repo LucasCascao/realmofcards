@@ -26,7 +26,7 @@ public class ValidaDadosCarta implements IStrategy {
             msg.append(validadorString.validar(carta.getNome(), "nome"));
             msg.append(validadorString.validar(carta.getDescricao(), "descrição"));
             msg.append(doubleValidador.validar(carta.getValorCompra(), "valor do produto"));
-            msg.append(doubleValidador.validar(carta.getPrecificacao(), "valor de precificação"));
+            msg.append(doubleValidador.validar(carta.getGrupoPrecificacao(), "valor de precificação"));
             msg.append(validadorString.validar(carta.getImagemPath(), "imagem"));
             msg.append(validadorString.validar(carta.getJogo().getId(), "jogo"));
             msg.append(validadorString.validar(carta.getCategoriaCarta().getId(), "categoria"));

@@ -6,11 +6,13 @@ import org.springframework.data.repository.CrudRepository;
 
 import br.edu.les.realmofcard.domain.Endereco;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
 
+@Repository
 public interface EnderecoRepository extends CrudRepository<Endereco, Integer> {
 
     List<Endereco> findByPessoa_Id(Integer id);

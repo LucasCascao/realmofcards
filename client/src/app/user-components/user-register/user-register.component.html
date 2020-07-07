@@ -70,9 +70,32 @@
           </div>
         </div>
         <div class="form-group">
+          <div class="row">
+            <div class="col-lg-12">
+              <label class="col-md-12 control-label float-left"><strong>Telefone:</strong></label>
+            </div>
+            <div class="col-lg-2 float-left">
+              <input [(ngModel)]="telefone.ddd" class="form-control" type="text" name="cad_telefone_ddd" id="cad_telefone_ddd" autocomplete="off" mask="(999)" placeholder="(999)">
+            </div>
+            <div class="col-md-3">
+              <input [(ngModel)]="telefone.numero" class="form-control" type="text" name="cad_telefone_numero" id="cad_telefone_numero" autocomplete="off" mask="99999-9999" placeholder="99999-9999">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <label class="col-md-12 control-label float-left"><strong>Tipo Telefone:</strong></label>
+            </div>
+            <div class="col-lg-3">
+              <select class="form-control" name="cad_tipo_telefone" id="cad_tipo_telefone" [(ngModel)]="telefone.tipoTelefone">
+                <option name="cad_endereco_cidade_selecionado" *ngFor="let tipoTelefone of tiposTelefone" [ngValue]="tipoTelefone">{{tipoTelefone.tipo}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
-            <input type="submit" class="btn btn-secondary btn-lg float-right" (click)="cadastrar()" value="Cadastrar">
+            <input type="button" class="btn btn-primary" (click)="cadastra()" value="Cadastrar">
             <span></span>
             <input type="reset" class="btn btn-default btn-lg float-left" [routerLink]="['/']" value="Cancelar">
           </div>

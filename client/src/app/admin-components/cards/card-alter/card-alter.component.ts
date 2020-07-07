@@ -5,6 +5,7 @@ import { UtilService } from 'src/services/util.service';
 import { Carta } from 'src/model/domain/carta.model';
 import { Category } from 'src/model/domain/category.model';
 import {Util} from '../../../shared/app.util';
+import { GrupoPrecificacao } from 'src/model/domain/grupo-precificacao.model';
 
 @Component({
   selector: 'app-card-alter',
@@ -21,6 +22,7 @@ export class CardAlterComponent implements OnInit {
   carta: Carta = new Carta();
   categorias: Category[];
   mensagens = [];
+  gruposPrecificacao: GrupoPrecificacao[];
 
   ngOnInit(): void {
     this.carta = JSON.parse(sessionStorage.getItem('cartaSelecionada'));
@@ -29,11 +31,22 @@ export class CardAlterComponent implements OnInit {
 
   async getCategorias() {
     const categoria: Category = new Category();
-    await this.serviceCategoria.get(categoria, 'categorias').subscribe(async resultado => {
+    this.serviceCategoria.get(categoria, 'categorias').subscribe(async resultado => {
       this.categorias = resultado?.entidades;
-      await this.service.get(this.carta, 'cartas').subscribe(resultado2 => {
-        this.carta = resultado2?.entidades[0];
-      });
+      this.getGrupoPrecificacao();
+    });
+  }
+
+  getGrupoPrecificacao(){
+    this.service.get(new GrupoPrecificacao, '/grupo-precificacao').subscribe(resultado => {
+      this.gruposPrecificacao = resultado?.entidades;
+      this.getCartaSelecionada();
+    });
+  }
+
+  getCartaSelecionada(){
+    this.service.get(this.carta, 'cartas').subscribe(resultado2 => {
+      this.carta = resultado2?.entidades[0];
     });
   }
 

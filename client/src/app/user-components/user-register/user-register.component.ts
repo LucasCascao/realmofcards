@@ -8,6 +8,11 @@ import {TipoUsuario} from '../../../model/domain/tipo-usuario';
 import { UtilService } from 'src/services/util.service';
 import { Status } from 'src/model/domain/status.model';
 import * as Inputmask from 'inputmask';
+import { Endereco } from 'src/model/domain/endereco.model';
+import { Cidade } from 'src/model/domain/cidade.model';
+import { Estado } from 'src/model/domain/estado.model';
+import { Telefone } from 'src/model/domain/telefone.model';
+import { TipoTelefone } from 'src/model/domain/tipo-telefone';
 
 @Component({
   selector: 'app-user-register',
@@ -20,6 +25,10 @@ export class UserRegisterComponent implements OnInit {
 
   person: Pessoa = new Pessoa();
 
+  telefone: Telefone = new Telefone;
+
+  tiposTelefone : TipoTelefone[];
+
   dataNascimento: string;
 
   mensagens = [];
@@ -28,19 +37,26 @@ export class UserRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     Inputmask().mask(document.querySelectorAll('input'));
+    this.getTiposTelefone();
   }
 
-  cadastrar() {
+  getTiposTelefone(){
+    this.service.get(new TipoTelefone, 'tipos-telefone').subscribe(resultado => this.tiposTelefone = resultado?.entidades);
+  }
+
+  cadastra() {
     this.person.usuario = this.user;
     this.person.usuario.tipoUsuario = new TipoUsuario();
     this.person.usuario.tipoUsuario.id = 2;
     this.person.usuario.status = new Status();
     this.person.usuario.status.id = 1;
     this.person.dataNascimento = this.util.formatarDataJSON(this.dataNascimento);
-    this.cadastrarPessoa();
+    this.person.telefones = [];
+    this.person.telefones.push(this.telefone);
+    this.cadastraPessoa();
   }
 
-  cadastrarPessoa() {
+  cadastraPessoa() {
     this.mensagens = [];
     this.service.add(this.person, 'pessoas').subscribe(resultado => {
       if (resultado.msg !== null) {

@@ -52,4 +52,15 @@ public class GeradorCodigo {
 		String codigo = String.valueOf(random.nextInt(899)+100) + "-" + String.valueOf(random.nextInt(899)+100);
 		return codigo;
 	}
+
+	public static String gerarCodigoCarta() {
+		Random random = new Random();
+		LocalDateTime localDateTime = LocalDateTime.now();
+		random.setSeed(localDateTime.getHour()
+				+ localDateTime.getMinute()
+				+ localDateTime.getSecond()
+				+ localDateTime.getDayOfYear());
+		String codigo = String.valueOf(random.nextInt(89999999)+10000000);
+		return codigo;
+	}
 }

@@ -9,14 +9,13 @@ CREATE TABLE carta (
     car_nome                     VARCHAR(50) NOT NULL UNIQUE,
     car_descricao                VARCHAR(500) NOT NULL,
     car_valor_compra             DECIMAL(4, 2) NOT NULL,
-    car_precificacao             DECIMAL(4, 2) NOT NULL,
-    car_valor_venda              DECIMAL(4, 2) NOT NULL,
     car_quantidade_disponivel    INT NOT NULL,
     car_quantidade_estoque       INT NOT NULL,
     car_imagem_path              VARCHAR(250) NOT NULL,
     car_jogo_id                  INT NOT NULL,
     car_categoria_id             INT NOT NULL,
-    car_status_id                INT NOT NULL
+    car_status_id                INT NOT NULL,
+    car_grupo_precificacao_id    INT NOT NULL
 );
 
 CREATE TABLE cartao_credito (
@@ -116,12 +115,13 @@ CREATE TABLE telefone (
     tel_id                  SERIAL NOT NULL,
     tel_ddd                 VARCHAR(3),
     tel_numero              VARCHAR(9),
+    tel_pessoa_id           INT NOT NULL,
     tel_tipo_telefone_id    INT NOT NULL
 );
 
 CREATE TABLE tipo_telefone (
     ttl_id       SERIAL NOT NULL,
-    ttl_tipo     VARCHAR(3)
+    ttl_tipo     VARCHAR(20)
 );
 
 CREATE TABLE estado (
@@ -132,7 +132,6 @@ CREATE TABLE estado (
 
 CREATE TABLE carrinho (
     crr_id            SERIAL NOT NULL,
-    crr_valorTotal    DECIMAL(4, 2),
     crr_pessoa_id     INT NOT NULL
 );
 
@@ -218,6 +217,19 @@ CREATE TABLE usuario (
     usu_status_id        INT NOT NULL
 );
 
+CREATE TABLE transacao_status_carta (
+    tsc_id          SERIAL NOT NULL,
+    tsc_motivo      VARCHAR(60) NOT NULL,
+    tsc_status_id   INT NOT NULL,
+    tsc_carta_id    INT NOT NULL
+);
+
+CREATE TABLE grupo_precificacao (
+    gpr_id                  SERIAL NOT NULL,
+    gpr_nome                VARCHAR(60) NOT NULL,
+    gpr_valor_percentual    DECIMAL(8,2) NOT NULL
+);
+
 ALTER TABLE bandeira ADD CONSTRAINT bandeira_pk PRIMARY KEY ( ban_id );
 
 ALTER TABLE carta ADD CONSTRAINT carta_pk PRIMARY KEY ( car_id );
@@ -276,6 +288,10 @@ ALTER TABLE rastreio ADD CONSTRAINT rastreio_pk PRIMARY KEY ( rto_id );
 
 ALTER TABLE tipo_transicao ADD CONSTRAINT tipo_transicao_pk PRIMARY KEY ( tit_id );
 
+ALTER TABLE transacao_status_carta ADD CONSTRAINT transacao_status_carta_pk PRIMARY KEY (tsc_id);
+
+ALTER TABLE grupo_precificacao ADD CONSTRAINT grupo_precificacao_pk PRIMARY KEY (gpr_id);
+
 ALTER TABLE carta
     ADD CONSTRAINT carta_status_fk FOREIGN KEY ( car_status_id )
         REFERENCES status ( sts_id );
@@ -287,6 +303,10 @@ ALTER TABLE carta
 ALTER TABLE carta
     ADD CONSTRAINT carta_jogo_fk FOREIGN KEY ( car_jogo_id )
         REFERENCES jogo ( jog_id );
+
+ALTER TABLE carta
+    ADD CONSTRAINT carta_grupo_precificacao_fk FOREIGN KEY ( car_grupo_precificacao_id )
+        REFERENCES grupo_precificacao ( gpr_id );
 
 ALTER TABLE cartao_credito
     ADD CONSTRAINT cartao_bandeira_fk FOREIGN KEY ( crt_bandeira_id )
@@ -396,6 +416,10 @@ ALTER TABLE telefone
     ADD CONSTRAINT telefone_tipo_telefone_fk FOREIGN KEY ( tel_tipo_telefone_id )
         REFERENCES tipo_telefone ( ttl_id );
 
+ALTER TABLE telefone
+    ADD CONSTRAINT telefone_pessoa_fk FOREIGN KEY ( tel_pessoa_id )
+        REFERENCES pessoa ( pes_id );
+
 ALTER TABLE transicao
     ADD CONSTRAINT transicao_pedido_fk FOREIGN KEY ( tsc_pedido_id )
         REFERENCES pedido ( ped_id );
@@ -431,3 +455,11 @@ ALTER TABLE transicao
 ALTER TABLE transicao
     ADD CONSTRAINT transicao_tipo_transicao_fk FOREIGN KEY ( tsc_tipo_transicao_id )
         REFERENCES tipo_transicao ( tit_id );
+
+ALTER TABLE transacao_status_carta
+    ADD CONSTRAINT transacao_status_carta_status_fk FOREIGN KEY ( tsc_status_id )
+        REFERENCES status ( sts_id );
+
+ALTER TABLE transacao_status_carta
+    ADD CONSTRAINT transacao_status_carta_carta_fk FOREIGN KEY ( tsc_carta_id )
+        REFERENCES carta ( car_id );

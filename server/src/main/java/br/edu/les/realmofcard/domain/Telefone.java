@@ -32,7 +32,7 @@ public class Telefone extends EntidadeDominio{
     @JoinColumn(name = "tel_tipo_telefone_id")
     private TipoTelefone tipoTelefone;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "tel_pessoa_id")
     private Pessoa pessoa;
 }
