@@ -4,6 +4,7 @@ import { UtilService } from 'src/services/util.service';
 import { Pessoa } from 'src/model/domain/pessoa.model';
 import { Pedido } from 'src/model/domain/pedido.model';
 import {Router} from '@angular/router';
+import { Util } from 'src/app/shared/app.util';
 
 @Component({
   selector: 'app-user-orders',
@@ -13,7 +14,8 @@ import {Router} from '@angular/router';
 export class UserOrdersComponent implements OnInit {
 
   constructor(private service: UtilService,
-              private router: Router) { }
+              private router: Router,
+              public util: Util) { }
 
   pedidos: Array<Pedido>;
 

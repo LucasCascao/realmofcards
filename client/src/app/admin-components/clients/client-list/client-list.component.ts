@@ -49,7 +49,11 @@ export class ClientListComponent implements OnInit {
   }
 
   filtrar() {
-    this.clientsFiltrados = this.clients.filter((client) => client.nome.toUpperCase().startsWith(this.valorBuscado.toUpperCase()));
+    this.clientsFiltrados = this.clients.filter((client) =>
+      client.nome.toUpperCase().startsWith(this.valorBuscado.toUpperCase()) ||
+      client.usuario.email.toUpperCase().startsWith(this.valorBuscado.toUpperCase()) ||
+      client.usuario.codigo.toUpperCase().startsWith(this.valorBuscado.toUpperCase())
+    );
   }
 
   verPedidosDoCliente(cliente: Pessoa){

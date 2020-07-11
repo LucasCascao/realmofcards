@@ -1,5 +1,6 @@
 package br.edu.les.realmofcard.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.edu.les.realmofcard.domain.*;
+
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @Getter
@@ -20,6 +23,8 @@ public class CartaDTO extends EntidadeDominio implements IDTO {
     private String nome;
 
     private String descricao;
+
+    private LocalDate dataCadastro;
 
     private Double valorVenda;
 
@@ -53,6 +58,7 @@ public class CartaDTO extends EntidadeDominio implements IDTO {
             cartaDTO.setId(carta.getId());
             cartaDTO.setNome(carta.getNome());
             cartaDTO.setDescricao(carta.getDescricao());
+            cartaDTO.setDataCadastro(carta.getDataCadastro());
             cartaDTO.setValorVenda(carta.getValorCompra() * carta.getGrupoPrecificacao().getValor());
             cartaDTO.setJogo(carta.getJogo());
             cartaDTO.setQuantidadeDisponivel(carta.getQuantidadeDisponivel());

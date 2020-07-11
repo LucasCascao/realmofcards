@@ -26,7 +26,9 @@ public class ValidaDadosTelefone implements IStrategy {
 			if(Util.isNotNull(pessoa.getTelefones())){
 				if(pessoa.getTelefones().size() > 0){
 					for (Telefone telefone : pessoa.getTelefones()) {
-						if((telefone.getNumero().length() != 8 && telefone.getNumero().length() != 9)){
+						if(Util.isNull(telefone.getNumero())){
+							naoTemTeledoneValido = true;
+						} else if( telefone.getNumero().length() != 8 && telefone.getNumero().length() != 9){
 							naoTemTeledoneValido = true;
 						}
 						if(Util.isNull(telefone.getDdd())){

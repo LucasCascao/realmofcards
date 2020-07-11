@@ -1,5 +1,6 @@
 package br.edu.les.realmofcard.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class Telefone extends EntidadeDominio{
     @JoinColumn(name = "tel_tipo_telefone_id")
     private TipoTelefone tipoTelefone;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "tel_pessoa_id")
     private Pessoa pessoa;

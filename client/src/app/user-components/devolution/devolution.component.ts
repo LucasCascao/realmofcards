@@ -25,7 +25,7 @@ export class DevolutionComponent implements OnInit {
 
   constructor(private service: UtilService,
               private router: Router,
-              private util: Util) { }
+              public util: Util) { }
 
   ngOnInit(): void {
     this.pedido = JSON.parse(sessionStorage.getItem('pedidoSelecionado'));

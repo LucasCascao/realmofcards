@@ -18,6 +18,8 @@ public class UsuarioDTO extends EntidadeDominio implements IDTO{
 
     private Integer id;
 
+    private String codigo;
+
     private String email;
 
     private Boolean isAdmin;
@@ -31,6 +33,7 @@ public class UsuarioDTO extends EntidadeDominio implements IDTO{
             UsuarioDTO usuarioDTO = new UsuarioDTO();
 
             usuarioDTO.setId(usuario.getId());
+            usuarioDTO.setCodigo(usuario.getCodigo());
             usuarioDTO.setEmail(usuario.getEmail());
             
             if(usuario.getTipoUsuario() != null && usuario.getTipoUsuario().getTipo() != null

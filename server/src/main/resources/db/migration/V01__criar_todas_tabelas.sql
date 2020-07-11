@@ -8,6 +8,7 @@ CREATE TABLE carta (
     car_codigo                   VARCHAR(50) NOT NULL UNIQUE,
     car_nome                     VARCHAR(50) NOT NULL UNIQUE,
     car_descricao                VARCHAR(500) NOT NULL,
+    car_data_cad                 DATE NOT NULL,
     car_valor_compra             DECIMAL(4, 2) NOT NULL,
     car_quantidade_disponivel    INT NOT NULL,
     car_quantidade_estoque       INT NOT NULL,
@@ -211,6 +212,7 @@ CREATE TABLE item_pedido (
 
 CREATE TABLE usuario (
     usu_id				 SERIAL NOT NULL,
+    usu_codigo           VARCHAR(9) NOT NULL,
     usu_email            VARCHAR(80) NOT NULL UNIQUE,
     usu_senha            VARCHAR(60) NOT NULL,
     usu_tipo_usuario_id     INT NOT NULL,

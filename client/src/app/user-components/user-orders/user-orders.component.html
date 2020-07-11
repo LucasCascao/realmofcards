@@ -24,7 +24,7 @@
             </div>
             <div class="col-lg-5 col-md-10 float-left">
               <p class="card-text"><strong>Produto:</strong> {{item?.carta?.nome}}</p>
-              <p class="card-text"><strong>Valor unitario:</strong> {{item?.carta?.valorVenda}}</p>
+              <p class="card-text"><strong>Valor unitario:</strong> {{util.calculaValorPreco(item?.carta) | currency: 'BRL': true}}</p>
               <p class="card-text" *ngIf="item?.quantidade > 0">
                 <strong>Quantidade:</strong> {{item?.quantidade}}
               </p>

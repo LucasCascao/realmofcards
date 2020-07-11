@@ -127,6 +127,9 @@ public class AbstractFachada {
     private ValidaUsuarioAtivo validaUsuarioAtivo;
 
     @Autowired
+    private GeraCodigoUsuario geraCodigoUsuario;
+
+    @Autowired
     private CriptografaSenha criptografarSenha;
 
     @Autowired
@@ -146,6 +149,9 @@ public class AbstractFachada {
 
     @Autowired
     private ValidaDadosTransacaoStatusCarta validaDadosTransacaoStatusCarta;
+
+    @Autowired
+    private InsereDataCadastro insereDataCadastro;
 
     @Autowired
     private AltararStatusCarta altararStatusCarta;
@@ -304,6 +310,7 @@ public class AbstractFachada {
         rnsPessoaSalvar.add(validaDadosUsuario);
         rnsPessoaSalvar.add(validaSenhasIguais);
         rnsPessoaSalvar.add(validaExistenciaUsuario);
+        rnsPessoaSalvar.add(geraCodigoUsuario);
         rnsPessoaSalvar.add(criptografarSenha);
 
         List<IStrategy> rnsPessoaAlterar = new ArrayList<>();
@@ -349,6 +356,7 @@ public class AbstractFachada {
         rnsCartaSalvar.add(moveImagem);
         rnsCartaSalvar.add(inseriItemDisponivelParaEstoque);
         rnsCartaSalvar.add(geraCodigoCarta);
+        rnsCartaSalvar.add(insereDataCadastro);
 
         List<IStrategy> rnsCartaAlterar = new ArrayList<>();
 

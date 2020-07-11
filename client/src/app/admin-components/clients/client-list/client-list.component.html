@@ -17,6 +17,7 @@
       <table class="table">
         <thead class="thead-dark">
           <tr>
+            <th scope="col">Codigo</th>
             <th scope="col">Nome</th>
             <th scope="col">Email</th>
             <th scope="col">Pedidos</th>
@@ -24,6 +25,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let client of clientsFiltrados">
+            <td class="text-center">{{client?.usuario?.codigo}}</td>
             <td class="text-center">{{client?.nome}} {{client?.sobrenome}}</td>
             <td>{{client?.usuario?.email}}</td>
             <td>

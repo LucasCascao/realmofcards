@@ -67,6 +67,9 @@ public class PessoaDAO implements IDAO {
 		pessoa.getUsuario().setPassword(usuario.getPassword());
 		pessoa.getUsuario().setTipoUsuario(usuario.getTipoUsuario());
 		pessoa.getUsuario().setStatus(usuario.getStatus());
+		for (Telefone telefone : pessoa.getTelefones()) {
+			telefone.setPessoa(pessoa);
+		}
 		pessoa = pessoaRepository.save(pessoa);
 		pessoa.getUsuario().setPassword(null);
 	}

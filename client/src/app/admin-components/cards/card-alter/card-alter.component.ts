@@ -40,7 +40,7 @@ export class CardAlterComponent implements OnInit {
   getGrupoPrecificacao(){
     this.service.get(new GrupoPrecificacao, '/grupo-precificacao').subscribe(resultado => {
       this.gruposPrecificacao = resultado?.entidades;
-      this.getCartaSelecionada();
+      //this.getCartaSelecionada();
     });
   }
 

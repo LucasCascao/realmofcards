@@ -25,6 +25,9 @@ public class Usuario extends EntidadeDominio implements Serializable{
 	@Column(name = "usu_id")
 	private Integer id;
 
+	@Column(name = "usu_codigo")
+	private String codigo;
+
 	@Column(name = "usu_email")
 	private String email;
 

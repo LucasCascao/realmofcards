@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Component
 @AllArgsConstructor
@@ -33,6 +34,9 @@ public class Carta extends EntidadeDominio implements Comparable<Carta>{
 
     @Column(name = "car_descricao")
     private String descricao;
+
+    @Column(name = "car_data_cad")
+    private LocalDate dataCadastro;
 
     @Column(name = "car_valor_compra")
     private Double valorCompra;

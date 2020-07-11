@@ -202,7 +202,7 @@ export class SelectCreditCardComponent implements OnInit {
   }
 
   validaValorTotalAcimaDoObrigatorioParaCartaoCredito(): boolean{
-    if ((this.formaPagamentoSelecionadoList.find( el => el.valorPagamento !== null || el.valorPagamento !== undefined))
+    if ((this.formaPagamentoSelecionadoList.find( el => (el.valorPagamento !== null || el.valorPagamento !== undefined) && el.cupom == null))
          && this.valorTotal < 10.00) {
       this.mensagens.push('Valor a ser pago deve ser maior que R$10,00 quando é utilizado cartão de crédito como forma de pagamento.');
       return false;

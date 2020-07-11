@@ -9,6 +9,7 @@ export class Carta {
   codigo: string;
   nome: string;
   descricao: string;
+  dataCadastro: Date;
   valorCompra: number;
   grupoPrecificacao: GrupoPrecificacao;
   quantidadeDisponivel: number;

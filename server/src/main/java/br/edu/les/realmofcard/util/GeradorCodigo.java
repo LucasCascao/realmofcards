@@ -63,4 +63,15 @@ public class GeradorCodigo {
 		String codigo = String.valueOf(random.nextInt(89999999)+10000000);
 		return codigo;
 	}
+
+	public static String gerarCodigoUsuario() {
+		Random random = new Random();
+		LocalDateTime localDateTime = LocalDateTime.now();
+		random.setSeed(localDateTime.getHour()
+				+ localDateTime.getMinute()
+				+ localDateTime.getSecond()
+				+ localDateTime.getDayOfYear());
+		String codigo = String.valueOf(random.nextInt(899999999)+100000000);
+		return codigo;
+	}
 }

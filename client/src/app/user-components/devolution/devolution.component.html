@@ -21,7 +21,7 @@
                           <strong>Produto:</strong> {{itemDevolucao?.item?.carta?.nome}}.
                         </p>
                         <p>
-                          <strong>Valor unitário:</strong> {{itemDevolucao?.item?.carta?.valorVenda | currency: 'BRL': true}}
+                          <strong>Valor unitário:</strong> {{util.calculaValorPreco(itemDevolucao?.item?.carta) | currency: 'BRL': true}}
                         </p>
                         <p>
                           <strong>Quantidade de devolução:</strong> {{itemDevolucao?.quantidade}}
