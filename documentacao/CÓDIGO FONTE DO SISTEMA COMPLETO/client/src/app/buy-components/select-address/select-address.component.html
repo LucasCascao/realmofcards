@@ -1,0 +1,52 @@
+<!-- Page Content -->
+<div class="container">
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">Selecione o endereço de entrega</h1>
+  <hr>
+  <div class="row" *ngIf="mensagens?.length > 0">
+    <div class="col-lg-12 personal-info">
+      <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+    </div>
+  </div>
+  <!-- Project One -->
+  <div class="row" *ngFor="let endereco of enderecos">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-lg-1">
+          <input type="radio" name="enderecoSelecionado" (click)="selecionaEnderecoParaCompra(endereco)">
+        </div>
+        <div class="col-lg-1">
+          <img class="img-fluid" src="/assets/icon/transporte.png">
+        </div>
+        <div class="col-md-8">
+          <p class="card-text">{{endereco?.logradouro}}, nº {{endereco?.numero}}, {{endereco?.bairro}}, {{endereco?.cidade?.nome}} / {{endereco?.cidade?.estado?.nome}} - {{endereco?.cep}}</p>
+        </div>
+        <div class="col-lg-2">
+          <a class="btn btn-danger float-right" (click)="enviarPara(endereco, '/app-logado/address-delete')">Excluir</a>
+          <a class="btn btn-warning float-left" (click)="enviarPara(endereco, '/app-logado/address-alter')">Editar</a>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" *ngIf="correio !== null">
+      <p class="card-text"><strong>Quantidades de dias para entrega:</strong> {{correio?.quantidadeDiasEntrega}}</p>
+      <p class="card-text"><strong>Custo do frete:</strong> {{correio?.valorCusto | currency: 'BRL': true}}</p>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <a class="btn btn-secondary float-left" [routerLink]="['/app-logado/address-register']">Adicionar novo endereco
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+      <button class="btn btn-success float-right" (click)="continua()">Continuar
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </button>
+    </div>
+  </div>
+  <hr>
+  <!-- /.row -->
+</div>
+<!-- /.container -->

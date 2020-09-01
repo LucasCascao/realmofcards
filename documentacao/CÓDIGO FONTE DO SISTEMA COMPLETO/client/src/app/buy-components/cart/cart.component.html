@@ -1,0 +1,73 @@
+<!-- Page Content -->
+<div class="container">
+
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">Carrinho</h1>
+
+  <div class="row" *ngIf="carrinho?.itemList?.length > 0;else SemItemNoCarrinho">
+    <div class="col-lg-12 mb-4">
+      <div class="row" *ngFor="let item of carrinho?.itemList">
+        <div class="col-lg-12 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="col-md-2 float-left">
+                <a [routerLink]="['/app-logado/product-detail']">
+                  <img class="img-fluid rounded mb-3 mb-md-0" [src]="item.carta.imagemPath" alt="">
+                </a>
+              </div>
+              <div class="col-lg-7 float-left">
+                <p class="card-text"><strong>Produto:</strong> {{item?.carta?.nome}}</p>
+                <p class="card-text"><strong>Valor total:</strong> {{item?.carta?.valorVenda | currency: 'BRL': true}}</p>
+                <p class="card-text"><strong>Quantidade disponível:</strong> {{item?.carta?.quantidadeDisponivel}}.</p>
+                <p class="card-text"><strong>Quantidade:</strong> {{item?.quantidade}}</p>
+                <div class="row">
+                  <div class="col-lg-1 col-md-2 btn">
+                    <a (click)="incrementaValor(item)">
+                      <img class="img-fluid mb-1" src="/assets/icon/increment.png">
+                    </a>
+                  </div>
+                  <div class="col-lg-1 col-md-2 btn">
+                    <a (click)="decrementaValor(item)">
+                      <img class="img-fluid mb-1" src="/assets/icon/decrement.png">
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 float-left">
+                <a link="#" (click)="deletaCartaDoCarrinho(item)"><button class="btn btn-danger float-right">Remover do carrinho</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <h3 class="card-text float-right"><strong>Subtotal:</strong> {{valorTotal?.valueOf() | currency: 'BRL': true}}</h3>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-lg-12">
+          <button (click)="continuarComprando()" class="btn btn-secondary float-left">Continuar comprando</button>
+          <button (click)="finalizarCompra()" class="btn btn-success float-right">Finalizar compra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #SemItemNoCarrinho>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-12">
+            <h2 class="text-center"><strong>Nenhum item no carrinho</strong></h2>
+          </div>
+          <div class="col-lg-12">
+            <button (click)="continuarComprando()" class="btn btn-secondary float-left">Continuar comprando</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <hr>
+</div>
+<!-- /.container -->

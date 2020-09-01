@@ -1,0 +1,26 @@
+<!-- Page Content -->
+<div class="container">
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">Cartões cadastrados</h1>
+  <hr>
+  <a class="btn btn-secondary" [routerLink]="['../creditcard-register']">Adcionar novo cartão
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+  <div *ngFor="let cartao of cartoes">
+    <hr>
+    <!-- Project One -->
+    <div class="row">
+      <div class="col-lg-5">
+        <p class="card-text"><strong>Ultimos 4 digitos:</strong> {{cartao?.numero}}</p>
+        <p class="card-text"><strong>Bandeira:</strong> {{cartao?.bandeira?.nome}}</p>
+      </div>
+      <div class="col-lg-5">
+        <button class="btn btn-danger float-right" (click)="deletarCartao(cartao)">Excluir</button>
+      </div>
+      <hr>
+    </div>
+    <!-- /.row -->
+  </div>
+  <hr>
+</div>
+<!-- /.container -->

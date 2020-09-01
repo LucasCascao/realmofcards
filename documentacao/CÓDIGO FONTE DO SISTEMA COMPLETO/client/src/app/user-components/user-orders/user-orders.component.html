@@ -1,0 +1,116 @@
+<!-- Page Content -->
+<div class="container">
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">Pedidos</h1>
+
+  <div *ngIf="pedidos?.length > 0; else semPedidos"></div>
+  <!-- Project One -->
+  <div class="row" *ngFor="let pedido of pedidos">
+    <div class="col-lg-12 col-md-8 mx-auto">
+      <hr>
+      <div class="card rounded shadow shadow-sm">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12 col-md-5 float-left">
+              <h3><strong>ID do pedido:</strong> {{pedido?.codigoPedido}}</h3>
+              <hr>
+            </div>
+          </div>
+          <div class="row" *ngFor="let item of pedido?.itemList">
+            <div class="col-lg-2 col-md-5 float-left">
+              <a [routerLinkActive]="['/product-detail']">
+                <img class="img-fluid rounded mb-3 mb-md-3" [src]="item?.carta?.imagemPath" [alt]="item?.carta?.nome">
+              </a>
+            </div>
+            <div class="col-lg-5 col-md-10 float-left">
+              <p class="card-text"><strong>Produto:</strong> {{item?.carta?.nome}}</p>
+              <p class="card-text"><strong>Valor unitario:</strong> {{util.calculaValorPreco(item?.carta) | currency: 'BRL': true}}</p>
+              <p class="card-text" *ngIf="item?.quantidade > 0">
+                <strong>Quantidade:</strong> {{item?.quantidade}}
+              </p>
+              <p class="card-text" *ngIf="item?.quantidadeTroca > 0">
+                <strong>Quantidade de itens trocados:</strong> {{item?.quantidadeTroca}}
+              </p>
+              <p class="card-text" *ngIf="item?.quantidadeDevolucao > 0">
+                <strong>Quantidade de itens devolvidos:</strong> {{item?.quantidadeDevolucao}}
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-10 float-left">
+              <hr>
+              <h4 class="mb-md-3"><strong>Dados do pedido: </strong></h4>
+              <p class="card-text"><strong>Endereço de Entrega:</strong>
+                {{pedido?.endereco?.logradouro}},
+                nº {{pedido?.endereco?.numero}},
+                bairo: {{pedido?.endereco?.bairro}},
+                {{pedido?.endereco?.cidade?.nome}} - {{pedido?.endereco?.cidade?.estado?.sigla}},
+                CEP {{pedido?.endereco?.cep}}
+              </p>
+              <p class="card-text"><strong>Data da compra:</strong> {{pedido?.dataCompra | date: 'dd/MM/yyyy'}}</p>
+              <p class="card-text"><strong>Data estimada para entrega:</strong> {{pedido?.dataEstimada | date: 'dd/MM/yyyy'}}</p>
+              <div *ngFor="let formaPagamento of pedido?.formaPagamentoList">
+                <div class="row" *ngIf="formaPagamento?.cartaoCredito != null; else compraComCupom">
+                  <div class="col-lg-3 mb-md-3 float-left">
+                    <p class="card-text">
+                      <strong>Cartão com final:</strong> {{formaPagamento?.cartaoCredito?.numero}}
+                    </p>
+                  </div>
+                  <div class="col-lg-4 mb-md-3 float-left">
+                    <p class="card-text">
+                      <strong>Valor pago nesse cartão:</strong> {{formaPagamento?.valorPagamento | currency: 'BRL': true}}
+                    </p>
+                  </div>
+                </div>
+                <ng-template #compraComCupom>
+                  <div class="row">
+                    <div class="col-lg-3 mb-md-3 float-left">
+                      <p class="card-text">
+                        <strong>Código do cupom:</strong> {{formaPagamento?.cupom?.codigo}}
+                      </p>
+                    </div>
+                    <div class="col-lg-4 mb-md-3 float-left">
+                      <p class="card-text">
+                        <strong>Valor pago nesse cupom:</strong> {{formaPagamento?.cupom?.valor | currency: 'BRL': true}}
+                      </p>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+              <div class="row">
+                <div class="col-lg-1 col-md-10">
+                  <p class="card-text"><strong>Status:</strong></p>
+                </div>
+                <div class="col-lg-3">
+                  <p class="btn-sm btn-dark text-center">{{pedido?.statusPedido?.status}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <h3><strong>Valor da compra:</strong> {{pedido?.valorTotal | currency: 'BRL': true}}</h3>
+                </div>
+                <div class="col-lg-2" *ngIf="temPermissaoParaDevolucao(pedido)">
+                  <button class="btn-sm btn-danger text-center" name="solicita-devolucao" (click)="solicitaDevolucao(pedido)"><strong>Solicitar devolucão</strong></button>
+                </div>
+                <div class="col-lg-2" *ngIf="temPermissaoParaTroca(pedido)">
+                  <button class="btn-sm btn-warning text-center" name="solicita-troca" (click)="solicitaTroca(pedido)"><strong>Solicitar troca</strong></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <ng-template #semPedidos>
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="card-text text-center"><strong>Não possui pedidos.</strong></h2>
+        <hr>
+      </div>
+    </div>
+  </ng-template>
+  <!-- /.row -->
+</div>
+<!-- /.container -->

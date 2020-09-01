@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="container">
+    <h1 class="mt-4 mb-3">Cadastrar endereço</h1>
+    <hr>
+    <div class="row" *ngIf="mensagens?.length > 0">
+      <div class="col-lg-12 personal-info">
+        <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Logradouro:</label>
+            <div class="col-lg-8">
+              <input [(ngModel)]="endereco.logradouro" name="cad_endereco_logradouro" class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Numero:</label>
+            <div class="col-lg-8">
+              <input [(ngModel)]="endereco.numero" name="cad_endereco_numero" class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Complemento:</label>
+            <div class="col-lg-8">
+              <input [(ngModel)]="endereco.complemento" name="cad_endereco_complemento" class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Cep:</label>
+            <div class="col-lg-8">
+              <input [(ngModel)]="endereco.cep" name="cad_endereco_cep" class="form-control" type="text" mask="00000-000">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Bairro:</label>
+            <div class="col-lg-8">
+              <input [(ngModel)]="endereco.bairro" name="cad_endereco_bairro" class="form-control" type="text">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Estado:</label>
+            <div class="col-lg-8">
+              <div class="ui-select">
+                <select class="form-control" name="cad_endereco_estado" [(ngModel)]="estadoSelecionado" (change)="chamaCidade()">
+                  <option name="cad_endereco_estado_selecionado" *ngFor="let estado of estados" [ngValue]="estado">{{estado?.nome}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="cidades?.length > 0">
+            <label class="col-lg-3 control-label">Cidade:</label>
+            <div class="col-lg-8">
+              <!-- <input class="form-control" type="text" [(ngModel)]="endereco.cidade.nome" name="cad_endereco_cidade" value="{{endereco?.cidade?.nome}}"> -->
+              <select class="form-control" name="cad_endereco_cidade" [(ngModel)]="endereco.cidade">
+                <option name="cad_endereco_cidade_selecionado" *ngFor="let cidade of cidades" [ngValue]="cidade">{{cidade.nome}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <input type="button" class="btn btn-primary" (click)="cadastra()" value="Cadastrar">
+              <span></span>
+              <input type="reset" class="btn btn-default" [routerLink]="['/app-logado/address-list']" value="Cancelar">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
+

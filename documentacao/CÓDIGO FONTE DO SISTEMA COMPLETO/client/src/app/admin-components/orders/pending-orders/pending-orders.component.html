@@ -1,0 +1,82 @@
+<div class="container">
+  <h1 class="my-4">Pedidos Pendentes</h1>
+  <hr>
+  <div class="row">
+    <div class="col-lg-10 offset-1">
+      <form>
+        <div class="col-lg-10 float-left">
+          <input type="text" name="valorBusca" [(ngModel)]="valorBuscado" class="form-control" placeholder="Pesquisar pedido">
+        </div>
+        <div class="col-lg-2 float-right">
+          <input type="button" (click)="filtrar()" class="btn btn-secondary" value="Pesquisar">
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="pedidosFiltrados?.length > 0;else semItensPendentes">
+    <div class="row" *ngFor="let pedido of pedidosFiltrados" >
+      <div class="col-lg-12 mb-4">
+        <div class="card rounded shadow shadow-sm">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <h3 class="card-text"><strong>Código do pedido:</strong> {{pedido?.codigoPedido}}</h3>
+                <hr>
+              </div>
+              <div class="col-lg-10">
+                <div class="row" *ngFor="let item of pedido?.itemList">
+                  <div class="col-lg-6">
+                    <div class="row">
+                      <div class="col-lg-2">
+                        <img class="card-img-top" [src]="item?.carta?.imagemPath" alt="">
+                      </div>
+                      <div class="col-lg-9">
+                        <p class="card-text"><strong>Produto:</strong> {{item?.carta?.nome}}</p>
+                        <p class="card-text"><strong>Categoria:</strong> {{item?.carta?.categoriaCarta?.nome}}</p>
+                        <p class="card-text"><strong>Quantidade requisitada:</strong> {{item?.quantidade}}</p>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-10">
+                    <p class="card-text"><strong>Cliente:</strong> {{pedido?.cliente?.nome}} {{pedido?.cliente?.sobrenome}}</p>
+                    <p class="card-text"><strong>Email:</strong> {{pedido?.cliente?.usuario?.email}}</p>
+                    <p class="card-text"><strong>Data da compra:</strong> {{pedido?.dataCompra | date: 'dd/MM/yyyy'}}</p>
+                    <div class="mb-md-3" *ngFor="let formaPagamento of pedido?.formaPagamentoList">
+                      <p class="card-text" *ngIf="formaPagamento?.cartaoCredito != null; else comCupom">
+                        <strong>Cartão final {{formaPagamento?.cartaoCredito?.numero}}:</strong> {{formaPagamento?.valorPagamento | currency: 'BRL': true}}.
+                      </p>
+                      <ng-template class="card-text" #comCupom>
+                        <strong>Cupom com o numero {{formaPagamento?.cupom?.codigo}}:</strong> {{formaPagamento?.valorPagamento | currency: 'BRL': true}}.
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="row">
+                  <div class="col-lg-12 mb-md-3">
+                    <button class="btn btn-success" (click)="enviaPedidoParaTransportar(pedido)">Despachar para Entrega</button>
+                  </div>
+                  <div class="col-lg-12">
+                    <button class="btn btn-danger" (click)="recusaPedido(pedido)">Recusar pedido</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #semItensPendentes>
+    <div class="row">
+      <div class="col-lg-10">
+        <h3 class="card-text text-center"><strong>Sem pedido encontrado.</strong></h3>
+      </div>
+    </div>
+  </ng-template>
+</div>

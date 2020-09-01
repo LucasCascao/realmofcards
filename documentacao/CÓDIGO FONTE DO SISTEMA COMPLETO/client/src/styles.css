@@ -1,0 +1,30 @@
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+body {
+  padding-top: 56px;
+}
+
+.carousel-item {
+  height: 65vh;
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}/* You can add global styles to this file, and also import other style files */
+
+/* link: https://www.codeply.com/go/nhbdi2FkJm/bootstrap-4-login-form ------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.bg-purple {
+  background-color: var(--purple);
+}
+
+.erro {
+  color: red;
+}

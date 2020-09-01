@@ -1,0 +1,92 @@
+<!-- Page Content -->
+<div class="container">
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">Selecione até 2 opções</h1>
+  <div class="row" *ngIf="mensagens?.length > 0">
+    <div class="col-lg-12 personal-info">
+      <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+    </div>
+  </div>
+  <div *ngFor="let formaPagamento of formaPagamentoList">
+    <hr>
+    <!-- Project One -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-lg-1">
+            <input type="checkbox" [id] = "formaPagamento?.cartaoCredito.id" [name]="formaPagamento?.cartaoCredito?.id"
+              (click)="selecionaCartao($event, formaPagamento)">
+          </div>
+          <div class="col-lg-1">
+            <img class="img-fluid" src="/assets/icon/cartao-credito.png">
+          </div>
+          <div class="col-lg-5">
+            <p class="card-text"><strong>Ultimos 4 digitos:</strong> {{formaPagamento?.cartaoCredito?.numero}}</p>
+            <p class="card-text"><strong>Bandeira:</strong> {{formaPagamento?.cartaoCredito?.bandeira?.nome}}</p>
+          </div>
+          <div class="col-lg-4">
+            <div *ngIf="formaPagamento?.isSelecionado">
+              <p class="card-text"><strong>Valor</strong> </p>
+              <input type="number" step="0.01" name="quantity" min="0.01" [max]="valorTotal" value="1"
+                [(ngModel)]="formaPagamento.valorPagamento" (keyup)="calculaValor(formaPagamento)">
+            </div>
+          </div>
+          <div class="col-md-1">
+            <a class="btn btn-danger float-right" (click)="selecionaCartaoExcluir(formaPagamento?.cartaoCredito)"  [routerLink]="['/app-logado/creditcard-delete']">Excluir</a>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <!-- /.row -->
+  </div>
+  <hr>
+  <div class="row mt-4">
+    <div class="col-lg-1">
+      <input type="checkbox" (click)="selecionaCupom($event, formaPagamentoComCupom)">
+    </div>
+    <div class="col-lg-1">
+      <h5><strong>Cupom:</strong> </h5>
+    </div>
+    <div class="col-lg-3">
+      <input type="text" name="codigo-cupom" [(ngModel)]="formaPagamentoComCupom.cupom.codigo">
+    </div>
+    <div class="col-lg-1">
+      <button class="btn btn-secondary" (click)="validaCupom()">Validar</button>
+    </div>
+    <div class="col-lg-4">
+      <div *ngIf="mensagemCupom?.length > 0">
+        <div *ngIf="isMsgError;else cupomAprovado">
+          <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagemCupom">{{mensagem}}</p>
+        </div>
+        <ng-template #cupomAprovado>
+          <p class="alert alert-success text-center" *ngFor="let mensagem of mensagemCupom">{{mensagem}}</p>
+        </ng-template>
+      </div>
+    </div>
+    <div class="col-lg-2">
+      <div *ngIf="formaPagamentoComCupom?.cupom?.valor != null">
+        <p><Strong>Valor: </Strong>{{formaPagamentoComCupom?.cupom?.valor | currency: 'BRL': true}}</p>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <h3><strong>Valor a pagar: </strong> {{valorTotal | currency: 'BRL': true}}</h3>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <a class="btn btn-secondary float-left" [routerLink]="['/app-logado/creditcard-register']">Adicionar novo cartão
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+      <button class="btn btn-success float-right" (click)="continua()">Continuar
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </button>
+    </div>
+  </div>
+  <hr>
+</div>
+<!-- /.container -->

@@ -1,0 +1,43 @@
+
+imagem-path: /media/lucas_cascao/ubuntu/Develop/Git/realmofcards/client/src/assets/images/cartas
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/realmofcards
+    username: postgres
+    password: 48299871
+    initialization-mode: always
+    data: classpath:org/springframework/session/jdbc/schema-postgresql.sql
+    continue-on-error: true
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: postgresql
+    show-sql: true
+
+
+  session:
+    jdbc:
+      initialize-schema: always
+    store-type: jdbc
+    
+  mail:
+    host: smtp.outlook.com
+    username: realmofcards@outlook.com
+    password: 123Fatec
+    port: 587
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          
+          ssl:
+            enable: false
+            
+            

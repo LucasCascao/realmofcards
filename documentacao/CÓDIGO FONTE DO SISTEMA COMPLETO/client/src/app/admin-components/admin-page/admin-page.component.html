@@ -1,0 +1,87 @@
+<div class="wrapper d-flex align-items-stretch">
+  <nav id="sidebar">
+    <div class="p-4 pt-5">
+      <h1><p class="logo">Admin</p></h1>
+      <ul class="list-unstyled components mb-5">
+        <li class="active">
+          <a href="#analiseSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Análise</a>
+          <ul class="collapse list-unstyled" id="analiseSubmenu">
+            <li>
+              <a class="" [routerLink]="['/app-logado/admin-page/analyze']">Gráfico de vendas</a>
+            </li>
+          </ul>
+        </li>
+        <li class="active">
+          <a href="#produtoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Produto</a>
+          <ul class="collapse list-unstyled" id="produtoSubmenu">
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/admin-product-register']">Novo produto</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/admin-product-list']">Produtos ativos</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/admin-product-inactive-list']">Produtos inativos</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/stock-insert']">Estoque</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#pedidoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pedidos</a>
+          <ul class="collapse list-unstyled" id="pedidoSubmenu">
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/pending-orders']">Pendentes de aprovação</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/transit-orders']">Em Trasito</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/orders-delivered']">Entregue</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="card-text" [routerLink]="['/app-logado/admin-page/admin-client-list']">Clientes ativos</a>
+        </li>
+        <li>
+          <a href="#cupomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Cupom</a>
+          <ul class="collapse list-unstyled" id="cupomSubmenu">
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/admin-ticket-value']">Gerar cupom de desconto</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/ticket-list']">Lista de cupons</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#trocaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Troca</a>
+          <ul class="collapse list-unstyled" id="trocaSubmenu">
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/request-trade']">Pendentes de aprovação</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/transit-trade']">Pendente de recebimento</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#devolucaoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Devolução</a>
+          <ul class="collapse list-unstyled" id="devolucaoSubmenu">
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/devolution-request']">Pendentes de aprovação</a>
+            </li>
+            <li>
+              <a class="card-text" [routerLink]="['/app-logado/admin-page/devolution-transit']">Em transito</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="content" class="p-4 p-md-5 pt-5">
+    <router-outlet></router-outlet>
+  </div>
+</div>

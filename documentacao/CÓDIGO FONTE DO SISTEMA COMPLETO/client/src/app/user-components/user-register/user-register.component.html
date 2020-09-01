@@ -1,0 +1,108 @@
+
+<div class="container">
+  <h1 class="mt-4 mb-3">Cadastrar perfil</h1>
+  <hr>
+  <div class="row">
+    <!-- edit form column -->
+    <div class="col-md-9 personal-info">
+      <h3>Informações pessoais</h3>
+      <div class="row" *ngIf="mensagens.length > 0">
+        <div class="col-lg-12 personal-info">
+          <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+        </div>
+      </div>
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-lg-3 control-label"><strong>Primeiro nome:</strong></label>
+          <div class="col-lg-8">
+            <input [(ngModel)]="person.nome" class="form-control" type="text" id="cad_nome" name="cad_nome" required="required">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label"><strong>Ultimo nome:</strong></label>
+          <div class="col-lg-8">
+            <input [(ngModel)]="person.sobrenome" class="form-control" type="text" name="cad_sobrenome" id="cad_sobrenome">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label"><strong>CPF:</strong></label>
+          <div class="col-lg-3">
+            <input [(ngModel)]="person.cpf" class="form-control" type="text" name="cad_cpf" id="cad_cpf" mask="000.000.000-00">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label"><strong>Data de nascimento:</strong></label>
+          <div class="col-lg-3">
+            <input [(ngModel)]="dataNascimento" class="form-control" type="text" name="cad_data_nascimento" id="cad_data_nascimento" maxlength="10" mask="00/00/0000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-1 control-label"><strong>Sexo:</strong></label>
+          <div class="form-check form-check-inline">
+            <input [(ngModel)]="person.sexo" class="form-check-input" type="radio" name="inlineRadioOptions" id="cad_sexo_m" value="M" >
+            <label class="form-check-label" for="cad_sexo_m">Masculino</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input [(ngModel)]="person.sexo" class="form-check-input" type="radio" name="inlineRadioOptions" id="cad_sexo_f" value="F" >
+            <label class="form-check-label" for="cad_sexo_f">Feminino</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input [(ngModel)]="person.sexo" class="form-check-input" type="radio" name="inlineRadioOptions" id="cad_sexo_n" value="N" >
+            <label class="form-check-label" for="cad_sexo_n">Não informar</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label"><strong>Email:</strong></label>
+          <div class="col-lg-8">
+            <input [(ngModel)]="user.email"class="form-control" type="text" name="cad_email" id="cad_email" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"><strong>Senha:</strong></label>
+          <div class="col-md-8">
+            <input [(ngModel)]="user.password" class="form-control" type="password" name="cad_senha" id="cad_senha" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"><strong>Confirmar senha:</strong></label>
+          <div class="col-md-8">
+            <input [(ngModel)]="user.rePassword" class="form-control" type="password" name="cad_confirmar_senha" id="cad_confirmar_senha" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-12">
+              <label class="col-md-12 control-label float-left"><strong>Telefone:</strong></label>
+            </div>
+            <div class="col-lg-2 float-left">
+              <input [(ngModel)]="telefone.ddd" class="form-control" type="text" name="cad_telefone_ddd" id="cad_telefone_ddd" autocomplete="off" mask="(999)" placeholder="(999)">
+            </div>
+            <div class="col-md-3">
+              <input [(ngModel)]="telefone.numero" class="form-control" type="text" name="cad_telefone_numero" id="cad_telefone_numero" autocomplete="off" mask="99999-9999" placeholder="99999-9999">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <label class="col-md-12 control-label float-left"><strong>Tipo Telefone:</strong></label>
+            </div>
+            <div class="col-lg-3">
+              <select class="form-control" name="cad_tipo_telefone" id="cad_tipo_telefone" [(ngModel)]="telefone.tipoTelefone">
+                <option name="cad_endereco_cidade_selecionado" *ngFor="let tipoTelefone of tiposTelefone" [ngValue]="tipoTelefone">{{tipoTelefone.tipo}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <input type="button" class="btn btn-primary" (click)="cadastra()" value="Cadastrar">
+            <span></span>
+            <input type="reset" class="btn btn-default btn-lg float-left" [routerLink]="['/']" value="Cancelar">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<hr>
+

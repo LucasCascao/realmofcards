@@ -1,0 +1,93 @@
+<div class="container">
+  <h1 class="mt-4 mb-3">Cadastrar cartão de crédito</h1>
+  <hr>
+  <div class="row" *ngIf="mensagens?.length > 0">
+    <div class="col-lg-12 personal-info">
+      <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <!-- edit form column -->
+    <div class="col-md-9 personal-info">
+      <form class="form-horizontal" role="form" method="post">
+        <div class="form-group">
+          <label class="col-lg-3 control-label" >Número do cartão:</label>
+          <div class="col-lg-8">
+            <input class="form-control" name="cartao_numero" [(ngModel)]="cartaoCredito.numero" mask="0000 0000 0000 0000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Nome e sobrenome:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" name="cartao_titular_nome" [(ngModel)]="cartaoCredito.titularNome">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Mês de vencimento:</label>
+          <div class="col-lg-2">
+            <select class="form-control" name="cartao_data_vencimento_mes" [(ngModel)]="cartaoCredito.vencimentoMes">
+              <option [ngValue]="1">01</option>
+              <option [ngValue]="2">02</option>
+              <option [ngValue]="3">03</option>
+              <option [ngValue]="4">04</option>
+              <option [ngValue]="5">05</option>
+              <option [ngValue]="6">06</option>
+              <option [ngValue]="7">07</option>
+              <option [ngValue]="8">08</option>
+              <option [ngValue]="9">09</option>
+              <option [ngValue]="10">10</option>
+              <option [ngValue]="11">11</option>
+              <option [ngValue]="12">12</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Ano de vencimento:</label>
+          <div class="col-lg-2">
+            <select class="form-control"  name="cartao_data_vencimento_ano" [(ngModel)]="cartaoCredito.vencimentoAno">
+              <option [ngValue]="2020">2020</option>
+              <option [ngValue]="2021">2021</option>
+              <option [ngValue]="2022">2022</option>
+              <option [ngValue]="2023">2023</option>
+              <option [ngValue]="2024">2024</option>
+              <option [ngValue]="2025">2025</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Código de segurança:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" name="cartao_codigo_seguranca" minlength="3" maxlength="3" [(ngModel)]="cartaoCredito.codigoSeguranca">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label" >CPF do titular do cartão:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" name="cartao_cpf_titular" mask="000.000.000-00" [(ngModel)]="cartaoCredito.cpfTitular">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Bandeira: </label>
+          <div class="col-lg-8">
+            <select class="form-control" type="text" name="cartao_cartao_bandeira" [(ngModel)]="cartaoCredito.bandeira">
+              <option  *ngFor="let bandeira of bandeiras" [ngValue]="bandeira">{{bandeira.nome}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <button class="btn btn-lg btn-secondary float-right" (click)="cadastraCartaoCredito()">Cadastrar</button>
+            <span></span>
+            <input type="reset" class="btn btn-lg btn-secondary float-left" [routerLink]="['/app-logado/creditcard-list']" value="Cancelar">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<hr>
+<script>
+  $(':input').inputmask();
+</script>
+

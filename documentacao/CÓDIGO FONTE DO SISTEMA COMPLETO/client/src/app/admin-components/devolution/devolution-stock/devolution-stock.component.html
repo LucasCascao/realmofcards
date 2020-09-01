@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <!-- form card login -->
+          <div class="card rounded shadow shadow-sm">
+            <div class="card-header">
+              <h3 class="mb-0">Retornar Produto para o Estoque</h3>
+            </div>
+            <div class="card-body">
+              <p>Confirmação para inserir o(s) produto(s) de volta ao estoque:</p>
+              <ul>
+                <li><strong>1 un - {{carta.nome}}</strong>.</li>
+              </ul>
+              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['../devolution-transit']" value="Negar">
+              <input type="button" class="btn btn-success btn-lg float-right" [routerLink]="['../devolution-transit']" value="Inserir">
+            </div>
+            <!--/card-block-->
+          </div>
+          <!-- /form card login -->
+        </div>
+      </div>
+      <!--/row-->
+    </div>
+    <!--/col-->
+  </div>
+  <!--/row-->
+</div>
+<!--/container-->

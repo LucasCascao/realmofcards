@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <!-- form card login -->
+          <div class="card rounded shadow shadow-sm">
+            <div class="card-header">
+              <h3 class="mb-0">Inativar cliente</h3>
+            </div>
+            <div class="card-body">
+              <p>Confirmação para que a inativação do cliente <strong>{{client.firstName}} {{client.lastName}}</strong>, clique no botão 'inativar para confirmar'.</p>
+              <input type="button" class="btn btn-secondary btn-lg float-left" [routerLink]="['../admin-product-list']" value="Cancelar">
+              <input type="button" class="btn btn-danger btn-lg float-right" [routerLink]="['../admin-product-list']" value="Inativar">
+            </div>
+            <!--/card-block-->
+          </div>
+          <!-- /form card login -->
+        </div>
+      </div>
+      <!--/row-->
+    </div>
+    <!--/col-->
+  </div>
+  <!--/row-->
+</div>
+<!--/container-->

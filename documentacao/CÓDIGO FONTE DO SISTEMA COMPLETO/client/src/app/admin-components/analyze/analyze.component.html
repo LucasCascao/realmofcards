@@ -1,0 +1,46 @@
+<div class="container">
+  <hr>
+  <div class="row">
+    <div class="col-lg-12 col-sm-6 portfolio-item">
+      <div class="row" *ngIf="mensagemErro?.length > 0">
+        <div class="col-lg-12 personal-info">
+          <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagemErro">{{mensagem}}</p>
+        </div>
+      </div>
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="col-lg-4 float-left">
+                <p>Data de inicio: </p>
+              </div>
+              <div class="col-lg-6 float-left">
+                <input class="form-control" name="dtincio" type="text" [(ngModel)]="dataInicio" placeholder="dd/mm/aaaa" maxlength="10">
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="col-lg-4 float-left">
+                <p>Data de fim: </p>
+              </div>
+              <div class="col-lg-6 float-left">
+                <input class="form-control" name="dtfim" type="text" [(ngModel)]="dataFim" placeholder="dd/mm/aaaa" maxlength="10">
+              </div>
+            </div>
+            <div class="col-lg-1">
+              <button class="btn btn-secondary" (click)="getGraficoVendaPorCategoria()">Novo</button>
+            </div>
+            <div class="col-lg-1">
+              <button class="btn btn-secondary" (click)="getGraficoAntigo()">Antigo</button>
+            </div>
+          </div>
+          <div *ngIf="dashboard != null; else semGrafico"  class="col-lg-12 col-sm-6">
+            <div [chart]="chart"></div>
+          </div>
+          <ng-template #semGrafico>
+            <h3 class="text-center m-md-5"><strong>Sem gráfico!</strong></h3>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

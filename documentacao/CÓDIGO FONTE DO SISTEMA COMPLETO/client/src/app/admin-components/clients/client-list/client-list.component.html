@@ -1,0 +1,39 @@
+<div class="container">
+  <h1 class="my-4">Lista de Clientes</h1>
+  <hr>
+  <div class="row">
+    <div class="col-lg-10 offset-1">
+      <div class="col-lg-10 float-left">
+        <input type="text" name="valorBusca" [(ngModel)]="valorBuscado" class="form-control" placeholder="Pesquisar cliente">
+      </div>
+      <div class="col-lg-2 float-right">
+        <input type="button" (click)="filtrar()" class="btn btn-secondary" value="Pesquisar">
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Pedidos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of clientsFiltrados">
+            <td class="text-center">{{client?.usuario?.codigo}}</td>
+            <td class="text-center">{{client?.nome}} {{client?.sobrenome}}</td>
+            <td>{{client?.usuario?.email}}</td>
+            <td>
+              <button class="btn btn-success mb-md-3" (click)="verPedidosDoCliente(client)">Ver Pedidos</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

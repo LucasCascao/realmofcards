@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
+      <div class="row">
+        <div class="col-lg-10 col-md-8 mx-auto">
+          <!-- form card login -->
+          <div class="card rounded shadow shadow-sm">
+            <div class="card-header">
+              <h3 class="mb-0">Devolução</h3>
+            </div>
+            <div class="card-body">
+              <div class="row" *ngFor="let itemDevolucao of devolucao.itemTransicaoList">
+                <div *ngIf="itemDevolucao?.item?.quantidade > 0">
+                  <div class="col-lg-12">
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <img class="img-fluid" [src]="itemDevolucao?.item?.carta?.imagemPath" [alt]="itemDevolucao?.item?.carta?.nome">
+                      </div>
+                      <div class="col-lg-9 float-left">
+                        <p class="card-text">
+                          <strong>Produto:</strong> {{itemDevolucao?.item?.carta?.nome}}.
+                        </p>
+                        <p>
+                          <strong>Valor unitário:</strong> {{util.calculaValorPreco(itemDevolucao?.item?.carta) | currency: 'BRL': true}}
+                        </p>
+                        <p>
+                          <strong>Quantidade de devolução:</strong> {{itemDevolucao?.quantidade}}
+                        </p>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <h4><strong>Valor total da devolução: </strong>{{devolucao?.subTotal | currency: 'BRL': true}}</h4>
+              <p>Clique no botão abaixo para confirmar a devolução.</p>
+              <button class="btn btn-secondary btn-lg float-left" [routerLink]="['/app-logado/user-orders']">Cancelar</button>
+              <button class="btn btn-danger btn-lg float-right" (click)="trocaProduto()">Confirmar Devolução</button>
+            </div>
+            <!--/card-block-->
+          </div>
+          <!-- /form card login -->
+        </div>
+      </div>
+      <!--/row-->
+      <hr>
+    </div>
+    <!--/col-->
+  </div>
+  <!--/row-->
+</div>
+<!--/container-->

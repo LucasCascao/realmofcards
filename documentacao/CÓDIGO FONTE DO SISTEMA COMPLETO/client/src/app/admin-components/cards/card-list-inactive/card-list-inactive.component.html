@@ -1,0 +1,53 @@
+<div class="container">
+  <h1 class="my-4">Lista de cartas inativas</h1>
+  <hr>
+  <div class="row">
+    <div class="col-lg-10 offset-1">
+      <div class="col-lg-10 float-left">
+        <input type="text" class="form-control" placeholder="Pesquisar produto">
+      </div>
+      <div class="col-lg-2 float-right">
+        <input type="button" (click)="filtrar(cartas)" class="btn btn-secondary" value="Pesquisar">
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table" *ngIf="cartas.length > 0;else semCartaInativa">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Imagem</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Valor venda</th>
+            <th scope="col">Qntd Disponível</th>
+            <th scope="col">Qntd Estoque</th>
+            <th scope="col">Ativar
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let carta of cartas">
+            <td>
+              <div class="row">
+                <div class="col-lg-3 ">
+                  <img class="img-fluid rounded mb-3 mb-md-0 text-center" [src]="carta?.imagemPath" alt="">
+                </div>
+              </div>
+            </td>
+            <td>{{carta?.nome}}</td>
+            <td>{{carta?.valorVenda | currency: 'BRL': true}}</td>
+            <td>{{carta?.quantidadeDisponivel}}</td>
+            <td>{{carta?.quantidadeEstoque}}</td>
+            <td>
+              <button class="btn btn-secondary" (click)="selecionaCarta(carta)">Ativar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #semCartaInativa>
+        <h3 class="card-text text-center"><strong>Sem cartas inativas no momento.</strong></h3>
+      </ng-template>
+    </div>
+  </div>
+</div>

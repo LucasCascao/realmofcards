@@ -1,0 +1,39 @@
+<div class="container">
+  <h1 class="mt-4 mb-3">Carta</h1>
+  <hr>
+  <div class="row" *ngIf="mensagens?.length > 0">
+    <div class="col-lg-12 personal-info">
+      <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4">
+      <img class="img-fluid rounded mb-4" [src]="carta?.imagemPath" alt="">
+    </div>
+    <div class="col-lg-3">
+      <h3 class="mt-4 mb-3"><strong>{{carta.nome}}</strong></h3>
+      <p class="card-text"><strong>Categoria de carta:</strong> {{carta?.categoriaCarta?.nome}}.</p>
+      <p class="card-text"><strong>Quantidade disponivel:</strong> {{carta?.quantidadeDisponivel}}.</p>
+      <p class="card-text"><strong>Quantidade:</strong>
+        <input class="form-control w-25 " type="number" name="quantidade" [(ngModel)]="quantidade" [max]="carta?.quantidadeDisponivel" min="1" >
+      </p>
+    </div>
+    <div class="col-lg-3">
+      <h3 class="card-text mt-4 mb-3 alert alert-success" ><strong>{{(carta?.valorCompra + (carta?.valorCompra * (carta?.grupoPrecificacao?.valor / 100))) | currency: 'BRL': true}} à vista</strong></h3>
+    </div>
+    <div class="col-lg-2">
+      <button class="btn btn-lg btn-success btn-block mt-4 mb-3" (click)="adicionaItemNoCarrinho(carta)">Comprar</button>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-lg-2">
+      <h3><strong>Descrição:</strong></h3>
+    </div>
+    <div class="col-lg-10">
+      <p class="card-text">{{carta.descricao}}</p>
+    </div>
+  </div>
+  <hr>
+</div>
+

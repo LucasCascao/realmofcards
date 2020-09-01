@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
+      <div class="row">
+        <div class="col-lg-10 col-md-8 mx-auto">
+          <!-- form card login -->
+          <div class="card rounded shadow shadow-sm">
+            <div class="card-header">
+              <h3 class="mb-0">Escolha o item(s) para troca</h3>
+            </div>
+            <div class="card-body">
+              <div class="row" *ngIf="mensagens?.length > 0">
+                <div class="col-lg-12 personal-info">
+                  <p class="alert alert-danger text-center" *ngFor="let mensagem of mensagens">{{mensagem}}</p>
+                </div>
+              </div>
+              <div class="row" *ngFor="let itemTroca of trocaItemList">
+                <div *ngIf="itemTroca?.item?.quantidade > 0">
+                  <div class="col-lg-12">
+                    <div class="row">
+                      <div class="col-lg-1">
+                        <input type="checkbox" name="selecionaItemTroca" (click)="adicionaItem(itemTroca, $event, itemTroca?.quantidade)">
+                      </div>
+                      <div class="col-lg-1 col-md-5">
+                        <a [routerLinkActive]="['/product-detail']">
+                          <img class="img-fluid rounded mb-3 mb-md-3" [src]="itemTroca?.item?.carta?.imagemPath" [alt]="itemTroca?.item?.carta?.nome">
+                        </a>
+                      </div>
+                      <div class="col-lg-10 col-md-08 float-left">
+                        <p class="card-text">
+                          <strong>Produto:</strong> {{itemTroca?.item?.carta?.nome}},  (valor unitário) .
+                        </p>
+                        <p>
+                          <strong>Valor unitário:</strong> {{itemTroca?.item?.carta?.valorVenda | currency: 'BRL': true}}
+                        </p>
+                        <p>
+                          <strong>Valor total:</strong> {{calculaValorTotalItem(itemTroca?.item?.carta?.valorVenda, itemTroca?.item?.quantidade) | currency: 'BRL': true}}
+                        </p>
+                        <p>
+                          <strong>Quantidade comprada:</strong> {{itemTroca?.item?.quantidade}}
+                        </p>
+                        <p>
+                          <strong>Quantidade para trocar:</strong> <input type="number" [max]="itemTroca?.item?.quantidade" [(ngModel)]="itemTroca.quantidade" name="button-troca-quantidade" min="1" value="1">
+                        </p>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+              <p>Clique no botão abaixo para confirmar a troca.</p>
+              <button class="btn btn-secondary btn-lg float-left" name="cancelaTroca" [routerLink]="['/app-logado/user-orders']">Cancelar</button>
+              <button class="btn btn-danger btn-lg float-right" name="confirmaTroca" (click)="trocaProduto()">Confirmar Troca</button>
+            </div>
+            <!--/card-block-->
+          </div>
+          <!-- /form card login -->
+        </div>
+      </div>
+      <!--/row-->
+      <hr>
+    </div>
+    <!--/col-->
+  </div>
+  <!--/row-->
+</div>
+<!--/container-->

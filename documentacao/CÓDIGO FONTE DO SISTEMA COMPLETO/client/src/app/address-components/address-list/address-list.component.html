@@ -1,0 +1,39 @@
+<!-- Page Content -->
+<div class="container">
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">Lista de endereços</h1>
+  <hr>
+  <a class="btn btn-secondary" [routerLink]="['/app-logado/address-register']">Adicionar novo endereco
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+  <hr>
+  <!-- Project One -->
+  <div class="row" *ngFor="let endereco of enderecos">
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-1">
+          <img class="img-fluid" src="/assets/icon/transporte.png">
+        </div>
+        <div class="col-lg-8">
+          <p class="card-text">
+            {{endereco?.logradouro}},
+            {{endereco?.numero}},
+            {{endereco?.complemento}},
+            {{endereco?.cep | mask: '00000-000'}},
+            {{endereco?.bairro}},
+            {{endereco?.cidade?.nome}} - {{endereco?.cidade?.estado?.sigla}}
+          </p>
+        </div>
+        <div class="col-lg-2">
+          <button class="btn btn-danger float-left" (click)="enviarPara(endereco, '/app-logado/address-delete')">Excluir</button>
+          <button class="btn btn-warning float-right" (click)="enviarPara(endereco, '/app-logado/address-alter')">Editar</button>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+
+
+  <!-- /.row -->
+</div>
+<!-- /.container -->
